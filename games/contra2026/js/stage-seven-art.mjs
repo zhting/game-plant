@@ -1,4 +1,4 @@
-import {StageOneArt} from './stage-one-art.mjs?v=single-enemy-rifle-1';
+import {StageOneArt} from './stage-one-art.mjs?v=mods-1';
 import {HUD_PLAYER_X} from './hud-layout.mjs';
 import {drawFrozenEnemy} from './enemy-freeze-art.mjs?v=larva-hop-1';
 import {drawHangarAtmosphere,drawHangarRouteBackdrop} from './stage-seven-atmosphere.mjs?v=hangar-required-routes-1';
@@ -82,6 +82,7 @@ export class StageSevenArt extends StageOneArt{
     }
   }
   enemy(e){
+    if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
     if(e.t==='alienHead'&&!this.freezePainting)this.guardianStalk(e);
     let bounds,poseKey;
     if(e.t==='alienHead')bounds={...alienGuardianArtBox(e),foot:124};

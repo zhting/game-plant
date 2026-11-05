@@ -14,16 +14,16 @@ import { createCeilingParasites, createFloorParasites, ceilingParasiteBox, white
 import { createCeilingStalkers, ceilingStalkerBox, advanceCeilingStalker } from '/games/contra2026/js/ceiling-stalker.mjs?v=ceiling-stalker-1';
 import { createHiveBrainParts, hiveBroodRemaining, hiveBroodHealth, hiveDamageableParts, advanceHiveBrood, advanceHiveHatchling, hiveHatchlingBox, hiveShotBlocked } from '/games/contra2026/js/hive-brood.mjs?v=hive-four-ports-1';
 import { hiveSpikeHeight } from '/games/contra2026/js/stage-eight-hazards.mjs?v=organic-motion-2';
-import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=single-enemy-rifle-1';
+import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=mods-1';
 import { createFortressRoofGuard, advanceFortressRoofGuard, roofGuardBox, fortressRoofY } from '/games/contra2026/js/fortress-roof-guard.mjs?v=roof-guard-1';
 import { riverFishJumps, riverFishBox, riverFishLifeReward } from '/games/contra2026/js/river-fish.mjs?v=fish-life-1';
 import {fortressCannonMuzzle,advanceFortressCannon} from '/games/contra2026/js/fortress-cannon.mjs?v=cannon-recoil-1';
 import {advanceMotorcycle,motorcycleMuzzle,motorcycleDust} from '/games/contra2026/js/motorcycle-motion.mjs?v=moto-wheelie-2';
 import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=single-enemy-rifle-1';
 import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=single-enemy-rifle-1';
-import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=single-enemy-rifle-1';
-import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=foundry-exit-art-1';
-import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=single-enemy-rifle-1';
+import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=mods-1';
+import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=mods-1';
+import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=mods-1';
 import { HANGAR_PLATE, createHangarPlates, hangarPlateBox, collideHangarPlates } from '/games/contra2026/js/stage-seven-obstacles.mjs?v=hangar-required-routes-1';
 import { MINECART, isMinecartRider, syncMinecartRider, leaveMinecart, boardMinecart, minecartMuzzle, minecartRiderBox, minecartCanRise, collideMinecartClearance } from '/games/contra2026/js/minecart-rider.mjs?v=hangar-required-routes-1';
 import { STAGE_SEVEN_ROUTE, hangarSectionAt, createStageSevenSolids, HANGAR_CART_TUNNEL, HANGAR_PRESSES, hangarPressState, hangarPressCrushBox, HANGAR_SNIPERS, HANGAR_BOXES, HANGAR_PODS, HANGAR_CART_DEPOTS, HANGAR_ENCOUNTERS } from '/games/contra2026/js/stage-seven-layout.mjs?v=hangar-required-routes-1';
@@ -33,7 +33,7 @@ import { STAGE_SIX_GALLERY, createStageSixGallerySolids, createStageSixGunners, 
 import { drawExplosion, drawSupplyDisc, drawEquipmentTurret, drawEquipmentSupply } from '/games/contra2026/js/combat-art.mjs?v=combat-polish-1';
 import { STAGE_FIVE_ROUTE, createSnowDefenders, snowDefenderBox, advanceSnowDefender, advanceSnowOrdnance, createFlyingFortress, placeFlyingFortress, advanceFlyingFortress, advanceFortressEscorts, advanceFortressSaucer, fortressSaucerBox } from '/games/contra2026/js/stage-five-combat.mjs?v=fortress-saucers-1';
 import { STAGE_FOUR_ROOMS, STAGE_FOUR_DEVICES, makeTwinProjections, advanceTwinProjections, initStageFourDefenses, advanceStageFourShutters, stageFourFacilityClosed, advanceStageFourGallery, stageFourGalleryTargets } from '/games/contra2026/js/stage-four-layout.mjs?v=stage-four-defense-1';
-import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=single-enemy-rifle-1';
+import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=mods-1';
 import { drawImpactHelmet } from '/games/contra2026/js/impact-helmet-art.mjs?v=helmet-detail-2';
 import { GamepadInput } from '/games/contra2026/js/gamepad-input.mjs?v=controller-refinements-1';
 import { THIRTY_LIVES, ThirtyLivesCheat, inTitleLogo } from '/games/contra2026/js/thirty-lives.mjs?v=lives-load-1';
@@ -60,9 +60,11 @@ import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
 import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=spec-2';
+import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=mods-1';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
-export function startArcade(wukongDependencies, gameSpec) {
+// projectModules: optional { modules, assetBase } with the project's code modules; see games/shared/mod-runtime.mjs.
+export function startArcade(wukongDependencies, gameSpec, projectModules) {
 'use strict';
 const SPEC = resolveGameSpec(gameSpec);
 const {
@@ -329,6 +331,94 @@ const SHIELD_T = SPEC.items.shieldSeconds;
 const GAME_TITLE = SPEC.meta?.title || '魂斗罗2026', CREDIT_TEAM = GAME_TITLE + '制作组';
 if (SPEC.meta?.title && typeof document !== 'undefined') { document.title = GAME_TITLE; const brand = document.querySelector?.('.loading-brand'); if (brand) brand.textContent = GAME_TITLE; }
 const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 ' + SHIELD_T + ' 秒', ...SPECIALS };
+
+// ================= project code modules (track B) =================
+// Everything below is inert when the project has no modules (MOD.active === false).
+const MOD = createModRuntime(projectModules?.modules || [], {
+  reserved: STOCK_ENEMY_TYPES, items: Object.keys(ITEM_NAMES), assetBase: projectModules?.assetBase || '',
+  imageFactory: () => typeof Image === 'undefined' ? null : new Image(),
+});
+for (const error of MOD.errors) console.warn('[modules]', error.where, error.message);
+/** The only engine surface module code sees (documented in mod-runtime.mjs / the Studio agent prompt). */
+const MOD_GAME = Object.freeze({
+  get G() { return G; }, get dt() { return DT; }, get stage() { return G.stage; }, get time() { return G.time; }, get frame() { return G.t; },
+  get camera() { return { x: G.camX, y: G.camY, w: W, h: H }; },
+  get gravity() { return GRAV; },
+  rnd: () => rnd(),
+  target: x => stageOneTarget(x) || players().find(q => !q.dead) || null,
+  players: () => players().filter(q => !q.dead),
+  aim: (x, y) => aimAtPlayer(x, y),
+  shoot(x, y, vx, vy, options = {}) { const b = ebullet(x, y, vx, vy, options.gravity || 0, options.r || 2); b.from = 'mod'; if (options.sound !== false) sfx.eshot(); return b; },
+  spawn: (type, props) => spawnModEnemy(type, props),
+  ground(x) { const s = groundAt(x); return s ? s.y : null; },
+  land(e, halfWidth = 4) {
+    e.vy = Math.min((e.vy || 0) + GRAV * DT, MAXFALL);
+    const b0 = e.y; e.y += e.vy * DT; e.on = false;
+    if (e.vy >= 0) { const s = findLand(e.x, b0, e.y, halfWidth, false); if (s) { e.y = s.y; e.vy = 0; e.on = true; } }
+    return e.on;
+  },
+  onScreen: (x, margin = 0) => onScreen(x, margin),
+  boom(x, y, size = 8) { boom(x, y, size); sfx.boom(); },
+  sound(name) { const fn = sfx[name]; if (typeof fn === 'function') fn(); },
+  score: n => addScore(Math.round(n) || 0),
+  banner: (text, sec = 1.6) => banner(String(text).slice(0, 40), sec),
+  shake: n => shake(n),
+  drop(x, y, kind) { if (ITEM_NAMES[kind]) G.items.push({ x, y, vx: 20, vy: -170, kind }); },
+  kill: e => killEnemy(e),
+  image: name => MOD.api.image(name),
+  sprite: drawModSprite,
+});
+function spawnModEnemy(type, props = {}) {
+  const def = MOD.enemies.get(type);
+  if (!def) throw new Error(`未定义的敌人类型 ${type}`);
+  const e = { t: type, x: G.camX + W + 16, y: G.camY + 60, vx: 0, vy: 0, hp: def.hp, flash: 0, face: -1, anim: 0, age: 0, mod: true, ...props };
+  if (!def.contact && e.harmless === undefined) e.harmless = true;
+  MOD.call(def, 'init', e, MOD_GAME);
+  G.en.push(e);
+  return e;
+}
+function modSpawn() {
+  const timers = G.modT || (G.modT = {});
+  for (const def of MOD.spawners) {
+    const rule = def.spawn;
+    if (!rule.stages.includes(G.stage) || G.camX < rule.after || G.camX > rule.before) continue;
+    if (timers[def.type] === undefined) timers[def.type] = rule.firstDelay ?? rule.every[0];
+    timers[def.type] -= DT;
+    if (timers[def.type] > 0) continue;
+    timers[def.type] = rule.every[0] + rnd() * (rule.every[1] - rule.every[0]);
+    if (G.en.filter(e => e.t === def.type && !e.dead).length >= rule.max) continue;
+    const left = rule.from === 'left' || (rule.from === 'both' && rnd() < 0.5);
+    const x = left ? G.camX - 16 : G.camX + W + 16;
+    let y;
+    if (rule.height === 'ground') {
+      const s = groundAt(x) || groundAt(left ? G.camX + 24 : G.camX + W - 24);
+      if (!s) continue;
+      y = def.box.anchor === 'feet' ? s.y : s.y - def.box.h / 2;
+    } else y = G.camY + (rule.height === 'sky' ? 30 + rnd() * 50 : rule.height);
+    spawnModEnemy(def.type, { x, y, face: left ? 1 : -1 });
+  }
+}
+function updateModEnemy(def, e) {
+  e.age += DT;
+  MOD.call(def, 'update', e, MOD_GAME);
+  if (!def.keepOffscreen && (e.x < G.camX - 96 || e.x > G.camX + W + 160 || e.y > G.camY + H + 120 || e.y < G.camY - 240)) e.dead = true;
+}
+function modBox(def, e) {
+  const { w, h } = def.box;
+  return { x: e.x - w / 2, y: def.box.anchor === 'feet' ? e.y - h : e.y - h / 2, w, h };
+}
+function drawModEnemy(e, g) {
+  const def = MOD.enemies.get(e.t);
+  if (!def) return false;
+  g.save();
+  try {
+    if (def.draw) def.draw(g, e, MOD_GAME);
+    else { const b = modBox(def, e); g.fillStyle = e.flash > 0 ? '#ffffff' : def.color; g.fillRect(b.x, b.y, b.w, b.h); }
+  } catch (err) { MOD.record(`${def.type}.draw`, err); e.dead = true; }
+  g.restore();
+  return true;
+}
+if (MOD.enemies.size) for (const art of [stageOneArt, stageThreeArt, stageFiveArt, stageSixArt, hangarArt, stageSevenArt]) art.modEnemy = function (e) { return drawModEnemy(e, this.g); };
 
 function findLand(x, b0, b1, hw, skipLedge) {
   let best = null;
@@ -753,6 +843,7 @@ function reset(stage, carry) {
     G.sel2 = 0; G.nadeCd2 = 0;
   } else { delete G.p2; delete G.inv2; }
   if(isSiege())WukongSiege.init(G,players(),siegeHooks());
+  if (MOD.active) { G.modT = {}; MOD.emit('stageStart', MOD_GAME, G.stage); }
 }
 function syncSiegeRoom(){
   LEVEL_W=WukongSiege.ROOM_WIDTHS[G.siege.room];CAM_MAX=Math.max(0,LEVEL_W-W);
@@ -5876,6 +5967,7 @@ function runner(x, y, dir) { return { t: 'run', x, y, vx: dir * 62, vy: 0, hp: i
 const onScreen = (x, m) => x > G.camX - m && x < G.camX + W + m;
 const inViewY = y => y > G.camY + 4 && y < G.camY + H + 24;
 function ebox(e) {
+  if (e.mod) { const def = MOD.enemies.get(e.t); if (def) return modBox(def, e); }
   if(e.t==='fortressSaucer')return fortressSaucerBox(e);
   if(e.t==='hiveHatchling')return hiveHatchlingBox(e);
   if(e.t==='ceilingStalker')return ceilingStalkerBox(e);
@@ -5959,8 +6051,10 @@ function updateEnemies() {
       if (s && !s.water && (G.stage!==6||stageSixRunnerSpawnSafe(sx,s.y,G.jets,G.time,G.s6.coolT))) G.en.push(runner(sx, s.y, left ? 1 : -1));
     }
   }
+  if (MOD.spawners.length && !isSiege()) modSpawn();
   for (const e of G.en) {
     if (e.flash > 0) e.flash -= DT;
+    if (e.mod) { const def = MOD.enemies.get(e.t); if (def) { updateModEnemy(def, e); continue; } }
     if(e.t==='fortressSaucer'){
       advanceFortressSaucer(e,stageOneTarget(e.x),DT,G.camX);continue;
     }
@@ -6233,6 +6327,16 @@ function updateEnemies() {
 function killEnemy(e,shot) {
   if (e.dead) return;
   e.dead = true;
+  if (e.mod) {
+    const def = MOD.enemies.get(e.t);
+    if (def) {
+      MOD.call(def, 'onKill', e, MOD_GAME);
+      const c = modBox(def, e); if (def.boom) boom(c.x + c.w / 2, c.y + c.h / 2, def.boom); sfx.boom(); addScore(def.score);
+      const drop = e.drop ?? def.drop; if (drop && ITEM_NAMES[drop]) G.items.push({ x: e.x, y: c.y + c.h / 2, vx: 20, vy: -170, kind: drop });
+      MOD.emit('kill', e, MOD_GAME);
+      return;
+    }
+  }
   if(e.t==='alienHead'){
     const box=alienGuardianBox(e),wall=alienGuardianWallBox(e);
     for(let i=0;i<3;i++)boom(box.x+box.w*(i%2?.65:.35),box.y+16+i*26,16);
@@ -6259,11 +6363,13 @@ function killEnemy(e,shot) {
   addScore({ artillery:800, heavyGunner:800, grenadier:300, run: 100, snp: 300, tur: 500, box: 500, rock: 100, mor: 300, cart: 200, sac: 500, larva: 50, whiteFloater:50, ceilingParasite:300, ceilingStalker:150, diver: 200, mine: 100, jelly: 100, msub: 500, boat: 500, eel: 300, valve: 200, fish: 100 }[e.t] || 100);
   if (!small) shake(2);
   if (e.t === 'box') G.items.push({ x: e.x, y: e.y - 14, vx: 20, vy: -170, kind: e.item });
+  if (MOD.active) MOD.emit('kill', e, MOD_GAME);
 }
 function damageEnemy(e, dmg, x, y, shot) {
   const impact={material:['tur','box','cart','artillery','heavyGunner','spikeWall','fortressSaucer'].includes(e.t)?'metal':'body',target:ebox(e),vx:shot?.vx??1,vy:shot?.vy??0,weapon:shot?.k};
   if (e.t === 'box' && !e.open) { spark(x, y,impact); return; } // closed sensor box shrugs off hits
   e.hp -= dmg; e.flash = 0.07; spark(x, y,impact);
+  if (e.mod) { const def = MOD.enemies.get(e.t); if (def?.onHit) MOD.call(def, 'onHit', e, MOD_GAME, dmg); }
   if(isCelestial()){
     if(['run','snp','fly'].includes(e.t))receiveGuardHit(e,shot,dmg);
     martialImpact(x,y,{heavy:!!shot?.heavy||dmg>=4,killed:e.hp<=0,metal:impact.material==='metal',blood:['run','snp','fly'].includes(e.t),face:Math.sign(shot?.vx||1),damage:dmg,target:impact.target,weapon:shot?.k,angle:shot?.impactAngle??Math.atan2(shot?.vy||0,shot?.vx||1),form:shot?.form||null});
@@ -6678,7 +6784,7 @@ function collidePlayer() {
     }
   }
   for (const e of G.en) {
-    if (e.dead || e.t === 'waterAmbush' || e.t === 'box' || e.t === 'grenadier' || e.t === 'sac' || e.t === 'valve' || G.freezeT > 0 || (e.t==='rock'&&(e.phase==='embedded'||e.phase==='warning')) || (e.t === 'beam' && e.st !== 'fall') || (e.t === 'eel' && e.out < 0.3)) continue; // frozen and embedded enemies are harmless
+    if (e.dead || e.harmless || e.t === 'waterAmbush' || e.t === 'box' || e.t === 'grenadier' || e.t === 'sac' || e.t === 'valve' || G.freezeT > 0 || (e.t==='rock'&&(e.phase==='embedded'||e.phase==='warning')) || (e.t === 'beam' && e.st !== 'fall') || (e.t === 'eel' && e.out < 0.3)) continue; // frozen and embedded enemies are harmless
     if(e.t==='alienHead'){
       // Power-ups protect the player; touching the gate cannot bypass its HP.
       if(alienGuardianHeadBoxes(e).some(b=>overlap(pb,b)))killPlayer();
@@ -6816,6 +6922,7 @@ function step() {
   G.t++; G.time += DT;
   if (ENEMY_TUNED) tuneEnemies();
   if (BOSS_TUNED) tuneBosses();
+  if (MOD.hooks.step.length && G.mode === 'play') MOD.emit('step', MOD_GAME);
   if(G.martialCombo?.remaining>0)G.martialCombo.remaining=Math.max(0,G.martialCombo.remaining-DT);
   for (const actor of players()) if (updateGiant(actor, DT)) {
     puff(actor.x, actor.y); sfx.hit(); banner('巨大化时间结束 · 恢复原尺寸', 1.4);
@@ -7726,6 +7833,10 @@ function drawIntro() {
   drawText(STAGE_NAMES[G.stage], W / 2, 132, '#f8c23a', 'center', 12);
 }
 function render() {
+  renderFrame();
+  if (MOD.hooks.drawScreen.length && G.mode === 'play') { setT(); ctx.save(); MOD.emit('drawScreen', ctx, MOD_GAME); ctx.restore(); }
+}
+function renderFrame() {
   document.body.classList.toggle('wukong-finale',isCelestial()&&G.boss.encounter?.stage===3);
   if (G.mode === 'loading') return wukong?wukong.loadingBackdrop(ctx,G):drawTitle();
   if (resolutionStage !== G.stage) { resolutionStage = G.stage; resize(); }
@@ -8758,6 +8869,7 @@ window[WUKONG ? 'WukongGame' : 'Contra2026'] = Object.freeze({ inspect: () => ({
   musicDownloads: backgroundMusic?.inspect() || null,
   gamepad:gamepads.inspect(),
   lives:{remaining:G.lives,infinite:infiniteLives(),thirty:!!G.thirtyLives,armed:lifeCheat.enabled},
+  mods: MOD.active ? { types: [...MOD.enemies.keys()], alive: G.en.filter(e=>e.mod&&!e.dead).map(e=>e.t), errors: MOD.errors.map(e=>`${e.where}: ${e.message}`) } : null,
   mode: G.mode, stage: G.stage, role: coop.role, room: coop.room, connected: coop.connected,
   game: GAME_ID,
   theme: null,

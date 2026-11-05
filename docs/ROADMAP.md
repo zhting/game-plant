@@ -145,8 +145,8 @@ flowchart LR
 - **验收**：一句话把机枪射速、生命数、敌人血量、道具掉落改掉，30 秒内在预览里看到效果，可以撤销
 
 ### M2 B 轨 + 资源生成（3 周）
-- [ ] 第一批钩子（从 `WUKONG` 分支提炼），加上 `modules/` 加载机制
-- [ ] Agent 代码工具 + `run_checks` + `playtest` 闭环
+- [x] 第一批钩子（从 `WUKONG` 分支提炼），加上 `modules/` 加载机制（见十三）
+- [x] Agent 代码工具 + `run_checks` + `playtest` 闭环（见十三）
 - [ ] 生图和改图管线（Nano Banana + 风格参考 + 后处理）；把原作的 Python 工具改写成 Node（sharp），或者用 Python worker 调用
 - **验收**：一句话加一种"会飞、会俯冲的敌人"，包括美术和行为，自动测试通过后进入预览
 
@@ -206,3 +206,19 @@ flowchart LR
 - [x] 新增可调字段：`bosses.hpScale`（各关 Boss 可破坏部位血量倍率）、`items.shieldSeconds`（护盾道具时长）。
 - [ ] 继续提取：敌人刷新频率、关卡顺序（关卡顺序也被联机服务使用，需要同步改测试）。
 - [ ] png 源图挪到 `design/source-art`（M0 遗留）。
+
+## 十三、M2 进度
+
+B 轨（项目代码模块）已经跑通：AI 可以一句话写出新敌人，经过检查和试玩后保存为新版本，预览直接生效。
+
+- [x] 模块运行时 `games/shared/mod-runtime.mjs`：`api.defineEnemy`（血量、碰撞框、刷新规则、掉落、init/update/draw/onHit/onKill）和钩子 `stageStart / step / kill / drawScreen`。模块出错只记录并停用对应部分，不会让游戏崩溃。
+- [x] 引擎接入：冻结的 `MOD_GAME` 接口（瞄准、射子弹、生成敌人、爆炸、音效、加分、横幅、震屏、掉落、图片……）。没有模块时行为完全不变，黄金回放不变。模块敌人支持第 1、3、5、6、7、8 关。
+- [x] 隔离试玩 `sim/isolated.mjs`：独立子进程 + `node --permission`（不能写文件、开子进程、读环境变量）+ 超时强杀；静态检查禁止 import/require。
+- [x] Agent 代码工具 `code_list / code_read / code_write / code_delete`：`code_write` 依次做静态检查 → 加载检查 → 相关关卡无头试玩（包括绘制）→ 保存；返回新敌人出现和被击杀的次数。
+- [x] 项目文件 API（`modules/`、`assets/`，带版本），试玩页按版本加载模块。
+- [x] Studio「代码与资源」页：查看/编辑模块（保存前检查）、上传图片和音频资源。
+- [ ] 生图和改图工具（Gemini 图片模型 + 去背景 + 像素化 + 尺寸规范），生成结果存进 `assets/`，模块用 `api.image()` 使用。
+- [ ] 截图工具：让 AI 看到真实画面，自查美术效果。
+- [ ] 悟空模式加载项目模块；第 2、4 关和水下关支持模块敌人。
+- [ ] 用真实 Gemini Key 完成验收：「加一种会飞、会俯冲的敌人」（行为部分已用脚本化模型端到端验证，美术部分等生图工具）。
+

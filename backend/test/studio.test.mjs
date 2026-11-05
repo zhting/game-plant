@@ -139,7 +139,7 @@ test('studio HTTP API: token auth, projects, chat, preview page and undo', { tim
     // The preview page and its game.json are public so play links can be shared.
     const page = await fetch(origin + '/play/web/');
     assert.equal(page.status, 200);
-    assert.match(await page.text(), /main\.mjs\?v=spec-2/);
+    assert.match(await page.text(), /main\.mjs\?v=mods-1/);
     assert.equal((await (await fetch(origin + '/api/projects/web/game.json')).json()).enemies.hpScale, 2);
     assert.equal((await fetch(origin + '/play/missing/')).status, 404);
 
@@ -152,6 +152,77 @@ test('studio HTTP API: token auth, projects, chat, preview page and undo', { tim
     const schema = await (await call('GET', '/api/spec/schema')).json();
     assert.equal(schema.defaults.weapons.rifle.cd, 0.24);
     assert.equal(schema.schema.props.stages.key, '^[1-8]$');
+  } finally {
+    await app.close();
+  }
+});
+
+test('agent: code_write checks, playtests and commits a module enemy; broken code is rejected', { timeout: 60000 }, async () => {
+  const { EXAMPLE_MODULE } = await import('../ai/mod-guide.mjs');
+  const store = newStore();
+  await store.create({ id: 'mods' });
+  const broken = EXAMPLE_MODULE.replace("e.x += e.vx * game.dt;", "e.x += e.vx * game.dt; if (e.age > 0.2) throw new Error('翅膀坏了');");
+  const llm = fakeLlm([
+    { calls: [{ name: 'code_write', args: { path: 'modules/bird.mjs', content: "import x from 'y';\nexport default () => {}", summary: 'x' } }] },
+    { calls: [{ name: 'code_write', args: { path: 'modules/bird.mjs', content: broken, summary: '新增怪鸟' } }] },
+    { calls: [{ name: 'code_write', args: { path: 'modules/bird.mjs', content: EXAMPLE_MODULE.replace('every: [3, 6]', 'every: [1, 2]'), summary: '新增会俯冲的怪鸟' } }] },
+    { calls: [{ name: 'code_list', args: {} }] },
+    { text: '加好了：会俯冲的怪鸟。' },
+  ]);
+  const turn = await runAgentTurn({ llm, store, projectId: 'mods', message: '加一种会飞会俯冲的敌人' });
+  assert.deepEqual(turn.steps.map(s => [s.name, s.ok]), [['code_write', false], ['code_write', false], ['code_write', true], ['code_list', true]]);
+  const responses = llm.requests.slice(1).map(r => r.contents.at(-1).parts[0].functionResponse.response);
+  assert.match(responses[0].details.join(), /不能使用 import/);
+  assert.match(responses[1].error, /翅膀坏了/);
+  assert.equal(responses[2].ok, true);
+  assert.ok(responses[2].playtest[0].customEnemies.diveBird.spawned >= 1, JSON.stringify(responses[2].playtest));
+  assert.deepEqual(responses[3].enemies.map(e => e.type), ['diveBird']);
+  assert.equal(turn.changes.length, 1);
+  assert.deepEqual((await store.listFiles('mods', 'modules')).map(f => f.path), ['modules/bird.mjs']);
+  // Undo removes the module again; restore brings back the whole tree.
+  const added = (await store.history('mods'))[0].commit;
+  await store.undo('mods');
+  assert.deepEqual(await store.listFiles('mods', 'modules'), []);
+  await store.restore('mods', added);
+  assert.deepEqual((await store.listFiles('mods', 'modules')).map(f => f.path), ['modules/bird.mjs']);
+  assert.ok(systemPrompt().includes('api.defineEnemy'));
+});
+
+test('studio HTTP API: module and asset files', { timeout: 30000 }, async () => {
+  const { EXAMPLE_MODULE } = await import('../ai/mod-guide.mjs');
+  const app = await createBackend({ studio: { dataDir: tmp(), token: 't', llm: null, aiConfig: { models: {}, agent: {}, limits: {} } } });
+  app.server.listen(0, '127.0.0.1');
+  await once(app.server, 'listening');
+  const origin = `http://127.0.0.1:${app.server.address().port}`;
+  const auth = { authorization: 'Bearer t' };
+  try {
+    await fetch(origin + '/api/projects', { method: 'POST', headers: { ...auth, 'content-type': 'application/json' }, body: JSON.stringify({ id: 'files' }) });
+    const put = (rel, body, type) => fetch(`${origin}/api/projects/files/files/${rel}`, { method: 'PUT', headers: { ...auth, 'content-type': type }, body });
+    assert.equal((await put('modules/bird.mjs', EXAMPLE_MODULE, 'text/plain', false)).status, 200);
+    const bad = await put('modules/bad.mjs', 'export default api => api.defineEnemy("run", {})', 'text/plain');
+    assert.equal(bad.status, 422);
+    assert.match((await bad.json()).details.join(), /原版敌人重名/);
+    assert.equal((await put('modules/../x.mjs', 'x', 'text/plain')).status, 404);
+    const png = Buffer.from('89504e470d0a1a0a', 'hex');
+    assert.equal((await put('assets/bird.png', png, 'image/png')).status, 200);
+    assert.equal((await put('assets/Bird.PNG', png, 'image/png')).status, 400);
+
+    // Public loader endpoints (used by /play/<id>/).
+    const list = await (await fetch(origin + '/api/projects/files/modules.json')).json();
+    assert.equal(list.assetBase, '/api/projects/files/files/assets');
+    assert.deepEqual(list.files.map(f => f.path), ['modules/bird.mjs']);
+    const mod = await fetch(origin + list.files[0].url);
+    assert.match(mod.headers.get('content-type'), /javascript/);
+    assert.match(mod.headers.get('cache-control'), /immutable/);
+    assert.equal(await mod.text(), EXAMPLE_MODULE);
+    const image = await fetch(origin + '/api/projects/files/files/assets/bird.png');
+    assert.equal(image.headers.get('content-type'), 'image/png');
+    assert.deepEqual(Buffer.from(await image.arrayBuffer()), png);
+
+    const project = await (await fetch(origin + '/api/projects/files', { headers: auth })).json();
+    assert.deepEqual(project.files.assets.map(f => f.path), ['assets/bird.png']);
+    assert.equal((await fetch(origin + '/api/projects/files/files/assets/bird.png', { method: 'DELETE', headers: auth })).status, 200);
+    assert.equal((await fetch(origin + '/api/projects/files/files/assets/bird.png')).status, 404);
   } finally {
     await app.close();
   }

@@ -3,6 +3,7 @@ import { api, getToken, setToken, ApiError } from './api.js';
 import Chat from './Chat.jsx';
 import SpecPanel from './SpecPanel.jsx';
 import History from './History.jsx';
+import Files from './Files.jsx';
 import RawJson from './RawJson.jsx';
 
 export default function App() {
@@ -112,10 +113,11 @@ export default function App() {
           </section>
           <aside className="side">
             <nav>
-              {[['params', '参数'], ['history', '版本'], ['json', 'game.json']].map(([key, label]) =>
+              {[['params', '参数'], ['files', '代码与资源'], ['history', '版本'], ['json', 'game.json']].map(([key, label]) =>
                 <button key={key} className={tab === key ? 'active' : ''} onClick={() => setTab(key)}>{label}</button>)}
             </nav>
             {tab === 'params' && <SpecPanel project={project} schema={schema} onChanged={changed} onError={setError} />}
+            {tab === 'files' && <Files project={project} onChanged={changed} onError={setError} />}
             {tab === 'history' && <History project={project} onChanged={changed} onError={setError} />}
             {tab === 'json' && <RawJson project={project} onChanged={changed} onError={setError} />}
           </aside>

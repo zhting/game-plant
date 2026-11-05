@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=single-enemy-rifle-1';
+import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
 import { drawExplosion } from './combat-art.mjs?v=combat-polish-1';
 import { HDActorArt } from './hd-actors.mjs?v=webp-1';
 import { BASE_ACTORS, BASE_KIT } from './stage-two-atlas.mjs?v=webp-1';

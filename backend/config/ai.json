@@ -9,7 +9,7 @@
   },
   "agent": {
     "thinkingLevel": "medium",
-    "maxSteps": 8,
+    "maxSteps": 14,
     "historyTurns": 12
   },
   "limits": {

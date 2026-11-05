@@ -1,4 +1,4 @@
-import { StageOneArt } from './stage-one-art.mjs?v=single-enemy-rifle-1';
+import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
 import { HUD_PLAYER_X } from './hud-layout.mjs';
 import { FLAME_JET_ASSET, drawFlameJet } from './flame-jet-art.mjs?v=multi-stage-polish-1';
 import { drawFoundryAtmosphere } from './stage-six-atmosphere.mjs?v=foundry-motion-2';
@@ -91,6 +91,7 @@ export class StageSixArt extends StageOneArt {
     else{this.rect(beamX,21,beamW,3,'#282e2d');this.line(beamX,21,q.end,21,'#8b8c80',.7);}
   }
   enemy(e){
+    if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
     if(e.t!=='heavyGunner')return super.enemy(e);
     if(drawFrozenEnemy(this,e,()=>this.enemy(e),{bounds:{x:e.x-54,y:e.y-39,w:108,h:43,foot:e.y}}))return;
     const g=this.g;g.save();g.translate(e.x,e.y);if(e.face>0)g.scale(-1,1);

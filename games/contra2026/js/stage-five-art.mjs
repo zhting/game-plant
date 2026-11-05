@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=single-enemy-rifle-1';
+import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
 import { COMBAT_ASSETS, EQUIPMENT_SUPPLY, EQUIPMENT_TURRET, drawExplosion, drawEquipmentSupply, drawEquipmentTurret } from './combat-art.mjs?v=combat-polish-1';
 import { STAGE_FIVE_ROUTE, FOREST_GRENADIERS, snowDefenderBox, fortressEscortPort } from './stage-five-combat.mjs?v=fortress-saucers-1';
 import { ThermalMaterialCache, thermalSeconds } from './stage-five-thermal.mjs?v=thermal-vision-2';
@@ -262,6 +262,7 @@ export class StageFiveArt extends StageOneArt{
     g.restore();
   }
   enemy(e){
+    if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
     if(e.t!=='box'&&drawFrozenEnemy(this,e,()=>this.enemy(e)))return;
     if(e.t==='fortressSaucer'){this.escortSaucer(e);return;}
     const g=this.g;g.save();g.filter='saturate(.2) brightness(1.22)';

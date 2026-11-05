@@ -1,5 +1,5 @@
 # Stage 1: build the Studio UI (Vite + React). The game runtime itself is never bundled.
-FROM node:22-alpine AS studio
+FROM node:24-alpine AS studio
 WORKDIR /studio
 COPY apps/studio/package.json apps/studio/package-lock.json ./
 RUN npm ci --no-audit --no-fund
@@ -7,7 +7,7 @@ COPY apps/studio ./
 RUN npm run build
 
 # Stage 2: the Node backend (games, coop rooms, Studio API, headless playtests).
-FROM node:22-alpine
+FROM node:24-alpine
 # git: every Studio project is its own git repository (version history / undo).
 RUN apk add --no-cache git
 WORKDIR /app

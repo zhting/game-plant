@@ -19,3 +19,23 @@ export async function loadProjectSpec(loc = location, fetchImpl = fetch) {
   if (!res.ok) throw new Error(`项目 ${id} 的 game.json 加载失败（HTTP ${res.status}）`);
   return res.json();
 }
+
+/**
+ * Import the project's code modules (modules/*.mjs, see games/shared/mod-runtime.mjs).
+ * A module that fails to load is replaced by a stub whose setup rethrows, so the
+ * error shows up in the engine's module error list instead of blocking the game.
+ * @returns {Promise<{modules: object[], assetBase: string}|undefined>}
+ */
+export async function loadProjectModules(loc = location, fetchImpl = fetch, importImpl = url => import(url)) {
+  const id = projectFromPath(loc.pathname);
+  if (!id) return undefined;
+  const rev = new URLSearchParams(loc.search).get('rev');
+  const res = await fetchImpl(`/api/projects/${id}/modules.json` + (rev ? `?rev=${encodeURIComponent(rev)}` : ''), { cache: 'no-store' });
+  if (!res.ok) throw new Error(`项目 ${id} 的模块列表加载失败（HTTP ${res.status}）`);
+  const { files, assetBase } = await res.json();
+  const modules = await Promise.all(files.map(async file => {
+    try { return Object.assign({ __file: file.path }, await importImpl(file.url)); }
+    catch (error) { console.error('[modules]', file.path, error); return { __file: file.path, default: () => { throw error; } }; }
+  }));
+  return { modules, assetBase };
+}

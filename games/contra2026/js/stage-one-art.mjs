@@ -642,6 +642,7 @@ export class StageOneArt {
     this.disc(x, y, radius, gradient);
   }
   enemy(e) {
+    if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
     if(e.t!=='box'&&drawFrozenEnemy(this,e,()=>this.enemy(e)))return;
     if (e.t === 'tur') {
       const image=(this.baseArt||this).images?.equipmentTurret;

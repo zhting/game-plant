@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=single-enemy-rifle-1';
+import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
 import { STAGE_THREE, WATERFALL_GATE, FLAME_BRIDGES, flameJetState, flameJetPositions, waterfallNodesAlive } from './stage-three-layout.mjs?v=crossing-flames-1';
 import { WATERFALL_ARMS, waterfallArmPose } from './stage-three-arms.mjs?v=boss-detail-1';
 import { drawStageThreeWaterfall } from './stage-three-waterfall.mjs?v=boss-detail-1';
@@ -121,6 +121,7 @@ export class StageThreeArt extends StageOneArt{
     }
   }
   enemy(e){
+    if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
     const freezeBounds=e.t==='waterAmbush'?{bounds:{x:e.x-28,y:e.y-40,w:56,h:56,foot:e.y}}:{};
     if(e.t!=='box'&&drawFrozenEnemy(this,e,()=>this.enemy(e),freezeBounds))return;
     if(e.t==='waterAmbush'){this.waterAmbush(e);return;}

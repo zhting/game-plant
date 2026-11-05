@@ -79,3 +79,20 @@ header { display: flex; align-items: center; gap: 10px; padding: 8px 14px; borde
 pre { background: #0f1116; border: 1px solid var(--line); border-radius: 6px; padding: 8px; overflow: auto; font-size: 12px; }
 .diff .add { color: var(--accent2); } .diff .del { color: var(--danger); }
 .raw textarea { width: 100%; height: 50vh; font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+
+.files h4 { display: flex; align-items: center; justify-content: space-between; margin: 12px 0 6px; color: var(--accent); }
+.files h4 button, .files .upload { font-size: 12px; padding: 1px 8px; }
+.file-list { list-style: none; padding: 0; margin: 0 0 8px; }
+.file-list li { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 4px; }
+.file-list li.active { background: var(--panel2); }
+.file-list li .spacer, .editor .spacer { flex: 1; }
+.file-list img { width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated; background: #0f1116; border: 1px solid var(--line); }
+.editor { margin: 8px 0 12px; }
+.editor .row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.editor textarea { width: 100%; height: 45vh; font-family: ui-monospace, Consolas, monospace; font-size: 12px; tab-size: 2; }
+.problems { color: var(--danger); font-size: 12px; margin: 6px 0; padding-left: 18px; }
+.upload { cursor: pointer; border: 1px solid var(--line); border-radius: 6px; background: var(--panel2); color: inherit; }
+.upload input { display: none; }
+.muted, .note { color: var(--dim); font-size: 12px; }
+button.link { background: none; border: 0; padding: 0; color: var(--accent2); cursor: pointer; text-align: left; }
+button.link:hover { text-decoration: underline; }

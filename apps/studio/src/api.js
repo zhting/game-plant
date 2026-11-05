@@ -8,14 +8,14 @@ export class ApiError extends Error {
   constructor(status, message, details) { super(message); this.status = status; this.details = details; }
 }
 
-async function request(method, url, body) {
+async function request(method, url, body, { raw, type, headers = {} } = {}) {
   const res = await fetch(url, {
     method,
-    headers: { ...(body ? { 'content-type': 'application/json' } : {}), ...(getToken() ? { authorization: `Bearer ${getToken()}` } : {}) },
-    body: body ? JSON.stringify(body) : undefined,
+    headers: { ...(raw ? { 'content-type': type || 'application/octet-stream' } : body ? { 'content-type': 'application/json' } : {}), ...(getToken() ? { authorization: `Bearer ${getToken()}` } : {}), ...headers },
+    body: raw ?? (body ? JSON.stringify(body) : undefined),
   });
-  const type = res.headers.get('content-type') || '';
-  const data = type.includes('json') ? await res.json() : await res.text();
+  const resType = res.headers.get('content-type') || '';
+  const data = resType.includes('json') ? await res.json() : await res.text();
   if (!res.ok) throw new ApiError(res.status, data?.error || `HTTP ${res.status}`, data?.details);
   return data;
 }
@@ -33,4 +33,8 @@ export const api = {
   diff: (id, rev) => request('GET', `/api/projects/${id}/diff/${rev}`),
   chatLog: id => request('GET', `/api/projects/${id}/chat`),
   chat: (id, message) => request('POST', `/api/projects/${id}/chat`, { message }),
+  files: id => request('GET', `/api/projects/${id}/files`),
+  readFile: (id, rel) => fetch(`/api/projects/${id}/files/${rel}`, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))),
+  writeFile: (id, rel, content, type, message) => request('PUT', `/api/projects/${id}/files/${rel}`, null, { raw: content, type, headers: message ? { 'x-message': encodeURIComponent(message) } : {} }),
+  deleteFile: (id, rel) => request('DELETE', `/api/projects/${id}/files/${rel}`),
 };

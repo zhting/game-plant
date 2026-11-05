@@ -15,8 +15,10 @@
 | `/games/wukong/` | 大闹天宫 |
 | `/games/wukong/ws` | 大闹天宫独立双人房间（和魂斗罗的房间互不相通） |
 | `/studio/` | Studio 界面（需要先 `npm run studio:install && npm run studio:build`；Docker 镜像会自动构建） |
-| `/api/*` | Studio API；设置了 `STUDIO_TOKEN` 时需要口令（`/api/projects/<id>/game.json` 的 GET 除外） |
-| `/play/<项目>/` | 用项目的 game.json 运行游戏，`?rev=<版本>` 试玩历史版本；公开，可以直接发给测试的人 |
+| `/api/*` | Studio API；设置了 `STUDIO_TOKEN` 时需要口令（`/api/projects/<id>/game.json`、`modules.json` 和 `files/...` 的 GET 除外，试玩页要用） |
+| `/api/projects/<id>/modules.json` | 项目代码模块清单（`?rev=` 指定版本，默认最新），试玩页据此加载 `modules/*.mjs` |
+| `/api/projects/<id>/files/<modules\|assets>/<文件名>` | 读取项目文件；PUT（原始内容，`x-message` 头写版本说明）/DELETE 需要口令。模块保存前会做静态检查和隔离加载检查，不通过返回 422 |
+| `/play/<项目>/` | 用项目的 game.json 和代码模块运行游戏，`?rev=<版本>` 试玩历史版本；公开，可以直接发给测试的人 |
 
 房间只保存在内存里，没有账号，也没有持久化存档；服务重启会结束正在进行的对局。只对外提供各游戏的 `assets/`、`css/`、`js/` 和 `index.html`，`design/`、`tools/` 等源码目录一律返回 404。
 
@@ -32,7 +34,9 @@ npm test
 npm run studio:dev   # 改 Studio 界面时用：http://localhost:5173/studio/（代理到 3000）
 ```
 
-项目数据在 `backend/data/projects/<id>/`（每个项目一个 git 仓库），AI 用量记在 `backend/data/ai-usage.json`。模型在 `backend/config/ai.json` 里配置，也可以用环境变量 `GEMINI_MODEL_AGENT` 等覆盖。
+项目数据在 `backend/data/projects/<id>/`（每个项目一个 git 仓库：`game.json`、`modules/`、`assets/`），AI 用量记在 `backend/data/ai-usage.json`。模型在 `backend/config/ai.json` 里配置，也可以用环境变量 `GEMINI_MODEL_AGENT` 等覆盖。
+
+需要 **Node.js 24**：AI 写的代码模块在独立子进程里试玩（`sim/isolated.mjs`），用 `node --permission` 禁止写文件、开子进程和读环境变量，并有超时强杀。这是内测级别的隔离，不是对抗恶意代码的沙箱，Studio 口令只发给可信的人。
 
 ## 云服务器部署（Docker + Caddy）
 

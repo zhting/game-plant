@@ -1,5 +1,6 @@
 // Project store: every creator project is a directory holding game.json (GameSpec
-// overrides) and, later, modules/ and assets/. Each project directory is its own
+// overrides), modules/*.mjs (code modules, games/shared/mod-runtime.mjs) and
+// assets/ (images and audio used by modules). Each project directory is its own
 // git repository, so every AI or manual change is a commit and "undo" is a revert.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -12,6 +13,12 @@ import { PROJECT_ID_PATTERN } from '../games/shared/project-spec.mjs';
 const run = promisify(execFile);
 const GIT_IDENTITY = ['-c', 'user.name=Game Plant Studio', '-c', 'user.email=studio@game-plant.local', '-c', 'commit.gpgsign=false'];
 const REV_PATTERN = /^[0-9a-f]{4,40}$/;
+/** Files a project may contain besides game.json. One directory level, safe names only. */
+export const PROJECT_FILE_RULES = Object.freeze({
+  modules: { pattern: /^[a-z][a-z0-9-]{0,39}\.mjs$/, maxBytes: 200_000, text: true, desc: '代码模块（.mjs）' },
+  assets: { pattern: /^[a-z0-9][a-z0-9_-]{0,59}\.(png|webp|jpg|ogg|mp3|wav)$/, maxBytes: 8 << 20, text: false, desc: '图片和音频' },
+});
+export const ASSET_TYPES = Object.freeze({ png: 'image/png', webp: 'image/webp', jpg: 'image/jpeg', ogg: 'audio/ogg', mp3: 'audio/mpeg', wav: 'audio/wav', mjs: 'text/javascript; charset=utf-8' });
 
 export class ProjectError extends Error {
   constructor(status, message, details) { super(message); this.status = status; this.details = details; }
@@ -32,6 +39,25 @@ export function createProjectStore({ dir, templatesDir }) {
     return path.join(dir, id);
   };
   const git = async (id, args) => (await run('git', [...GIT_IDENTITY, '-C', projectDir(id), ...args], { maxBuffer: 16 << 20 })).stdout;
+  const gitBuffer = async (id, args) => (await run('git', [...GIT_IDENTITY, '-C', projectDir(id), ...args], { maxBuffer: 32 << 20, encoding: 'buffer' })).stdout;
+  function checkRev(rev) { if (!REV_PATTERN.test(rev || '')) throw new ProjectError(400, '版本号格式不对'); }
+  /** Validate a project-relative path such as modules/bird.mjs; returns the matching rule. */
+  function fileRule(rel) {
+    const parts = String(rel || '').split('/');
+    const rule = PROJECT_FILE_RULES[parts[0]];
+    if (!rule || parts.length !== 2 || !rule.pattern.test(parts[1])) {
+      throw new ProjectError(400, `文件路径 "${rel}" 不允许：只能是 modules/<小写名>.mjs 或 assets/<小写名>.(png|webp|jpg|ogg|mp3|wav)`);
+    }
+    return rule;
+  }
+  async function hasStaged(id) {
+    try { await git(id, ['diff', '--cached', '--quiet']); return false; } catch { return true; }
+  }
+  async function commitStaged(id, message) {
+    if (!await hasStaged(id)) return { commit: (await git(id, ['rev-parse', 'HEAD'])).trim(), changed: false };
+    await git(id, ['commit', '-q', '-m', message]);
+    return { commit: (await git(id, ['rev-parse', 'HEAD'])).trim(), changed: true };
+  }
   async function requireProject(id) {
     try { await fs.access(path.join(projectDir(id), 'game.json')); }
     catch { throw new ProjectError(404, `项目 ${id} 不存在`); }
@@ -126,8 +152,84 @@ export function createProjectStore({ dir, templatesDir }) {
 
     async diff(id, rev) {
       await requireProject(id);
-      if (!REV_PATTERN.test(rev || '')) throw new ProjectError(400, '版本号格式不对');
-      return git(id, ['show', '--format=%s', rev, '--', 'game.json']);
+      checkRev(rev);
+      return git(id, ['show', '--format=%s', '--stat', '--patch', rev, '--', 'game.json', 'modules', 'assets']);
+    },
+
+    /** Files under modules/ or assets/ (at a revision if given): [{ path, size }]. */
+    async listFiles(id, folder, rev) {
+      await requireProject(id);
+      if (!PROJECT_FILE_RULES[folder]) throw new ProjectError(400, `未知目录 ${folder}`);
+      if (rev) {
+        checkRev(rev);
+        const text = await git(id, ['ls-tree', '-r', '-l', rev, '--', folder + '/']).catch(() => '');
+        return text.trim().split('\n').filter(Boolean).map(line => {
+          const [meta, file] = line.split('\t'); return { path: file, size: Number(meta.trim().split(/\s+/)[3]) };
+        }).filter(f => PROJECT_FILE_RULES[folder].pattern.test(f.path.slice(folder.length + 1)));
+      }
+      const entries = await fs.readdir(path.join(projectDir(id), folder), { withFileTypes: true }).catch(() => []);
+      const out = [];
+      for (const entry of entries) {
+        if (!entry.isFile() || !PROJECT_FILE_RULES[folder].pattern.test(entry.name)) continue;
+        out.push({ path: `${folder}/${entry.name}`, size: (await fs.stat(path.join(projectDir(id), folder, entry.name))).size });
+      }
+      return out.sort((a, b) => a.path.localeCompare(b.path));
+    },
+
+    /** Read a project file as a Buffer (at a revision if given). */
+    async readFile(id, rel, rev) {
+      await requireProject(id);
+      fileRule(rel);
+      if (rev) {
+        checkRev(rev);
+        try { return await gitBuffer(id, ['show', `${rev}:${rel}`]); }
+        catch { throw new ProjectError(404, `版本 ${rev} 里没有 ${rel}`); }
+      }
+      try { return await fs.readFile(path.join(projectDir(id), rel)); }
+      catch { throw new ProjectError(404, `文件 ${rel} 不存在`); }
+    },
+
+    /** Code modules as [{ path, source }] (what the engine loads), at a revision if given. */
+    async moduleSources(id, rev) {
+      const files = await this.listFiles(id, 'modules', rev);
+      return Promise.all(files.map(async f => ({ path: f.path, source: (await this.readFile(id, f.path, rev)).toString('utf8') })));
+    },
+
+    /**
+     * Write files and commit them together. files: [{ path, content: string|Buffer }].
+     * @returns {{ commit, changed }}
+     */
+    writeFiles(id, files, message) {
+      return locked(id, async () => {
+        await requireProject(id);
+        if (!Array.isArray(files) || !files.length || files.length > 20) throw new ProjectError(400, '一次写入 1~20 个文件');
+        for (const file of files) {
+          const rule = fileRule(file.path);
+          const data = Buffer.isBuffer(file.content) ? file.content : typeof file.content === 'string' ? Buffer.from(file.content, 'utf8') : null;
+          if (!data) throw new ProjectError(400, `${file.path}: 内容需要是字符串或二进制`);
+          if (data.length > rule.maxBytes) throw new ProjectError(413, `${file.path}: 超过 ${Math.round(rule.maxBytes / 1024)} KB`);
+          file.data = data;
+        }
+        for (const file of files) {
+          const target = path.join(projectDir(id), file.path);
+          await fs.mkdir(path.dirname(target), { recursive: true });
+          await fs.writeFile(target, file.data);
+          await git(id, ['add', '--', file.path]);
+        }
+        return commitStaged(id, message || `更新 ${files.map(f => f.path).join('、')}`);
+      });
+    },
+
+    deleteFiles(id, paths, message) {
+      return locked(id, async () => {
+        await requireProject(id);
+        for (const rel of paths) {
+          fileRule(rel);
+          try { await fs.access(path.join(projectDir(id), rel)); } catch { throw new ProjectError(404, `文件 ${rel} 不存在`); }
+        }
+        await git(id, ['rm', '-q', '--', ...paths]);
+        return commitStaged(id, message || `删除 ${paths.join('、')}`);
+      });
     },
 
     /** Undo the latest change by reverting HEAD (the creation commit cannot be undone). */
@@ -159,11 +261,14 @@ export function createProjectStore({ dir, templatesDir }) {
       return log;
     },
 
-    /** Restore game.json to the state of an earlier version, as a new commit. */
+    /** Restore the whole project (game.json, modules, assets) to an earlier version, as a new commit. */
     restore(id, rev) {
       return locked(id, async () => {
         const spec = await this.readSpec(id, rev);
-        return writeAndCommit(id, spec, `回到版本 ${rev.slice(0, 7)}`);
+        checkSpec(spec);
+        await git(id, ['restore', `--source=${rev}`, '--staged', '--worktree', '--', '.']);
+        const result = await commitStaged(id, `回到版本 ${rev.slice(0, 7)}`);
+        return { ...result, spec };
       });
     },
   };

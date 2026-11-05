@@ -17,8 +17,10 @@ Game Plant 是一个内部使用的 **AI 游戏创作工具**。底座是一套�
 | `sim/` | 无头模拟：`headless.mjs`（不渲染画面地运行引擎）、`replay.mjs`（黄金回放）、`golden/`（已录制的回放基线） |
 | `games/shared/game-spec.mjs` | GameSpec：模板默认值 + 字段说明 + 校验。引擎从这里读可调数据 |
 | `templates/contra/` | 新项目从这里复制的 game.json（只写和默认值不同的部分） |
-| `backend/projects.mjs` `backend/studio.mjs` | Studio：项目（每个一个 git 仓库）、API、`/play/<id>/` 预览 |
-| `backend/ai/` | Gemini 接入和创作 Agent（`agent.mjs` 的工具就是 AI 能做的全部事情） |
+| `backend/projects.mjs` `backend/studio.mjs` | Studio：项目（每个一个 git 仓库：`game.json`、`modules/`、`assets/`）、API、`/play/<id>/` 预览 |
+| `backend/ai/` | Gemini 接入和创作 Agent（`agent.mjs` 的工具就是 AI 能做的全部事情；`mod-guide.mjs` 是教 AI 写代码模块的文档） |
+| `games/shared/mod-runtime.mjs` | 项目代码模块（B 轨）运行时：`defineEnemy`、钩子、出错隔离。引擎里的 `MOD_GAME` 是模块能用的全部接口 |
+| `sim/isolated.mjs` `sim/worker.mjs` | 在独立子进程里加载和试玩 AI 写的模块（`node --permission`、超时强杀） |
 | `apps/studio/` | Studio 界面（Vite + React，唯一允许打包构建的地方） |
 | `docs/` | 路线图和架构文档 |
 
@@ -36,7 +38,7 @@ Game Plant 是一个内部使用的 **AI 游戏创作工具**。底座是一套�
 ## 常用命令
 
 ```sh
-npm ci                 # 安装依赖（Node ≥ 22）
+npm ci                 # 安装依赖（Node 24）
 npm start              # http://localhost:3000 ：入口页 + /games/contra2026/ + /games/wukong/
 npm test               # 全部测试（约 30 秒）
 npm run test:contra    # 只跑魂斗罗
@@ -69,3 +71,10 @@ console.log(e.G.p.x, e.G.score, e.G.en.length);
 2. 引擎里把字面量换成 `SPEC.xxx`。和悟空不同的值先不要提取，或者只在项目显式设置时才生效。
 3. 在 `sim/test/game-spec.test.mjs` 加一个测试，证明改这个字段确实会改变游戏行为。
 4. `npm test`：黄金回放必须不变。Agent 的系统提示会自动带上新字段。
+
+## 项目代码模块（B 轨）
+
+- 模块能用的接口只有 `mod-runtime.mjs` 的 `api` 和引擎里冻结的 `MOD_GAME`。改动接口时，**同步更新** `backend/ai/mod-guide.mjs`（AI 的文档）和 `sim/test/mod-runtime.test.mjs`；示例模块 `EXAMPLE_MODULE` 必须一直能跑通测试。
+- 引擎新增原版敌人类型时，把类型名加进 `STOCK_ENEMY_TYPES`（模块不能重名）。
+- 模块敌人只在 `MOD_STAGES` 列出的关卡生成；美术类在 `enemy(e)` 开头把 `e.mod` 交给 `this.modEnemy`。不要改美术类的原型（无头测试里多个引擎共享同一个类），用实例属性。
+- 没有模块时引擎行为必须和以前完全一样（黄金回放不变）。模块出错只记录、停用对应钩子或敌人，不能让游戏崩溃。

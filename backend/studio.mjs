@@ -3,7 +3,8 @@
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
-import { createProjectStore, ProjectError } from './projects.mjs';
+import { createProjectStore, ProjectError, ASSET_TYPES, PROJECT_FILE_RULES } from './projects.mjs';
+import { checkModuleSource, runIsolated } from '../sim/isolated.mjs';
 import { loadAiConfig, createUsageMeter } from './ai/config.mjs';
 import { createGemini } from './ai/gemini.mjs';
 import { runAgentTurn, describeSchema } from './ai/agent.mjs';
@@ -49,6 +50,22 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   router.get('/api/projects/:id/game.json', wrap(async (req, res) => {
     res.set('Cache-Control', 'no-store').json(await store.readSpec(req.params.id, req.query.rev || undefined));
   }));
+  // Public: the browser loader (games/shared/project-spec.mjs) imports modules by revision so caches never go stale.
+  router.get('/api/projects/:id/modules.json', wrap(async (req, res) => {
+    const id = req.params.id;
+    const rev = req.query.rev ? String(req.query.rev) : (await store.history(id, 1))[0].commit;
+    const files = await store.listFiles(id, 'modules', rev);
+    res.set('Cache-Control', 'no-store').json({
+      rev, assetBase: `/api/projects/${id}/files/assets`,
+      files: files.map(f => ({ path: f.path, url: `/api/projects/${id}/files/${f.path}?rev=${rev}` })),
+    });
+  }));
+  router.get('/api/projects/:id/files/:folder/:name', wrap(async (req, res) => {
+    const rel = `${req.params.folder}/${req.params.name}`, rev = req.query.rev ? String(req.query.rev) : undefined;
+    const data = await store.readFile(req.params.id, rel, rev);
+    res.set('Cache-Control', rev ? 'public, max-age=31536000, immutable' : 'no-store');
+    res.type(ASSET_TYPES[rel.split('.').pop()] || 'application/octet-stream').send(data);
+  }));
   router.get('/play/:id', (req, res) => res.redirect(301, `/play/${encodeURIComponent(req.params.id)}/` + (req._parsedUrl.search || '')));
   router.get('/play/:id/', wrap(async (req, res) => {
     const spec = await store.readSpec(req.params.id);
@@ -69,7 +86,33 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   router.post('/api/projects', wrap(async (req, res) => res.status(201).json(await store.create(req.body || {}))));
   router.get('/api/projects/:id', wrap(async (req, res) => {
     const id = req.params.id;
-    res.json({ id, spec: await store.readSpec(id), resolved: await store.resolvedSpec(id), history: await store.history(id, 30) });
+    res.json({
+      id, spec: await store.readSpec(id), resolved: await store.resolvedSpec(id), history: await store.history(id, 30),
+      files: { modules: await store.listFiles(id, 'modules'), assets: await store.listFiles(id, 'assets') },
+    });
+  }));
+  router.get('/api/projects/:id/files', wrap(async (req, res) => {
+    const id = req.params.id;
+    res.json({ modules: await store.listFiles(id, 'modules'), assets: await store.listFiles(id, 'assets') });
+  }));
+  // Manual edits from the Studio. Modules must load cleanly (checked in an isolated process) before they are committed.
+  const raw = express.raw({ type: () => true, limit: PROJECT_FILE_RULES.assets.maxBytes });
+  router.put('/api/projects/:id/files/:folder/:name', raw, wrap(async (req, res) => {
+    const { id, folder, name } = req.params, rel = `${folder}/${name}`;
+    let content = req.body;
+    if (folder === 'modules') {
+      content = Buffer.isBuffer(content) ? content.toString('utf8') : '';
+      const errors = checkModuleSource(content);
+      if (errors.length) throw new ProjectError(422, '模块检查没有通过', errors);
+      const others = (await store.moduleSources(id)).filter(m => m.path !== rel);
+      const inspect = await runIsolated({ kind: 'inspect', modules: [...others, { path: rel, source: content }] }, { timeoutMs: 15000 });
+      if (!inspect.ok) throw new ProjectError(422, '模块加载失败', (inspect.errors || [{ message: inspect.error }]).map(e => `${e.where || rel}: ${e.message}`));
+    } else if (!Buffer.isBuffer(content) || !content.length) throw new ProjectError(400, '需要上传文件内容');
+    res.json(await store.writeFiles(id, [{ path: rel, content }], decodeURIComponent(String(req.get('x-message') || '')).slice(0, 120) || `手动更新 ${rel}`));
+  }));
+  router.delete('/api/projects/:id/files/:folder/:name', wrap(async (req, res) => {
+    const rel = `${req.params.folder}/${req.params.name}`;
+    res.json(await store.deleteFiles(req.params.id, [rel], `删除 ${rel}`));
   }));
   router.put('/api/projects/:id/game.json', wrap(async (req, res) => res.json(await store.writeSpec(req.params.id, req.body?.spec, req.body?.message || '手动编辑 game.json'))));
   router.patch('/api/projects/:id/game.json', wrap(async (req, res) => res.json(await store.patchSpec(req.params.id, req.body?.patch, req.body?.message || '手动修改'))));
