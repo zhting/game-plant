@@ -1,0 +1,19 @@
+{
+  "name": "game-plant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "游戏生产平台：基于魂斗罗2026 / 大闹天宫引擎的 AI 游戏创作工具",
+  "scripts": {
+    "start": "node backend/server.mjs",
+    "test": "node --test backend/test/*.test.mjs sim/test/*.test.mjs",
+    "test:contra": "node --test backend/test/contra*.test.mjs",
+    "test:wukong": "node --test backend/test/wukong-*.test.mjs",
+    "replay:record": "node sim/record-golden.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}

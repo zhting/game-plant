@@ -1,0 +1,14 @@
+.git
+.github
+.playwright-mcp
+node_modules
+**/node_modules
+**/data
+**/test
+**/design
+**/tools
+sim
+backend/.env
+# Runtime only loads webp/ogg/svg; png files are source art used by tools and tests.
+games/*/assets/**/*.png
+assets/**/*.png
