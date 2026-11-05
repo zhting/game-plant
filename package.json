@@ -9,7 +9,10 @@
     "test": "node --test backend/test/*.test.mjs sim/test/*.test.mjs",
     "test:contra": "node --test backend/test/contra*.test.mjs",
     "test:wukong": "node --test backend/test/wukong-*.test.mjs",
-    "replay:record": "node sim/record-golden.mjs"
+    "replay:record": "node sim/record-golden.mjs",
+    "studio:install": "npm ci --prefix apps/studio",
+    "studio:dev": "npm run dev --prefix apps/studio",
+    "studio:build": "npm run build --prefix apps/studio"
   },
   "engines": {
     "node": ">=22"

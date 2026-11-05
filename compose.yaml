@@ -6,6 +6,10 @@ services:
     restart: unless-stopped
     environment:
       GAMES_ALLOWED_ORIGINS: ${GAMES_ALLOWED_ORIGINS:-https://games.tangletang.top}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      STUDIO_TOKEN: ${STUDIO_TOKEN:-}
+      GEMINI_MODEL_AGENT: ${GEMINI_MODEL_AGENT:-}
+      AI_DAILY_TOKENS: ${AI_DAILY_TOKENS:-}
     volumes:
       - game-data:/app/backend/data
     expose:

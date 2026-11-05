@@ -15,6 +15,11 @@ Game Plant 是一个内部使用的 **AI 游戏创作工具**。底座是一套�
 | `games/wukong/` | 大闹天宫：通过 `js/engine-dependencies.mjs` 把皮肤、规则、敌人、音乐注入引擎 |
 | `backend/` | Node 服务：静态页面 + 两款游戏的双人联机 WebSocket（`contra.mjs`）；`test/` 下是全部回归测试 |
 | `sim/` | 无头模拟：`headless.mjs`（不渲染画面地运行引擎）、`replay.mjs`（黄金回放）、`golden/`（已录制的回放基线） |
+| `games/shared/game-spec.mjs` | GameSpec：模板默认值 + 字段说明 + 校验。引擎从这里读可调数据 |
+| `templates/contra/` | 新项目从这里复制的 game.json（只写和默认值不同的部分） |
+| `backend/projects.mjs` `backend/studio.mjs` | Studio：项目（每个一个 git 仓库）、API、`/play/<id>/` 预览 |
+| `backend/ai/` | Gemini 接入和创作 Agent（`agent.mjs` 的工具就是 AI 能做的全部事情） |
+| `apps/studio/` | Studio 界面（Vite + React，唯一允许打包构建的地方） |
 | `docs/` | 路线图和架构文档 |
 
 ## 红线（必须遵守）
@@ -57,3 +62,10 @@ console.log(e.G.p.x, e.G.score, e.G.en.length);
 - 关卡由 `G.stage` 区分：1–8 是主线，9–16 是水下关原型（还没开放，见 `release-stages.mjs`）。
 - `WUKONG` 为真时走悟空分支（约 179 处）。这些分支就是以后提炼"规则模块和钩子"的清单。
 - 随机数：引擎内部用 `rnd = Math.random`。无头模拟可以传入 `seed`，让结果可复现。
+
+## 把引擎里的常量提取到 GameSpec
+
+1. 在 `game-spec.mjs` 的 `CONTRA_SPEC_DEFAULTS` 里加默认值（必须和引擎原值完全一致），在 `GAME_SPEC_SCHEMA` 里加字段说明和范围。
+2. 引擎里把字面量换成 `SPEC.xxx`。和悟空不同的值先不要提取，或者只在项目显式设置时才生效。
+3. 在 `sim/test/game-spec.test.mjs` 加一个测试，证明改这个字段确实会改变游戏行为。
+4. `npm test`：黄金回放必须不变。Agent 的系统提示会自动带上新字段。

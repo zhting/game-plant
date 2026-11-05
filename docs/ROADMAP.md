@@ -193,3 +193,14 @@ flowchart LR
 - [x] 黄金回放：魂斗罗 8 关 + 悟空 2 关，每秒一个状态指纹（`sim/golden/`）
 - [x] `AGENTS.md`
 - [ ] 资源去重：运行时只加载 webp，png 源图（约 241 MB）暂时不出现在 Docker 镜像里；把源图挪到 `design/source-art` 需要同步修改工具和测试里的路径，放到 M1
+
+## 十二、M1 进度
+- [x] GameSpec 数据层 `games/shared/game-spec.mjs`：物理、命数、加命分数、6 种武器、道具栏、敌人血量倍率（全体/按类型）、得分倍率、第 1/5/6/7/8 关的空中补给和补给箱、关卡名称。每个字段都有中文说明，供 Agent 和参数面板使用。
+- [x] 引擎改为 `startArcade(deps, gameSpec)`，默认值等于原来的常量，黄金回放没有变化。
+- [x] 项目：每个项目一个 git 仓库（`backend/data/projects/<id>/`），版本历史、撤销、回到任意版本；`/play/<id>/` 用项目的 game.json 运行游戏，`?rev=` 可以试玩历史版本。
+- [x] Gemini 接入：`backend/config/ai.json` 配置各角色的模型（环境变量可覆盖），`GEMINI_API_KEY` 只放在环境变量；每日 token 上限。
+- [x] 创作 Agent（轨道 A）：`spec_get / spec_patch / playtest / history / undo`。每次修改先校验字段和范围，再用无头引擎试玩相关关卡，通过后才提交。
+- [x] Studio（`apps/studio`，Vite + React）：对话、实时预览、参数面板、版本历史（改动对比、试玩旧版本、回到此版本）、game.json 编辑。`STUDIO_TOKEN` 共享口令。
+- [ ] 用真实 Gemini key 跑一轮验收：一句话改射速、命数、敌人血量、掉落，30 秒内看到效果，可撤销。
+- [ ] 标题画面、开场文字使用 `meta.title`（目前只在 Studio 里显示）。
+- [ ] png 源图挪到 `design/source-art`（M0 遗留）。

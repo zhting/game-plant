@@ -17,3 +17,5 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - run: npm run studio:install
+      - run: npm run studio:build

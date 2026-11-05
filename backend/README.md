@@ -4,7 +4,7 @@
 - 入口页、两款游戏的静态文件；
 - 两款游戏的双人联机 WebSocket。
 
-以后 Studio 的 API 也会挂在这里。
+- Studio：创作工具界面 `/studio/`、API `/api/*`、项目试玩页 `/play/<项目>/`。
 
 | 路径 | 服务 |
 | --- | --- |
@@ -14,6 +14,9 @@
 | `/games/contra2026/ws` | 魂斗罗双人房间：按键和画面快照同步 |
 | `/games/wukong/` | 大闹天宫 |
 | `/games/wukong/ws` | 大闹天宫独立双人房间（和魂斗罗的房间互不相通） |
+| `/studio/` | Studio 界面（需要先 `npm run studio:install && npm run studio:build`；Docker 镜像会自动构建） |
+| `/api/*` | Studio API；设置了 `STUDIO_TOKEN` 时需要口令（`/api/projects/<id>/game.json` 的 GET 除外） |
+| `/play/<项目>/` | 用项目的 game.json 运行游戏，`?rev=<版本>` 试玩历史版本；公开，可以直接发给测试的人 |
 
 房间只保存在内存里，没有账号，也没有持久化存档；服务重启会结束正在进行的对局。只对外提供各游戏的 `assets/`、`css/`、`js/` 和 `index.html`，`design/`、`tools/` 等源码目录一律返回 404。
 
@@ -23,9 +26,13 @@
 
 ```sh
 npm ci
-npm start      # http://localhost:3000
+npm run studio:install && npm run studio:build
+GEMINI_API_KEY=你的key npm start   # http://localhost:3000/studio/
 npm test
+npm run studio:dev   # 改 Studio 界面时用：http://localhost:5173/studio/（代理到 3000）
 ```
+
+项目数据在 `backend/data/projects/<id>/`（每个项目一个 git 仓库），AI 用量记在 `backend/data/ai-usage.json`。模型在 `backend/config/ai.json` 里配置，也可以用环境变量 `GEMINI_MODEL_AGENT` 等覆盖。
 
 ## 云服务器部署（Docker + Caddy）
 
@@ -33,7 +40,7 @@ npm test
 
 ```sh
 cp backend/.env.example backend/.env
-# 编辑 BACKEND_DOMAIN 与 GAMES_ALLOWED_ORIGINS
+# 编辑 BACKEND_DOMAIN、GAMES_ALLOWED_ORIGINS、GEMINI_API_KEY、STUDIO_TOKEN
 docker compose --env-file backend/.env up -d --build
 docker compose --env-file backend/.env logs --tail=100 backend caddy
 curl https://你的域名/healthz

@@ -7,7 +7,8 @@ node_modules
 **/test
 **/design
 **/tools
-sim
+sim/golden
+apps/studio/dist
 backend/.env
 # Runtime only loads webp/ogg/svg; png files are source art used by tools and tests.
 games/*/assets/**/*.png
