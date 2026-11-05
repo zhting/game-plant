@@ -11,8 +11,11 @@
     "test:wukong": "node --test backend/test/wukong-*.test.mjs",
     "replay:record": "node sim/record-golden.mjs"
   },
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
+    "@google/genai": "^2.32.0",
     "express": "^4.21.2",
     "ws": "^8.18.0"
   }

@@ -1,0 +1,18 @@
+{
+  "provider": "gemini",
+  "models": {
+    "agent": "gemini-3.8-flash",
+    "light": "gemini-3.5-flash-lite",
+    "image": "gemini-3.1-flash-image",
+    "imagePro": "gemini-3-pro-image",
+    "tts": "gemini-3.8-flash-tts"
+  },
+  "agent": {
+    "thinkingLevel": "medium",
+    "maxSteps": 8,
+    "historyTurns": 12
+  },
+  "limits": {
+    "dailyTokens": 5000000
+  }
+}

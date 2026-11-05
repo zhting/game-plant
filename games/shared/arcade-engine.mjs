@@ -59,9 +59,12 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=spec-1';
 // Each document supplies only the systems used by its game.
-export function startArcade(wukongDependencies) {
+// gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
+export function startArcade(wukongDependencies, gameSpec) {
 'use strict';
+const SPEC = resolveGameSpec(gameSpec);
 const {
   WUKONG_STAGES, WUKONG_RELEASE_MESSAGE, isWukongStageOpen,
   WukongSkin, WukongSiege, WukongSiegeArt,
@@ -97,7 +100,7 @@ const canPlayStage = stage => WUKONG ? isWukongStageOpen(stage) : isStageOpen(st
 const lastPlayableStage = () => GAME_STAGES.at(-1);
 const nextPlayableStage = stage => canPlayStage(stage + 1) ? stage + 1 : null;
 const W = 384, H = 216, DT = 1 / 60;
-const GRAV = 700, RUN = 90, JUMPV = 280, JUMPV2 = 250, MAXFALL = 360;
+const { gravity: GRAV, runSpeed: RUN, jumpVelocity: JUMPV, airJumpVelocity: JUMPV2, maxFallSpeed: MAXFALL } = SPEC.player.physics;
 let LEVEL_W = 3334, CAM_MAX = LEVEL_W - W; const BX = 3196;
 const WATER = { x0: 1180, x1: 1560, surf: 186 };
 const $ = id => document.getElementById(id);
@@ -158,7 +161,7 @@ function resetBridges() { for (const b of BRIDGES) { b.armed = false; b.t = 0; b
 const SNIPERS = [[410,144],[1000,88],[1440,120],[1810,96],[2140,128],[2600,112]];
 // [x, surface y]; the turret sits on an 8px base so its barrel is at chest height (y-16) and prone players can duck under its shots
 const TURRETS = [[888,176],[1720,176],[2288,96],[2350,176],[2700,176]];
-const PODS = [{ at: 160, kind: 'M', y0: 70 }, { at: 520, kind: 'g', y0: 64 }, { at: 980, kind: 'S', y0: 58 }, { at: 1420, kind: 'B', y0: 64 }, { at: 1700, kind: 'u', y0: 62 }, { at: 1880, kind: 'm', y0: 66 }, { at: 2040, kind: 'R', y0: 66 }, { at: 700, kind: 'c', y0: 62 }, { at: 2300, kind: 'f', y0: 60 }, { at: 2780, kind: 't', y0: 60 }, { at: 2560, kind: 'h', y0: 56 }, { at: 2680, kind: 'S', y0: 58 }];
+const PODS = SPEC.stages[1].pods;
 // ---------- stage 3 · 峡谷瀑布: a vertical climb; the camera only scrolls up ----------
 const SOLIDS1 = solids.slice();
 const TOP_Y = STAGE_THREE.top;
@@ -171,8 +174,8 @@ const SOLIDS5 = [
 const SNIPERS5 = [[440,100],[1000,92],[1320,96],[1720,96],[2170,124],[2500,92],[2940,96],[3660,98],[4260,94]];
 const TURRETS5 = [[900,176],[1600,176],[2240,176],[2380,120],[2760,176],[3900,176],[4400,176]];
 const MORTARS5 = [1150, 1950, 2560, 2890];
-const BOXES5 = [[380,'i'],[1650,'v'],[2440,'L'],[2720,'S'],[3480,'L'],[4330,'S']];
-const PODS5 = [{ at: 120, kind: 'M', y0: 66 }, { at: 460, kind: 'i', y0: 60 }, { at: 900, kind: 'S', y0: 58 }, { at: 1250, kind: 'v', y0: 62 }, { at: 1600, kind: 'g', y0: 60 }, { at: 1900, kind: 'i', y0: 56 }, { at: 2000, kind: 'H', y0: 64 }, { at: 2200, kind: 'F', y0: 60 }, { at: 2450, kind: 'v', y0: 58 }, { at: 2700, kind: 'R', y0: 64 }, { at: 2860, kind: 'f', y0: 60 },{ at: 3420, kind: 'g', y0: 60 },{ at: 3980, kind: 'v', y0: 58 },{ at: 4450, kind: 'L', y0: 64 }];
+const BOXES5 = SPEC.stages[5].boxes;
+const PODS5 = SPEC.stages[5].pods;
 // ---------- stage 6 · 高温能源厂: furnace halls with lava pits and timed flame jets ----------
 const LEVEL_W6 = 3300;
 const SOLIDS6 = [
@@ -191,16 +194,16 @@ const JETS6 = [
 ];
 const SNIPERS6 = [[400,100],[900,96],[2220,96],[2800,96]];
 const TURRETS6 = [[760,176],[1500,176],[2260,176],[2600,176]];
-const BOXES6 = [[340,'x'],[1180,'w'],[1860,'L'],[2700,'S']];
-const PODS6 = [{ at: 120, kind: 'M', y0: 66 }, { at: 500, kind: 'x', y0: 60 }, { at: 900, kind: 'S', y0: 58 }, { at: 1250, kind: 'w', y0: 62 }, { at: 1550, kind: 'g', y0: 60 }, { at: 1850, kind: 'x', y0: 56 }, { at: 2000, kind: 'H', y0: 64 }, { at: 2200, kind: 'F', y0: 60 }, { at: 2450, kind: 'w', y0: 58 }, { at: 2650, kind: 'R', y0: 64 }, { at: 2850, kind: 'B', y0: 60 }];
+const BOXES6 = SPEC.stages[6].boxes;
+const PODS6 = SPEC.stages[6].pods;
 // ---------- stage 7 · 机械机库: conveyors, hydraulic presses, moving lifts over shafts, cargo carts ----------
 const LEVEL_W7 = STAGE_SEVEN_ROUTE.width;
 const SOLIDS7 = createStageSevenSolids();
 const PRESSES7 = HANGAR_PRESSES;
 const SNIPERS7 = HANGAR_SNIPERS;
 const TURRETS7 = [[520,176],[1350,176],[2400,176],[2820,176]];
-const BOXES7 = HANGAR_BOXES;
-const PODS7 = HANGAR_PODS;
+const BOXES7 = SPEC.stages[7]?.boxes ?? HANGAR_BOXES;
+const PODS7 = SPEC.stages[7]?.pods ?? HANGAR_PODS;
 // ---------- stage 8 · 异形巢穴: the final hive, with acid pools, acid drips, egg sacs and the hive heart ----------
 const LEVEL_W8 = 3500;
 const SOLIDS8 = [
@@ -210,9 +213,9 @@ const SOLIDS8 = [
 const SNIPERS8 = [[440,100],[920,96],[1400,96],[1820,96],[2280,96],[2860,96]];
 const TURRETS8 = [[800,176],[1300,176],[1950,176],[2700,176]];
 const SACS8 = [560, 1240, 1700, 2200, 2900];
-const BOXES8 = [[340,'p'],[1050,'z'],[1880,'L'],[2620,'S']];
+const BOXES8 = SPEC.stages[8].boxes;
 const ACID8 = [{ x: 380, per: 3.2, off: 0 }, { x: 980, per: 2.8, off: 1 }, { x: 1330, per: 3.0, off: 0.5 }, { x: 1760, per: 2.6, off: 1.6 }, { x: 2150, per: 3.0, off: 0.2 }, { x: 2380, per: 2.8, off: 2.0 }, { x: 2760, per: 3.0, off: 1.1 }, { x: 3190, per: 2.2, off: 0, boss: 1 }, { x: 3270, per: 2.2, off: 1.1, boss: 1 }];
-const PODS8 = [{ at: 120, kind: 'M', y0: 66 }, { at: 500, kind: 'p', y0: 60 }, { at: 900, kind: 'S', y0: 58 }, { at: 1250, kind: 'z', y0: 62 }, { at: 1550, kind: 'g', y0: 60 }, { at: 1850, kind: 'p', y0: 56 }, { at: 2000, kind: 'H', y0: 64 }, { at: 2200, kind: 'F', y0: 60 }, { at: 2450, kind: 'z', y0: 58 }, { at: 2700, kind: 'R', y0: 64 }, { at: 2950, kind: 'B', y0: 60 }];
+const PODS8 = SPEC.stages[8].pods;
 // ---------- 水下八关 · 第一关 珊瑚浅海 (stage 9): swimming, oxygen, mines, jellyfish, frogmen, and a mechanical shark ----------
 const LEVEL_W9 = 3200, SEA_SURF = 26, SEA_FLOOR = 196;
 const SOLIDS9 = [
@@ -278,25 +281,34 @@ function xMax(m) { // right edge the player can reach in the side-scrolling stag
   return BX - m;
 }
 // ground sensor boxes: open and close on a cycle, can only be damaged while open, drop the listed item
-const BOXES = [[560, 'F'], [1660, 'H'], [2470, 'L'], [2880, 'g']];
+const BOXES = SPEC.stages[1].boxes;
 // special items: kept in a 3-slot inventory and used with the special-item key; each use starts a short cooldown
 const SPECIALS = { g: '手雷', f: '闪光弹', m: '摩托车', h: '直升机', u: '蘑菇', c: '迷彩披风', t: '炸药包', e: '电磁脉冲', d: '防爆盾', k: '攀岩钩爪', j: '防落石头盔', o: '全息诱饵', n: '磁暴扫雷器', i: '防滑冰爪', v: '热成像镜', x: '防火服', w: '液氮罐', y: '磁力靴', a: '护卫无人机', p: '声波脉冲器', z: '抗酸护甲', b: '压缩氧气瓶', l: '鱼雷组', q: '便携气囊', s: '声呐浮标', r: '冷却剂', A: '增压推进器', C: '涡流推进器', D: '时缓水泡', E: '照明弹', P: '荧光服', K: '绝缘服', T: '遥控阀门', G: '破冰炸药', W: '暖流护罩', N: '钻机护盾', Q: '自动哨炮' };
 // stage-only items (purple badges): they only drop in their own stage and are dropped from the inventory when the stage changes
 const STAGE_ONLY = { c: 1, t: 1, e: 2, d: 2, k: 3, j: 3, o: 4, n: 4, i: 5, v: 5, x: 6, w: 6, y: 7, a: 7, p: 8, z: 8, b: 9, l: 9, q: 10, s: 10, r: 11, A: 11, C: 12, D: 12, E: 13, P: 13, K: 14, T: 14, G: 15, W: 15, N: 16, Q: 16 };
 const stageItemAllowed=(kind,stage)=>!STAGE_ONLY[kind]||STAGE_ONLY[kind]===stage;
 const SP_SHORT = { g: '手雷', f: '闪光', m: '摩托', h: '飞机', u: '蘑菇', c: '迷彩', t: '炸药', e: '电磁', d: '盾牌', k: '钩爪', j: '头盔', o: '诱饵', n: '扫雷', i: '冰爪', v: '热像', x: '防火', w: '液氮', y: '磁靴', a: '无人机', p: '声波', z: '抗酸', b: '氧气', l: '鱼雷', q: '气囊', s: '声呐', r: '冷却', A: '推进', C: '涡流', D: '时缓', E: '照明', P: '荧光', K: '绝缘', T: '阀门', G: '炸药', W: '暖流', N: '护盾', Q: '哨炮' };
-const SP_CD = 2, INV_MAX = 3;
+const { specialCooldown: SP_CD, inventorySize: INV_MAX } = SPEC.items;
 
 if(WUKONG){Object.assign(SPECIALS,WUKONG_MAGIC_NAMES);Object.assign(SP_SHORT,WUKONG_MAGIC_SHORT);Object.assign(STAGE_ONLY,WUKONG_MAGIC_STAGE);}
 
-const WEAP = {
-  rifle:   { name: '步枪', cd: 0.24, max: 4, per: 1, spd: 270 },
-  machine: { name: '连发机枪', cd: 0.09, max: 7, per: 1, spd: 290 },
-  spread:  { name: '扇形散弹', cd: 0.30, max: 15, per: 5, spd: 260 },
-  laser:   { name: '贯穿光束', cd: 0.28, max: 1, per: 1, spd: 380 },
-  fire:    { name: '螺旋火焰', cd: 0.28, max: 4, per: 1, spd: 170 },
-  homing:  { name: '跟踪导弹', cd: 0.32, max: 4, per: 1, spd: 150 },
-};
+const WEAP = SPEC.weapons;
+const SCORE_SCALE = SPEC.scoring.scale;
+// GameSpec enemy hp tuning: applied once to each new entry of G.en at the start of a frame.
+// Skipped entirely for the stock spec so golden replays stay byte-identical.
+const ENEMY_SPEC = SPEC.enemies, ENEMY_TUNED = ENEMY_SPEC.hpScale !== 1 || Object.keys(ENEMY_SPEC.types).length > 0;
+const tunedEnemies = new WeakSet();
+function tuneEnemies() {
+  for (const e of G.en) {
+    if (tunedEnemies.has(e)) continue;
+    tunedEnemies.add(e);
+    if (typeof e.hp !== 'number' || e.hp <= 0 || e.hp >= 999) continue; // 999 marks indestructible props
+    const rule = ENEMY_SPEC.types[e.t], hp = rule?.hp ?? Math.max(1, Math.ceil(e.hp * ENEMY_SPEC.hpScale * (rule?.hpScale ?? 1)));
+    const ratio = hp / e.hp; e.hp = hp;
+    if (typeof e.max === 'number') e.max = Math.max(1, Math.round(e.max * ratio));
+    if (typeof e.maxHp === 'number') e.maxHp = Math.max(1, Math.round(e.maxHp * ratio));
+  }
+}
 const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 10 秒', ...SPECIALS };
 
 function findLand(x, b0, b1, hw, skipLedge) {
@@ -672,7 +684,7 @@ function reset(stage, carry) {
   const keep2 = carry && G.p2 ? { weapon: G.p2.weapon, rapid: G.p2.rapid, inv: G.inv2 || [] } : null;
   const keep = carry && G.p ? { score: G.score, lives: G.lives, nextLife: G.nextLife, deaths: G.deaths, time: G.time, inv: G.inv.slice(), sel: G.sel, weapon: G.p.weapon, rapid: G.p.rapid } : null;
   Object.assign(G, {
-    camX: 0, camY: 0, t: 0, time: 0, score: 0, lives: thirtyLives?THIRTY_LIVES:SET.diff === 'easy' ? 5 : 3, thirtyLives, nextLife: 20000, deaths: 0, shake: 0,
+    camX: 0, camY: 0, t: 0, time: 0, score: 0, lives: thirtyLives?THIRTY_LIVES:SET.diff === 'easy' ? SPEC.player.lives.easy : SPEC.player.lives.normal, thirtyLives, nextLife: SPEC.player.extraLife.first, deaths: 0, shake: 0,
     p: newPlayer(40), pb: [], eb: [], gr: [], en: [], riverFishHits:{}, flashT: 0, nadeCd: 0, freezeT: 0, empT: 0, decoyT: 0, decoyX: 0, sweepT: 0, inv: [], sel: 0, pods: [], items: [], fx: [],
     spawnT: 2.5, podTrig: [...PODS,...(WUKONG&&(stage||1)===1?[...WUKONG_MAGIC_DROPS,...HEALING_DROPS]:[])].map(p => ({ ...p, done: false })), boss: makeBoss(), bannerT: 0,
   });
@@ -739,9 +751,9 @@ function makeBoss() {
 reset();
 
 function addScore(n) {
-  G.score += n;
+  G.score += SCORE_SCALE === 1 ? n : Math.round(n * SCORE_SCALE);
   if (G.score > HI) { HI = G.score; try { localStorage.setItem(WUKONG ? 'wukong-hi' : 'chiyan-hi', String(HI)); } catch (e) {} }
-  if (G.score >= G.nextLife) { G.lives++; G.nextLife += 70000; banner('奖励一条命'); sfx.pick(); }
+  if (G.score >= G.nextLife) { G.lives++; G.nextLife += SPEC.player.extraLife.every; banner('奖励一条命'); sfx.pick(); }
 }
 function banner(text, sec) { G.bannerText = isCelestial()?wukongMountText(text):text; G.bannerT = sec || 1.8; }
 function shake(n) { if (!reduceMotion && SET.shake === 'on') G.shake = Math.max(G.shake, n); }
@@ -6783,6 +6795,7 @@ function step() {
   if(isCelestial()&&G.boss.encounter?.stage===3){stepGiantFinale();return;}
   if(isCelestial()&&advanceImpactPause(G,DT,[I,remoteInput]))return;
   G.t++; G.time += DT;
+  if (ENEMY_TUNED) tuneEnemies();
   if(G.martialCombo?.remaining>0)G.martialCombo.remaining=Math.max(0,G.martialCombo.remaining-DT);
   for (const actor of players()) if (updateGiant(actor, DT)) {
     puff(actor.x, actor.y); sfx.hit(); banner('巨大化时间结束 · 恢复原尺寸', 1.4);
@@ -6920,6 +6933,7 @@ function drawText(str, x, y, color, align, size, scale) {
 }
 const pad6 = n => String(n).padStart(6, '0');
 const STAGE_NAMES = { 1: WUKONG?'云海天宫':'雨林要塞', 2: WUKONG?'南天门 · 破阵登天':'地下指挥所', 3: '峡谷瀑布', 4: '地下基地 · 双生投影', 5: '极地冰原', 6: '高温能源厂', 7: '机械机库', 8: '异形巢穴', 9: '珊瑚浅海', 10: '沉船墓场', 11: '海底火山', 12: '深海洋流', 13: '黑暗深渊', 14: '海底要塞', 15: '冰封海沟', 16: '远古母体' };
+for (const [n, s] of Object.entries(SPEC.stages)) if (s.name) STAGE_NAMES[n] = s.name;
 const STAGE_NUM = { 1: '第一关', 2: '第二关', 3: '第三关', 4: '第四关', 5: '第五关', 6: '第六关', 7: '第七关', 8: '第八关', 9: '水下第一关', 10: '水下第二关', 11: '水下第三关', 12: '水下第四关', 13: '水下第五关', 14: '水下第六关', 15: '水下第七关', 16: '水下第八关' };
 const LAST_STAGE = 8;
 

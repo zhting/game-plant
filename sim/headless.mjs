@@ -58,12 +58,13 @@ function seededRandom(seed) {
  * @param {'basic'|'rich'} [options.dom]           DOM stub flavour (defaults to the one each game's tests were written against).
  * @param {boolean} [options.primeAllStages]       Mark every open stage's resources as cached so play() starts immediately.
  * @param {object} [options.dependencies]          Module passed to startArcade (defaults to the Wukong dependencies for Wukong).
+ * @param {object} [options.spec]                  GameSpec overrides (a project's game.json) passed to startArcade.
  */
 export function createHeadlessEngine({
   game = 'contra2026', seed = null, coldResources = false, hostname = 'localhost', search = '', touch = false,
   getGamepads = () => [], savedSettings = null, hideGamepadIndicator = false, overrides = {},
   dom = game === 'wukong' ? 'rich' : 'basic', primeAllStages = game !== 'wukong',
-  dependencies = game === 'wukong' ? wukongDependencies : undefined,
+  dependencies = game === 'wukong' ? wukongDependencies : undefined, spec = undefined,
 } = {}) {
   const rich = dom === 'rich';
   let fullscreenRequests = 0;
@@ -108,7 +109,7 @@ export function createHeadlessEngine({
   if (seed !== null) { math = Object.create(Math); math.random = seededRandom(seed); }
   const sandbox = {
     ...ENGINE_IMPORTS,
-    __dependencies: dependencies,
+    __dependencies: dependencies, __gameSpec: spec,
     document, navigator: { maxTouchPoints: touch ? 5 : 0, getGamepads },
     location: { href: `http://localhost/games/${game}/`, origin: 'http://localhost', hostname, search },
     matchMedia: () => ({ matches: false }), addEventListener() {}, requestAnimationFrame() {},
@@ -141,7 +142,7 @@ export function createHeadlessEngine({
       hurtPartner(force, hit) { withPlayer2(() => killPlayer(force, hit)); },
     };
     ${LOOP_MARKER}`);
-  vm.runInNewContext(source + `\nstartArcade(${dependencies ? '__dependencies' : ''});`, sandbox, { filename: `${game}-engine.js` });
+  vm.runInNewContext(source + `\nstartArcade(__dependencies, __gameSpec);`, sandbox, { filename: `${game}-engine.js` });
   const engine = sandbox.engine;
   engine.dispatchDocument = (type, event) => { for (const handler of documentEvents.get(type) || []) handler({ preventDefault() {}, cancelable: true, ...event }); };
   engine.fullscreenRequests = () => fullscreenRequests;

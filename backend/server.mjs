@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { attachGames } from './runtime.mjs';
+import { createStudio } from './studio.mjs';
 
 const require = createRequire(import.meta.url);
 const express = require('express');
@@ -17,6 +18,11 @@ export async function createBackend(options = {}) {
   for (const file of ['index.html', 'backend-config.js']) {
     app.get(file === 'index.html' ? ['/', '/index.html'] : '/backend-config.js', (req, res) => res.sendFile(path.join(root, file)));
   }
+  // Studio: creator UI (built by apps/studio), its API and /play/<project>/ previews.
+  const studio = createStudio({ root, ...options.studio });
+  app.use(studio.router);
+  const studioDist = path.join(root, 'apps', 'studio', 'dist');
+  app.use('/studio', express.static(studioDist, { index: 'index.html' }));
   app.use('/assets', express.static(path.join(root, 'assets')));
   app.use('/games/shared', express.static(path.join(root, 'games/shared')));
   for (const name of ['contra2026', 'wukong']) {
@@ -35,7 +41,7 @@ export async function createBackend(options = {}) {
   const server = http.createServer(app);
   games = await attachGames(server, options);
   return {
-    server, games,
+    server, games, studio,
     async close() {
       await games.close();
       server.closeAllConnections?.();
@@ -48,7 +54,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const { server, games } = await createBackend();
   const port = Number(process.env.PORT || 3000);
   const host = process.env.HOST || '0.0.0.0';
-  server.listen(port, host, () => console.log(`游戏统一后台：http://${host}:${server.address().port}（魂斗罗 + 大闹天宫）`));
+  server.listen(port, host, () => console.log(`游戏统一后台：http://${host}:${server.address().port}（魂斗罗 + 大闹天宫 + Studio /studio/）`));
   let closing = false;
   async function shutdown() {
     if (closing) return;
