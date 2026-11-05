@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-23",
+  "description": "伏地整体等比缩小 25%，双臂、握棍位置及飘带同尺度校准；实际键盘验证伏地、挥棍、起身和跳跃，固定姿势截图比较左右朝向。",
+  "prone": {
+    "prone": true,
+    "width": 46.4625,
+    "height": 24.57,
+    "standingWidth": 38.56953642384106,
+    "standingHeight": 40.60927152317881,
+    "renderPreservesWorld": true
+  },
+  "stood": true,
+  "jumped": true,
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 53,
+    "total": 53,
+    "failed": []
+  },
+  "errors": [],
+  "tests": {
+    "passed": 84,
+    "failed": 0
+  },
+  "previews": [
+    "prone-proportion-standing.png",
+    "prone-proportion-right.png",
+    "prone-proportion-left.png",
+    "prone-proportion-attack.png"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen built-in",
+  "prompt": "Use case: stylized-concept. Asset type: production transparent sprite sheet for a hand-painted Chinese mythology Wukong Heavenly Palace side-scrolling game. A SINGLE ornate heavenly treasure casket, shown in TWO matching animation states, closed on the LEFT and open on the RIGHT. Two equal-size cells in a wide horizontal sheet, generous empty transparent gap and padding, fully isolated objects, consistent side-on slightly three-quarter camera, SAME exact base proportions and matching ground baseline in both cells. Design: elegant small rounded-lid imperial treasure casket made from creamy white jade, with rich carved gold dragon and cloud ornament, cinnabar inlays, curved gold feet, distinctive arched lid, sculptural silhouette. LEFT: lid fully closed, readable ornate dragon clasp (not a glowing circle). RIGHT: same casket with lid hinged open upwards, amber golden light inside, warm soft glow confined very close to the open mouth, NO flying loot. Painterly richly textured gold and jade to match a detailed ancient Chinese celestial palace action game, soft daylight, sharp defined edges and readable when reduced to 28x24 game pixels. Both objects fully visible and centered within their cells. No square featureless box, no gun barrel, no turret, no electronics, no text, no labels, no UI, no characters, no landscape, no floor, no cast shadow beyond the objects. Genuinely transparent background.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-5869003f-5211-495e-817e-63ac1fa6faca.png",
+  "asset": "games/wukong/assets/heaven-casket.png",
+  "frames": {
+    "closed": {
+      "bounds": [
+        50,
+        245,
+        810,
+        530
+      ],
+      "anchor": [
+        455,
+        760
+      ]
+    },
+    "open": {
+      "bounds": [
+        1040,
+        95,
+        805,
+        680
+      ],
+      "anchor": [
+        1440,
+        760
+      ]
+    }
+  },
+  "worldScale": "28/810"
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>南天门 · 破阵登天｜大闹天宫第二关设计</title>
+  <meta name="description" content="大闹天宫第二关设计：自由选择三条破阵支路，夺弩、回雷、放锤，迎战增长天王。包含关卡地图与机关规则演示。">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="hero">
+    <img class="hero-art" src="./concept.webp" alt="悟空持棍冲向封印南天门，巨弩守住城楼，攻城锤悬在云海要塞旁">
+    <div class="hero-shade"></div>
+    <nav class="topbar" aria-label="设计导航">
+      <a class="brand" href="../../">大闹天宫<span>关卡设计</span></a>
+      <a href="#production">制作安排 <span aria-hidden="true">↓</span></a>
+    </nav>
+    <div class="hero-copy">
+      <p class="eyebrow">第二关 / 攻城破阵</p>
+      <h1>南天门</h1>
+      <p class="chapter-name">破阵登天</p>
+      <p class="hero-intro">借天兵之弩，回天庭之雷。<br>这一次，亲手拆掉挡在面前的天门。</p>
+      <a class="primary-link" href="#route">查看攻城路线 <span aria-hidden="true">↓</span></a>
+    </div>
+    <p class="hero-caption">8–12 分钟 · 单人与双人<br>第二关场景概念 / 路线与机关交互演示</p>
+  </header>
+
+  <main>
+    <section id="route" class="route-section" aria-labelledby="route-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">路线选择</p><h2 id="route-title">先破哪一阵，由你决定。</h2></div>
+        <div class="objective"><strong id="seal-count">0 / 3</strong><span id="gate-status" role="status">破任意两阵，即可开门</span></div>
+      </div>
+      <p class="section-intro">从前庭进入三条支路。可以破两阵直取天王，也可以拆完三阵，换来更从容的决战。</p>
+      <div class="route-workspace">
+        <div>
+          <div class="map-window" tabindex="0" aria-label="关卡路线图，窄屏可左右滚动"><div id="route-map" aria-busy="true"></div></div>
+          <div class="map-footer"><span>点击地点查看玩法；三条支路均可往返。</span><button id="reset" class="text-button">重置演示 <span aria-hidden="true">↺</span></button></div>
+          <p class="map-help">路线图表达房间连接关系。各房间内仍采用当前游戏的横版移动、跳跃与棍击。</p>
+        </div>
+        <aside class="detail" aria-labelledby="detail-title">
+          <div id="detail-content"></div>
+          <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </aside>
+      </div>
+      <noscript><p>启用 JavaScript 可查看路线与机关演示；完整规则也可阅读上方制作稿。</p></noscript>
+    </section>
+
+    <section class="boss-plan" aria-labelledby="boss-title">
+      <div class="boss-number" aria-hidden="true">Ⅱ</div>
+      <div class="boss-copy"><p class="eyebrow">关底 / 青锋巨剑</p><h2 id="boss-title">增长天王</h2><p>看清剑锋，躲过重劈，再把整套棍法打出去。<br>大招后至少留出 <strong>3 秒</strong>反击；破镇甲力阵后延长至 <strong>4 秒</strong>。</p>
+        <button id="view-boss" class="outline-button">查看天王招式演示 <span aria-hidden="true">↗</span></button>
+      </div>
+      <ul class="boss-supports" id="support-list" aria-label="当前阵眼对天王的影响"></ul>
+    </section>
+
+    <section class="pacing" aria-labelledby="pacing-title">
+      <p class="eyebrow">整关节奏</p><h2 id="pacing-title">登桥见门，分路拆阵，破门决战。</h2>
+      <ol>
+        <li><span>01 / 登云桥</span><strong>学会借力</strong><p>安全试打一次机关弹，再接近守门枪阵。</p></li>
+        <li><span>02 / 天门前庭</span><strong>自己选路</strong><p>三座阵眼一眼可见，补给与检查点设在中央。</p></li>
+        <li><span>03 / 三条支路</span><strong>换三种打法</strong><p>夺弩、回雷、放锤；每破一阵，城防随之减弱。</p></li>
+        <li><span>04 / 天王台</span><strong>用连招收尾</strong><p>击开城门，利用破阵成果迎战青锋巨剑。</p></li>
+      </ol>
+    </section>
+    <figure class="concept"><a href="./concept.webp" target="_blank" rel="noreferrer"><img src="./concept.webp" alt="第二关攻城场景完整概念图：白玉云桥、巨弩风阵、三印城门和悬挂攻城锤" loading="lazy"></a><figcaption><span>场景概念 / 白玉云桥与南天门城防</span><span>点击查看全图 ↗</span></figcaption></figure>
+    <section class="pacing production" id="production" aria-labelledby="production-title">
+      <p class="eyebrow">制作安排</p><h2 id="production-title">先通路线，再做兵器与首领。</h2>
+      <ol>
+        <li><span>A / 房间灰盒</span><strong>路要走得通</strong><p>前庭、三支路、主门与天王台；完成三选二和返程近路。</p></li>
+        <li><span>B / 攻城机制</span><strong>棍身碰到才算</strong><p>接入实际回雷、巨弩拨杆、双锁悬锤与检查点。</p></li>
+        <li><span>C / 天王战</span><strong>每次重劈留反击</strong><p>三招、两阶段，阵眼成果改变首领能力和反击时间。</p></li>
+        <li><span>D / 画面与联机</span><strong>完整制作后接关</strong><p>加入正式场景、首领动画、音乐与双人同步，再接首关出口。</p></li>
+      </ol>
+    </section>
+  </main>
+  <footer><span>大闹天宫 / 第二关设计 v1</span><p>此页演示路线、机关规则与反击节奏。正式关卡、增长天王美术及战斗接入列于制作稿。</p><a href="../../">返回当前游戏 ↗</a></footer>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

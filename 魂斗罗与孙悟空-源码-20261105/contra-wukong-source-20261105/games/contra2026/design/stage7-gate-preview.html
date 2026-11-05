@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>第七关防御大门造型预览</title>
+<style>body{margin:0;background:#070e10;color:#d3c7b1;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1536px);height:auto;margin:auto}button{margin:12px 5px;padding:8px 14px;background:#25312d;border:1px solid #65705a;color:inherit;cursor:pointer}</style>
+<canvas width="1536" height="864"></canvas>
+<button id="normal">完整大门</button><button id="damaged">炮台与核心损坏</button><button id="open">大门开启</button><button id="iron">拦路大铁板</button><button id="cart">坐车射击</button><button id="pause">暂停预览</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=hangar-bay-depth-1';
+import {minecartMuzzle} from '../js/minecart-rider.mjs?v=cart-rider-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt,hangar:true});
+await Promise.all([...Object.keys(art.assets).map(key=>art.loadImage(key)),baseArt.loadImage('actorBlue')]);
+const gate={x:3410,active:true,dead:false,deadT:0,parts:[{k:'turret',x:3235,y:155,w:20,h:19,hp:16,max:16},{k:'turret',x:3315,y:155,w:20,h:19,hp:16,max:16},{k:'core',x:3418,y:83,w:30,h:30,hp:55,max:55}]};
+let mode='normal',paused=false,time=2.5,last=performance.now(),opening=0;
+document.querySelector('#normal').onclick=()=>{mode='normal';opening=0;};
+document.querySelector('#damaged').onclick=()=>{mode='damaged';opening=0;};
+document.querySelector('#open').onclick=()=>{mode='open';opening=0;};
+document.querySelector('#iron').onclick=()=>{mode='iron';opening=0;};
+document.querySelector('#cart').onclick=()=>{mode='cart';opening=0;};
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续预览':'暂停预览';};
+function frame(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused){time+=dt;if(mode==='open')opening=Math.min(1.4,opening+dt);}
+  gate.dead=mode==='open';gate.deadT=2.5-opening;gate.parts.forEach((part,i)=>{part.hp=mode==='normal'?part.max:0;part.flash=0;part.shotFlash=i<2&&mode==='normal'?Math.max(0,.35-((time+i*.9)%1.8)):0;});
+  art.prepare(ctx);baseArt.scale=art.scale;const camera=mode==='iron'?1520:3116;art.state={camX:camera,time,t:time*60};art.hangarBackdrop(camera);art.g.save();art.g.translate(-camera,0);
+  art.hangarFloor([{x:0,y:176,w:3500,h:40,g:1},...(mode==='iron'?[{x:1540,y:128,w:300,h:10,g:0}]:[])],camera);
+  if(mode==='cart'){
+    for(const [i,label]of ['坐姿射击','伏低射击','向上射击'].entries()){
+      const cart={x:camera+65+i*116,y:176,wheel:time*5},p={x:cart.x,y:154,face:1,ax:i===2?0:1,ay:i===2?-1:0,cart,cartDuck:i===1,flashT:time% .24<.08?.05:0};
+      art.hangarCartRider(p,'blue');art.hangarCart(cart);const muzzle=minecartMuzzle(p);
+      art.bullets(Array.from({length:3},(_,j)=>({k:'b',x:muzzle.x+(i===2?0:12+j*14+(time*100)%14),y:muzzle.y-(i===2?12+j*14+(time*100)%14:0)})));
+      art.hudText(label,cart.x,108,'#ffe1a5',6,'center');
+    }
+  }
+  else if(mode==='iron'){for(const x of [1760,1870])art.hangarSpikeWall({x,y:176,rise:1,hp:24,max:24});art.actor({x:1690,y:128,face:1,onGround:true,ax:1,ay:0},'blue');}
+  else art.hangarGate(gate);
+  art.g.restore();art.present(ctx);requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);window.gatePreviewReady=true;
+</script></html>

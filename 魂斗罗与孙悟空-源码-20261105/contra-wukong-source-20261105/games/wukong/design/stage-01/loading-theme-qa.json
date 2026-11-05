@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-25",
+  "purpose": "悟空版加载页背景和文案统一为大闹天宫",
+  "tests": {
+    "files": 4,
+    "total": 206,
+    "passed": 206,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-loading-theme.tap"
+  },
+  "browser": {
+    "errors": [],
+    "loading": {
+      "mode": "loading",
+      "resources": {
+        "status": "loading",
+        "ready": false,
+        "loaded": 28,
+        "total": 71,
+        "failed": [],
+        "stage": 1,
+        "cached": 28
+      },
+      "brand": "齐天大圣 · 云海天宫",
+      "title": "大闹天宫",
+      "status": "正在准备第一关 · 云海天宫",
+      "background": "linear-gradient(90deg, rgba(5, 29, 38, 0.94), rgba(8, 34, 43, 0.76) 62%, rgba(13, 47, 57, 0.4)), url(\"http://127.0.0.1:4173/games/wukong/assets/heaven-panorama.webp\")",
+      "text": "齐天大圣 · 云海天宫\n\n大闹天宫\n正在准备第一关 · 云海天宫\n39%\n\n28 / 71 项已就绪 · 完成后自动开始\n\n返回标题"
+    },
+    "failed": {
+      "mode": "loading",
+      "resources": {
+        "status": "error",
+        "ready": false,
+        "loaded": 70,
+        "total": 71,
+        "failed": [
+          "image:/games/wukong/assets/hero-whole-cleave.webp"
+        ],
+        "stage": 1,
+        "cached": 70
+      },
+      "brand": "齐天大圣 · 云海天宫",
+      "title": "大闹天宫",
+      "status": "部分资源未能加载",
+      "background": "linear-gradient(90deg, rgba(5, 29, 38, 0.94), rgba(8, 34, 43, 0.76) 62%, rgba(13, 47, 57, 0.4)), url(\"http://127.0.0.1:4173/games/wukong/assets/heaven-panorama.webp\")",
+      "text": "齐天大圣 · 云海天宫\n\n大闹天宫\n部分资源未能加载\n98%\n\n1 项失败：hero-whole-cleave.webp。已保留成功资源，重试可继续。\n\n重试加载\n返回标题"
+    },
+    "ready": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 71,
+      "total": 71,
+      "failed": [],
+      "stage": 1,
+      "cached": 71
+    },
+    "contraCovers": [],
+    "contra": {
+      "brand": "魂斗罗2026",
+      "title": "准备出击",
+      "background": "linear-gradient(90deg, rgba(0, 5, 8, 0.96), rgba(0, 8, 12, 0.88)), url(\"http://127.0.0.1:4173/games/contra2026/assets/cover-zh.webp?v=0f33b04645\")"
+    },
+    "fixtures": "Delay one Wukong atlas, fail its first request, then retry; original Contra holds one atlas only for its screenshot."
+  },
+  "artifacts": [
+    "loading-wukong.png",
+    "loading-wukong-retry.png",
+    "loading-contra-unchanged.png"
+  ],
+  "notes": [
+    "复用已有 heaven-panorama.webp，无新增图片素材。",
+    "悟空加载期间底层画布仅绘制天宫景色，不回退至原版 drawTitle。",
+    "隔离浏览器延迟一张悟空图集以截取加载中画面，第一次请求故意失败以检查重试界面，重试后71/71资源就绪并进入片头。",
+    "悟空页面加载期间未请求 cover-zh.webp；原版魂斗罗加载页的背景和品牌保持原样。",
+    "截图期间进度仍在推进，截图与读取状态时的百分比可能略有不同。"
+  ]
+}

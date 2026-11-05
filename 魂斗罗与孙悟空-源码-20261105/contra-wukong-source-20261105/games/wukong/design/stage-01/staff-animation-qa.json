@@ -1,0 +1,559 @@
+{
+  "boot": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 51,
+    "total": 51,
+    "failed": []
+  },
+  "ground": [
+    "cloud",
+    "figureEight",
+    "uppercut",
+    "backFlower",
+    "sideWheel",
+    "lowSweep",
+    "reverse",
+    "cross",
+    "risingSpin",
+    "carryFlower",
+    "overhead",
+    "thrust",
+    "doubleTap"
+  ],
+  "live": {
+    "swings": [
+      {
+        "variant": "cloud",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "uppercut",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "backFlower",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "sideWheel",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "lowSweep",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "reverse",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cross",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "reverse",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "carryFlower",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "overhead",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "backFlower",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "carryFlower",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "thrust",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "doubleTap",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "sideWheel",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "carryFlower",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "overhead",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cross",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "uppercut",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "uppercut",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "figureEight",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "lowSweep",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cross",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "thrust",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "risingSpin",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "uppercut",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "backFlower",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "reverse",
+        "kind": "backhand",
+        "combo": 2,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "sideWheel",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "cloud",
+        "kind": "sweep",
+        "combo": 1,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "airThrust",
+        "kind": "spin",
+        "combo": 2,
+        "x": 400,
+        "y": 94.41666666666664
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 3,
+        "x": 400,
+        "y": 49.277777777777736
+      },
+      {
+        "variant": "airWheel",
+        "kind": "spin",
+        "combo": 1,
+        "x": 400,
+        "y": 120.16666666666657
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 2,
+        "x": 400,
+        "y": 120.08333333333333
+      },
+      {
+        "variant": "airThrust",
+        "kind": "spin",
+        "combo": 3,
+        "x": 400,
+        "y": 92.27777777777774
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 1,
+        "x": 400,
+        "y": 90.8055555555555
+      },
+      {
+        "variant": "airCross",
+        "kind": "spin",
+        "combo": 2,
+        "x": 400,
+        "y": 103.94444444444436
+      },
+      {
+        "variant": "figureEight",
+        "kind": "smash",
+        "combo": 3,
+        "x": 400,
+        "y": 144
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 1,
+        "x": 400,
+        "y": 70.58333333333331
+      },
+      {
+        "variant": "airWheel",
+        "kind": "spin",
+        "combo": 2,
+        "x": 400,
+        "y": 53.77777777777772
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 3,
+        "x": 400,
+        "y": 131.08333333333323
+      },
+      {
+        "variant": "airThrust",
+        "kind": "spin",
+        "combo": 1,
+        "x": 400,
+        "y": 99.08333333333331
+      },
+      {
+        "variant": "airReverse",
+        "kind": "spin",
+        "combo": 2,
+        "x": 400,
+        "y": 105.49999999999996
+      },
+      {
+        "variant": "airWheel",
+        "kind": "spin",
+        "combo": 3,
+        "x": 400,
+        "y": 88.11111111111106
+      },
+      {
+        "variant": "airCross",
+        "kind": "spin",
+        "combo": 1,
+        "x": 400,
+        "y": 132.05555555555546
+      }
+    ],
+    "bullets": 0,
+    "enemyBullets": 0,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 51,
+      "total": 51,
+      "failed": []
+    }
+  },
+  "board": {
+    "worldUnchanged": true,
+    "forms": [
+      "cross",
+      "overhead",
+      "figureEight",
+      "cloud",
+      "backFlower",
+      "lowSweep"
+    ]
+  },
+  "qa": {
+    "pausedRenderWorldUnchanged": true,
+    "allFormsDrawWithoutMutation": [
+      {
+        "variant": "cross",
+        "unchanged": true
+      },
+      {
+        "variant": "reverse",
+        "unchanged": true
+      },
+      {
+        "variant": "thrust",
+        "unchanged": true
+      },
+      {
+        "variant": "uppercut",
+        "unchanged": true
+      },
+      {
+        "variant": "overhead",
+        "unchanged": true
+      },
+      {
+        "variant": "figureEight",
+        "unchanged": true
+      },
+      {
+        "variant": "lowSweep",
+        "unchanged": true
+      },
+      {
+        "variant": "whirlwind",
+        "unchanged": true
+      },
+      {
+        "variant": "doubleTap",
+        "unchanged": true
+      },
+      {
+        "variant": "risingSpin",
+        "unchanged": true
+      },
+      {
+        "variant": "cloud",
+        "unchanged": true
+      },
+      {
+        "variant": "backFlower",
+        "unchanged": true
+      },
+      {
+        "variant": "sideWheel",
+        "unchanged": true
+      },
+      {
+        "variant": "carryFlower",
+        "unchanged": true
+      }
+    ],
+    "renderMs": {
+      "mean": 10.427500001589458,
+      "p95": 13.600000023841858
+    },
+    "imageAssets": 20
+  },
+  "errors": [],
+  "bad": [],
+  "date": "2026-10-23",
+  "note": "Actual J/K keyboard input in an isolated browser context. Natural 20-second ground sample is random and need not contain every variant; engine tests cover all 14. Preview board samples the actual game renderer at six fixed phases.",
+  "artifacts": [
+    "wukong-staff-ready.png",
+    "wukong-staff-forms.png"
+  ],
+  "automated": {
+    "tests": 192,
+    "passed": 192,
+    "failed": 0,
+    "poweredHitProbe": {
+      "cases": 504,
+      "misses": 0,
+      "scope": "14 forms x 6 weapons x 2 rapid states x 3 combo stages; sampled at actual 60 Hz simulation steps"
+    }
+  }
+}

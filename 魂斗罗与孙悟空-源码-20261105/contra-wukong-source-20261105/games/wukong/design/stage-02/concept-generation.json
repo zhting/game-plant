@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-29",
+  "tool": "built-in image_gen",
+  "useCase": "stylized-concept",
+  "purpose": "Stage 02 South Heavenly Gate environment and siege mechanism mood concept; design reference only",
+  "references": [
+    "../../assets/heaven-panorama.webp",
+    "../../assets/cover.webp"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one cinematic environment concept for level 2 of an existing Chinese side-scrolling Wukong action game. Input image 1 is the current heavenly architecture / hand-painted material style reference; input image 2 is the established Wukong character identity and armor reference. Create ONE new unified wide landscape, approximately 16:9, no panels, no UI, no text or lettering. Scene: assault on the outer courtyard of the South Heavenly Gate above a deep cloud sea, jade-white fortress terraces, strong vermilion columns, dark teal roofs, aged bronze and gold fittings. It is a stormy late afternoon with soft warm sunlight breaking through blue-grey clouds, a more fortified, grounded and martial atmosphere than the peaceful reference. Broad horizontal jade foreground walkway clearly visible at lower third with railing gaps, readable lateral gameplay space, sparse details in the far-left quarter so title copy can overlay later. The central and right background show the huge CLOSED celestial gate, protected by three distinct small bronze seal mechanisms embedded in its portal. Above the left midground is a captured giant ancient bronze crossbow turret, on the lower right is a large suspended jade-and-bronze siege hammer hanging from chains, with a winding ramp connecting the courtyard. Sun Wukong appears at lower left-middle, full body, small at gameplay scale (around 17 percent image height), in his established gold armor, teal trousers, long red cape, two pheasant plumes and monkey tail, holding one continuous gold-ended dark staff, poised to charge right. A few silver-blue heavenly spear guards defend the gate, clearly separated silhouettes. Large shapes and readable side-view ground edges, restrained particles, no modern weapons, no guns, no machinery from science fiction. High quality painterly 2.5D game art, rich but controlled materials, depth in architecture while all foreground characters stand on one side-view plane. This is a mood / location concept, not an exact collision map or sprite atlas. Preserve Wukong's recognizable design, no text, no watermark.",
+  "generatedSource": "C:\\Users\\zhting\\.codex\\generated_images\\01a186c7-b608-7e03-9d9d-5225798d2282\\exec-2afcd617-6464-4626-94c3-aaa6a132e093.png",
+  "master": "concept-source.png",
+  "preview": "../../assets/stage-02-design/concept.webp",
+  "notes": "One unified concept image, not collision geometry or a production sprite sheet. Original generation retained; only a WebP delivery conversion was made."
+}

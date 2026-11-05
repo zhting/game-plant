@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-28",
+  "changes": {
+    "fixedSafeZones": false,
+    "axe": {
+      "tracksForSeconds": 0.38,
+      "radius": 88,
+      "windup": 1.85,
+      "cut": 0.09,
+      "damage": 40
+    },
+    "stompTell": {
+      "radius": 76,
+      "tracksForSeconds": 0.22,
+      "windup": 1.26,
+      "groundProjection": 0.075,
+      "features": [
+        "stable crush boundary",
+        "gold tracking to red lock",
+        "one lock pulse",
+        "contracting countdown",
+        "last-moment edge glow",
+        "drawn above ground, below actors",
+        "disappears at impact"
+      ]
+    }
+  },
+  "regression": {
+    "passed": 246,
+    "failed": 0,
+    "log": ".playwright-mcp/wukong-no-safe-zone-v1.tap"
+  },
+  "browser": {
+    "resources": {
+      "loaded": 95,
+      "total": 95,
+      "failed": []
+    },
+    "ordinaryInputRehearsal": {
+      "deaths": 0,
+      "bossDead": true,
+      "gateOpen": true,
+      "scarsRetained": 3,
+      "time": 89.46666666666287
+    },
+    "screenshots": [
+      "recordings/wukong-no-safe-stomp-locked-v2.png",
+      "recordings/wukong-no-safe-stomp-urgent-v2.png",
+      "recordings/wukong-no-safe-axe-warning.png",
+      "recordings/wukong-no-safe-axe-impact.png"
+    ]
+  },
+  "visualReview": "Checked tracking, locked, imminent-impact and axe impact frames; adjusted projection and ground render order so the entire ring is visible and moved the lock label above the hero.",
+  "recording": {
+    "output": "recordings/大闹天宫_巨灵神最终Boss战_无安全区版.mp4",
+    "source": "recordings/wukong-final-boss-20261028-no-safe-take-2.webm",
+    "report": "recordings/wukong-final-boss-20261028-no-safe-take-2.json",
+    "duration": 97.305333,
+    "bytes": 66703721,
+    "video": "H.264 / 1920x1080 / 60fps / yuv420p",
+    "audio": "AAC / stereo / 48000Hz",
+    "meanVolumeDb": -33.6,
+    "peakVolumeDb": -6.4,
+    "deaths": 0,
+    "bossDead": true,
+    "gateOpen": true,
+    "scars": 3,
+    "errors": []
+  }
+}

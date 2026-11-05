@@ -1,0 +1,344 @@
+{
+  "checks": 3456,
+  "minAlpha": 255,
+  "disconnected": [],
+  "poses": [
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": false,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "blue",
+      "inWater": true,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": false,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "red",
+      "inWater": true,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": false,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": -1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": -1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": -1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": -1,
+      "ay": 0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": 1,
+      "ay": -1,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": 1,
+      "ay": -0.7,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": 1,
+      "ay": 0,
+      "valid": true
+    },
+    {
+      "role": "enemy",
+      "inWater": true,
+      "face": 1,
+      "ay": 0.7,
+      "valid": true
+    }
+  ],
+  "regressionTests": 92
+}

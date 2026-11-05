@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "output": "H:/project/games/games/contra2026/assets/stage1/commando-death-hd.png",
+  "references": [
+    "H:/project/games/games/contra2026/assets/stage1/commando-blue-hd.png",
+    "H:/project/games/games/contra2026/assets/stage1/commando-red-hd.png"
+  ],
+  "prompt": "Create a production-ready transparent PNG sprite atlas for a 2D side-scrolling arcade game, matching the two reference commando character sheets. Reference 1 blue commando and reference 2 red commando are identity/style references only. NEW death-only animations, NOT shooting or prone combat. Exactly 6 separate full-body sprites in a clean 3-column by 2-row grid with generous transparent gutters, consistent body/anatomy scale. Top row BLUE trousers + blue headband; bottom row RED trousers + red headband. Same muscular bare arms, tan skin, short brown hair, black harness and black boots as references. Facing right anatomical orientation (boots left and head right once fallen). Column 1: incapacitated recoiling backward in midair, head tilted back, eyes closed, slack arms, bent knees, NO rifle held or aimed. Column 2: hard landing on side/back, knees partly bent, one arm flung limply to side, head resting low and eyes closed, NO weapon held or aimed. Column 3: fully motionless lying on side/back on ground, relaxed limbs, eyes closed, cheek near floor, absolutely NO raised head or aiming pose, no weapon. Dropped weapons are omitted entirely so pose never reads as shooting. All figures non-graphic, no blood or wounds. Detailed hand-painted arcade illustration, crisp dark contours and warm readable skin highlights, smooth fine shading matching references, not coarse pixel art, no glow. Transparent background alpha everywhere outside characters, no scene, no floor, no cast shadow, no text, no labels, no grid lines. Entire characters visible inside each cell without overlap. Wide atlas around 1536x1024 or larger."
+}

@@ -1,0 +1,113 @@
+{
+  "state": {
+    "inspect": {
+      "mode": "play",
+      "stage": 2,
+      "role": "",
+      "room": "",
+      "connected": false,
+      "playing": false,
+      "tick": 197,
+      "snapshotBytes": 0,
+      "art": {
+        "ready": true,
+        "loaded": [
+          "environment",
+          "kit",
+          "corridor",
+          "rearBlue",
+          "rearRed",
+          "bossWall",
+          "frontEnemy"
+        ],
+        "failed": [],
+        "frameCount": 4,
+        "resolution": [
+          1536,
+          864
+        ]
+      },
+      "camera": {
+        "x": 0,
+        "y": 0
+      },
+      "audio": {
+        "track": null,
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "exit": null,
+      "base": {
+        "room": 0,
+        "cleared": false,
+        "transition": 0,
+        "dead": false,
+        "targets": [
+          {
+            "kind": "gun",
+            "hp": 4,
+            "max": 4
+          },
+          {
+            "kind": "gun",
+            "hp": 4,
+            "max": 4
+          },
+          {
+            "kind": "core",
+            "hp": 12,
+            "max": 12
+          }
+        ]
+      },
+      "players": [
+        {
+          "id": 1,
+          "x": 222,
+          "y": 204,
+          "weapon": "rifle",
+          "dead": false,
+          "invincible": 0.633333333333334
+        }
+      ],
+      "shots": [
+        {
+          "owner": 1,
+          "x": 209.56,
+          "y": 134.92
+        }
+      ],
+      "score": 0
+    },
+    "qaHook": "undefined",
+    "controls": {
+      "x": 1299.25,
+      "y": 160.625,
+      "width": 90.625,
+      "height": 39.875,
+      "top": 160.625,
+      "right": 1389.875,
+      "bottom": 200.5,
+      "left": 1299.25
+    },
+    "stage": {
+      "x": 16,
+      "y": 41,
+      "width": 1392,
+      "height": 783,
+      "top": 41,
+      "right": 1408,
+      "bottom": 824,
+      "left": 16
+    }
+  },
+  "errors": []
+}

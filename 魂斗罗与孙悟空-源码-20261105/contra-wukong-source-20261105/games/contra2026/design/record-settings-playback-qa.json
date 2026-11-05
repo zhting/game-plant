@@ -1,0 +1,493 @@
+{
+  "runs": [
+    {
+      "before": {
+        "track": "stage1rock",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 2,
+          "preference": "random",
+          "choice": "rock"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1rock",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 2,
+          "preference": "random",
+          "choice": "rock"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 3,
+          "preference": "random",
+          "choice": "cyberpunk"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 3,
+          "preference": "random",
+          "choice": "cyberpunk"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 4,
+          "preference": "random",
+          "choice": "cyberpunk"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 4,
+          "preference": "random",
+          "choice": "cyberpunk"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 5,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 5,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1rock",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 6,
+          "preference": "random",
+          "choice": "rock"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1rock",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 6,
+          "preference": "random",
+          "choice": "rock"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 7,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 7,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "before": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 8,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "after": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 1,
+          "entry": 8,
+          "preference": "random",
+          "choice": "industrial"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    }
+  ],
+  "paused": {
+    "before": {
+      "track": "stage1industrial",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "selection": "random",
+      "resolved": {
+        "stage": 1,
+        "entry": 8,
+        "preference": "random",
+        "choice": "industrial"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "pauseState": {
+      "track": "stage1industrial",
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "suspended",
+      "muted": false,
+      "music": "on",
+      "selection": "random",
+      "resolved": {
+        "stage": 1,
+        "entry": 8,
+        "preference": "random",
+        "choice": "industrial"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "resumed": {
+      "track": "stage1industrial",
+      "playing": false,
+      "paused": false,
+      "loading": true,
+      "ended": false,
+      "error": null,
+      "context": "suspended",
+      "muted": false,
+      "music": "on",
+      "selection": "random",
+      "resolved": {
+        "stage": 1,
+        "entry": 8,
+        "preference": "random",
+        "choice": "industrial"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929
+    }
+  },
+  "resumed": {
+    "track": "stage1industrial",
+    "playing": true,
+    "paused": false,
+    "loading": false,
+    "ended": false,
+    "error": null,
+    "context": "suspended",
+    "muted": false,
+    "music": "on",
+    "selection": "random",
+    "resolved": {
+      "stage": 1,
+      "entry": 8,
+      "preference": "random",
+      "choice": "industrial"
+    },
+    "synth": false,
+    "sfx": "on",
+    "gain": 0.550000011920929
+  },
+  "base": {
+    "track": "stage2",
+    "playing": true,
+    "paused": false,
+    "loading": false,
+    "ended": false,
+    "error": null,
+    "context": "running",
+    "muted": false,
+    "music": "on",
+    "selection": "random",
+    "resolved": {
+      "stage": 2,
+      "entry": 11,
+      "preference": "random",
+      "choice": "original"
+    },
+    "synth": false,
+    "sfx": "on",
+    "gain": 0.550000011920929
+  },
+  "rooms": [
+    {
+      "room": 1,
+      "audio": {
+        "track": "stage2",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 2,
+          "entry": 11,
+          "preference": "random",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "room": 2,
+      "audio": {
+        "track": "stage2",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 2,
+          "entry": 11,
+          "preference": "random",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    },
+    {
+      "room": 3,
+      "audio": {
+        "track": "stage2boss",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "random",
+        "resolved": {
+          "stage": 2,
+          "entry": 11,
+          "preference": "random",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      }
+    }
+  ]
+}

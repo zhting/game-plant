@@ -1,0 +1,24 @@
+{
+  "generatedWith": "built-in imagegen",
+  "source": "design/source-art/shared/demolition-charge-v2.png",
+  "sourceBounds": [
+    75,
+    180,
+    1553,
+    870
+  ],
+  "file": "assets/shared/demolition-charge-v2.webp",
+  "url": "/games/contra2026/assets/shared/demolition-charge-v2.webp",
+  "dimensions": [
+    512,
+    256
+  ],
+  "baseline": 240,
+  "fuseTip": [
+    498,
+    16
+  ],
+  "bytes": 46656,
+  "sha256": "dda6a38de917af5d30938f37b24054c18e66b86dbddc20976e0d74478c304d0c",
+  "alphaPreserved": true
+}

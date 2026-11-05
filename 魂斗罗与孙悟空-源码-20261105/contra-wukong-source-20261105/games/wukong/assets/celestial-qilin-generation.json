@@ -1,0 +1,16 @@
+{
+  "mode": "built-in image_gen",
+  "useCase": "stylized-concept",
+  "intent": "generate",
+  "transparentBackground": true,
+  "prompt": "Use case: stylized-concept. Asset type: transparent 2D game sprite atlas for a Chinese Journey to the West side-scrolling action game. Primary request: a beautiful rideable celestial Qilin mythical beast replacing a motorcycle. Create one atlas with FOUR equal rectangular cells, exactly TWO columns and TWO rows, clean real transparent background throughout. In each cell, the SAME beast at the SAME size and the SAME profile camera, entirely facing RIGHT, full body completely inside its cell with generous transparent gutters, paws at a consistent bottom baseline. Top left: idle standing, four strong legs planted. Top right: gallop, forelegs reach forward and hindlegs push backward. Bottom left: gallop gathered underneath the body. Bottom right: airborne leap, front paws slightly bent, hindlegs extended behind. Keep the body, saddle, face, and horns identical across all four frames; only the leg gait, tail and mane change. Subject: a compact powerful Chinese Qilin with a lion-like sturdy body, jade turquoise dragon scales, small elegant gold antlers, a golden cream flowing mane and whiskers, cloven gold hooves, a long flame-shaped teal tail. It has a clearly visible little burgundy-red and gold saddle cushion centered on a level back, prepared for a rider but NO rider. Head has a regal dragon-lion expression, brave and friendly. Style: polished hand-painted Chinese fantasy game art, detailed gilded armor and painted fur, sharp readable silhouette, slightly three-quarter side illustration matching ornate golden Heavenly Palace game scenery and a red-and-gold Sun Wukong hero. Lighting: soft warm upper left daylight. Body proportions: animal total width about 1.8 times total height, horse-sized rideable back, NOT a thin deer. Constraints: real transparent alpha, no scenery, no floor, no cast shadows, no clouds obscuring feet, no square panels or dividers, no letters, no labels, no text, no watermark, NO motorcycle or wheels, no weapon, no person. Each cell contains exactly one complete separate beast.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-fa828085-c0e5-43cd-b02f-468659355d2d.png",
+  "asset": "games/wukong/assets/celestial-qilin.png",
+  "runtime": "games/wukong/assets/celestial-qilin.webp",
+  "frames": [
+    "idle",
+    "extended gallop",
+    "gathered gallop",
+    "leap"
+  ]
+}

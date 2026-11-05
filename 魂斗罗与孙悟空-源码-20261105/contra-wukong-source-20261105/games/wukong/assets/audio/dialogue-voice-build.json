@@ -1,0 +1,192 @@
+{
+  "version": "dialogue-v4",
+  "sourceKind": "local synthetic voice extension from user-provided recording",
+  "reference": "games/wukong/tools/sources/wukong-calls-user-20261026.mp3",
+  "referenceSha256": "9ce4e75ac15993429274b156484933d6d70a2f260a316db1ecd0fb7248efbb84",
+  "referenceText": "嘿！看棒！哪里跑！吃俺老孙一棒！",
+  "model": {
+    "repository": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+    "license": "Apache-2.0",
+    "directory": "H:\\project\\games\\.playwright-mcp\\wukong-tts-model"
+  },
+  "settings": {
+    "seed": 20261026,
+    "temperature": 0.7,
+    "topP": 0.85,
+    "maxNewTokens": 96
+  },
+  "files": [
+    {
+      "key": "come",
+      "text": "接招！",
+      "families": [
+        "ordinary",
+        "heavy",
+        "qi"
+      ],
+      "file": "wukong-come-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/come.wav",
+      "duration": 0.527375,
+      "bytes": 7324,
+      "sha256": "f24dcc731491287fb9253dc2ce65840f9af444ba7f924411548a407d4df21648",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-19.86:measured_TP=-3.77:measured_LRA=0.00:measured_thresh=-29.86:offset=1.13,atrim=duration=0.527375"
+    },
+    {
+      "key": "again",
+      "text": "再来！",
+      "families": [
+        "ordinary"
+      ],
+      "file": "wukong-again-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/again.wav",
+      "duration": 0.399375,
+      "bytes": 6281,
+      "sha256": "fbb03d4ff770ab6f907717459300845eaea68367a3cf7b774fb3ad73e66afd18",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-16.64:measured_TP=-2.60:measured_LRA=0.00:measured_thresh=-26.64:offset=-0.06,atrim=duration=0.399375"
+    },
+    {
+      "key": "another",
+      "text": "再接一招！",
+      "families": [
+        "ordinary",
+        "heavy",
+        "qi"
+      ],
+      "file": "wukong-another-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/another.wav",
+      "duration": 0.923292,
+      "bytes": 9962,
+      "sha256": "60ad769753a8f90653742774ee0e764f496bc30b4008498bc1d94e39760e014d",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-19.14:measured_TP=-3.31:measured_LRA=0.00:measured_thresh=-29.14:offset=0.84,atrim=duration=0.923292"
+    },
+    {
+      "key": "sunHere",
+      "text": "俺老孙来也！",
+      "families": [
+        "ordinary",
+        "ultimate"
+      ],
+      "file": "wukong-sunHere-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/sunHere.wav",
+      "duration": 1.231542,
+      "bytes": 11742,
+      "sha256": "5c66d48ade66dae796468b70d8b1b0fb6fcb083d50eb12fbf8dbc7cedbb7524f",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-20.45:measured_TP=-5.82:measured_LRA=0.00:measured_thresh=-30.45:offset=0.00,atrim=duration=1.231542"
+    },
+    {
+      "key": "tryStaff",
+      "text": "尝尝俺的棍法！",
+      "families": [
+        "ordinary",
+        "heavy",
+        "qi"
+      ],
+      "file": "wukong-tryStaff-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/tryStaff.wav",
+      "duration": 1.32375,
+      "bytes": 12716,
+      "sha256": "09e4112aa4523ab05ed8d3ad6425e493b6bac21bec173ea5bbddedc989470e62",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-19.99:measured_TP=-3.86:measured_LRA=0.00:measured_thresh=-29.99:offset=1.11,atrim=duration=1.32375"
+    },
+    {
+      "key": "fight",
+      "text": "战个痛快！",
+      "families": [
+        "ordinary",
+        "heavy",
+        "ultimate"
+      ],
+      "file": "wukong-fight-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/fight.wav",
+      "duration": 0.882833,
+      "bytes": 9943,
+      "sha256": "660b874236c3849a6c288f4b20f360d92c074e10ddec0080dd05d88673cb3fe1",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-21.85:measured_TP=-5.21:measured_LRA=0.00:measured_thresh=-31.85:offset=1.65,atrim=duration=0.882833"
+    },
+    {
+      "key": "sweepCall",
+      "text": "看俺横扫千军！",
+      "families": [
+        "heavy",
+        "ultimate"
+      ],
+      "file": "wukong-sweepCall-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/sweepCall.wav",
+      "duration": 1.542125,
+      "bytes": 13999,
+      "sha256": "6fb1a2a40766929ce245e83764f445b0964af5b11f61634148f6456bc8a02b23",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-21.55:measured_TP=-2.70:measured_LRA=0.00:measured_thresh=-31.55:offset=3.84,atrim=duration=1.542125"
+    },
+    {
+      "key": "overheadCall",
+      "text": "吃俺一棍！",
+      "families": [
+        "heavy",
+        "qi",
+        "ultimate"
+      ],
+      "file": "wukong-overheadCall-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/overheadCall.wav",
+      "duration": 0.828833,
+      "bytes": 8852,
+      "sha256": "8e6ece78727e15babe59be780366cbb7a66f696b5188ab95041b334a0f03ccd0",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-19.46:measured_TP=-4.60:measured_LRA=0.00:measured_thresh=-29.46:offset=-0.00,atrim=duration=0.828833"
+    },
+    {
+      "key": "noEscape",
+      "text": "休想逃！",
+      "families": [
+        "ordinary",
+        "heavy",
+        "qi"
+      ],
+      "file": "wukong-noEscape-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/noEscape.wav",
+      "duration": 1.137083,
+      "bytes": 11007,
+      "sha256": "c627232eede9c8070ad67481eb0930a98e0451d8adb458672edf276848ebc5e7",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-19.62:measured_TP=-3.81:measured_LRA=0.00:measured_thresh=-29.62:offset=0.80,atrim=duration=1.137083"
+    },
+    {
+      "key": "qiCall",
+      "text": "棍气如虹！",
+      "families": [
+        "qi"
+      ],
+      "file": "wukong-qiCall-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/qiCall.wav",
+      "duration": 1.049417,
+      "bytes": 10173,
+      "sha256": "959e9904c3128b0315c22e97f0de4cbc88dd5363bd8c4b88e28704c4c7cdfcbb",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-20.86:measured_TP=-5.61:measured_LRA=0.00:measured_thresh=-30.86:offset=0.25,atrim=duration=1.049417"
+    },
+    {
+      "key": "powerCall",
+      "text": "金箍棒，显神威！",
+      "families": [
+        "ultimate"
+      ],
+      "file": "wukong-powerCall-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/powerCall.wav",
+      "duration": 2.117208,
+      "bytes": 16878,
+      "sha256": "9c89e5b001ca2fe8c2f53df4d28963a6dd4d90d09efe5a77a1c55a79c383c715",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-21.27:measured_TP=-4.28:measured_LRA=0.00:measured_thresh=-31.76:offset=1.97,atrim=duration=2.117208"
+    },
+    {
+      "key": "monkeyKing",
+      "text": "齐天大圣在此！",
+      "families": [
+        "ultimate"
+      ],
+      "file": "wukong-monkeyKing-dialogue-v4.ogg",
+      "source": ".playwright-mcp/wukong-dialogue-v4/monkeyKing.wav",
+      "duration": 1.667,
+      "bytes": 14912,
+      "sha256": "0808e39df172588a9ae01d0fdb51c3083140ce78b53ca4e8870c178950e1f24e",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-42dB,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB,areverse,afade=t=in:d=0.004,apad=whole_dur=0.5,loudnorm=I=-17:TP=-2:LRA=7:linear=true:measured_I=-20.49:measured_TP=-3.11:measured_LRA=0.00:measured_thresh=-30.49:offset=2.38,atrim=duration=1.667"
+    }
+  ],
+  "newVoiceBytes": 133789
+}

@@ -1,0 +1,157 @@
+{
+  "taskSpaceId": 153,
+  "productionURL": "http://localhost:3190/games/contra2026/?art=opening-story-1",
+  "before": {
+    "state": {
+      "mode": "cine",
+      "stage": 1,
+      "role": "",
+      "room": "",
+      "connected": false,
+      "playing": false,
+      "tick": 96,
+      "snapshotBytes": 0,
+      "art": {
+        "ready": true,
+        "loaded": [
+          "environment",
+          "palm",
+          "rock",
+          "damage",
+          "actorRed",
+          "actorBlue",
+          "actorEnemy",
+          "fortress",
+          "jungle",
+          "runRed",
+          "runBlue",
+          "runLimbs",
+          "actorDeath",
+          "runEnemy"
+        ],
+        "failed": [],
+        "frameCount": 7,
+        "resolution": [
+          1536,
+          864
+        ]
+      },
+      "camera": {
+        "x": 0,
+        "y": 0
+      },
+      "audio": {
+        "track": "opening",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "exit": {
+        "open": false,
+        "actors": [
+          {
+            "id": 1,
+            "entering": false,
+            "entered": false
+          }
+        ]
+      },
+      "base": null,
+      "players": [
+        {
+          "id": 1,
+          "x": 40,
+          "y": 144,
+          "weapon": "rifle",
+          "dead": false,
+          "invincible": 1.5
+        }
+      ],
+      "shots": [],
+      "score": 0
+    },
+    "hooks": false
+  },
+  "after": {
+    "mode": "intro",
+    "stage": 1,
+    "role": "",
+    "room": "",
+    "connected": false,
+    "playing": false,
+    "tick": 4,
+    "snapshotBytes": 0,
+    "art": {
+      "ready": true,
+      "loaded": [
+        "environment",
+        "palm",
+        "rock",
+        "damage",
+        "actorRed",
+        "actorBlue",
+        "actorEnemy",
+        "fortress",
+        "jungle",
+        "runRed",
+        "runBlue",
+        "runLimbs",
+        "actorDeath",
+        "runEnemy"
+      ],
+      "failed": [],
+      "frameCount": 7,
+      "resolution": [
+        1536,
+        864
+      ]
+    },
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": "opening",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": {
+      "open": false,
+      "actors": [
+        {
+          "id": 1,
+          "entering": false,
+          "entered": false
+        }
+      ]
+    },
+    "base": null,
+    "players": [
+      {
+        "id": 1,
+        "x": 40,
+        "y": 144,
+        "weapon": "rifle",
+        "dead": false,
+        "invincible": 1.5
+      }
+    ],
+    "shots": [],
+    "score": 0
+  }
+}

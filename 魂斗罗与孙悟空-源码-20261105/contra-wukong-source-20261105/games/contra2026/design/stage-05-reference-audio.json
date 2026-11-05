@@ -1,0 +1,15 @@
+{
+  "source": "H:\\download\\videoplayback.mp4",
+  "sourceStart": 709,
+  "duration": 31.94875,
+  "measuredSpectralRepeatSeconds": 31.952,
+  "processing": "FFmpeg Opus 96kbps stereo / 48kHz, -18 LUFS, 4ms edge fades; downloadable MP3 192kbps",
+  "notes": [
+    "The supplied video enters the snowfield around 705.5 seconds.",
+    "The soundtrack is extracted from a mixed gameplay recording and includes original game sound effects.",
+    "One complete repeated musical phrase is used; stage five alone requests this file."
+  ],
+  "file": "../assets/audio/reference-stage5.ogg",
+  "bytes": 459592,
+  "sha256": "7c5983b2343bf5291ca5a2f7a12bfee81cbb3fd489d52d024d2face75ace99bc"
+}

@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-27",
+  "scope": "大闹天宫：追身踩踏、裂空斧、永久坑痕、六套新棍招与七十二变",
+  "checks": {
+    "wukongAndAudio": {
+      "log": ".playwright-mcp/wukong-pressure-regression.tap",
+      "failed": 0,
+      "passed": 377
+    },
+    "sharedContra": {
+      "log": ".playwright-mcp/wukong-pressure-contra-regression.tap",
+      "failed": 0,
+      "passed": 122
+    },
+    "lastTransformAndBoss": {
+      "log": ".playwright-mcp/wukong-pressure-final.tap",
+      "failed": 0,
+      "passed": 13
+    }
+  },
+  "browser": {
+    "crush": {
+      "hp": 66,
+      "scar": {
+        "x": 3100,
+        "y": 176,
+        "r": 68.4,
+        "depth": 1,
+        "at": 1.2833333333333337,
+        "seed": 40300
+      }
+    },
+    "evade": {
+      "hp": 100,
+      "x": 3191.5,
+      "y": 131.0833333333333
+    },
+    "axeHp": 60,
+    "permanentScars": 2,
+    "forms": [
+      {
+        "form": "peng",
+        "hp": 45,
+        "remaining": 17.15000000000005,
+        "guard": false
+      },
+      {
+        "form": "tiger",
+        "hp": 43,
+        "remaining": 15.783333333333436,
+        "guard": false
+      },
+      {
+        "form": "tortoise",
+        "hp": 50,
+        "remaining": 14.350000000000032,
+        "guard": true
+      }
+    ],
+    "shellDamage": 16,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 93,
+      "total": 93,
+      "failed": [],
+      "stage": 1,
+      "cached": 93
+    },
+    "errors": [],
+    "images": [
+      {
+        "path": "H:/project/games/recordings/wukong-pressure-v2-stomp-incoming.png",
+        "bytes": 4112443
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-pressure-v2-crater.png",
+        "bytes": 4127981
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-pressure-v2-permanent-scars.png",
+        "bytes": 3877624
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-pressure-v2-space-rift.png",
+        "bytes": 4118563
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-transform-v2-peng.png",
+        "bytes": 3948307
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-transform-v2-tiger.png",
+        "bytes": 3892541
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-transform-v2-tortoise.png",
+        "bytes": 3944062
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-transform-v2-counter.png",
+        "bytes": 3972091
+      }
+    ]
+  },
+  "counter": {
+    "counterTargetHpAfter": 38,
+    "guardedDamage": 16,
+    "image": "recordings/wukong-transform-v2-counter-impact.png",
+    "counterTargetHpBefore": 50,
+    "incomingDamage": 40
+  },
+  "assets": {
+    "generator": "Built-in image_gen",
+    "bytes": 541326,
+    "atlas": "games/wukong/assets/hero-transform-atlas.webp",
+    "forms": 3,
+    "provenance": "games/wukong/assets/hero-transform-generation.json",
+    "frames": 12
+  },
+  "limitations": [
+    "七十二变当前实装金翅鹏、白虎、玄龟三种形态。",
+    "坑痕灰烬永久保留至关卡重开，地面碰撞保持原规则。"
+  ]
+}

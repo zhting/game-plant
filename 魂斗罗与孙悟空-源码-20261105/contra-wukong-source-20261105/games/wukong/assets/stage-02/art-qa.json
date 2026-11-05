@@ -1,0 +1,32 @@
+{
+  "south-gate-bg": {
+    "size": [
+      1672,
+      941
+    ],
+    "bytes": 328062,
+    "sha256": "0b85a1cd23b84470e48f2d6a7a5ec3e01c48eb69a6e01dc1c1d371d93f769d7d",
+    "transparentPixels": 0,
+    "pixels": 1573352
+  },
+  "growth-king": {
+    "size": [
+      1448,
+      1086
+    ],
+    "bytes": 352096,
+    "sha256": "f8f3fb5219b8210702f1335ddd1364a50db1e3a36b3839fa5c74fafe290e1166",
+    "transparentPixels": 1119002,
+    "pixels": 1572528
+  },
+  "siege-props": {
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 240470,
+    "sha256": "88f3fb10e56f1d54404455b278e3fd9cb47b3badf06225dbc1ae019aa320f641",
+    "transparentPixels": 1234486,
+    "pixels": 1572516
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>敌人冻结特效 · 材质与姿势校准</title>
+<style>html,body{margin:0;background:#0b1920}canvas{display:block;width:1200px;height:720px}</style>
+<canvas width="1200" height="720"></canvas>
+<script type="module">
+import {StageOneArt,STAGE_ONE_ASSETS} from '/games/contra2026/js/stage-one-art.mjs?v=enemy-freeze-2';
+import {StageTwoArt,STAGE_TWO_ASSETS} from '/games/contra2026/js/stage-two-art.mjs?v=enemy-freeze-2';
+import {versionedAssetUrl} from '/games/contra2026/js/asset-url.mjs?v=enemy-freeze-2';
+const createCanvas=()=>document.createElement('canvas'),art=new StageOneArt({createCanvas,autoLoad:false});
+const base=new StageTwoArt({createCanvas,autoLoad:false,baseArt:art});
+for(const [owner,key,url]of [['one','actorEnemy',STAGE_ONE_ASSETS.actorEnemy],['one','runLimbs',STAGE_ONE_ASSETS.runLimbs],
+ ['one','freezeAtlas',STAGE_ONE_ASSETS.freezeAtlas],['one','equipmentTurret',STAGE_ONE_ASSETS.equipmentTurret],['base','frontEnemy',STAGE_TWO_ASSETS.frontEnemy]]){
+ const image=new Image();image.src=versionedAssetUrl(url);await image.decode();const target=owner==='one'?art:base;target.images[key]=image;target.loaded.add(key);
+}
+const canvas=document.querySelector('canvas'),g=canvas.getContext('2d');g.fillStyle='#0b1920';g.fillRect(0,0,1200,720);
+const cases=[['正常',0,'snp'],['冻结 · 轮廓冰壳',3,'snp'],['冻结 · 跑步姿势',3,'run'],['冻结 · 炮台',3,'tur'],['冻结 · 基地守军',3,'base'],['解冻前 · 霜层消散',.2,'snp']];
+for(const [i,[label,timer,type]]of cases.entries()){
+ const x=(i%3)*400,y=Math.floor(i/3)*360;g.fillStyle='#d5e9ed';g.font='23px sans-serif';g.textAlign='center';g.fillText(label,x+200,y+36);
+ g.save();g.translate(x+200,y+307);g.scale(7,7);g.fillStyle='#20372c';g.fillRect(-25,0,50,3);
+ art.g=g;art.scale=7;art.state={t:240,time:4,freezeT:timer,fx:[]};
+ const e={t:type,x:0,y:type==='tur'?-17:0,idx:6,face:1,on:true,vx:type==='run'?80:0,anim:2.3,fireT:1,flash:0,ay:0};
+ if(type==='base'){base.g=g;base.scale=7;base.state=art.state;base.figure({...e,t:undefined},'enemy',1,true);}
+ else art.enemy(e);
+ g.restore();
+}
+window.__freezePreview={ready:true,cases:cases.map(c=>c[0]),dimensions:[1200,720]};
+</script>

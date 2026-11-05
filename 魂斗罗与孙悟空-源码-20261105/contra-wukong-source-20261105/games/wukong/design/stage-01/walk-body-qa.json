@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-23",
+  "description": "悟空走路躯干、腰甲、胯部与双腿共享腰身变换；固定源图髋关节标定，贴图关节重叠，摆腿抬升缩小 25%。",
+  "motions": [
+    {
+      "name": "right",
+      "x": 175.5,
+      "y": 112,
+      "speed": 90,
+      "onGround": true
+    },
+    {
+      "name": "left",
+      "x": 132,
+      "y": 112,
+      "speed": -90,
+      "onGround": true
+    },
+    {
+      "name": "moving attack",
+      "x": 165,
+      "y": 112,
+      "speed": 90,
+      "variant": "overhead"
+    }
+  ],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 53,
+    "total": 53,
+    "failed": []
+  },
+  "errors": [],
+  "connectivity": {
+    "frames": 180,
+    "jointChecks": 1080,
+    "failures": [],
+    "renderPreservesWorld": true,
+    "method": "180 assembled RGBA frames (ready plus fourteen staff variants, twelve gait phases), alpha >= 35, hip/knee/ankle neighborhoods within 1.5 world units all intersect the largest body component."
+  },
+  "tests": {
+    "passed": 93,
+    "failed": 0
+  },
+  "previews": [
+    "walk-body-before.png",
+    "walk-attack-before.png",
+    "walk-body-after.png",
+    "walk-body-left.png",
+    "walk-attack-after.png",
+    "walk-live-right.png",
+    "walk-live-left.png",
+    "walk-live-attack.png"
+  ],
+  "method": "Isolated Playwright context with QA-only pause/seek access. D/A and D+J exercised with actual keyboard input after resource loading. No production debug hooks."
+}

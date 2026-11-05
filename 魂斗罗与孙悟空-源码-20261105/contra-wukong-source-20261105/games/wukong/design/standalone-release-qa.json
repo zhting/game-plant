@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-29",
+  "entry": "/games/wukong/",
+  "gameId": "wukong",
+  "engine": "/games/shared/arcade-engine.mjs",
+  "iframe": false,
+  "campaign": {
+    "openStages": [1],
+    "endsAfter": "击败巨灵神并跳入仙门",
+    "result": "大闹天宫 · 首章通关",
+    "continuesIntoContra": false
+  },
+  "multiplayer": {
+    "endpoint": "/games/wukong/ws",
+    "roomsIsolatedFromContra": true,
+    "serverRejectsOtherStages": true,
+    "sharedClearSnapshotTest": "passed"
+  },
+  "regression": {
+    "command": "npm test",
+    "backendAndGameTestsPassed": 646,
+    "backendAndGameTestsFailed": 0,
+    "junqiPassed": 42,
+    "gandengyanSimulatedGames": 900,
+    "gandengyanRoomTests": "passed",
+    "log": ".playwright-mcp/wukong-standalone-full-test.log"
+  },
+  "browser": {
+    "tool": "ego-browser",
+    "origin": "http://127.0.0.1:4187",
+    "homeCoverLoaded": true,
+    "iframeCount": 0,
+    "startupResources": {"loaded": 53, "total": 53, "failed": []},
+    "heroAudioDecoded": 31,
+    "actualKeyboard": ["移动", "棍击", "跳跃"],
+    "legacyRedirect": "/games/contra2026/?theme=wukong&room=ABC234 → /games/wukong/?room=ABC234",
+    "contraEntry": {"game": "contra2026", "stageFiveStillOpen": true},
+    "mobileLandscape": {"width": 844, "height": 390, "horizontalOverflow": false},
+    "mobilePortrait": {"width": 390, "height": 844, "horizontalOverflow": false, "fullScreenCover": true, "minimumButtonHeight": 44},
+    "screenshots": [
+      ".playwright-mcp/wukong-standalone-home-native.png",
+      ".playwright-mcp/wukong-standalone-title-final.png",
+      ".playwright-mcp/wukong-standalone-gameplay.png",
+      ".playwright-mcp/wukong-standalone-mobile-title.png",
+      ".playwright-mcp/wukong-standalone-portrait-title.png"
+    ]
+  },
+  "cover": {
+    "tool": "built-in image_gen",
+    "prompt": "games/wukong/assets/cover-generation.json",
+    "gameBytes": 452198,
+    "home512Bytes": 62392,
+    "home800Bytes": 136132
+  },
+  "deployment": "Local verification only; production needs frontend, backend and the new Nginx WebSocket location together."
+}

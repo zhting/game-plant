@@ -1,0 +1,28 @@
+[
+  {
+    "source": "games/wukong/assets/opening-huaguoshan.png",
+    "webp": "games/wukong/assets/opening-huaguoshan.webp",
+    "originalBytes": 3223735,
+    "sourceBytes": 3223735,
+    "webpBytes": 487924,
+    "width": 1672,
+    "height": 941,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 88,
+    "psnr": 34.64
+  },
+  {
+    "source": "games/wukong/assets/opening-birth.png",
+    "webp": "games/wukong/assets/opening-birth.webp",
+    "originalBytes": 2550560,
+    "sourceBytes": 2550560,
+    "webpBytes": 371760,
+    "width": 1536,
+    "height": 1024,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 88,
+    "psnr": 33.84
+  }
+]

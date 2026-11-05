@@ -1,0 +1,86 @@
+{
+  "mode": "play",
+  "stage": 1,
+  "role": "",
+  "room": "",
+  "connected": false,
+  "theme": null,
+  "playing": false,
+  "tick": 148,
+  "snapshotBytes": 0,
+  "art": {
+    "ready": true,
+    "loaded": [
+      "snow",
+      "lowJungle",
+      "facilities",
+      "turretBase",
+      "rock",
+      "damage",
+      "environment",
+      "fortress",
+      "actorRed",
+      "actorBlue",
+      "actorEnemy",
+      "runRed",
+      "runBlue",
+      "runEnemy",
+      "actorDeath",
+      "runLimbs"
+    ],
+    "failed": [],
+    "frameCount": 8,
+    "resolution": [
+      1536,
+      864
+    ]
+  },
+  "camera": {
+    "x": 0,
+    "y": 0
+  },
+  "audio": {
+    "track": null,
+    "playing": false,
+    "paused": true,
+    "loading": false,
+    "ended": false,
+    "error": null,
+    "context": "running",
+    "muted": false,
+    "music": "on",
+    "selection": "chiptune",
+    "resolved": {
+      "stage": 1,
+      "entry": 3,
+      "preference": "chiptune",
+      "choice": "chiptune"
+    },
+    "synth": true,
+    "sfx": "on",
+    "gain": 0.550000011920929
+  },
+  "exit": {
+    "open": false,
+    "actors": [
+      {
+        "id": 1,
+        "entering": false,
+        "entered": false
+      }
+    ]
+  },
+  "base": null,
+  "players": [
+    {
+      "id": 1,
+      "x": 40,
+      "y": 112,
+      "weapon": "rifle",
+      "dead": false,
+      "invincible": 1.4500000000000002
+    }
+  ],
+  "shots": [],
+  "score": 0
+}

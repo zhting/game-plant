@@ -1,0 +1,22 @@
+{
+  "source": "tools/sources/staff-flow-111.mp4",
+  "original": "H:\\project\\games\\games\\wukong\\tools\\sources\\staff-flow-111.mp4",
+  "sha256": "6912bcc65c8327d3bd10ed3526b136f791e057ba62314f5e9be1cb54ca888b68",
+  "sourceDuration": 7.979,
+  "sampledRange": [
+    0,
+    6.7
+  ],
+  "frames": 64,
+  "gameDuration": 2.15,
+  "method": "FFmpeg video-frame extraction and white studio chroma key; no generated replacement poses",
+  "master": "hero-whole-reference.png",
+  "runtime": "hero-whole-reference.webp",
+  "crop": [
+    233,
+    70,
+    868,
+    540
+  ],
+  "scale": 0.2255921052631579
+}

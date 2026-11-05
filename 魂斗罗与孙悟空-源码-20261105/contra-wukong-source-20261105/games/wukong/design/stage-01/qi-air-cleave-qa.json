@@ -1,0 +1,342 @@
+{
+  "production": {
+    "fixture": false,
+    "charged": {
+      "charge": {
+        "time": 1.2500000000000004,
+        "active": true,
+        "ready": true,
+        "full": true
+      },
+      "pose": null
+    },
+    "wave": [
+      {
+        "x": 101.66666666666664,
+        "y": 93,
+        "strength": 2,
+        "radius": 13,
+        "damage": 7
+      }
+    ],
+    "cleave": {
+      "y": 69.02777777777779,
+      "staff": {
+        "kind": "slam",
+        "variant": "airCleave",
+        "combo": 3,
+        "time": 0,
+        "duration": 0.58
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 71,
+      "total": 71,
+      "failed": [],
+      "stage": 1,
+      "cached": 71
+    },
+    "errors": [],
+    "debug": "undefined"
+  },
+  "fixture": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "full": {
+        "mode": "play",
+        "tick": 226,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": {
+          "t": 1.2500000000000004,
+          "active": true,
+          "ready": true,
+          "full": true
+        },
+        "staff": null,
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": []
+        }
+      },
+      "wave": {
+        "mode": "pause",
+        "tick": 252,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0.16666666666666666
+        },
+        "waves": [
+          {
+            "x": 373.83333333333314,
+            "y": 125,
+            "strength": 2,
+            "damage": 7,
+            "hitCount": 0
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "rangedHit": {
+        "mode": "pause",
+        "tick": 273,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0.35
+        },
+        "waves": [
+          {
+            "x": 440.7499999999996,
+            "y": 125,
+            "strength": 2,
+            "damage": 7,
+            "hitCount": 1
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 17,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "qiBurst",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "airCleave": {
+        "mode": "pause",
+        "tick": 315,
+        "x": 300,
+        "y": 113.99999999999997,
+        "ground": false,
+        "prone": false,
+        "staff": {
+          "kind": "slam",
+          "variant": "airCleave",
+          "t": 0.21666666666666665
+        },
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 20,
+            "x": 332,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "landing": {
+        "mode": "pause",
+        "tick": 336,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "staff": {
+          "kind": "slam",
+          "variant": "airCleave",
+          "t": 0.41759999999999997,
+          "landed": true
+        },
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 20,
+            "x": 340.2347720783736,
+            "y": 136.28333333333333
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "slamLand",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "pad": {
+        "mode": "pause",
+        "tick": 386,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0
+        },
+        "waves": [
+          {
+            "x": 313,
+            "y": 125,
+            "strength": 1,
+            "damage": 4,
+            "hitCount": 0
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full",
+            "start",
+            "ready"
+          ],
+          "wave": [
+            2,
+            1
+          ]
+        }
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 71,
+      "total": 71,
+      "failed": [],
+      "stage": 1,
+      "cached": 71
+    },
+    "audio": "running"
+  },
+  "regression": {
+    "passed": 416,
+    "failed": 0,
+    "files": 23,
+    "report": "../../../../.playwright-mcp/wukong-qi-regression.tap"
+  },
+  "notes": [
+    "Fixture positions, enemy health, and pause points existed only in an isolated routed browser response; production has no debug hook.",
+    "Keyboard long-press/release and the on-screen pad pointer press/release were exercised through real game input. Controller actions share these input fields; physical controller hardware was not used.",
+    "Air Down inflicted 4 damage while airborne and then landed with a floor-contact effect. Full charged qi inflicted 7 damage at range; wall occlusion and multiplayer snapshots are covered by automated tests.",
+    "Existing whole-body cleave, running and mounted frames were reused. Charge, crescent wave and floor effects use native Canvas; no new image download."
+  ]
+}

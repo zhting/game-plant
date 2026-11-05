@@ -1,0 +1,42 @@
+{
+  "url": "http://localhost:3190/games/contra2026/?art=permanent-monsoon-1",
+  "mode": "play",
+  "stage": 1,
+  "camera": {
+    "x": 0,
+    "y": 0
+  },
+  "rain": 0.9905566424869464,
+  "modules": [
+    "http://localhost:3190/games/contra2026/js/stage-two-art.mjs?v=permanent-monsoon-1",
+    "http://localhost:3190/games/contra2026/js/stage-one-art.mjs?v=permanent-monsoon-1",
+    "http://localhost:3190/games/contra2026/js/stage-one-atmosphere.mjs?v=permanent-monsoon-1"
+  ],
+  "assets": {
+    "ready": true,
+    "loaded": [
+      "snow",
+      "lowJungle",
+      "facilities",
+      "turretBase",
+      "rock",
+      "actorRed",
+      "damage",
+      "environment",
+      "fortress",
+      "actorBlue",
+      "actorEnemy",
+      "runLimbs",
+      "runRed",
+      "runBlue",
+      "runEnemy",
+      "actorDeath"
+    ],
+    "failed": [],
+    "frameCount": 207,
+    "resolution": [
+      1536,
+      864
+    ]
+  }
+}

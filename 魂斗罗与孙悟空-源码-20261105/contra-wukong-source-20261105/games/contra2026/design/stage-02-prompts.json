@@ -1,0 +1,76 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-19",
+  "referenceVideo": "H:/download/videoplayback.mp4",
+  "referenceFrames": {
+    "corridor": 190,
+    "motion": [
+      235,
+      242
+    ],
+    "boss": 340
+  },
+  "assets": [
+    {
+      "file": "../assets/stage2/corridor-hd.png",
+      "prompt": "Production background art for a high-resolution 2D arcade action game matching the crisp hand-painted metal detailing of the supplied fortress style reference, and the one-point perspective composition of the supplied classic-game corridor screenshot. ONE seamless scene, landscape 16:9 1920x1080 or higher, no UI. Exact logical canvas384x216: a large rear-wall rectangle x96..288 y40..140 (25%..75% width, 18.5%..64.8% height), symmetric side walls converge onto these corners; front floor spans x0..384 at y204 (94.4% height). Keep that rear rectangle a relatively FLAT dark oxblood red steel armored surface with a tall subtle central closed bulkhead; empty at its lower left/center/right for separately rendered gameplay cannon and core sprites. Gray and cool blue-gray STEEL side walls with fine beveled panel seams, rivets, scratched plates, wiring channels and narrow cyan-white edge reflections. Strong architectural perspective, black ceiling with repeated rectangular white light bars receding toward center. Floor dark petrol blue steel panels, fine seams and restrained reflections, perspective panels converge on the back wall, broad clear walking area in bottom third, no obstructions. Thin irregular olive-gray rock/concrete tunnel framing ONLY in outermost 3% of left/right/top edges, tying to jungle fortress. Keep ceiling/back wall dim, front action area readable. Retain original game's readable clean geometry with modern painted arcade detail similar to the fortress reference. No characters, monsters, guns, glowing targets, electric fences, projectiles, explosions, text, HUD, signs, symbols, numbers, UI panels, watermark. No photorealism, no coarse enlarged pixels. Entire image opaque, a single continuous believable corridor, not a collage.",
+      "reference": [
+        "stage-02-reference-corridor.png",
+        "../assets/stage1/fortress-hd.png"
+      ],
+      "transparent": false
+    },
+    {
+      "file": "../assets/stage2/mechanisms-hd.png",
+      "prompt": "Create a transparent production HD sprite atlas for a 2D arcade military science-fiction game. Match the finely painted blue-gray steel and dark contoured beveled edges in the fortress reference, with dark oxblood red and olive metal accents from the classic-game screenshots. Exactly EIGHT isolated front-view objects, regular 4 columns x2 rows, generous transparent padding, all objects complete, no overlaps. Wide canvas around2048x1024, each object300-420nativepixels, genuinely transparent RGBA background. Reading order: 1 a small SQUARE WALL CANNON housing, brushed silver rectangular armor, horizontal black muzzle slot with a tiny red-orange inner bore; weapon faces toward viewer. 2 matching DESTROYED WALL CANNON with torn irregular housing and dark hole, loose wires and small metal pieces still attached, no explosion. 3 circular SECURITY CORE mounted in a square red steel panel, concentric metallic rings and bright small orange-white center, closed surrounding steel collar. 4 DESTROYED SECURITY CORE a square panel with jagged dark breach, torn rim, attached wires; no glow. 5 LARGE central BOSS CONTROL REACTOR FRONT VIEW: wide olive-black steel mechanical housing, blue-gray beveled corners, layered conduits and precise metallic machinery, large central circular red-orange energy iris inside oval steel protective bands, bolted armor and dense fine detail, strong readable target center, NOT a fleshy monster, resembles a central module of the original boss's industrial control wall. 6 matching destroyed boss module with cracked glass, jagged torn plating and a dark recess, subtle ember near edge. 7 small round ROLLING STEEL MINE with tiny red warning lamp and ribbed metal band, circular front view. 8 tall narrow ELECTRIC FENCE TERMINAL POST, steel base, black ribbed body and white-blue insulators, tiny amber status lamp. No floor, cast shadows outside silhouettes, text, labels, grid, icons, digits, background, watermark or extra objects. Clean high resolution painted arcade sprite craftsmanship, no coarse pixel blocks.",
+      "reference": [
+        "../assets/stage1/fortress-hd.png",
+        "stage-02-reference-boss.png"
+      ],
+      "transparent": true
+    },
+    {
+      "file": "../assets/stage2/commando-back-blue.png",
+      "prompt": "Create a production transparent sprite atlas for the BLUE TROUSER COMMANDO in the character reference, matching the exact finely painted arcade anatomy, black harness, muscular bare arms, brown hair, BLUE headband, vivid cobalt BLUE detailed combat trousers and black boots. This atlas shows the player from BEHIND, back to viewer, facing into the screen in a one-point corridor like the second reference. Not side view. Full body, same scale in every frame, highly detailed coherent painting from torso to boots, crisp dark outline, native body height at least300pixels, ideally340pixels. Exactly12 isolated sprites, 3 columns by4 rows, large portrait atlas around1536x2048, transparent padding between figures, no overlap. Fixed pelvis x per cell and common ground baseline in each row. Exact pose order: row1 col1 standing rear view feet apart, aiming rifle slightly above head forward into distance, gun barrel visible above shoulder, bare muscular BACK with black harness straps, headband tails; row1 col2 PRONE rear view aiming into distance, flattened low body; row1 col3 tucked airborne SOMERSAULT rear view compact knees hugged. Row2 col1 running frame0 near/right leg forward heel down, far/left leg extends back; row2 col2 run1 planted right knee compresses, left foot recovers off ground; row2 col3 run2 right support foot under pelvis, left knee drives upward passing other leg. Row3 col1 run3 flight left knee forward, right leg trails; row3 col2 run4 opposite contact left leg forward heel down, right leg trails; row3 col3 run5 left knee compresses, right foot recovers off ground. Row4 col1 run6 left supporting under pelvis, right knee lifted passing left; row4 col2 run7 flight right knee forward, left leg trails; row4 col3 dead lying on side rear three-quarter view, knees slack, rifle low. Running poses must be eight DISTINCT CHRONOLOGICAL phases, alternating left and right legs with clear knee bend and boot lift, not just shaking the same two poses. Upper back and rifle remain registered while hips bounce subtly. Body never changes size. All faces hidden from camera. No floor, ground shadow, labels, grid, UI, numbers, text or backdrop. Genuine RGBA transparency.",
+      "reference": [
+        "../assets/stage1/commando-blue-hd.png",
+        "stage-02-reference-corridor.png"
+      ],
+      "transparent": true
+    },
+    {
+      "file": "../assets/stage2/commando-back-red.png",
+      "prompt": "Edit the supplied BLUE commando rear-view sprite atlas. Preserve EXACTLY all12 poses and their order, back-view camera, every limb silhouette and rifle position, character size, spacing, transparent padding and3columns by4rows grid. Change ONLY blue headband and blue trousers to vivid deep RED matching the other player from the existing game. Keep brown hair, peach muscular bare back and arms, black harness, black boots, rifle and painting style untouched. Retain all8 distinct running phases, standing, prone, somersault and fallen pose. No new objects, text, labels, floor, shadows, backdrop. Genuine RGBA transparent background.",
+      "reference": [
+        "../assets/stage2/commando-back-blue.png"
+      ],
+      "transparent": true
+    },
+    {
+      "file": "../assets/stage2/soldier-front.png",
+      "prompt": "Create a production transparent sprite atlas of the OLIVE ENEMY SOLDIER in the supplied character reference, matching the same finely hand-painted arcade rendering, olive helmet, olive vest with many pouches, bare muscular tan arms, olive detailed fatigues and black boots, black steel rifle. Camera DIRECT FRONT VIEW, soldier facing camera, not side view. Full-body sprites, same height and scale, native body about300-340pixels. Exactly12 isolated sprites in a regular3columns by4rows large portrait atlas, no overlap, fixed pelvis center and common floor baseline in each row. Pose order: row1 col1 standing front view aiming rifle at viewer, barrel at chest; row1 col2 crouched low front view aiming rifle; row1 col3 airborne knees tucked front view. Row2 cols1,2,3 running frame0 right foot forward left back, frame1 right knee compressed left heel recovers, frame2 right foot under pelvis left knee raised. Row3 cols1,2,3 running frame3 flight left knee forward right trailing, frame4 left heel contact right leg behind, frame5 left knee compressed right heel raised. Row4 cols1,2 running frame6 left support under pelvis right knee passing, frame7 flight right knee forward left trailing; row4 col3 defeated collapsed soldier on side. These are EIGHT distinct alternating leg phases of approaching jog, strong boot lift, not two-pose jitter. Rifle and upper body stay stable. Transparent RGBA background, clean dark outlines, finely shaded matching materials and native fine detail, no coarse pixels, no blur. No floor, shadow outside silhouette, text, numbers, labels, grid or extra objects.",
+      "reference": [
+        "../assets/stage1/soldier-hd.png"
+      ],
+      "transparent": true
+    },
+    {
+      "file": "../assets/stage2/control-wall-hd.png",
+      "prompt": "Create one production HD 2D game environment sprite: the large mechanical CONTROL WALL of the classic second-level boss, using the supplied original-game frame for composition and the supplied new mechanism atlas for the refined painted arcade metal style. Wide front-view rectangular equipment wall, width to height about2.3:1, large native resolution about1792x768. Detailed olive-black and cool silver steel frame, thick vertical ribbed columns on both sides, upper shallow wide black monitor-like recess, several layers of exposed fine wiring, dense pipes, vents, shutters, mechanical panel seams, subtle rivets, tiny dim amber and cyan status indicators. Match clean finely painted metal highlights and small surface scratches of the second image, not coarse pixel blocks and not flat vector outlines. Lower central area must have a DARK EMPTY MOUNT for a separate reactor module, rectangle approximately x37%..63% and y42%..100% of overall wall. Leave four smaller inactive dark metal mounting areas across lower row at about x22%,33%,67%,78%, y80%; gameplay cannon sprites will be rendered over these. No active glowing targets or red eyes painted into the background. Entire wall reads as a single imposing industrial military boss control machine, not a robot or face, no organic tissue. Solid frontal orthographic surface, no floor, corridor, characters, weapons, electricity, explosions, UI, text, labels, typography or watermark. Tiny lights are muted and decorative. Genuine transparent RGBA outside the complete tightly framed rectangular wall silhouette, minimal padding. Keep strong dimensional detail across the WHOLE wall, no large featureless flat patches.",
+      "reference": [
+        "stage-02-reference-boss.png",
+        "../assets/stage2/mechanisms-hd.png"
+      ],
+      "transparent": true
+    }
+  ],
+  "integration": {
+    "art": "../js/stage-two-art.mjs",
+    "atlas": "../js/stage-two-atlas.mjs",
+    "sourceMeasurement": "../tools/measure-stage-two.py",
+    "projection": "384x216 unchanged, rear wall x96 y40 w192 h100, front floor y204. 9-slice artwork registration aligns the generated rear wall with existing target surfaces.",
+    "resolution": "Native destination backing resolution up to3840x2160, resolution changes release scene and sprite caches.",
+    "actors": "Two rear-view player sheets and one front-view soldier sheet,12 poses each including eight run phases. Single-player blue, multiplayer red1P/blue2P. Native idle heights348–358px.",
+    "effects": "Stable two-strand electric barrier; independently destroyed cannon/core modules; broken doorway, forward perspective zoom, aligned projectile render and localized impact effects."
+  }
+}

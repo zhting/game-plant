@@ -1,0 +1,38 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第八关怪物大脑与守卫关口</title>
+<style>body{margin:0;background:#080611;color:#ddc5d5;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}button{margin:12px 4px;padding:8px 14px;background:#241525;border:1px solid #75516c;color:inherit;cursor:pointer}</style>
+<canvas width="1536" height="864"></canvas><button id="scene">查看中途守卫</button><button id="open">暴露大脑</button><button id="defeat">击败预览Boss</button><button id="pause">暂停预览</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=hive-four-ports-1';
+import {createAlienGuardian} from '../js/stage-eight-guardian.mjs?v=guardian-flyers-1';
+import {advanceGuardianSpit,advanceGuardianFlyer} from '../js/guardian-flyer.mjs?v=guardian-flyers-1';
+import {createHiveBrainParts,hiveBroodParts,advanceHiveBrood,advanceHiveHatchling} from '../js/hive-brood.mjs?v=hive-four-ports-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt});
+await Promise.all(['cavern','terrain','guardian','guardianWall','guardianFlyer','hiveWall','brain','brainRib','ceilingParasite','hiveHatchling','intestineMotion','cystMotion','chasm'].map(k=>art.loadImage(k)).concat(baseArt.loadImage('actorBlue')));
+const newHive=()=>({x:3350,parts:createHiveBrainParts(3350),dead:false,open:false});
+let time=0,last=performance.now(),paused=false,scene='brain',opened=false,defeated=false,opening=0,guardian=createAlienGuardian(),hive=newHive(),brood=[];
+document.querySelector('#scene').onclick=()=>{scene=scene==='brain'?'guardian':'brain';document.querySelector('#scene').textContent=scene==='brain'?'查看中途守卫':'查看最终大脑';defeated=false;guardian=createAlienGuardian();hive=newHive();opened=false;opening=0;document.querySelector('#open').textContent='暴露大脑';document.querySelector('#defeat').textContent='击败预览Boss';brood=[];};
+document.querySelector('#open').onclick=()=>{opened=!opened;hive.open=opened;for(const p of hiveBroodParts(hive))p.hp=opened?0:p.max;document.querySelector('#open').textContent=opened?'闭合护骨':'暴露大脑';};
+document.querySelector('#defeat').onclick=()=>{defeated=!defeated;hive.dead=defeated;if(!defeated){hive=newHive();opened=false;opening=0;document.querySelector('#open').textContent='暴露大脑';}brood=[];document.querySelector('#defeat').textContent=defeated?'还原Boss':'击败预览Boss';};
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续预览':'暂停预览';};
+function frame(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused){time+=dt;opening+=Math.sign(Number(opened)-opening)*Math.min(Math.abs(Number(opened)-opening),dt*1.2);}
+  const camera=scene==='brain'?3116:856;
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={stage:8,camX:camera,time,t:time*60,freezeT:0};art.backdrop(camera);art.g.save();art.g.translate(-camera,0);
+  art.floor(scene==='brain'?[{x:2580,y:176,w:920,h:40,g:1},{x:3000,y:124,w:80,h:8,g:0}]:[{x:820,y:176,w:280,h:40,g:1},{x:1160,y:176,w:340,h:40,g:1},{x:900,y:96,w:80,h:8,g:0},{x:1098,y:118,w:64,h:8,g:0}],camera);
+  if(scene==='brain'){
+    if(!paused&&!defeated){brood=brood.filter(e=>!e.dead);brood.push(...advanceHiveBrood(hive,dt,brood,{active:true}));for(const child of brood)advanceHiveHatchling(child,{x:camera+110,y:176},dt,camera);}
+    hive.openK=opening;hive.tissueTime=time;hive.beatK=Math.pow(.5+.5*Math.sin(time*6.28),7);art.hive(hive);for(const child of brood)if(!child.dead)art.enemy(child);
+  }else if(!defeated){
+    if(!paused){
+      brood=brood.filter(e=>!e.dead);brood.push(...advanceGuardianSpit(guardian,dt,brood,{active:true}));
+      for(const child of brood)advanceGuardianFlyer(child,{x:camera+110,y:176},dt,camera);
+    }
+    art.enemy(guardian);for(const child of brood)if(!child.dead)art.enemy(child);
+  }else brood=[];
+  art.actor({x:camera+110,y:176,face:1,onGround:true,ax:1,ay:0},'blue');art.g.restore();
+  art.hudText(scene==='brain'?'第八关 · 母巢大脑':'第八关 · 必须击败的洞穴守卫',192,7,'#edc5df',7,'center');art.present(ctx);
+  window.bossPreview={scene,time,paused,opened,opening,defeated,brood:brood.length};requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);window.bossPreviewReady=true;
+</script></html>

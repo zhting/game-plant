@@ -1,0 +1,279 @@
+{
+  "initial": {
+    "bank": {
+      "end": 1180,
+      "y": 152
+    },
+    "firstBridge": [
+      {
+        "x": 1180,
+        "y": 152
+      },
+      {
+        "x": 1212,
+        "y": 152
+      },
+      {
+        "x": 1244,
+        "y": 152
+      },
+      {
+        "x": 1276,
+        "y": 152
+      },
+      {
+        "x": 1308,
+        "y": 152
+      }
+    ],
+    "secondBridgeY": 176
+  },
+  "samples": [
+    {
+      "x": 1167.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1169,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1170.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1172,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1173.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1175,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1176.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1178,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1179.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1181,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1182.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1184,
+      "y": 152,
+      "onGround": true,
+      "onBridge": false,
+      "dead": false
+    },
+    {
+      "x": 1185.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1187,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1188.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1190,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1191.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1193,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1194.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1196,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1197.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1199,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1200.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1202,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1203.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1205,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1206.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1208,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1209.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1211,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1212.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1214,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1215.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1217,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    },
+    {
+      "x": 1218.5,
+      "y": 152,
+      "onGround": true,
+      "onBridge": true,
+      "dead": false
+    }
+  ],
+  "regressionTests": 97
+}

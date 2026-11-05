@@ -1,0 +1,18 @@
+{
+  "created": "2026-10-27",
+  "tool": "Built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: transparent 2D side-view videogame sprite atlas for Sun Wukong's seventy-two transformations in a Chinese celestial palace action game. Generate ONE production sprite sheet, landscape aspect 3:2, 1536x1024, exactly 4 equal columns by 3 equal rows, 12 separate full-body sprites. Every sprite isolated on true alpha transparency, no background, no labels, no letters, no frames, no ground or shadows. Keep generous 10% empty padding within every cell. All creatures face RIGHT in strict side view, hand-painted richly shaded fantasy illustration, crisp silhouettes, detailed gold material, red silk ribbons and dark teal accents consistent with an armored Monkey King. Top row: the SAME majestic golden-winged eagle/Peng in four whole-body motion poses: wings raised hovering, wings lowered flying, wings swept back lunging, wings tucked diving talons extended. Golden feathers, red ribbon at neck, bright focused eye. Middle row: the SAME powerful WHITE TIGER with black stripes, ornate gold brow ornament and red silk scarf, four whole-body poses: battle ready standing, stretched running stride, airborne forward pounce, swiping front paws extended. Bottom row: the SAME celestial BLACK TORTOISE with dark teal shell and engraved gold shell panels, a red silk ribbon and dignified dragon-like head, four whole-body poses: walking ready, advancing stance, legs tucked armored guard, grounded heavy stomp pose. No glow spilling between cells. Match each creature's body scale and registration across its four cells. No human bodies. No cropped limbs or wings. This sheet will be cut into 12 cells and animated at small size in a side-scrolling game; prioritize readable silhouettes and consistent anatomy.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a17a55-15ef-7812-b883-f8072c398bc7/exec-794e3395-4638-4265-a38b-805af5cd9f95.png",
+  "output": "hero-transform-atlas.webp",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "frames": 12,
+  "forms": [
+    "金翅鹏",
+    "白虎",
+    "玄龟"
+  ],
+  "pipeline": "Original alpha preserved; lossily encoded WebP quality 88; connected-silhouette crop coordinates measured without changing the paintings."
+}

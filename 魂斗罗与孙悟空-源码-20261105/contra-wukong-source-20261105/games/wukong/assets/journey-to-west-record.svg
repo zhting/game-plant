@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>西游记片头 · 大闹天宫独立唱片</title>
+  <defs><radialGradient id="jade"><stop stop-color="#52796d"/><stop offset="1" stop-color="#102d36"/></radialGradient></defs>
+  <rect width="512" height="512" rx="24" fill="#102d36"/>
+  <circle cx="256" cy="256" r="232" fill="url(#jade)" stroke="#d7b77d" stroke-width="4"/>
+  <g fill="none" stroke="#d7b77d" opacity=".22"><circle cx="256" cy="256" r="211"/><circle cx="256" cy="256" r="194"/><circle cx="256" cy="256" r="177"/></g>
+  <path d="M83 306q17-24 41-13-8-30 25-37 30-8 40 14 25-16 39 9M299 309q14-18 31-11-7-25 17-33 30-10 42 15 25-11 38 12" fill="none" stroke="#e4d5b1" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="109" fill="#b34936" stroke="#d7b77d" stroke-width="5"/>
+  <path d="m194 289 122-110" stroke="#d7b77d" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="15" fill="#102d36" stroke="#d7b77d" stroke-width="4"/>
+  <g fill="#f4deb0" font-family="Microsoft YaHei,sans-serif" text-anchor="middle"><text x="256" y="119" font-size="33" font-weight="700">西游记片头</text><text x="256" y="414" font-size="23" letter-spacing="7">大闹天宫</text></g>
+</svg>

@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-25",
+  "purpose": "月牙收细并增加刀锋刃口与光效",
+  "tests": {
+    "files": 5,
+    "total": 143,
+    "passed": 143,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-blade-light.tap"
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "contact": {
+        "hp": 22,
+        "waves": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "t": 0.055
+          }
+        ],
+        "staff": "sweep"
+      },
+      "flight": {
+        "hp": 24,
+        "waves": [
+          {
+            "x": 361.6666666666665,
+            "y": 125,
+            "radius": 13,
+            "strength": 2,
+            "damage": 7
+          }
+        ],
+        "effects": [],
+        "staff": "qiCast"
+      },
+      "qiHit": {
+        "hp": 17,
+        "waves": [
+          {
+            "x": 440.7499999999996,
+            "y": 125,
+            "radius": 13,
+            "strength": 2,
+            "damage": 7
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "qiBurst",
+            "t": 0.016666666666666666
+          }
+        ],
+        "staff": "qiCast"
+      },
+      "fan": {
+        "hp": 24,
+        "waves": [
+          {
+            "x": 352.7580444627196,
+            "y": 115.69091778897982,
+            "radius": 11,
+            "strength": 2,
+            "damage": 4
+          },
+          {
+            "x": 353.8333333333332,
+            "y": 125,
+            "radius": 11,
+            "strength": 2,
+            "damage": 4
+          },
+          {
+            "x": 352.7580444627196,
+            "y": 134.30908221102018,
+            "radius": 11,
+            "strength": 2,
+            "damage": 4
+          }
+        ],
+        "effects": [],
+        "staff": "ultimate"
+      }
+    },
+    "bench": {
+      "meanRenderMs": 1.7225000023841859,
+      "renderPure": true
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 71,
+      "total": 71,
+      "failed": [],
+      "stage": 1,
+      "cached": 71
+    }
+  },
+  "artifacts": [
+    "blade-contact.png",
+    "blade-qi-flight.png",
+    "blade-qi-hit.png",
+    "blade-qi-fan.png"
+  ],
+  "notes": [
+    "接触弧光和飞行棍气共用 drawBladeCrescent：渐尖闭合弧面、细白刃线、淡金叠加辉光与闪点。",
+    "飞行月牙内外控制点距离由0.64r缩小为0.09r，实体弧面中心厚度约减少86%，辉光单独绘制。",
+    "命中中央爆点缩小、扩散圈和光丝收细，喷血沿用已有实现。",
+    "隔离浏览器通过真实J键蓄满/松开发射，目标HP24→17；真实I键释放扇形棍气大招。",
+    "截图场景仅通过临时响应注入摆放角色/目标和定格时刻，正式页面未新增测试接口。",
+    "71/71资源就绪、无脚本错误；多气刃定格场景40次绘制平均约1.72毫秒，绘制不改世界状态。",
+    "复用原有美术和Canvas，无新增图片下载。"
+  ]
+}

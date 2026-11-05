@@ -1,0 +1,98 @@
+{
+  "taskSpaceId": 157,
+  "states": [
+    {
+      "phase": "air",
+      "role": "blue",
+      "dead": true,
+      "grounded": false,
+      "hidden": false,
+      "landTime": 0,
+      "position": [
+        183.66666666666657,
+        186.36111111111111
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.128851540616246,
+      "deathHeight": 18.627450980392155,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-blue-air-4k.png"
+    },
+    {
+      "phase": "ground",
+      "role": "blue",
+      "dead": true,
+      "grounded": true,
+      "hidden": false,
+      "landTime": 0.18333333333333332,
+      "position": [
+        167.83333333333306,
+        204
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.128851540616246,
+      "deathHeight": 18.627450980392155,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-blue-ground-4k.png"
+    },
+    {
+      "phase": "fade",
+      "role": "blue",
+      "dead": true,
+      "grounded": true,
+      "hidden": false,
+      "landTime": 0.5666666666666668,
+      "position": [
+        167.83333333333306,
+        204
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.128851540616246,
+      "deathHeight": 18.627450980392155,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-blue-fade-4k.png"
+    },
+    {
+      "phase": "respawn",
+      "role": "blue",
+      "dead": false,
+      "position": [
+        167.83333333333306,
+        204
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.128851540616246,
+      "deathHeight": 18.627450980392155,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-blue-respawn-4k.png"
+    },
+    {
+      "phase": "air",
+      "role": "red",
+      "dead": true,
+      "grounded": false,
+      "hidden": false,
+      "landTime": 0,
+      "position": [
+        165.66666666666657,
+        186.36111111111111
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.97206703910614,
+      "deathHeight": 18.893854748603353,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-red-air-4k.png"
+    },
+    {
+      "phase": "ground",
+      "role": "red",
+      "dead": true,
+      "grounded": true,
+      "hidden": false,
+      "landTime": 0.18333333333333332,
+      "position": [
+        149.83333333333306,
+        204
+      ],
+      "standingHeight": 38,
+      "deathWidth": 40.97206703910614,
+      "deathHeight": 18.893854748603353,
+      "path": "H:/project/games/games/contra2026/design/base-death-size-red-ground-4k.png"
+    }
+  ]
+}

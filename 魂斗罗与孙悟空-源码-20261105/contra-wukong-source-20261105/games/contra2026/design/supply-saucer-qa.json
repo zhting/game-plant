@@ -1,0 +1,52 @@
+{
+  "taskSpaceId": 154,
+  "canvas": [
+    3840,
+    2160
+  ],
+  "falling": {
+    "x": 168.1,
+    "y": 101.4484338425003,
+    "vx": 30,
+    "vy": 141.33333333333331,
+    "kind": "G",
+    "fromPod": true,
+    "landed": false
+  },
+  "landed": {
+    "x": 174.6,
+    "y": 144,
+    "vx": 0,
+    "vy": 0,
+    "kind": "G",
+    "fromPod": true,
+    "landed": true,
+    "rest": true
+  },
+  "podsAfterHit": 0,
+  "art": {
+    "ready": true,
+    "loaded": [
+      "damage",
+      "environment",
+      "rock",
+      "palm",
+      "runRed",
+      "jungle",
+      "actorRed",
+      "fortress",
+      "actorBlue",
+      "actorEnemy",
+      "actorDeath",
+      "runEnemy",
+      "runBlue",
+      "runLimbs"
+    ],
+    "failed": [],
+    "frameCount": 12,
+    "resolution": [
+      3840,
+      2160
+    ]
+  }
+}

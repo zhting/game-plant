@@ -1,0 +1,86 @@
+{
+  "voicesSource": "https://opengameart.org/content/male-gruntyelling-sounds",
+  "voiceAuthor": "HaelDB",
+  "voiceLicense": "CC0 1.0",
+  "sfx": "Procedural, original project code with seeded noise and resonant tones",
+  "files": [
+    {
+      "file": "wukong-effort-1.ogg",
+      "bytes": 5978,
+      "sha256": "9abeb35bdb3943fa6922a338e426207f3c32ce10930516804585f350eb5f79ed",
+      "source": ".playwright-mcp\\wukong-hero-audio\\3grunt3.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-38dB,highpass=f=100,lowpass=f=5600,atempo=1.1,atrim=duration=0.34,asetpts=PTS-STARTPTS,afade=t=in:d=0.004,afade=t=out:st=0.29000000000000004:d=0.05,loudnorm=I=-15:TP=-2:LRA=7"
+    },
+    {
+      "file": "wukong-effort-2.ogg",
+      "bytes": 5143,
+      "sha256": "87d5fc1c65902570325927b79e1053af968d4579d4f7d6538de3c9554521bf24",
+      "source": ".playwright-mcp\\wukong-hero-audio\\3grunt4.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-38dB,highpass=f=100,lowpass=f=5600,atempo=1.1,atrim=duration=0.36,asetpts=PTS-STARTPTS,afade=t=in:d=0.004,afade=t=out:st=0.31:d=0.05,loudnorm=I=-15:TP=-2:LRA=7"
+    },
+    {
+      "file": "wukong-effort-3.ogg",
+      "bytes": 6480,
+      "sha256": "f947c6a80df5112a16fdafffa4b5911b139c4c2c4f0fc45f768634045db70a6c",
+      "source": ".playwright-mcp\\wukong-hero-audio\\3grunt5.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-38dB,highpass=f=100,lowpass=f=5600,atempo=1.1,atrim=duration=0.4,asetpts=PTS-STARTPTS,afade=t=in:d=0.004,afade=t=out:st=0.35000000000000003:d=0.05,loudnorm=I=-15:TP=-2:LRA=7"
+    },
+    {
+      "file": "wukong-battle-shout.ogg",
+      "bytes": 8735,
+      "sha256": "308f6138f290ce454ac0ab6f96f7259de7fe3e96f36acf03e98c7918f724c9ff",
+      "source": ".playwright-mcp\\wukong-hero-audio\\3grunt6.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-38dB,highpass=f=100,lowpass=f=5600,atempo=1.1,atrim=duration=0.8,asetpts=PTS-STARTPTS,afade=t=in:d=0.004,afade=t=out:st=0.75:d=0.05,loudnorm=I=-15:TP=-2:LRA=7"
+    },
+    {
+      "file": "staff-swing.ogg",
+      "bytes": 5261,
+      "sha256": "b464fa8a4274d5567acf94393073215b545edfa059979bcf6ca22c7852466b0c",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-swing.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-heavy.ogg",
+      "bytes": 5886,
+      "sha256": "3a74fb481cc3791e051d499117449f0f69de1488f23021becbca69a10182d42a",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-heavy.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-spin.ogg",
+      "bytes": 6607,
+      "sha256": "c6ca4b47f414b20bc60cf8456caaadac4762ce64c7654f6004901dbd6985f92b",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-spin.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-qi.ogg",
+      "bytes": 6718,
+      "sha256": "c3fe0b6eb123adce801abbcc9e89764a8431eefbef8f6c63d03dd71771e58958",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-qi.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-ultimate.ogg",
+      "bytes": 8669,
+      "sha256": "9abe82258188469431d53943b4bdbccf753c01e51586329f5a5be1e0c4b9f646",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-ultimate.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-charge.ogg",
+      "bytes": 5160,
+      "sha256": "f728ac9925a4c4c48ca6428a6d25cf156c405f5b0c3271a816e5870af546662a",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-charge.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    },
+    {
+      "file": "staff-land.ogg",
+      "bytes": 5398,
+      "sha256": "454fea23b3ab2f864716ef5c2e4868bc3c14670a8e82b5e527048fedee949f54",
+      "source": ".playwright-mcp\\wukong-hero-audio\\staff-land.wav",
+      "filters": "highpass=f=65,lowpass=f=7500,afade=t=in:d=0.003,alimiter=limit=0.88:level=0"
+    }
+  ],
+  "totalBytes": 70035
+}

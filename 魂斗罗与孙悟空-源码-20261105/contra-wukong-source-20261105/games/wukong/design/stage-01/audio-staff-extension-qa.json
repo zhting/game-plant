@@ -1,0 +1,1316 @@
+{
+  "date": "2026-10-25",
+  "changes": {
+    "audio": {
+      "defaultMusicPercent": 30,
+      "defaultSfxPercent": 100,
+      "separateSliders": true,
+      "persisted": true
+    },
+    "staff": {
+      "baseLength": 68,
+      "peakMultiplier": 1.45,
+      "peakLength": 98.6,
+      "extraActionSeconds": 0.16,
+      "damageDisabledDuringRetraction": true,
+      "completeShaft": true
+    }
+  },
+  "tests": {
+    "passed": 555,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-audio-extension-regression.tap"
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "audio": {
+      "defaults": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 30,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.16500000655651093,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": true,
+        "saved": {}
+      },
+      "musicZero": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 0,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": true,
+        "saved": {
+          "music": "on",
+          "sfx": "on",
+          "musicVolume": 0,
+          "sfxVolume": 100,
+          "inf": "on",
+          "diff": "normal",
+          "autofire": "on",
+          "shake": "on",
+          "scan": "off",
+          "pad": "m",
+          "v": 2,
+          "stageMusic": {
+            "1": "original",
+            "2": "original",
+            "3": "original",
+            "4": "original",
+            "5": "original",
+            "6": "original",
+            "7": "original",
+            "8": "original",
+            "9": "original",
+            "10": "original",
+            "11": "original",
+            "12": "original",
+            "13": "original",
+            "14": "original",
+            "15": "original",
+            "16": "original"
+          }
+        }
+      },
+      "musicFull": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 100,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": true,
+        "saved": {
+          "music": "on",
+          "sfx": "on",
+          "musicVolume": 100,
+          "sfxVolume": 100,
+          "inf": "on",
+          "diff": "normal",
+          "autofire": "on",
+          "shake": "on",
+          "scan": "off",
+          "pad": "m",
+          "v": 2,
+          "stageMusic": {
+            "1": "original",
+            "2": "original",
+            "3": "original",
+            "4": "original",
+            "5": "original",
+            "6": "original",
+            "7": "original",
+            "8": "original",
+            "9": "original",
+            "10": "original",
+            "11": "original",
+            "12": "original",
+            "13": "original",
+            "14": "original",
+            "15": "original",
+            "16": "original"
+          }
+        }
+      },
+      "sfxZero": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 20,
+        "sfxVolume": 0,
+        "sfxGain": 0,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.10999999940395355,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": true,
+        "saved": {
+          "music": "on",
+          "sfx": "on",
+          "musicVolume": 20,
+          "sfxVolume": 0,
+          "inf": "on",
+          "diff": "normal",
+          "autofire": "on",
+          "shake": "on",
+          "scan": "off",
+          "pad": "m",
+          "v": 2,
+          "stageMusic": {
+            "1": "original",
+            "2": "original",
+            "3": "original",
+            "4": "original",
+            "5": "original",
+            "6": "original",
+            "7": "original",
+            "8": "original",
+            "9": "original",
+            "10": "original",
+            "11": "original",
+            "12": "original",
+            "13": "original",
+            "14": "original",
+            "15": "original",
+            "16": "original"
+          }
+        }
+      },
+      "adjusted": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 20,
+        "sfxVolume": 70,
+        "sfxGain": 0.6299999952316284,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.10999999940395355,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": true,
+        "saved": {
+          "music": "on",
+          "sfx": "on",
+          "musicVolume": 20,
+          "sfxVolume": 70,
+          "inf": "on",
+          "diff": "normal",
+          "autofire": "on",
+          "shake": "on",
+          "scan": "off",
+          "pad": "m",
+          "v": 2,
+          "stageMusic": {
+            "1": "original",
+            "2": "original",
+            "3": "original",
+            "4": "original",
+            "5": "original",
+            "6": "original",
+            "7": "original",
+            "8": "original",
+            "9": "original",
+            "10": "original",
+            "11": "original",
+            "12": "original",
+            "13": "original",
+            "14": "original",
+            "15": "original",
+            "16": "original"
+          }
+        }
+      },
+      "compact": [
+        {
+          "width": 180,
+          "scroll": 180,
+          "visible": true
+        },
+        {
+          "width": 180,
+          "scroll": 180,
+          "visible": true
+        }
+      ],
+      "restored": {
+        "track": "stage1",
+        "playing": false,
+        "paused": false,
+        "loading": true,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 20,
+        "sfxVolume": 70,
+        "sfxGain": 0.6299999952316284,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 1
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.10999999940395355,
+        "enemyVoices": {
+          "loaded": 0,
+          "total": 3,
+          "decoded": 0,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sameSource": false,
+        "saved": {
+          "music": "on",
+          "sfx": "on",
+          "musicVolume": 20,
+          "sfxVolume": 70,
+          "inf": "on",
+          "diff": "normal",
+          "autofire": "on",
+          "shake": "on",
+          "scan": "off",
+          "pad": "m",
+          "v": 2,
+          "stageMusic": {
+            "1": "original",
+            "2": "original",
+            "3": "original",
+            "4": "original",
+            "5": "original",
+            "6": "original",
+            "7": "original",
+            "8": "original",
+            "9": "original",
+            "10": "original",
+            "11": "original",
+            "12": "original",
+            "13": "original",
+            "14": "original",
+            "15": "original",
+            "16": "original"
+          }
+        }
+      }
+    },
+    "staff": {
+      "before": {
+        "x": 300,
+        "y": 144,
+        "weapon": "rifle",
+        "mode": "play",
+        "length": 68,
+        "origin": {
+          "x": 300.3508772,
+          "y": 126.2792978912
+        },
+        "frame": "movement:0",
+        "staff": null
+      },
+      "pickup": {
+        "x": 300,
+        "y": 144,
+        "weapon": "laser",
+        "mode": "play",
+        "length": 68,
+        "origin": {
+          "x": 300.3508772,
+          "y": 126.27532230190842
+        },
+        "frame": "movement:0",
+        "staff": null
+      },
+      "start": {
+        "x": 307.5,
+        "y": 144,
+        "weapon": "laser",
+        "mode": "pause",
+        "length": 68,
+        "origin": {
+          "x": 308.12512281952,
+          "y": 127.8975435376
+        },
+        "frame": "extra:1",
+        "staff": {
+          "t": 0.06666666666666667,
+          "duration": 0.64,
+          "phase": 0.10416666666666666,
+          "extension": true,
+          "command": "thrust"
+        }
+      },
+      "extended": {
+        "x": 307.5,
+        "y": 144,
+        "weapon": "laser",
+        "mode": "pause",
+        "length": 98.60000000000001,
+        "origin": {
+          "x": 316.5322808824,
+          "y": 126.322806664
+        },
+        "frame": "extra:4",
+        "staff": {
+          "t": 0.31666666666666665,
+          "duration": 0.64,
+          "phase": 0.49479166666666663,
+          "extension": true,
+          "command": "thrust"
+        }
+      },
+      "retracting": {
+        "x": 307.5,
+        "y": 144,
+        "weapon": "laser",
+        "mode": "pause",
+        "length": 73.22684491388209,
+        "origin": {
+          "x": 306.30084208128,
+          "y": 127.3319294912
+        },
+        "frame": "extra:6",
+        "staff": {
+          "t": 0.5666666666666668,
+          "duration": 0.64,
+          "phase": 0.8854166666666669,
+          "extension": true,
+          "command": "thrust"
+        }
+      },
+      "recovered": {
+        "x": 307.5,
+        "y": 144,
+        "weapon": "laser",
+        "mode": "play",
+        "length": 68,
+        "origin": {
+          "x": 307.96764913216,
+          "y": 127.46072268572625
+        },
+        "frame": "movement:1",
+        "staff": null
+      },
+      "samples": [
+        {
+          "x": 301.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 301.73256140816,
+            "y": 127.7487716048
+          },
+          "frame": "extra:0",
+          "staff": {
+            "t": 0,
+            "duration": 0.64,
+            "phase": 0,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 303,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 303.23256140816,
+            "y": 127.7487716048
+          },
+          "frame": "extra:0",
+          "staff": {
+            "t": 0.016666666666666666,
+            "duration": 0.64,
+            "phase": 0.026041666666666664,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 304.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 304.73256140816,
+            "y": 127.7487716048
+          },
+          "frame": "extra:0",
+          "staff": {
+            "t": 0.03333333333333333,
+            "duration": 0.64,
+            "phase": 0.05208333333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 306,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 306.23256140816,
+            "y": 127.7487716048
+          },
+          "frame": "extra:0",
+          "staff": {
+            "t": 0.05,
+            "duration": 0.64,
+            "phase": 0.078125,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.06666666666666667,
+            "duration": 0.64,
+            "phase": 0.10416666666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.06666666666666667,
+            "duration": 0.64,
+            "phase": 0.10416666666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68.13781182843734,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.08333333333333333,
+            "duration": 0.64,
+            "phase": 0.13020833333333331,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 69.61861607269856,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.09999999999999999,
+            "duration": 0.64,
+            "phase": 0.15624999999999997,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 72.42770589192708,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.11666666666666665,
+            "duration": 0.64,
+            "phase": 0.18229166666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 76.1961130708542,
+          "origin": {
+            "x": 308.12512281952,
+            "y": 127.8975435376
+          },
+          "frame": "extra:1",
+          "staff": {
+            "t": 0.13333333333333333,
+            "duration": 0.64,
+            "phase": 0.20833333333333331,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 80.55486939421121,
+          "origin": {
+            "x": 303.5378946576,
+            "y": 130.7775435952
+          },
+          "frame": "extra:2",
+          "staff": {
+            "t": 0.15,
+            "duration": 0.64,
+            "phase": 0.234375,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 85.13500664672944,
+          "origin": {
+            "x": 303.5378946576,
+            "y": 130.7775435952
+          },
+          "frame": "extra:2",
+          "staff": {
+            "t": 0.16666666666666666,
+            "duration": 0.64,
+            "phase": 0.26041666666666663,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 89.56755661314021,
+          "origin": {
+            "x": 303.5378946576,
+            "y": 130.7775435952
+          },
+          "frame": "extra:2",
+          "staff": {
+            "t": 0.18333333333333332,
+            "duration": 0.64,
+            "phase": 0.2864583333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 93.48355107817477,
+          "origin": {
+            "x": 303.5378946576,
+            "y": 130.7775435952
+          },
+          "frame": "extra:2",
+          "staff": {
+            "t": 0.19999999999999998,
+            "duration": 0.64,
+            "phase": 0.31249999999999994,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 96.5140218265645,
+          "origin": {
+            "x": 303.5378946576,
+            "y": 130.7775435952
+          },
+          "frame": "extra:2",
+          "staff": {
+            "t": 0.21666666666666665,
+            "duration": 0.64,
+            "phase": 0.33854166666666663,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.29000064304068,
+          "origin": {
+            "x": 306.69607015936003,
+            "y": 126.2807014
+          },
+          "frame": "extra:3",
+          "staff": {
+            "t": 0.2333333333333333,
+            "duration": 0.64,
+            "phase": 0.3645833333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 306.69607015936003,
+            "y": 126.2807014
+          },
+          "frame": "extra:3",
+          "staff": {
+            "t": 0.24999999999999997,
+            "duration": 0.64,
+            "phase": 0.39062499999999994,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 306.69607015936003,
+            "y": 126.2807014
+          },
+          "frame": "extra:3",
+          "staff": {
+            "t": 0.26666666666666666,
+            "duration": 0.64,
+            "phase": 0.41666666666666663,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 306.69607015936003,
+            "y": 126.2807014
+          },
+          "frame": "extra:3",
+          "staff": {
+            "t": 0.2833333333333333,
+            "duration": 0.64,
+            "phase": 0.4427083333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 306.69607015936003,
+            "y": 126.2807014
+          },
+          "frame": "extra:3",
+          "staff": {
+            "t": 0.3,
+            "duration": 0.64,
+            "phase": 0.46875,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.31666666666666665,
+            "duration": 0.64,
+            "phase": 0.49479166666666663,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.31666666666666665,
+            "duration": 0.64,
+            "phase": 0.49479166666666663,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.3333333333333333,
+            "duration": 0.64,
+            "phase": 0.5208333333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.35,
+            "duration": 0.64,
+            "phase": 0.546875,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.36666666666666664,
+            "duration": 0.64,
+            "phase": 0.5729166666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.60000000000001,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.3833333333333333,
+            "duration": 0.64,
+            "phase": 0.5989583333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 98.58245563271605,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.39999999999999997,
+            "duration": 0.64,
+            "phase": 0.6249999999999999,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 97.9566960596853,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.41666666666666663,
+            "duration": 0.64,
+            "phase": 0.6510416666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 96.53588084084399,
+          "origin": {
+            "x": 316.5322808824,
+            "y": 126.322806664
+          },
+          "frame": "extra:4",
+          "staff": {
+            "t": 0.4333333333333333,
+            "duration": 0.64,
+            "phase": 0.6770833333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 94.4590057184667,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.44999999999999996,
+            "duration": 0.64,
+            "phase": 0.7031249999999999,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 91.86506643482798,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.4666666666666666,
+            "duration": 0.64,
+            "phase": 0.7291666666666666,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 88.89305873220239,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.4833333333333333,
+            "duration": 0.64,
+            "phase": 0.7552083333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 85.6819783528646,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.49999999999999994,
+            "duration": 0.64,
+            "phase": 0.7812499999999999,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 82.37082103908908,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.5166666666666666,
+            "duration": 0.64,
+            "phase": 0.8072916666666665,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 79.09858253315045,
+          "origin": {
+            "x": 312.01059658144,
+            "y": 123.99578907360001
+          },
+          "frame": "extra:5",
+          "staff": {
+            "t": 0.5333333333333333,
+            "duration": 0.64,
+            "phase": 0.8333333333333333,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 76.00425857732326,
+          "origin": {
+            "x": 306.30084208128,
+            "y": 127.3319294912
+          },
+          "frame": "extra:6",
+          "staff": {
+            "t": 0.55,
+            "duration": 0.64,
+            "phase": 0.859375,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 73.22684491388209,
+          "origin": {
+            "x": 306.30084208128,
+            "y": 127.3319294912
+          },
+          "frame": "extra:6",
+          "staff": {
+            "t": 0.5666666666666668,
+            "duration": 0.64,
+            "phase": 0.8854166666666669,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 73.22684491388209,
+          "origin": {
+            "x": 306.30084208128,
+            "y": 127.3319294912
+          },
+          "frame": "extra:6",
+          "staff": {
+            "t": 0.5666666666666668,
+            "duration": 0.64,
+            "phase": 0.8854166666666669,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 70.90533728510152,
+          "origin": {
+            "x": 306.30084208128,
+            "y": 127.3319294912
+          },
+          "frame": "extra:6",
+          "staff": {
+            "t": 0.5833333333333335,
+            "duration": 0.64,
+            "phase": 0.9114583333333336,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 69.17873143325615,
+          "origin": {
+            "x": 306.30084208128,
+            "y": 127.3319294912
+          },
+          "frame": "extra:6",
+          "staff": {
+            "t": 0.6000000000000002,
+            "duration": 0.64,
+            "phase": 0.9375000000000003,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68.18602310062055,
+          "origin": {
+            "x": 307.23445613504003,
+            "y": 127.1396487856
+          },
+          "frame": "extra:7",
+          "staff": {
+            "t": 0.6166666666666669,
+            "duration": 0.64,
+            "phase": 0.9635416666666671,
+            "extension": true,
+            "command": "thrust"
+          }
+        },
+        {
+          "x": 307.5,
+          "y": 144,
+          "weapon": "laser",
+          "mode": "play",
+          "length": 68,
+          "origin": {
+            "x": 307.23445613504003,
+            "y": 127.1396487856
+          },
+          "frame": "extra:7",
+          "staff": {
+            "t": 0.6333333333333336,
+            "duration": 0.64,
+            "phase": 0.9895833333333338,
+            "extension": true,
+            "command": "thrust"
+          }
+        }
+      ]
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 85,
+      "total": 85,
+      "failed": [],
+      "stage": 1,
+      "cached": 85
+    },
+    "original": {
+      "mix": {
+        "track": null,
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 100,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "fixed",
+        "resolved": {
+          "track": null
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "hidden": true
+    }
+  },
+  "scope": "Isolated browser contexts, actual native range keyboard inputs and combat input; temporary test scene hooks only. Screenshot settings use test preferences 20/70, production defaults remain 30/100."
+}

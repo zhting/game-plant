@@ -1,0 +1,1002 @@
+{
+  "date": "2026-10-26",
+  "version": "dialogue-v4",
+  "request": "More Wukong lines; iconic long shout repeated too often",
+  "changes": {
+    "preservedOriginalClips": 4,
+    "additionalReferenceConditionedSyntheticLines": 12,
+    "totalVoiceLines": 16,
+    "audioClips": 25,
+    "audioBytes": 226464,
+    "newVoiceBytes": 133789,
+    "ordinaryGapSeconds": "5.2–7.8",
+    "recentLinesExcluded": 4,
+    "sameLineGapSeconds": 24,
+    "signatureMinGapSeconds": 60,
+    "signatureOrdinaryHeavyQi": false,
+    "ultimateSignature": "At most one per four voiced ultimates; finisher may select it, sharing the same history and 60-second cooldown",
+    "finisherDoesNotClearDialogueHistory": true,
+    "localGenerationOnly": true
+  },
+  "tests": {
+    "passed": 368,
+    "failed": 0,
+    "log": ".playwright-mcp/wukong-dialogue-regression.tap",
+    "includes": [
+      "Ordinary, heavy and qi do not select signature",
+      "Ten ordinary lines without replacement; exclude previous four",
+      "26 voiced ultimates across two owners; signature cooldown and rotation",
+      "Finisher preserves anti-repeat history",
+      "Source preservation, compressed asset hashes, mute, cancellation, networking and boss flow"
+    ]
+  },
+  "browser": {
+    "errors": [],
+    "initial": {
+      "time": 0,
+      "mode": "play",
+      "audio": {
+        "version": "dialogue-v4",
+        "loaded": 25,
+        "total": 25,
+        "decoded": 25,
+        "failed": [],
+        "active": 0,
+        "sounds": 0,
+        "voices": 0,
+        "counts": {},
+        "sampleCounts": {},
+        "voiceCounts": {},
+        "lastVoiceText": null,
+        "dialogue": {
+          "recent": [],
+          "ultimateCalls": 0,
+          "policy": {
+            "interval": 5.2,
+            "globalGap": 3,
+            "priorityGap": 4.5,
+            "repeatGap": 24,
+            "recentCount": 4,
+            "signatureGap": 60,
+            "signatureEvery": 4
+          }
+        },
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "logs": []
+    },
+    "normal": {
+      "time": 20.36666666666679,
+      "mode": "play",
+      "audio": {
+        "version": "dialogue-v4",
+        "loaded": 25,
+        "total": 25,
+        "decoded": 25,
+        "failed": [],
+        "active": 1,
+        "sounds": 43,
+        "voices": 4,
+        "counts": {
+          "swing": 16,
+          "spin": 6,
+          "charge": 8,
+          "qi": 8,
+          "heavy": 5
+        },
+        "sampleCounts": {
+          "swing": 8,
+          "spin": 2,
+          "charge": 8,
+          "qi": 8,
+          "swing2": 8,
+          "heavy": 2,
+          "swing3": 7
+        },
+        "voiceCounts": {
+          "effort1": 1,
+          "noEscape": 1,
+          "effort3": 1,
+          "again": 1
+        },
+        "lastVoiceText": "再来！",
+        "dialogue": {
+          "recent": [
+            "effort1",
+            "noEscape",
+            "effort3",
+            "again"
+          ],
+          "ultimateCalls": 0,
+          "policy": {
+            "interval": 5.2,
+            "globalGap": 3,
+            "priorityGap": 4.5,
+            "repeatGap": 24,
+            "recentCount": 4,
+            "signatureGap": 60,
+            "signatureEvery": 4
+          }
+        },
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "logs": [
+        {
+          "at": 0.15,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 0.15,
+          "key": "effort1",
+          "voice": true,
+          "text": "看棒！",
+          "duration": 0.7733333333333333,
+          "rate": 1
+        },
+        {
+          "at": 0.6833333333333338,
+          "key": "spin",
+          "voice": false,
+          "text": null,
+          "duration": 0.4746666666666667,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 1.2833333333333337,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 2.166666666666664,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 2.6999999999999953,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 3.0833333333333273,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 3.5499999999999923,
+          "key": "heavy",
+          "voice": false,
+          "text": null,
+          "duration": 0.4493333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 3.849999999999991,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 4.716666666666655,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 5.249999999999987,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 5.566666666666652,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 5.8499999999999845,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 6.21666666666665,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 6.21666666666665,
+          "key": "noEscape",
+          "voice": true,
+          "text": "休想逃！",
+          "duration": 1.1370833333333332,
+          "rate": 1
+        },
+        {
+          "at": 6.383333333333316,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 7.24999999999998,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 7.799999999999978,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 8.199999999999987,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 8.58333333333334,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 8.900000000000022,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 8.91666666666669,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 9.783333333333399,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 10.316666666666759,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 10.683333333333444,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 10.950000000000124,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 11.233333333333471,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 11.483333333333483,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 12.350000000000193,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 12.90000000000022,
+          "key": "spin",
+          "voice": false,
+          "text": null,
+          "duration": 0.4746666666666667,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 13.333333333333576,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 13.333333333333576,
+          "key": "effort3",
+          "voice": true,
+          "text": "嘿！",
+          "duration": 0.30933333333333335,
+          "rate": 1
+        },
+        {
+          "at": 13.733333333333595,
+          "key": "heavy",
+          "voice": false,
+          "text": null,
+          "duration": 0.4493333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 14.016666666666943,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 14.90000000000032,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 15.450000000000347,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 15.866666666667035,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 16.266666666667025,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 16.55000000000034,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 17.433333333333625,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 17.983333333333594,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 18.400000000000237,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 18.766666666666882,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 18.766666666666882,
+          "key": "again",
+          "voice": true,
+          "text": "再来！",
+          "duration": 0.39466666666666667,
+          "rate": 1
+        },
+        {
+          "at": 19.033333333333534,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 19.08333333333353,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 19.966666666666814,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9900000095367432
+        }
+      ]
+    },
+    "final": {
+      "time": 24.283333333333236,
+      "mode": "play",
+      "audio": {
+        "version": "dialogue-v4",
+        "loaded": 25,
+        "total": 25,
+        "decoded": 25,
+        "failed": [],
+        "active": 0,
+        "sounds": 44,
+        "voices": 5,
+        "counts": {
+          "swing": 16,
+          "spin": 6,
+          "charge": 8,
+          "qi": 8,
+          "heavy": 5,
+          "ultimate": 1
+        },
+        "sampleCounts": {
+          "swing": 8,
+          "spin": 2,
+          "charge": 8,
+          "qi": 8,
+          "swing2": 8,
+          "heavy": 2,
+          "swing3": 7,
+          "ultimate": 1
+        },
+        "voiceCounts": {
+          "effort1": 1,
+          "noEscape": 1,
+          "effort3": 1,
+          "again": 1,
+          "fight": 1
+        },
+        "lastVoiceText": "战个痛快！",
+        "dialogue": {
+          "recent": [
+            "noEscape",
+            "effort3",
+            "again",
+            "fight"
+          ],
+          "ultimateCalls": 1,
+          "policy": {
+            "interval": 5.2,
+            "globalGap": 3,
+            "priorityGap": 4.5,
+            "repeatGap": 24,
+            "recentCount": 4,
+            "signatureGap": 60,
+            "signatureEvery": 4
+          }
+        },
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "logs": [
+        {
+          "at": 0.15,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 0.15,
+          "key": "effort1",
+          "voice": true,
+          "text": "看棒！",
+          "duration": 0.7733333333333333,
+          "rate": 1
+        },
+        {
+          "at": 0.6833333333333338,
+          "key": "spin",
+          "voice": false,
+          "text": null,
+          "duration": 0.4746666666666667,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 1.2833333333333337,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 2.166666666666664,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 2.6999999999999953,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 3.0833333333333273,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 3.5499999999999923,
+          "key": "heavy",
+          "voice": false,
+          "text": null,
+          "duration": 0.4493333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 3.849999999999991,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 4.716666666666655,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 5.249999999999987,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 5.566666666666652,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 5.8499999999999845,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 6.21666666666665,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 6.21666666666665,
+          "key": "noEscape",
+          "voice": true,
+          "text": "休想逃！",
+          "duration": 1.1370833333333332,
+          "rate": 1
+        },
+        {
+          "at": 6.383333333333316,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 7.24999999999998,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 7.799999999999978,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 8.199999999999987,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 8.58333333333334,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 8.900000000000022,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 8.91666666666669,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 9.783333333333399,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 10.316666666666759,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 10.683333333333444,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 10.950000000000124,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 11.233333333333471,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 11.483333333333483,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 12.350000000000193,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 12.90000000000022,
+          "key": "spin",
+          "voice": false,
+          "text": null,
+          "duration": 0.4746666666666667,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 13.333333333333576,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 13.333333333333576,
+          "key": "effort3",
+          "voice": true,
+          "text": "嘿！",
+          "duration": 0.30933333333333335,
+          "rate": 1
+        },
+        {
+          "at": 13.733333333333595,
+          "key": "heavy",
+          "voice": false,
+          "text": null,
+          "duration": 0.4493333333333333,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 14.016666666666943,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 14.90000000000032,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 15.450000000000347,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 15.866666666667035,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 16.266666666667025,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 16.55000000000034,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 17.433333333333625,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 17.983333333333594,
+          "key": "swing2",
+          "voice": false,
+          "text": null,
+          "duration": 0.29333333333333333,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 18.400000000000237,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 18.766666666666882,
+          "key": "swing3",
+          "voice": false,
+          "text": null,
+          "duration": 0.208,
+          "rate": 0.9700000286102295
+        },
+        {
+          "at": 18.766666666666882,
+          "key": "again",
+          "voice": true,
+          "text": "再来！",
+          "duration": 0.39466666666666667,
+          "rate": 1
+        },
+        {
+          "at": 19.033333333333534,
+          "key": "swing",
+          "voice": false,
+          "text": null,
+          "duration": 0.368,
+          "rate": 0.9399999976158142
+        },
+        {
+          "at": 19.08333333333353,
+          "key": "charge",
+          "voice": false,
+          "text": null,
+          "duration": 0.224,
+          "rate": 1.0399999618530273
+        },
+        {
+          "at": 19.966666666666814,
+          "key": "qi",
+          "voice": false,
+          "text": null,
+          "duration": 0.4693333333333333,
+          "rate": 0.9900000095367432
+        },
+        {
+          "at": 23.399999999999952,
+          "key": "ultimate",
+          "voice": false,
+          "text": null,
+          "duration": 0.8106666666666666,
+          "rate": 1.0800000429153442
+        },
+        {
+          "at": 23.399999999999952,
+          "key": "fight",
+          "voice": true,
+          "text": "战个痛快！",
+          "duration": 0.8746666666666667,
+          "rate": 1
+        }
+      ]
+    },
+    "capture": {
+      "bytes": 393639,
+      "peak": 0.3174680471420288
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 90,
+      "total": 90,
+      "failed": [],
+      "stage": 1,
+      "cached": 90
+    }
+  },
+  "artifacts": {
+    "audition": "dialogue-new-lines-audition.mp3",
+    "actualGameplay": "dialogue-variety-demo.mp3",
+    "recipe": "../../assets/audio/dialogue-voice-build.json"
+  },
+  "scope": "Original four user-supplied voice clips retained. New voices synthesized offline using that recording as reference, no stock SAPI voice. Model weights and tool environment are ignored local build caches, not website resources. User's running in-app game was not refreshed."
+}

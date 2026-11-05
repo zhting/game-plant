@@ -1,0 +1,1667 @@
+{
+  "date": "2026-10-26",
+  "request": "Player feedback: faster boss, colossal foot/8-of-9-screen axe and jumpable stomp, automatic giant Wukong finisher",
+  "checks": {
+    "allWukongAndAudioMix": {
+      "passed": 365,
+      "failed": 0,
+      "log": ".playwright-mcp/wukong-three-stages-regression.tap"
+    },
+    "lastBoundaryChange": {
+      "passed": 119,
+      "failed": 0,
+      "log": ".playwright-mcp/wukong-three-stages-final.tap"
+    }
+  },
+  "implementation": {
+    "phase1": {
+      "walkSpeed": 76,
+      "previousWalkSpeed": 48,
+      "regularWindup": 0.68,
+      "regularRecovery": 0.65,
+      "cooldown": 0.42,
+      "leapCooldown": 3.2
+    },
+    "phase2": {
+      "entry": "first health bar reaches half",
+      "health": 72,
+      "growthSeconds": 1.8,
+      "axeCoverage": "8/9 screen",
+      "lockedSafeArea": "1/9 on the announced side",
+      "axeWindup": 2.1,
+      "stompWindup": 1.1,
+      "groundShock": "jump above floor-11 to evade",
+      "floor": 176
+    },
+    "phase3": {
+      "duration": 9.6,
+      "automatic": true,
+      "impactCount": 6,
+      "wholeBodyFrames": true,
+      "pauseSupported": true,
+      "controlsHiddenExceptPauseMute": true,
+      "exitLockedUntilFinished": true,
+      "scoreAwardedOnce": 10000,
+      "corpseImmediatelyGrounded": true
+    },
+    "newImageBytes": 277594,
+    "source": "games/wukong/assets/giant-colossus-generation.json"
+  },
+  "browser": {
+    "errors": [],
+    "scenes": {
+      "first": {
+        "mode": "play",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3150,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 60,
+          "max": 60,
+          "phase": 1,
+          "phaseTime": 0,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 1,
+          "time": 0
+        },
+        "dead": false,
+        "attack": null
+      },
+      "chase": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3150,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 60,
+          "max": 60,
+          "phase": 1,
+          "phaseTime": 0,
+          "growing": false,
+          "attack": {
+            "kind": "cleave",
+            "time": 0.8666666666666677
+          }
+        },
+        "encounter": {
+          "stage": 1,
+          "time": 0
+        },
+        "dead": false,
+        "attack": {
+          "kind": "cleave",
+          "t": 0.8666666666666677,
+          "windup": 0.68,
+          "strike": 0.32,
+          "recovery": 0.65,
+          "hits": [],
+          "repositionX": 3243.5166666666596
+        }
+      },
+      "colossus": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3150,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9333333333333313,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9333333333333313,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 0,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "axeTell": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3150,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.949999999999998,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 1.9000000000000001,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.949999999999998,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 1,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyAxe",
+          "t": 1.9000000000000001,
+          "windup": 2.1,
+          "strike": 0.3,
+          "recovery": 1.05,
+          "hits": [],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "axeUnsafe": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 78,
+        "x": 3120.6666666666665,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9666666666666646,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 2.2600000000000002,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9666666666666646,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 1,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyAxe",
+          "t": 2.2600000000000002,
+          "windup": 2.1,
+          "strike": 0.3,
+          "recovery": 1.05,
+          "hits": [
+            {
+              "pid": 1,
+              "heroFrames": true,
+              "hp": 78,
+              "maxHp": 100,
+              "hpTrail": 100,
+              "rage": 25,
+              "maxRage": 100,
+              "x": 3120.6666666666665,
+              "y": 176,
+              "vx": 0,
+              "vy": -100,
+              "face": 1,
+              "onGround": false,
+              "support": null,
+              "inWater": false,
+              "prone": false,
+              "dive": false,
+              "spin": false,
+              "dropT": 0,
+              "coyote": 0.06666666666666667,
+              "airJumps": 1,
+              "cool": -3.5333333333333257,
+              "wantFire": false,
+              "spCd": 0,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0,
+              "giantGraceT": 0,
+              "giantHitT": 0,
+              "giantCrushT": 0,
+              "wet": false,
+              "camoT": 0,
+              "riot": 0,
+              "helmT": 0,
+              "cleatT": 0,
+              "thermT": 0,
+              "fireproofT": 0,
+              "magnetT": 0,
+              "droneT": 0,
+              "droneCd": 0,
+              "acidT": 0,
+              "o2T": 0,
+              "coolT": 0,
+              "boostT": 0,
+              "torpCd": 0,
+              "dashT": 0,
+              "dashCd": 0,
+              "iceAir": false,
+              "skid": false,
+              "hook": null,
+              "invT": 0.85,
+              "shieldT": 0,
+              "dead": false,
+              "deadT": 0,
+              "weapon": "rifle",
+              "rapid": false,
+              "ax": 1,
+              "ay": 0,
+              "anim": 0,
+              "flashT": 0,
+              "heroAnimation": {
+                "clock": 3.5333333333333257,
+                "run": 0,
+                "prone": 0,
+                "land": 0,
+                "ground": true
+              },
+              "hurt": {
+                "t": 0,
+                "duration": 0.38,
+                "heavy": true,
+                "face": -1,
+                "amount": 22
+              },
+              "staff": null,
+              "hpTrailHold": 0.32,
+              "knockVX": -125,
+              "staffCombo": 0,
+              "staffComboT": 0
+            }
+          ],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "axeSafe": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3312.666666666667,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9666666666666646,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 2.2600000000000002,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9666666666666646,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 1,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyAxe",
+          "t": 2.2600000000000002,
+          "windup": 2.1,
+          "strike": 0.3,
+          "recovery": 1.05,
+          "hits": [],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "stompTell": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3312.666666666667,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9833333333333312,
+          "growing": false,
+          "attack": {
+            "kind": "skyStomp",
+            "time": 0.9000000000000001,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9833333333333312,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyStomp",
+          "t": 0.9000000000000001,
+          "windup": 1.1,
+          "strike": 0.55,
+          "recovery": 0.95,
+          "hits": [],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "stompGround": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 78,
+        "x": 3120.6666666666665,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9999999999999978,
+          "growing": false,
+          "attack": {
+            "kind": "skyStomp",
+            "time": 1.26,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9999999999999978,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyStomp",
+          "t": 1.26,
+          "windup": 1.1,
+          "strike": 0.55,
+          "recovery": 0.95,
+          "hits": [
+            {
+              "pid": 1,
+              "heroFrames": true,
+              "hp": 78,
+              "maxHp": 100,
+              "hpTrail": 100,
+              "rage": 50,
+              "maxRage": 100,
+              "x": 3120.6666666666665,
+              "y": 176,
+              "vx": 0,
+              "vy": -100,
+              "face": 1,
+              "onGround": false,
+              "support": null,
+              "inWater": false,
+              "prone": false,
+              "dive": false,
+              "spin": false,
+              "dropT": 0,
+              "coyote": 0.06666666666666667,
+              "airJumps": 1,
+              "cool": -3.5333333333333257,
+              "wantFire": false,
+              "spCd": 0,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0,
+              "giantGraceT": 0,
+              "giantHitT": 0,
+              "giantCrushT": 0,
+              "wet": false,
+              "camoT": 0,
+              "riot": 0,
+              "helmT": 0,
+              "cleatT": 0,
+              "thermT": 0,
+              "fireproofT": 0,
+              "magnetT": 0,
+              "droneT": 0,
+              "droneCd": 0,
+              "acidT": 0,
+              "o2T": 0,
+              "coolT": 0,
+              "boostT": 0,
+              "torpCd": 0,
+              "dashT": 0,
+              "dashCd": 0,
+              "iceAir": false,
+              "skid": false,
+              "hook": null,
+              "invT": 0.85,
+              "shieldT": 0,
+              "dead": false,
+              "deadT": 0,
+              "weapon": "rifle",
+              "rapid": false,
+              "ax": 1,
+              "ay": 0,
+              "anim": 0,
+              "flashT": 0,
+              "heroAnimation": {
+                "clock": 3.5333333333333257,
+                "run": 0,
+                "prone": 0,
+                "land": 0,
+                "ground": true
+              },
+              "hurt": {
+                "t": 0,
+                "duration": 0.38,
+                "heavy": true,
+                "face": -1,
+                "amount": 22
+              },
+              "staff": null,
+              "hpTrailHold": 0.32,
+              "knockVX": -125,
+              "staffCombo": 0,
+              "staffComboT": 0
+            }
+          ],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "stompAir": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3120.6666666666665,
+        "y": 140,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 1.9999999999999978,
+          "growing": false,
+          "attack": {
+            "kind": "skyStomp",
+            "time": 1.26,
+            "safeSide": "right"
+          }
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 1.9999999999999978,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": {
+          "kind": "skyStomp",
+          "t": 1.26,
+          "windup": 1.1,
+          "strike": 0.55,
+          "recovery": 0.95,
+          "hits": [],
+          "safeSide": "right",
+          "safe": {
+            "x": 3291.3333333333335,
+            "y": 0,
+            "w": 42.666666666666664,
+            "h": 184
+          },
+          "danger": {
+            "x": 2950,
+            "y": -80,
+            "w": 341.3333333333333,
+            "h": 266
+          },
+          "impacted": false
+        }
+      },
+      "footDamage": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 59,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 4.149999999999991,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 2,
+          "time": 4.149999999999991,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "finaleStart": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 1,
+          "max": 72,
+          "phase": 3,
+          "phaseTime": 0,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 3,
+          "time": 0,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 0,
+          "shouted": false,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "growth": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 1,
+          "max": 72,
+          "phase": 3,
+          "phaseTime": 1.2000000000000006,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 3,
+          "time": 1.2000000000000006,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 0,
+          "shouted": true,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "combo": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 1,
+          "max": 72,
+          "phase": 3,
+          "phaseTime": 3.7999999999999914,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 3,
+          "time": 3.7999999999999914,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 2,
+          "shouted": true,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "finish": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 1,
+          "max": 72,
+          "phase": 3,
+          "phaseTime": 6.6166666666666485,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 3,
+          "time": 6.6166666666666485,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 4,
+          "shouted": true,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "fallen": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 0,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 1,
+          "max": 72,
+          "phase": 3,
+          "phaseTime": 8.11666666666665,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 3,
+          "time": 8.11666666666665,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 6,
+          "shouted": true,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": false,
+        "exitOpen": false,
+        "attack": null
+      },
+      "finished": {
+        "mode": "pause",
+        "stage": 1,
+        "score": 10000,
+        "hp": 100,
+        "x": 3130.32,
+        "y": 176,
+        "heroActions": {
+          "version": "user-voice-v3",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        },
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": true,
+          "hp": 0,
+          "max": 72,
+          "phase": 4,
+          "phaseTime": 9.6,
+          "growing": false,
+          "attack": null
+        },
+        "encounter": {
+          "stage": 4,
+          "time": 9.6,
+          "growth": 0,
+          "arena": {
+            "left": 2950,
+            "right": 3334,
+            "width": 384,
+            "floor": 176
+          },
+          "turn": 2,
+          "from": {
+            "x": 3213.5166666666596,
+            "y": 176,
+            "face": -1,
+            "vx": 0,
+            "vy": 0,
+            "onGround": true,
+            "clock": 1.6166666666666658,
+            "gait": 5.552017016969893,
+            "walkBlend": 0.0000073059971109624834,
+            "cooldown": 0,
+            "attack": null,
+            "turn": 1,
+            "landT": 0,
+            "jumpCd": 0,
+            "poiseCooldown": 0,
+            "animation": null,
+            "meleeSinceLeap": 1,
+            "hurt": null
+          },
+          "impacts": 0,
+          "event": 6,
+          "shouted": true,
+          "saved": [
+            {
+              "pid": 1,
+              "x": 3130.32,
+              "y": 176,
+              "ride": null,
+              "rideT": 0,
+              "giantT": 0,
+              "giantHits": 0
+            }
+          ]
+        },
+        "dead": true,
+        "exitOpen": true,
+        "attack": null
+      }
+    },
+    "finalControls": {
+      "touch": "none",
+      "hudLeft": 1313,
+      "viewport": 1440
+    },
+    "pause": {
+      "before": 8.11666666666665,
+      "after": 8.11666666666665
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 90,
+      "total": 90,
+      "failed": [],
+      "stage": 1,
+      "cached": 90
+    }
+  },
+  "scope": "Original platform layout preserved. Original Contra keeps its existing single-stage fortress. User's current in-app game was not refreshed; QA used an isolated browser context."
+}

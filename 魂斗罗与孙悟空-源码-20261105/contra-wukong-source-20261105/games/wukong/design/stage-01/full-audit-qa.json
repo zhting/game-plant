@@ -1,0 +1,2411 @@
+{
+  "date": "2026-10-25",
+  "gameUrl": "http://127.0.0.1:4173/games/wukong/",
+  "conclusion": "First-stage changes verified with two qualified items: physical Xbox receiver input is not signed off; mounted commands share one eight-frame attack clip. The old 90-second exported video is not current.",
+  "fixes": [
+    "Theme settings brand, page and first-stage labels",
+    "Preserve the opening music source when skipping before eight seconds; explicit restart still starts at eight seconds",
+    "Current documentation corrected to twelve hero atlases and 152 frames"
+  ],
+  "tests": {
+    "functional": {
+      "files": 38,
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "report": ".playwright-mcp/wukong-audit-final-unit.tap"
+    },
+    "localNetwork": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "report": ".playwright-mcp/wukong-audit-network.tap"
+    },
+    "combinedPassed": 545
+  },
+  "browserScope": "Isolated browser contexts with deterministic, test-only scene injection, real keyboard/touch input and audio capture; not an unassisted natural full playthrough",
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "http": 200,
+    "title": "大闹天宫 · 齐天大圣",
+    "innerTitle": "大闹天宫 · 云海天宫",
+    "selectionLabel": "第一关 · 云海天宫",
+    "settingsBrand": "大闹天宫\n修行设置",
+    "helpHasCombos": true,
+    "titleMusic": {
+      "track": "stage1",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "selection": "original",
+      "resolved": {
+        "stage": 1,
+        "entry": 1
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929,
+      "enemyVoices": {
+        "loaded": 0,
+        "total": 3,
+        "decoded": 0,
+        "failed": [],
+        "active": 0,
+        "played": 0
+      },
+      "offset": 8,
+      "loopStart": 8,
+      "loopEnd": 159.17277083333335,
+      "position": 8.570666666666668,
+      "sameSource": false
+    },
+    "opening": {
+      "time": 0.35,
+      "page": 0,
+      "mode": "cine",
+      "music": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 2
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "offset": 0,
+        "loopStart": 8,
+        "loopEnd": 159.17277083333335,
+        "position": 0.33066666666666666,
+        "sameSource": true
+      }
+    },
+    "leap": {
+      "time": 3.016666666666661,
+      "page": 3,
+      "mode": "cine",
+      "music": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 2
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "offset": 0,
+        "loopStart": 8,
+        "loopEnd": 159.17277083333335,
+        "position": 3,
+        "sameSource": true
+      }
+    },
+    "landed": {
+      "time": 4.666666666666655,
+      "page": 4,
+      "mode": "cine",
+      "music": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 2
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "offset": 0,
+        "loopStart": 8,
+        "loopEnd": 159.17277083333335,
+        "position": 4.770666666666666,
+        "sameSource": true
+      }
+    },
+    "heaven": {
+      "time": 6.916666666666647,
+      "page": 6,
+      "mode": "cine",
+      "music": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 2
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "offset": 0,
+        "loopStart": 8,
+        "loopEnd": 159.17277083333335,
+        "position": 7.189333333333333,
+        "sameSource": true
+      }
+    },
+    "gameMusic": {
+      "track": "stage1",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "selection": "original",
+      "resolved": {
+        "stage": 1,
+        "entry": 3,
+        "preference": "original",
+        "choice": "original"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929,
+      "enemyVoices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 0,
+        "played": 0
+      },
+      "offset": 0,
+      "loopStart": 8,
+      "loopEnd": 159.17277083333335,
+      "position": 10.090666666666667,
+      "sameSource": true
+    },
+    "idleBefore": {
+      "x": 40,
+      "y": 112,
+      "frame": "movement:0",
+      "scale": 0.14035088,
+      "clip": "idle",
+      "rain": 0,
+      "particles": [],
+      "mode": "play"
+    },
+    "idleAfter": {
+      "x": 40,
+      "y": 112,
+      "frame": "movement:2",
+      "scale": 0.14035088,
+      "clip": "idle",
+      "rain": 0,
+      "particles": [],
+      "mode": "play"
+    },
+    "gamepad": {
+      "api": 0,
+      "activation": true,
+      "reported": {
+        "status": "waiting",
+        "count": 0,
+        "active": null
+      }
+    },
+    "enemies": {
+      "bullets": 0,
+      "types": [
+        "snp",
+        "run",
+        "fly"
+      ],
+      "melee": [
+        "cut",
+        "cut"
+      ],
+      "frames": [
+        {
+          "x": 336,
+          "y": 144,
+          "hp": 40
+        },
+        {
+          "x": 322.96666666666505,
+          "y": 144,
+          "hp": 30
+        },
+        {
+          "x": 332.99999999999875,
+          "y": 134,
+          "hp": 6
+        }
+      ]
+    },
+    "boss": {
+      "log": {
+        "minX": 3208.0043572984514,
+        "maxX": 3262.927777777778,
+        "air": true,
+        "moves": [
+          "cleave",
+          "sweep",
+          "leap"
+        ]
+      },
+      "actor": {
+        "x": 3205.7042483659898,
+        "y": 169.75999999999985,
+        "onGround": false,
+        "attack": "leap"
+      },
+      "dead": false
+    },
+    "defeated": {
+      "log": {
+        "minX": 3185.0032679738383,
+        "maxX": 3262.927777777778,
+        "air": true,
+        "moves": [
+          "cleave",
+          "sweep",
+          "leap"
+        ]
+      },
+      "actor": {
+        "x": 3171.2026143790704,
+        "y": 140.15999999999994,
+        "onGround": false
+      },
+      "dead": true,
+      "exitOpen": true,
+      "deathPoseY": 140.15999999999994
+    },
+    "qilin": {
+      "x": 3100,
+      "y": 176,
+      "frame": "qilin:9",
+      "scale": 0.1640625,
+      "clip": "mountedAttack",
+      "rain": 0,
+      "particles": [],
+      "mode": "play"
+    },
+    "cloud": {
+      "x": 3100,
+      "y": 120,
+      "frame": "movement:0",
+      "scale": 0.14035088,
+      "clip": "cloudIdle",
+      "rain": 0,
+      "particles": [],
+      "mode": "play"
+    },
+    "renderPure": true,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "art": {
+      "ready": true,
+      "loaded": [
+        "heaven",
+        "skinActors",
+        "heroWholeMovement",
+        "ruyiStaff",
+        "snow",
+        "lowJungle",
+        "facilities",
+        "turretBase",
+        "rock",
+        "damage",
+        "environment",
+        "fortress",
+        "birthMountain",
+        "birthActors",
+        "somersaultCloud",
+        "celestialQilin",
+        "palaceFoundation",
+        "cloudSea",
+        "heavenProps",
+        "heavenCasket",
+        "skinDeath",
+        "giantWholeMovement",
+        "giantWholeCleave",
+        "giantWholeSweep",
+        "giantWholeSpin",
+        "giantWholeMobility",
+        "giantWholeSweepLink",
+        "heroWholeMobility",
+        "heroWholeSweep",
+        "heroWholeCleave",
+        "heroWholeFlower",
+        "heroWholeExtra",
+        "heroWholeUppercut",
+        "heroWholeAdvance",
+        "heroWholeBlossom",
+        "heroWholeCyclone",
+        "heroWholeQilin",
+        "heroWholeLow",
+        "guardReactions",
+        "fairy",
+        "skinProne",
+        "heavenEncounters"
+      ],
+      "failed": [],
+      "frameCount": 31,
+      "resolution": [
+        1536,
+        864
+      ],
+      "skin": "wukong",
+      "presentationOnly": true,
+      "actorsReady": true,
+      "backgroundReady": true,
+      "cloudReady": true,
+      "sceneryReady": true,
+      "heroAnimation": "whole-sprite-sequences",
+      "heroAtlases": 12
+    }
+  },
+  "loading": {
+    "errors": [],
+    "loading": {
+      "mode": "loading",
+      "resources": {
+        "status": "loading",
+        "ready": false,
+        "loaded": 26,
+        "total": 81,
+        "failed": [],
+        "stage": 1,
+        "cached": 26
+      },
+      "brand": "齐天大圣 · 云海天宫",
+      "title": "大闹天宫",
+      "status": "正在准备第一关 · 云海天宫",
+      "background": "linear-gradient(90deg, rgba(5, 29, 38, 0.94), rgba(8, 34, 43, 0.76) 62%, rgba(13, 47, 57, 0.4)), url(\"http://127.0.0.1:4173/games/wukong/assets/heaven-panorama.webp\")",
+      "text": "齐天大圣 · 云海天宫\n\n大闹天宫\n正在准备第一关 · 云海天宫\n32%\n\n26 / 81 项已就绪 · 完成后自动开始\n\n返回标题"
+    },
+    "failed": {
+      "mode": "loading",
+      "resources": {
+        "status": "error",
+        "ready": false,
+        "loaded": 80,
+        "total": 81,
+        "failed": [
+          "image:/games/wukong/assets/hero-whole-cleave.webp"
+        ],
+        "stage": 1,
+        "cached": 80
+      },
+      "brand": "齐天大圣 · 云海天宫",
+      "title": "大闹天宫",
+      "status": "部分资源未能加载",
+      "background": "linear-gradient(90deg, rgba(5, 29, 38, 0.94), rgba(8, 34, 43, 0.76) 62%, rgba(13, 47, 57, 0.4)), url(\"http://127.0.0.1:4173/games/wukong/assets/heaven-panorama.webp\")",
+      "text": "齐天大圣 · 云海天宫\n\n大闹天宫\n部分资源未能加载\n98%\n\n1 项失败：hero-whole-cleave.webp。已保留成功资源，重试可继续。\n\n重试加载\n返回标题"
+    },
+    "ready": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "contraCovers": [],
+    "contra": {
+      "brand": "魂斗罗2026",
+      "title": "准备出击",
+      "background": "linear-gradient(90deg, rgba(0, 5, 8, 0.96), rgba(0, 8, 12, 0.88)), url(\"http://127.0.0.1:4173/games/contra2026/assets/cover-zh.webp?v=0f33b04645\")"
+    },
+    "fixtures": "Delay one Wukong atlas, fail its first request, then retry; original Contra holds one atlas only for its screenshot."
+  },
+  "healing": {
+    "fixture": true,
+    "errors": [],
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "renderPure": true,
+    "scenes": {
+      "legacyBefore": {
+        "hp": 20,
+        "x": 300,
+        "y": 144,
+        "score": 0,
+        "banner": "",
+        "weapon": "rifle",
+        "inventory": [],
+        "items": [
+          {
+            "kind": "healPill",
+            "x": 332,
+            "y": 144,
+            "rest": true,
+            "landed": false
+          }
+        ],
+        "fairy": null,
+        "healEffects": 0
+      },
+      "legacyAfter": {
+        "hp": 80,
+        "x": 313.5,
+        "y": 144,
+        "score": 200,
+        "banner": "九转金丹 · 生命 +60",
+        "weapon": "rifle",
+        "inventory": [],
+        "items": [],
+        "fairy": null,
+        "healEffects": 1
+      },
+      "fairyLanded": {
+        "hp": 20,
+        "x": 300,
+        "y": 144,
+        "score": 0,
+        "banner": "",
+        "weapon": "rifle",
+        "inventory": [],
+        "items": [
+          {
+            "kind": "healPill",
+            "x": 357.46666666666624,
+            "y": 144,
+            "rest": true,
+            "landed": true
+          }
+        ],
+        "fairy": {
+          "flee": true,
+          "kind": "healPill"
+        },
+        "healEffects": 0
+      },
+      "fairyCollected": {
+        "hp": 80,
+        "x": 339,
+        "y": 144,
+        "score": 200,
+        "banner": "九转金丹 · 生命 +60",
+        "weapon": "rifle",
+        "inventory": [],
+        "items": [],
+        "fairy": {
+          "flee": true,
+          "kind": "healPill"
+        },
+        "healEffects": 1
+      },
+      "fullHealth": {
+        "hp": 100,
+        "x": 313.5,
+        "y": 144,
+        "score": 200,
+        "banner": "九转金丹 · 生命已满",
+        "weapon": "rifle",
+        "inventory": [],
+        "items": [],
+        "fairy": null,
+        "healEffects": 1
+      }
+    }
+  },
+  "rage": {
+    "fixture": true,
+    "errors": [],
+    "empty": {
+      "hp": 100,
+      "rage": 0,
+      "ready": false,
+      "staff": null,
+      "enemies": [],
+      "waves": 0,
+      "button": "怒气 0%",
+      "buttonReady": false
+    },
+    "casts": [
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "pillar",
+            "time": 0.35,
+            "name": "定海神针"
+          },
+          "bag": [
+            "sweep",
+            "storm",
+            "qi"
+          ],
+          "last": "pillar",
+          "enemies": [
+            {
+              "x": 351.8666666666667,
+              "hp": 193
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "sweep",
+            "storm",
+            "qi"
+          ],
+          "last": "pillar",
+          "enemies": [
+            {
+              "x": 377.8115157985348,
+              "hp": 186
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "qi",
+            "time": 0.35,
+            "name": "万道棍气"
+          },
+          "bag": [
+            "sweep",
+            "storm"
+          ],
+          "last": "qi",
+          "enemies": [
+            {
+              "x": 356.1813205130941,
+              "hp": 188
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 2,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "sweep",
+            "storm"
+          ],
+          "last": "qi",
+          "enemies": [
+            {
+              "x": 393.7413921537034,
+              "hp": 168
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 551.5571833006452,
+              "hp": 188
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "touch",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "sweep",
+            "time": 0.35,
+            "name": "横扫天宫"
+          },
+          "bag": [
+            "storm"
+          ],
+          "last": "sweep",
+          "enemies": [
+            {
+              "x": 361.5042664125481,
+              "hp": 196
+            },
+            {
+              "x": 261.5042664125481,
+              "hp": 196
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "storm"
+          ],
+          "last": "sweep",
+          "enemies": [
+            {
+              "x": 389.110722438318,
+              "hp": 188
+            },
+            {
+              "x": 289.110722438318,
+              "hp": 188
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "storm",
+            "time": 0.35,
+            "name": "金箍风暴"
+          },
+          "bag": [],
+          "last": "storm",
+          "enemies": [
+            {
+              "x": 361.0122184213987,
+              "hp": 196
+            },
+            {
+              "x": 261.0122184213987,
+              "hp": 196
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [],
+          "last": "storm",
+          "enemies": [
+            {
+              "x": 408.23092977489694,
+              "hp": 190
+            },
+            {
+              "x": 318.73002317335084,
+              "hp": 188
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      }
+    ],
+    "quarter": {
+      "hp": 88,
+      "rage": 25,
+      "ready": false,
+      "staff": null,
+      "enemies": [],
+      "waves": 0,
+      "button": "怒气 25%",
+      "buttonReady": false
+    },
+    "ready": {
+      "hp": 52,
+      "rage": 100,
+      "ready": true,
+      "staff": null,
+      "enemies": [
+        {
+          "x": 350,
+          "hp": 200
+        },
+        {
+          "x": 250,
+          "hp": 200
+        },
+        {
+          "x": 510,
+          "hp": 200
+        }
+      ],
+      "waves": 0,
+      "button": "大招",
+      "buttonReady": true
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "audio": "running"
+  },
+  "commandsAndVFX": {
+    "fixture": true,
+    "keyboard": "Playwright keyboard down/up",
+    "errors": [],
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "art": {
+      "ready": true,
+      "loaded": [
+        "heaven",
+        "skinActors",
+        "heroWholeMovement",
+        "ruyiStaff",
+        "snow",
+        "lowJungle",
+        "facilities",
+        "turretBase",
+        "rock",
+        "damage",
+        "environment",
+        "fortress",
+        "birthMountain",
+        "birthActors",
+        "somersaultCloud",
+        "celestialQilin",
+        "palaceFoundation",
+        "cloudSea",
+        "heavenProps",
+        "heavenCasket",
+        "skinDeath",
+        "giantWholeMovement",
+        "giantWholeCleave",
+        "giantWholeSweep",
+        "giantWholeSpin",
+        "giantWholeMobility",
+        "giantWholeSweepLink",
+        "heroWholeMobility",
+        "heroWholeSweep",
+        "heroWholeCleave",
+        "heroWholeFlower",
+        "heroWholeExtra",
+        "heroWholeUppercut",
+        "heroWholeAdvance",
+        "heroWholeBlossom",
+        "heroWholeCyclone",
+        "heroWholeQilin",
+        "heroWholeLow",
+        "guardReactions",
+        "fairy",
+        "skinProne",
+        "heavenEncounters"
+      ],
+      "failed": [],
+      "frameCount": 10,
+      "resolution": [
+        1536,
+        864
+      ],
+      "skin": "wukong",
+      "presentationOnly": true,
+      "actorsReady": true,
+      "backgroundReady": true,
+      "cloudReady": true,
+      "sceneryReady": true,
+      "heroAnimation": "whole-sprite-sequences",
+      "heroAtlases": 12
+    },
+    "scenes": {
+      "thrust": {
+        "staff": {
+          "kind": "sweep",
+          "command": "thrust",
+          "time": 0.21666666666666665,
+          "duration": 0.48
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "extra:3",
+        "wholePainting": true,
+        "hp": 38,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "thrust",
+            "t": 0.11666666666666665
+          }
+        ],
+        "trial": {
+          "frames": [
+            "extra:0",
+            "extra:1",
+            "extra:2",
+            "extra:3"
+          ],
+          "hits": [
+            "thrust"
+          ],
+          "action": {
+            "kind": "sweep",
+            "variant": "thrust",
+            "command": "thrust",
+            "duration": 0.48,
+            "combo": 1,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        },
+        "completeFrames": [
+          "extra:0",
+          "extra:1",
+          "extra:2",
+          "extra:3",
+          "extra:4",
+          "extra:5",
+          "extra:6",
+          "extra:7"
+        ],
+        "hitForms": [
+          "thrust"
+        ],
+        "endHP": 38
+      },
+      "lift": {
+        "staff": {
+          "kind": "lift",
+          "command": "lift",
+          "time": 0.24999999999999997,
+          "duration": 0.56
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "uppercut:3",
+        "wholePainting": true,
+        "hp": 38,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "lift",
+            "t": 0.19999999999999998
+          }
+        ],
+        "trial": {
+          "frames": [
+            "uppercut:0",
+            "uppercut:1",
+            "uppercut:2",
+            "uppercut:3"
+          ],
+          "hits": [
+            "lift"
+          ],
+          "action": {
+            "kind": "lift",
+            "variant": "uppercut",
+            "command": "lift",
+            "duration": 0.56,
+            "combo": 1,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": false
+          }
+        },
+        "completeFrames": [
+          "uppercut:0",
+          "uppercut:1",
+          "uppercut:2",
+          "uppercut:3",
+          "uppercut:4",
+          "uppercut:5",
+          "uppercut:6",
+          "uppercut:7"
+        ],
+        "hitForms": [
+          "lift"
+        ],
+        "endHP": 38
+      },
+      "low": {
+        "staff": {
+          "kind": "sweep",
+          "command": "low",
+          "time": 0.2833333333333333,
+          "duration": 0.64
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "low:3",
+        "wholePainting": true,
+        "hp": 38,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "low",
+            "t": 0.2333333333333333
+          }
+        ],
+        "trial": {
+          "frames": [
+            "low:0",
+            "low:1",
+            "low:2",
+            "low:3"
+          ],
+          "hits": [
+            "low"
+          ],
+          "action": {
+            "kind": "sweep",
+            "variant": "lowSweep",
+            "command": "low",
+            "duration": 0.64,
+            "combo": 1,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": false
+          }
+        },
+        "completeFrames": [
+          "low:0",
+          "low:1",
+          "low:2",
+          "low:3",
+          "low:4",
+          "low:5",
+          "low:6",
+          "low:7"
+        ],
+        "hitForms": [
+          "low"
+        ],
+        "endHP": 38
+      },
+      "wheel": {
+        "staff": {
+          "kind": "sweep",
+          "command": "wheel",
+          "time": 0.35,
+          "duration": 0.78
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "cyclone:3",
+        "wholePainting": true,
+        "hp": 38,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "wheel",
+            "t": 0.3
+          }
+        ],
+        "trial": {
+          "frames": [
+            "cyclone:0",
+            "cyclone:1",
+            "cyclone:2",
+            "cyclone:3"
+          ],
+          "hits": [
+            "wheel"
+          ],
+          "action": {
+            "kind": "sweep",
+            "variant": "skyWheel",
+            "command": "wheel",
+            "duration": 0.78,
+            "combo": 2,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        },
+        "completeFrames": [
+          "cyclone:0",
+          "cyclone:1",
+          "cyclone:2",
+          "cyclone:3",
+          "cyclone:4",
+          "cyclone:5",
+          "cyclone:6",
+          "cyclone:7"
+        ],
+        "hitForms": [
+          "wheel"
+        ],
+        "endHP": 38
+      },
+      "bench": {
+        "meanRenderMs": 1.9133333365122478,
+        "renderPure": true
+      },
+      "sweep": {
+        "staff": {
+          "kind": "smash",
+          "command": "sweep",
+          "time": 0.4666666666666666,
+          "duration": 1.05
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "uppercut:3",
+        "wholePainting": true,
+        "hp": 36,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "sweep",
+            "t": 0.08333333333333333
+          }
+        ],
+        "trial": {
+          "frames": [
+            "sweep:8",
+            "sweep:9",
+            "sweep:10",
+            "sweep:11",
+            "sweep:12",
+            "sweep:13",
+            "sweep:14",
+            "sweep:15",
+            "uppercut:0",
+            "uppercut:1",
+            "uppercut:2"
+          ],
+          "hits": [
+            "sweep"
+          ],
+          "action": {
+            "kind": "smash",
+            "variant": "sweepingFinish",
+            "command": "sweep",
+            "duration": 1.05,
+            "combo": 3,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        },
+        "completeFrames": [
+          "sweep:8",
+          "sweep:9",
+          "sweep:10",
+          "sweep:11",
+          "sweep:12",
+          "sweep:13",
+          "sweep:14",
+          "sweep:15",
+          "uppercut:0",
+          "uppercut:1",
+          "uppercut:2",
+          "uppercut:3",
+          "uppercut:5",
+          "uppercut:6",
+          "uppercut:7",
+          "advance:0",
+          "advance:1",
+          "advance:2",
+          "advance:3",
+          "advance:4",
+          "advance:5",
+          "advance:6"
+        ],
+        "hitForms": [
+          "sweep"
+        ],
+        "endHP": 33
+      },
+      "flower": {
+        "staff": {
+          "kind": "smash",
+          "command": "flower",
+          "time": 0.4833333333333333,
+          "duration": 1.12
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "flower:14",
+        "wholePainting": true,
+        "hp": 36,
+        "waves": 0,
+        "hits": [
+          {
+            "form": "flower",
+            "t": 0.016666666666666666
+          }
+        ],
+        "trial": {
+          "frames": [
+            "blossom:0",
+            "blossom:1",
+            "blossom:2",
+            "blossom:3",
+            "blossom:4",
+            "blossom:5",
+            "blossom:6",
+            "blossom:7",
+            "flower:15",
+            "flower:14"
+          ],
+          "hits": [
+            "flower"
+          ],
+          "action": {
+            "kind": "smash",
+            "variant": "lotusChain",
+            "command": "flower",
+            "duration": 1.12,
+            "combo": 3,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        },
+        "completeFrames": [
+          "blossom:0",
+          "blossom:1",
+          "blossom:2",
+          "blossom:3",
+          "blossom:4",
+          "blossom:5",
+          "blossom:6",
+          "blossom:7",
+          "flower:15",
+          "flower:14",
+          "flower:13",
+          "flower:12",
+          "flower:11",
+          "flower:10",
+          "flower:9",
+          "flower:8",
+          "cleave:8",
+          "cleave:9",
+          "cleave:10",
+          "cleave:11",
+          "cleave:12",
+          "cleave:13",
+          "cleave:14",
+          "cleave:15"
+        ],
+        "hitForms": [
+          "flower"
+        ],
+        "endHP": 36
+      },
+      "protectedHold": {
+        "staff": {
+          "kind": "sweep",
+          "command": "wheel",
+          "time": 0.35,
+          "duration": 0.78
+        },
+        "charge": {
+          "active": false,
+          "ready": false
+        },
+        "frame": "cyclone:3",
+        "wholePainting": true,
+        "hp": 40,
+        "waves": 0,
+        "hits": [],
+        "trial": {
+          "frames": [
+            "cyclone:0",
+            "cyclone:1",
+            "cyclone:2",
+            "cyclone:3"
+          ],
+          "hits": [],
+          "action": {
+            "kind": "sweep",
+            "variant": "skyWheel",
+            "command": "wheel",
+            "duration": 0.78,
+            "combo": 2,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        }
+      },
+      "qi": {
+        "staff": {
+          "kind": "qiCast",
+          "time": 0.15,
+          "duration": 0.36
+        },
+        "charge": null,
+        "frame": "advance:3",
+        "wholePainting": true,
+        "hp": 40,
+        "waves": 1,
+        "hits": [],
+        "trial": {
+          "frames": [
+            "cyclone:0",
+            "cyclone:1",
+            "cyclone:2",
+            "cyclone:3",
+            "cyclone:4",
+            "cyclone:5",
+            "cyclone:6",
+            "cyclone:7"
+          ],
+          "hits": [],
+          "action": {
+            "kind": "sweep",
+            "variant": "skyWheel",
+            "command": "wheel",
+            "duration": 0.78,
+            "combo": 2,
+            "face": 1,
+            "weapon": "rifle",
+            "travel": true
+          }
+        }
+      }
+    },
+    "recording": {
+      "bytes": 4041530,
+      "mime": "video/webm;codecs=vp9"
+    },
+    "video": "H:/project/games/games/wukong/design/stage-01/command-vfx-demo.webm"
+  },
+  "guardScale": {
+    "fixture": true,
+    "errors": [],
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "airborne": {
+      "x": 331.0833333333333,
+      "y": 142.27777777777777,
+      "vy": -103.33333333333333,
+      "landed": false,
+      "landT": 0,
+      "face": -1
+    },
+    "landed": {
+      "x": 350.583333333333,
+      "y": 144,
+      "vy": 0,
+      "landed": true,
+      "landT": 0.2833333333333333,
+      "face": -1
+    },
+    "renderPure": true,
+    "comparison": {
+      "standingBodyHeight": 28,
+      "deathScales": [
+        0.09210526315789473,
+        0.08,
+        0.08484848484848485,
+        0.08588957055214724,
+        0.07777777777777778,
+        0.07777777777777778
+      ],
+      "posesPure": true
+    }
+  },
+  "qiAndAirCleave": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "full": {
+        "mode": "play",
+        "tick": 226,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": {
+          "t": 1.2500000000000004,
+          "active": true,
+          "ready": true,
+          "full": true
+        },
+        "staff": null,
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": []
+        }
+      },
+      "wave": {
+        "mode": "pause",
+        "tick": 253,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0.16666666666666666
+        },
+        "waves": [
+          {
+            "x": 373.83333333333314,
+            "y": 125,
+            "strength": 2,
+            "damage": 7,
+            "hitCount": 0
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "rangedHit": {
+        "mode": "pause",
+        "tick": 289,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0.35
+        },
+        "waves": [
+          {
+            "x": 440.7499999999996,
+            "y": 125,
+            "strength": 2,
+            "damage": 7,
+            "hitCount": 1
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 17,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "qiBurst",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "airCleave": {
+        "mode": "pause",
+        "tick": 332,
+        "x": 300,
+        "y": 113.99999999999997,
+        "ground": false,
+        "prone": false,
+        "staff": {
+          "kind": "slam",
+          "variant": "airCleave",
+          "t": 0.21666666666666665
+        },
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 20,
+            "x": 332,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.016666666666666666
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "landing": {
+        "mode": "pause",
+        "tick": 354,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "staff": {
+          "kind": "slam",
+          "variant": "airCleave",
+          "t": 0.41759999999999997,
+          "landed": true
+        },
+        "waves": [],
+        "enemies": [
+          {
+            "hp": 20,
+            "x": 340.2347720783736,
+            "y": 136.28333333333333
+          }
+        ],
+        "effects": [
+          {
+            "k": "impact",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "martialImpact",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "combatNumber",
+            "t": 0.11666666666666665
+          },
+          {
+            "k": "slamLand",
+            "t": 0.016666666666666666
+          }
+        ],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full"
+          ],
+          "wave": [
+            2
+          ]
+        }
+      },
+      "pad": {
+        "mode": "pause",
+        "tick": 407,
+        "x": 300,
+        "y": 144,
+        "ground": true,
+        "prone": false,
+        "charge": null,
+        "staff": {
+          "kind": "qiCast",
+          "variant": "fullSwing",
+          "t": 0
+        },
+        "waves": [
+          {
+            "x": 313,
+            "y": 125,
+            "strength": 1,
+            "damage": 4,
+            "hitCount": 0
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 24,
+            "x": 450,
+            "y": 144
+          }
+        ],
+        "effects": [],
+        "sound": {
+          "charge": [
+            "start",
+            "ready",
+            "full",
+            "start",
+            "ready"
+          ],
+          "wave": [
+            2,
+            1
+          ]
+        }
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "audio": "running"
+  },
+  "blood": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "light": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 10,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 125.57732103257835,
+            "heavy": false,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staff",
+            "angle": -0.03493127046726586,
+            "form": "cross",
+            "seed": 26102,
+            "t": 0.12,
+            "life": 0.4
+          }
+        ],
+        "cries": 0
+      },
+      "heavy": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 20,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 126,
+            "heavy": true,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "form": null,
+            "seed": 29581,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      },
+      "defeat": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 0,
+            "dead": true
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 125.57732103257835,
+            "heavy": false,
+            "killed": true,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staff",
+            "angle": -0.03493127046726586,
+            "form": "cross",
+            "seed": 31604,
+            "t": 0.12,
+            "life": 0.58
+          }
+        ],
+        "cries": 1
+      },
+      "flying": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "fly",
+            "hp": 8,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 126,
+            "heavy": true,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "form": null,
+            "seed": 33773,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      },
+      "metal": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "tur",
+            "hp": 8,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 136,
+            "heavy": true,
+            "killed": false,
+            "metal": true,
+            "player": false,
+            "blood": false,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "form": null,
+            "seed": 33904,
+            "t": 0.12,
+            "life": 0.36
+          }
+        ],
+        "cries": 0
+      },
+      "boss": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 12,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 3291.1827643630304,
+            "y": 121.82775119617224,
+            "heavy": true,
+            "killed": false,
+            "metal": true,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": 0,
+            "form": null,
+            "seed": 84389,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      }
+    },
+    "renderPure": true,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "audio": {
+      "loaded": 3,
+      "total": 3,
+      "decoded": 3,
+      "failed": [],
+      "active": 0,
+      "played": 0
+    }
+  },
+  "hitAndDeathAudio": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "hit": {
+        "tick": 152,
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 9,
+            "dead": false,
+            "x": 330,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.045,
+            "killed": false,
+            "angle": -0.05550813734758562
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sfx": "on",
+        "muted": false,
+        "sfxGain": 0.8999999761581421
+      },
+      "defeats": [
+        {
+          "tick": 177,
+          "mode": "pause",
+          "enemies": [
+            {
+              "type": "snp",
+              "hp": -1,
+              "dead": true,
+              "x": 330,
+              "y": 144
+            }
+          ],
+          "effects": [
+            {
+              "k": "martialImpact",
+              "x": 325,
+              "y": 122.67877679419746,
+              "t": 0.045,
+              "killed": true,
+              "angle": -0.05550813734758562
+            },
+            {
+              "k": "guardDefeat",
+              "x": 330,
+              "y": 144,
+              "t": 0
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 1,
+            "played": 1
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 247,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.9000000000000011
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.9000000000000011,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 301,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.9000000000000011
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.9000000000000011,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 2
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 354,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.8833333333333344
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.8833333333333344,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 3
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        }
+      ],
+      "sfxOff": {
+        "tick": 375,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.18333333333333332,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 348.33333333333354,
+            "y": 124.74999999999999,
+            "t": 0.18333333333333332
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.18333333333333332,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "off",
+        "muted": false,
+        "sfxGain": 0
+      },
+      "noReplay": {
+        "tick": 385,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.35,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 365.0000000000004,
+            "y": 127.66666666666666,
+            "t": 0.35
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.35,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "on",
+        "muted": false,
+        "sfxGain": 0.8999999761581421
+      },
+      "muted": {
+        "tick": 396,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.18333333333333332,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 348.33333333333354,
+            "y": 124.74999999999999,
+            "t": 0.18333333333333332
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.18333333333333332,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "on",
+        "muted": true,
+        "sfxGain": 0.8999999761581421
+      }
+    },
+    "audioCapture": {
+      "bytes": 54078,
+      "peak": 0.40218889713287354,
+      "rms": 0.19948500108756165
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 81,
+      "total": 81,
+      "failed": [],
+      "stage": 1,
+      "cached": 81
+    },
+    "audio": {
+      "track": "stage1",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "selection": "original",
+      "resolved": {
+        "stage": 1,
+        "entry": 3,
+        "preference": "original",
+        "choice": "original"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929,
+      "enemyVoices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 0,
+        "played": 3
+      }
+    }
+  },
+  "physicalGamepad": {
+    "nativeRead": "\r\nStatus Class        FriendlyName\r\n------ -----        ------------\r\nOK     XnaComposite Xbox 360 Controller for Windows\r\nOK     Bluetooth    Xbox Wireless Controller\r\nOK     System       Nefarius Virtual Gamepad Emulation Bus\r\nOK     System       Zuler Virtual Gamepad Device(DaaS)\r\n\r\n",
+    "browser": {
+      "api": 0,
+      "activation": true,
+      "reported": {
+        "status": "waiting",
+        "count": 0,
+        "active": null
+      }
+    },
+    "result": "Unverified: native device presence does not establish game input"
+  },
+  "video": {
+    "path": "recordings/大闹天宫_第一关_新棍法道具展示_90秒.mp4",
+    "lastWriteTime": "2026-10-24 13:38:47 +08:00",
+    "bytes": 66826812,
+    "reRecordedThisAudit": false
+  },
+  "renderChecks": "Repeated rendering preserves world state; current VFX scene average render 1.913 ms in the test browser",
+  "evidence": "games/wukong/design/stage-01/修改核验清单.md"
+}

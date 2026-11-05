@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-24",
+  "url": "http://127.0.0.1:4173/games/wukong/",
+  "change": "Complete Sun Wukong sprite sequences and removal of duplicate staff extensions",
+  "generation": {
+    "mode": "built-in image_gen",
+    "record": "assets/hero-whole-generation.json",
+    "prompts": "assets/hero-whole-prompts.json",
+    "atlases": 7,
+    "completeFrames": 108,
+    "runtimeBytes": 3705386
+  },
+  "regression": {
+    "command": "node --test --test-reporter=tap backend/test/wukong-hero-frames.test.mjs backend/test/wukong-engine.test.mjs backend/test/wukong-animation.test.mjs backend/test/wukong-staff.test.mjs backend/test/wukong-locomotion.test.mjs backend/test/wukong-magic.test.mjs backend/test/wukong-mount.test.mjs backend/test/wukong-giant-frames.test.mjs backend/test/wukong-supplies.test.mjs backend/test/wukong-music.test.mjs backend/test/wukong-opening.test.mjs backend/test/wukong-atmosphere.test.mjs backend/test/contra-engine.test.mjs backend/test/contra-motion.test.mjs backend/test/contra-preload.test.mjs backend/test/contra-audio.test.mjs backend/test/contra-fixed-soundtrack.test.mjs backend/test/contra-stage-loading.test.mjs",
+    "passed": 349,
+    "failed": 0,
+    "tap": "../../../../.playwright-mcp/wukong-whole-hero-regression.tap"
+  },
+  "runtime": {
+    "page": "Production page without code injection; actual start, cinematic, play and pause input",
+    "resources": {
+      "loaded": 65,
+      "total": 65,
+      "failed": []
+    },
+    "heroAnimation": "whole-sprite-sequences",
+    "heroAtlases": 7
+  },
+  "visualChecks": [
+    "Idle and run use eight complete character drawings per cycle",
+    "Jump and land retain whole body and consistent anatomy",
+    "Prone and rider use connected complete poses",
+    "Sweep, cleave, figure-eight, thrust and upward/aerial attacks use authored whole-body sequences",
+    "Normal staff is only the staff painted into the character; no appended geometry",
+    "Long-staff power draws one continuous shaft behind the hands; isolated original shaft ends are masked in a cached body copy",
+    "Summons reuse the same full-frame drawing path"
+  ],
+  "collisionChecks": [
+    "Ordinary origin, tip and butt match each painted frame",
+    "Long staff scales measured reach and rear by 1.75",
+    "Five intermediate shaft samples cover movement between attack keyframes",
+    "Wall occlusion and one-hit-per-target rules remain",
+    "Three staffs, flying staffs, flame, ultimate and magic regression pass"
+  ],
+  "preserved": [
+    "Original level layout, player movement speed, gravity, jump, platforms and collision",
+    "Contra and later-stage behavior",
+    "Existing music and cinematic flow"
+  ],
+  "snapshots": [
+    "wukong-sequence-preview.png",
+    "wukong-single-long-staff-preview.png",
+    "wukong-single-staff-in-game.png"
+  ],
+  "preview": "wukong-sequence-preview.html"
+}

@@ -1,0 +1,891 @@
+{
+  "date": "2026-10-26",
+  "version": "natural-v2",
+  "changes": {
+    "foley": "Actual stick/wood/bamboo field recordings, three ordinary variations plus heavy/flower sounds; lower mix levels",
+    "speech": [
+      "看棒！",
+      "哪里跑！",
+      "嘿！",
+      "吃俺老孙一棒！"
+    ],
+    "voice": "Local Windows Chinese male synthesis; generic character performance, no actor voice imitation",
+    "ordinaryVoiceGapSeconds": [
+      3.6,
+      5.8
+    ],
+    "noSpeechOverlap": true,
+    "foleyDuckedDuringSpeech": true,
+    "cache": "New v2 audio URLs and versioned module import",
+    "runtimeBytes": 81925
+  },
+  "tests": {
+    "passed": 234,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-natural-audio-regression.tap"
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "initial": {
+      "time": 0,
+      "mode": "play",
+      "hero": {
+        "version": "natural-v2",
+        "loaded": 13,
+        "total": 13,
+        "decoded": 13,
+        "failed": [],
+        "active": 0,
+        "sounds": 0,
+        "voices": 0,
+        "counts": {},
+        "sampleCounts": {},
+        "lastVoiceText": null,
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 30,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 4
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.16500000655651093,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "heroActions": {
+          "version": "natural-v2",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {},
+          "sampleCounts": {},
+          "lastVoiceText": null,
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        }
+      },
+      "logs": []
+    },
+    "normal": {
+      "time": 13.333333333333576,
+      "mode": "play",
+      "hero": {
+        "version": "natural-v2",
+        "loaded": 13,
+        "total": 13,
+        "decoded": 13,
+        "failed": [],
+        "active": 1,
+        "sounds": 34,
+        "voices": 3,
+        "counts": {
+          "swing": 18,
+          "heavy": 11,
+          "spin": 5
+        },
+        "sampleCounts": {
+          "swing": 7,
+          "swing2": 11,
+          "swing3": 10,
+          "heavy": 4,
+          "spin": 2
+        },
+        "lastVoiceText": "嘿！",
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 30,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 4,
+          "preference": "original",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.16500000655651093,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "heroActions": {
+          "version": "natural-v2",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 1,
+          "sounds": 34,
+          "voices": 3,
+          "counts": {
+            "swing": 18,
+            "heavy": 11,
+            "spin": 5
+          },
+          "sampleCounts": {
+            "swing": 7,
+            "swing2": 11,
+            "swing3": 10,
+            "heavy": 4,
+            "spin": 2
+          },
+          "lastVoiceText": "嘿！",
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        }
+      },
+      "logs": [
+        {
+          "at": 0.11666666666666665,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 0.11666666666666665,
+          "key": "effort1",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "看棒！"
+        },
+        {
+          "at": 0.4833333333333333,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.07636753469705582,
+          "text": null
+        },
+        {
+          "at": 0.8000000000000008,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 1.0833333333333344,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 1.4666666666666663,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 1.8999999999999981,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 2.166666666666664,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 2.449999999999996,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 2.8166666666666615,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 3.26666666666666,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 3.9333333333333242,
+          "key": "spin",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 4.29999999999999,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 4.716666666666655,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 5.2166666666666535,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 5.2166666666666535,
+          "key": "effort2",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "哪里跑！"
+        },
+        {
+          "at": 5.599999999999985,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 5.916666666666651,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 6.199999999999983,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 6.583333333333315,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 7.033333333333314,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.1414213627576828,
+          "text": null
+        },
+        {
+          "at": 7.499999999999979,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 8.016666666666644,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 8.466666666666667,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 8.950000000000024,
+          "key": "spin",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 9.500000000000052,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 10.016666666666744,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 10.433333333333431,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 10.800000000000116,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 11.066666666666796,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 11.066666666666796,
+          "key": "effort3",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "嘿！"
+        },
+        {
+          "at": 11.350000000000144,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.13500000536441803,
+          "text": null
+        },
+        {
+          "at": 11.733333333333496,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.06363961100578308,
+          "text": null
+        },
+        {
+          "at": 12.133333333333516,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 12.533333333333536,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 12.96666666666689,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 13.23333333333357,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        }
+      ]
+    },
+    "final": {
+      "time": 15.133333333333665,
+      "mode": "play",
+      "hero": {
+        "version": "natural-v2",
+        "loaded": 13,
+        "total": 13,
+        "decoded": 13,
+        "failed": [],
+        "active": 0,
+        "sounds": 36,
+        "voices": 4,
+        "counts": {
+          "swing": 18,
+          "heavy": 12,
+          "spin": 5,
+          "ultimate": 1
+        },
+        "sampleCounts": {
+          "swing": 7,
+          "swing2": 12,
+          "swing3": 10,
+          "heavy": 4,
+          "spin": 2,
+          "ultimate": 1
+        },
+        "lastVoiceText": "吃俺老孙一棒！",
+        "mix": {
+          "swing": 0.24,
+          "heavy": 0.3,
+          "spin": 0.2,
+          "qi": 0.26,
+          "ultimate": 0.34,
+          "charge": 0.16,
+          "land": 0.28,
+          "voice": 0.94
+        }
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 30,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 4,
+          "preference": "original",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.16500000655651093,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "heroActions": {
+          "version": "natural-v2",
+          "loaded": 13,
+          "total": 13,
+          "decoded": 13,
+          "failed": [],
+          "active": 0,
+          "sounds": 36,
+          "voices": 4,
+          "counts": {
+            "swing": 18,
+            "heavy": 12,
+            "spin": 5,
+            "ultimate": 1
+          },
+          "sampleCounts": {
+            "swing": 7,
+            "swing2": 12,
+            "swing3": 10,
+            "heavy": 4,
+            "spin": 2,
+            "ultimate": 1
+          },
+          "lastVoiceText": "吃俺老孙一棒！",
+          "mix": {
+            "swing": 0.24,
+            "heavy": 0.3,
+            "spin": 0.2,
+            "qi": 0.26,
+            "ultimate": 0.34,
+            "charge": 0.16,
+            "land": 0.28,
+            "voice": 0.94
+          }
+        }
+      },
+      "logs": [
+        {
+          "at": 0.11666666666666665,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 0.11666666666666665,
+          "key": "effort1",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "看棒！"
+        },
+        {
+          "at": 0.4833333333333333,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.07636753469705582,
+          "text": null
+        },
+        {
+          "at": 0.8000000000000008,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 1.0833333333333344,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 1.4666666666666663,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 1.8999999999999981,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 2.166666666666664,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 2.449999999999996,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 2.8166666666666615,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 3.26666666666666,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 3.9333333333333242,
+          "key": "spin",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 4.29999999999999,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 4.716666666666655,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 5.2166666666666535,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 5.2166666666666535,
+          "key": "effort2",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "哪里跑！"
+        },
+        {
+          "at": 5.599999999999985,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 5.916666666666651,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.1080000028014183,
+          "text": null
+        },
+        {
+          "at": 6.199999999999983,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.2121320366859436,
+          "text": null
+        },
+        {
+          "at": 6.583333333333315,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 7.033333333333314,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.1414213627576828,
+          "text": null
+        },
+        {
+          "at": 7.499999999999979,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 8.016666666666644,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 8.466666666666667,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 8.950000000000024,
+          "key": "spin",
+          "voice": false,
+          "gain": 0.20000000298023224,
+          "text": null
+        },
+        {
+          "at": 9.500000000000052,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 10.016666666666744,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 10.433333333333431,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 10.800000000000116,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 11.066666666666796,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 11.066666666666796,
+          "key": "effort3",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "嘿！"
+        },
+        {
+          "at": 11.350000000000144,
+          "key": "heavy",
+          "voice": false,
+          "gain": 0.13500000536441803,
+          "text": null
+        },
+        {
+          "at": 11.733333333333496,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.06363961100578308,
+          "text": null
+        },
+        {
+          "at": 12.133333333333516,
+          "key": "swing",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 12.533333333333536,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 12.96666666666689,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.23999999463558197,
+          "text": null
+        },
+        {
+          "at": 13.23333333333357,
+          "key": "swing3",
+          "voice": false,
+          "gain": 0.16970562934875488,
+          "text": null
+        },
+        {
+          "at": 13.516666666666918,
+          "key": "swing2",
+          "voice": false,
+          "gain": 0.30000001192092896,
+          "text": null
+        },
+        {
+          "at": 13.683333333333593,
+          "key": "ultimate",
+          "voice": false,
+          "gain": 0.24041630327701569,
+          "text": null
+        },
+        {
+          "at": 13.683333333333593,
+          "key": "shout",
+          "voice": true,
+          "gain": 0.9399999976158142,
+          "text": "吃俺老孙一棒！"
+        }
+      ]
+    },
+    "capture": {
+      "bytes": 244625,
+      "metrics": {
+        "mix": {
+          "peak": 0.2858850359916687,
+          "rms": 0.02063687922850952
+        },
+        "voice": {
+          "peak": 0.4234263002872467,
+          "rms": 0.02440977781100898
+        },
+        "foley": {
+          "peak": 0.12803368270397186,
+          "rms": 0.012857561703037604
+        }
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 89,
+      "total": 89,
+      "failed": [],
+      "stage": 1,
+      "cached": 89
+    }
+  },
+  "recording": "games/wukong/design/stage-01/natural-wukong-audio-demo.mp3",
+  "scope": "Actual keyboard attacks in isolated test scene. User's existing paused game was inspected without reloading or changing its progress."
+}

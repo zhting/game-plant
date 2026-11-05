@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-27",
+  "tool": "Built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE transparent 2D ground-impact crater decal for a high-detail painted Chinese celestial-palace side-scrolling action game. Create a genuinely three-dimensional-looking depression crushed into ivory white-jade/marble paving, NOT a flat black hole or graphic icon. Camera is a very LOW SIDE VIEW only about 10 degrees above the floor, like the edge of a side-scrolling platform. Composition: very wide flattened oval crater, long axis horizontal, low profile, seen from the front; approximately 5:1 overall silhouette width to height. Put it in a landscape 1536x512 image with generous fully transparent padding. The rear lip is thin and level; the front rim is fractured thick ivory stone with subtle warm gold veins and an inward-facing exposed broken cross-section. The cavity has clearly visible inward sloping fractured grey-beige stone walls, layered depth, occlusion shadows darkest immediately beneath the rear rim, a readable charcoal-grey rubble floor rather than a featureless black void. Grounded physically plausible stone chunks of varied sizes, small chips, cracks radiating a short distance through the pale rim, fine settled grey ash and powdery crushed jade inside the bowl and beside the rim. Soft soot at the outermost edges must fade naturally to true alpha transparency; avoid a hard oval outline. Warm sunlight from upper left, soft ambient sky fill, consistent light across all chunks. Realistic material texture and cohesive game-art rendering. Keep all fragments resting on the ground; no airborne rocks, no impact flash, no flames, no smoke cloud, no glowing lava, no sparks. No upright scenery, no characters, no sky, no floor rectangle extending past the decal, no frame, no text or labels, no watermark. Avoid repeated triangles, jagged vector polygons, thick black outlines and pure black filled regions. This will overlay a narrow cream-and-gold marble palace platform, so leave the surroundings completely transparent.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a17a55-15ef-7812-b883-f8072c398bc7/exec-453b7fe8-8555-4a97-81d6-1fa7125d0a31.png",
+  "outputs": [
+    "games/wukong/assets/jade-impact-crater-v2.png",
+    "games/wukong/assets/jade-impact-crater-v2.webp"
+  ],
+  "dimensions": [
+    2172,
+    724
+  ],
+  "alpha": [
+    0,
+    255
+  ],
+  "crop": [
+    8,
+    258,
+    2163,
+    386
+  ],
+  "webpBytes": 334300,
+  "pipeline": "Source alpha preserved; WebP quality 90, method 6. Empty padding excluded by runtime crop; no changes to painted pixels. Painting includes inward fractured marble walls, occlusion shadows, rubble floor, broken ivory slabs and grey ash."
+}

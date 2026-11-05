@@ -1,0 +1,7 @@
+{
+  "tool": "Built-in image_gen",
+  "mode": "text-localization",
+  "reference": "../assets/cover-v2.png",
+  "output": "../assets/cover-zh.png",
+  "prompt": "Use case: text-localization. Edit target: the supplied square Chinese pixel-art game cover. Replace ONLY the small white subtitle \"ONLINE CO-OP\" beneath the large gold 2026 numerals with exact Simplified Chinese text \"双人联网同屏\". Keep that subtitle centered, white, clean and legible, similar scale to the existing subtitle. Preserve the large Chinese title \"魂斗罗\", gold \"2026\", all characters, guns, jungle, waterfall, fortress, color palette, black background, square composition, and all other pixels as closely as possible. No English letters anywhere. Do not add any other text. This is a surgical subtitle translation, not a redesign."
+}

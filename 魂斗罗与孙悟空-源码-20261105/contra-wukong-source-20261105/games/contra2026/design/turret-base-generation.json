@@ -1,0 +1,13 @@
+{
+  "mode": "builtin image_gen edit",
+  "input": "games/contra2026/assets/stage1/classic-facilities.png",
+  "output": "games/contra2026/assets/stage1/classic-turret-base.png",
+  "crop": [
+    139,
+    101,
+    404,
+    384
+  ],
+  "prompt": "Use case: precise-object-edit. Edit target: this transparent 1536x1024 sprite atlas. Change ONLY the TOP LEFT turret sprite. Its upper-left white projecting mechanism and diagonal white arm look like a second gun barrel. REMOVE that entire upper-left gun-shaped projection and diagonal upper-left arm: the protruding white block near atlas (175,145), white wedge near (235,185), red tips near (160,155) and (185,210), and white diagonal strut from roughly (205,220) to (285,255). Replace this small upper-left structure with a simple narrow VERTICAL silver steel support post to the left of the large red circular rotor, continuing the existing lower-left frame. The left outline should be a straight vertical mechanical frame without any leftward projections, pipes or barrel-like shapes. Keep the large red circular rotor and its SINGLE central black mounting socket exactly as they are; NO gun barrels anywhere on this base sprite, no additional sockets or aiming mechanisms. Keep the lower feet, right post, top horizontal plate, rotor center, scale and exact placement unchanged. Preserve all three other sprites exactly unchanged. Preserve original pixel-art colors and pixel density. Output same 1536x1024 RGBA atlas and genuinely transparent background with zero-alpha gutters; no glow or backdrop. This is a barrel-free mount: the game draws the single working barrel separately.",
+  "usage": "Only the top-left turret crop is used; other fixtures continue to use the unchanged original atlas."
+}

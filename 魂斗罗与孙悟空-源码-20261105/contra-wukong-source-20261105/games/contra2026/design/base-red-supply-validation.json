@@ -1,0 +1,41 @@
+{
+  "taskSpaceId": 177,
+  "checks": {
+    "redAndGreenUniformsVerified": true,
+    "actualBulletKillDropsOneItemBeforeClear": true,
+    "itemLandsAndCanBePickedDuringCombat": true,
+    "pickupEquipsLaser": true,
+    "roomClearProducesNoNewItems": true,
+    "carriersSpawnNaturallyInAllThreeRooms": true
+  },
+  "palette": {
+    "width": 1086,
+    "height": 1448,
+    "naturalCarrier": [
+      {
+        "kind": "S",
+        "state": "walk"
+      }
+    ]
+  },
+  "production": {
+    "url": "http://localhost:3190/games/contra2026/?art=red-supply-1",
+    "helpUpdated": true,
+    "testHookAbsent": true,
+    "modules": [
+      "http://localhost:3190/games/contra2026/js/stage-two-art.mjs?v=red-supply-1",
+      "http://localhost:3190/games/contra2026/js/base-supply.mjs?v=red-supply-1"
+    ]
+  },
+  "screenshots": [
+    "H:/project/games/games/contra2026/design/base-red-supply-soldier.png",
+    "H:/project/games/games/contra2026/design/base-red-supply-ejected.png",
+    "H:/project/games/games/contra2026/design/base-red-supply-landed.png",
+    "H:/project/games/games/contra2026/design/base-red-supply-picked-up.png",
+    "H:/project/games/games/contra2026/design/base-red-supply-clear-no-reward.png"
+  ],
+  "regressionTests": {
+    "passed": 115,
+    "failed": 0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "prompt": "Use case: stylized-concept. Asset type: production transparent sprite atlas for a finely detailed arcade side-scrolling rainforest action game. Primary request: redesign a small wall-mounted armored supply hatch with a horizontal louvered shutter, preserving its recognizable compact square, chamfered metal surround and five broad horizontal steel slats, but add substantial dimensional depth and painted material detail. Make TWO separate reusable pieces on ONE 1536x1024 transparent atlas. LEFT PIECE: an OPEN armored hatch housing, occupying approximately x60..830,y110..930. The broad square chamfered front rim has layered beveled grey-green and aged ivory steel, four large recessed corner screw sockets, smaller fasteners, dark inset seams, guide rails inside the left and right jambs, subtle scratches, tiny oxidation marks, side vents and one small amber status lamp on the left. A clearly visible right-side thickness face and a narrow top plane show that this is a heavy box anchored into rock, with deep contact shadows inside the frame. Its front opening is completely OPEN: a recessed dark cavity with a small generic copper-red supply mechanism and restrained amber indicator inside, no letters or weapon symbols. A few tiny damp moss specks on the upper casing edge, without scenery. RIGHT PIECE: the detached five-slat SHUTTER PANEL ONLY, approximately x940..1480,y270..780; no surrounding housing or second machine. It should fit the left piece's interior opening when placed there by code. Five thick horizontal beveled metal slats stacked vertically, cold grey-green steel, narrow nearly black seams between slats, bright upper lips and dark lower faces, fine wear and compact hinge details. Both pieces nearly straight-on front view, same scale, same upper-left illumination, same highly crafted hand-painted HD arcade pixel-art style as richly detailed mossy cliffs and military machines. Readable large forms before tiny surface detail, crisp textured pixel clusters, controlled highlights, strong depth, no flat vector gradients, no photoreal studio render, no soft blur. Actual transparent alpha around each piece and a generous empty vertical gutter, no scenery or rock background, no rectangular shadow patch outside the objects, no ground, no text, labels, letters, numbers, arrows, UI, checkerboard pattern, logos or watermark. Entire objects visible without cropping.",
+  "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-28eca885-7765-46e0-8799-da9512b663b8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "generatedWith": "built-in imagegen",
+  "file": "assets/stage3/supply-hatch.webp",
+  "url": "/games/contra2026/assets/stage3/supply-hatch.webp",
+  "dimensions": [
+    1024,
+    683
+  ],
+  "frames": {
+    "frame": [
+      18,
+      58,
+      595,
+      546
+    ],
+    "shutter": [
+      632,
+      165,
+      372,
+      397
+    ]
+  },
+  "opening": [
+    137,
+    159,
+    329,
+    346
+  ],
+  "bytes": 193074,
+  "sha256": "cd2425d3550c5e69fcf1b5f2cfc9b5be52360c9cda468d2b0b132ffc58a590e9"
+}

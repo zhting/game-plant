@@ -1,0 +1,26 @@
+{
+  "prompt": "Use case: stylized-concept. Asset type: a production transparent sprite for the OPEN PASSAGE in an HD arcade military base game, viewed straight ahead in a pseudo-3D corridor. Primary request: replace a flat black doorway with repeated blue rectangle outlines by a believable, deeply recessed blast-open steel tunnel entrance. ONE complete vertically oriented breached entrance, outer width-to-height approximately 0.84:1, centered in a portrait canvas with modest transparent padding. Thick olive-grey industrial steel jambs and a broad dark lintel frame an actually open interior. The front armor is torn and bent back at a few irregular places: layered plate thickness, exposed darker cut edges, bolts, damaged corners, soot, restrained chipped paint and subtle metal wear. Keep the main doorway stable and recognizable, no spiky fantasy rock opening. Inside, show a dark utilitarian service corridor receding several meters in coherent one-point perspective: real side-wall planes with heavy structural ribs, ceiling crossbeams and pipes, a narrow steel floor with perspective seams, believable overlap and contact shadows, and a small distant dim amber utility light. Near edges are sharply detailed; far structures lose contrast into darkness. The tunnel is navigable, with a clear unobstructed floor, no closed door or debris across the route. A low metal threshold at the bottom aligns horizontally with the outside floor, with a muted red-brown reflection matching a red metal base floor, without an external floor rectangle. Strong volume through physically consistent upper-left and overhead light, cool reflected highlights on steel, deep ambient occlusion under the lintel and inside jambs, restrained warm light far inside. Realistic hand-painted HD arcade pixel-art texture matching richly detailed olive armor walls, grey military equipment and red metal floor panels, crisp readable forms and clustered highlights, no smooth toy plastic, no vector line drawing, no repeated empty outline rectangles, no neon portal, no magical glow, no photographic backdrop. The interior is opaque artwork inside the entrance; genuine alpha transparency ONLY around the complete irregular outer silhouette. No wall slab or scenery behind or around the entrance, no black background rectangle, no cast shadow patch outside it. Entire entrance and threshold visible, no clipped edges, no characters, weapons, machinery blocking it, signs, text, letters, numbers, UI, labels, logos, watermark, or checkerboard.",
+  "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-04053ab0-3b82-4054-89fe-21b56ae23d00.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "generatedWith": "built-in imagegen",
+  "file": "assets/stage4/breached-passage.webp",
+  "url": "/games/contra2026/assets/stage4/breached-passage.webp",
+  "dimensions": [
+    768,
+    884
+  ],
+  "bounds": [
+    0,
+    0,
+    768,
+    884
+  ],
+  "sourceAlphaBounds": [
+    20,
+    19,
+    1127,
+    1294
+  ],
+  "quality": 88,
+  "bytes": 221338,
+  "sha256": "a547b93f85372d69d287d857d4e020454d68f519ecb0d20c2db9bba1d3c1698a"
+}

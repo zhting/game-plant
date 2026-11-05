@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-23",
+  "naturalFight": {
+    "secondsUntilVisibleJump": 7.466666666666667,
+    "attacks": [
+      "cleave",
+      "sweep",
+      "leap"
+    ],
+    "xRange": [
+      3247.254901960784,
+      3278
+    ],
+    "jump": {
+      "x": 3247.254901960784,
+      "y": 144.1422222222221,
+      "onGround": false
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 51,
+      "total": 51,
+      "failed": []
+    },
+    "errors": []
+  },
+  "walk": {
+    "from": 3262.927777777778,
+    "to": 3211.833333333323,
+    "y": 176,
+    "gait": 5.740886575311077,
+    "walkBlend": 0.9999991929582823
+  },
+  "jump": {
+    "x": 3146.8570261437844,
+    "y": 139.60888888888886,
+    "onGround": false,
+    "vy": -27.733333333332517,
+    "landingX": 3066,
+    "hitBox": {
+      "x": 3129.2570261437845,
+      "y": 49.63672232328918,
+      "w": 46,
+      "h": 90
+    },
+    "averageRenderMs": 4.547999999523163,
+    "renderLeavesWorldUnchanged": true
+  },
+  "landing": {
+    "x": 3066,
+    "y": 176,
+    "landed": true,
+    "onGround": true,
+    "enemyBullets": 0
+  },
+  "defeat": {
+    "dead": true,
+    "deadT": 0,
+    "exitOpen": true,
+    "defeatX": 3066
+  },
+  "entry": {
+    "entering": true,
+    "x": 3282,
+    "y": 125.24999999999997,
+    "stage": 1
+  },
+  "nextStage": {
+    "stage": 2,
+    "score": 10000
+  },
+  "fairyHit": {
+    "fairy": {
+      "fairy": true,
+      "x": 452.7777777777779,
+      "y": 125.0506234575043,
+      "y0": 125,
+      "t": 1.1999999999999993,
+      "kind": "M",
+      "flee": true,
+      "fleeT": 0.11666666666666665
+    },
+    "items": [
+      {
+        "x": 441.03333333333336,
+        "y": 129.5617345686154,
+        "kind": "M",
+        "peach": true,
+        "landed": false
+      }
+    ],
+    "explosions": 0
+  },
+  "pickup": {
+    "weapon": "machine",
+    "remainingPeaches": 0,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 51,
+      "total": 51,
+      "failed": []
+    }
+  },
+  "normalEntry": {
+    "qaHookPresent": false,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 51,
+      "total": 51,
+      "failed": []
+    }
+  },
+  "errors": [],
+  "failed": []
+}

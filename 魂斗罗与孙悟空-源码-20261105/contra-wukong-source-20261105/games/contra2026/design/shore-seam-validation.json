@@ -1,0 +1,204 @@
+{
+  "cases": [
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 0,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 0,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 0,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 60,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 60,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1046,
+      "vx": 60,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 0,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 0,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 0,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 60,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 60,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "left",
+      "camera": 1006,
+      "vx": 60,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 0,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 0,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 0,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 60,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 60,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 0
+    },
+    {
+      "bank": "right",
+      "camera": 1414,
+      "vx": 60,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 0,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 0,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 0,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 60,
+      "anim": 0,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 60,
+      "anim": 0.7,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    },
+    {
+      "bank": "right",
+      "camera": 1374,
+      "vx": 60,
+      "anim": 1.4,
+      "exposedSubmergedPixels": 0,
+      "maxColorDelta": 1
+    }
+  ],
+  "allSubmergedOccluded": true,
+  "colorTolerance": 3,
+  "regressionTests": 97,
+  "production": {
+    "updatedModule": true,
+    "artReady": true,
+    "failed": []
+  }
+}

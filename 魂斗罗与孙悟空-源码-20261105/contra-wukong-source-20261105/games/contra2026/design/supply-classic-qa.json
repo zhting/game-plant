@@ -1,0 +1,40 @@
+{
+  "taskSpaceId": 160,
+  "captures": [
+    {
+      "phase": "flight",
+      "path": "H:/project/games/games/contra2026/design/supply-classic-flight-4k.png",
+      "pods": 1,
+      "item": null
+    },
+    {
+      "phase": "falling",
+      "path": "H:/project/games/games/contra2026/design/supply-classic-falling-4k.png",
+      "pods": 0,
+      "item": {
+        "x": 168.1,
+        "y": 101.4484338425003,
+        "vx": 30,
+        "vy": 141.33333333333331,
+        "kind": "G",
+        "fromPod": true,
+        "landed": false
+      }
+    },
+    {
+      "phase": "landed",
+      "path": "H:/project/games/games/contra2026/design/supply-classic-landed-4k.png",
+      "pods": 0,
+      "item": {
+        "x": 174.6,
+        "y": 144,
+        "vx": 0,
+        "vy": 0,
+        "kind": "G",
+        "fromPod": true,
+        "landed": true,
+        "rest": true
+      }
+    }
+  ]
+}

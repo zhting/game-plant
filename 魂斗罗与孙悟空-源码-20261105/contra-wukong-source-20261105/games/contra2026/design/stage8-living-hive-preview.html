@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第八关活体巢穴动效检查</title>
+<style>body{margin:0;background:#080611;color:#dcc4d3;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}button{margin:12px 4px;padding:8px 14px;background:#241525;border:1px solid #75516c;color:inherit;cursor:pointer}</style>
+<canvas width="1536" height="864"></canvas><button id="pause">暂停预览</button><button id="phase">下一相位</button><button id="camera">切换平台断层</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=living-hive-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt});
+await Promise.all(['cavern','terrain'].map(k=>art.loadImage(k)).concat(baseArt.loadImage('actorBlue')));
+const solids=[{x:0,y:176,w:640,h:40,g:1},{x:700,y:176,w:2800,h:40,g:1},{x:200,y:128,w:96,h:8,g:0},{x:420,y:100,w:80,h:8,g:0},{x:720,y:124,w:96,h:8,g:0}];
+let time=0,last=performance.now(),paused=false,camera=0,renderMs=[];
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续预览':'暂停预览';};
+document.querySelector('#phase').onclick=()=>time+=.8;document.querySelector('#camera').onclick=()=>camera=camera===0?450:0;
+function frame(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused)time+=dt;const start=performance.now();
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={stage:8,time,t:time*60,camX:camera};art.backdrop(camera);
+  art.g.save();art.g.translate(-camera,0);art.floor(solids,camera);art.actor({x:camera+120,y:176,face:1,onGround:true,ax:1,ay:0},'blue');art.g.restore();art.present(ctx);
+  renderMs.push(performance.now()-start);if(renderMs.length>120)renderMs.shift();
+  window.hivePreviewMetrics={time,paused,camera,cacheEntries:art.terrainCache.size,averageMs:renderMs.reduce((a,b)=>a+b,0)/renderMs.length,maxMs:Math.max(...renderMs)};
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);window.hivePreviewReady=true;
+</script></html>

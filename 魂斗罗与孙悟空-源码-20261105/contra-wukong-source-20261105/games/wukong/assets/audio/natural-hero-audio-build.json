@@ -1,0 +1,135 @@
+{
+  "version": "natural-v2",
+  "sourceNotes": "Public CC0 preview files; generic Chinese local voice, no actor imitation",
+  "sources": [
+    {
+      "key": "thin",
+      "author": "Dalesome",
+      "page": "https://freesound.org/people/Dalesome/sounds/352719/",
+      "preview": "https://cdn.freesound.org/previews/352/352719_6513636-hq.mp3",
+      "license": "CC0 1.0",
+      "file": "thin.mp3"
+    },
+    {
+      "key": "soft",
+      "author": "HoloDOOMy",
+      "page": "https://freesound.org/people/HoloDOOMy/sounds/810065/",
+      "preview": "https://cdn.freesound.org/previews/810/810065_16134838-hq.mp3",
+      "license": "CC0 1.0",
+      "file": "soft.mp3"
+    },
+    {
+      "key": "short",
+      "author": "Sadiquecat",
+      "page": "https://freesound.org/people/Sadiquecat/sounds/802458/",
+      "preview": "https://cdn.freesound.org/previews/802/802458_5287430-hq.mp3",
+      "license": "CC0 1.0",
+      "file": "short.mp3"
+    },
+    {
+      "key": "bamboo",
+      "author": "Sadiquecat",
+      "page": "https://freesound.org/people/Sadiquecat/sounds/855704/",
+      "preview": "https://cdn.freesound.org/previews/855/855704_5287430-hq.mp3",
+      "license": "CC0 1.0",
+      "file": "bamboo.mp3"
+    }
+  ],
+  "files": [
+    {
+      "file": "staff-air-1-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\thin.mp3",
+      "filters": "highpass=f=130,lowpass=f=6500,atempo=1.5,atrim=duration=0.38,afade=t=in:d=0.005,afade=t=out:st=0.355:d=0.025,loudnorm=I=-20:TP=-4:LRA=7",
+      "bytes": 5755,
+      "sha256": "349b778993218d705956dd572c82e790b0f8f65f8eea1fe34eae8345b43ebac9",
+      "author": "Dalesome",
+      "license": "CC0 1.0",
+      "page": "https://freesound.org/people/Dalesome/sounds/352719/"
+    },
+    {
+      "file": "staff-air-2-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\soft.mp3",
+      "filters": "highpass=f=130,lowpass=f=6500,atempo=1.15,atrim=duration=0.32,afade=t=in:d=0.005,afade=t=out:st=0.295:d=0.025,loudnorm=I=-20:TP=-4:LRA=7",
+      "bytes": 4948,
+      "sha256": "a3bba241a9afa3c486848b81ccf20278d3b9c9a7844f9e290da92499416067c4",
+      "author": "HoloDOOMy",
+      "license": "CC0 1.0",
+      "page": "https://freesound.org/people/HoloDOOMy/sounds/810065/"
+    },
+    {
+      "file": "staff-air-3-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\short.mp3",
+      "filters": "highpass=f=130,lowpass=f=6500,atempo=1,atrim=duration=0.27,afade=t=in:d=0.005,afade=t=out:st=0.24500000000000002:d=0.025,loudnorm=I=-20:TP=-4:LRA=7",
+      "bytes": 4854,
+      "sha256": "ee6e02efdf8243de35cda417533d11786c6afa2537a619603c3baeba681e8fdc",
+      "author": "Sadiquecat",
+      "license": "CC0 1.0",
+      "page": "https://freesound.org/people/Sadiquecat/sounds/802458/"
+    },
+    {
+      "file": "staff-air-heavy-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\bamboo.mp3",
+      "filters": "highpass=f=130,lowpass=f=6500,atempo=1.4,atrim=duration=0.46,afade=t=in:d=0.005,afade=t=out:st=0.435:d=0.025,loudnorm=I=-20:TP=-4:LRA=7",
+      "bytes": 5960,
+      "sha256": "ca48a237f1d5faef9218989423cc2b2dd258026d8ab27ead050b40135be411c6",
+      "author": "Sadiquecat",
+      "license": "CC0 1.0",
+      "page": "https://freesound.org/people/Sadiquecat/sounds/855704/"
+    },
+    {
+      "file": "staff-air-spin-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\thin.mp3",
+      "filters": "highpass=f=130,lowpass=f=6500,atempo=1.15,atrim=duration=0.5,afade=t=in:d=0.005,afade=t=out:st=0.475:d=0.025,loudnorm=I=-20:TP=-4:LRA=7",
+      "bytes": 6289,
+      "sha256": "3181b320af057f211923c7acf7f84a084fb9728f18f8ae374e85faea501bf541",
+      "author": "Dalesome",
+      "license": "CC0 1.0",
+      "page": "https://freesound.org/people/Dalesome/sounds/352719/"
+    },
+    {
+      "file": "wukong-call-1-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\call-1.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.005:start_threshold=-45dB,aresample=24000,asetrate=26400,aresample=24000,highpass=f=90,lowpass=f=7500,afade=t=in:d=0.004,loudnorm=I=-16:TP=-2:LRA=7",
+      "bytes": 6225,
+      "sha256": "e4517735bbec3859e01126f049d816d0808193fdb04eaf39dfef167539f0a73b",
+      "text": "看棒！",
+      "voice": "Microsoft Kangkang",
+      "rate": "SAPI 2",
+      "pitch": "+10%"
+    },
+    {
+      "file": "wukong-call-2-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\call-2.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.005:start_threshold=-45dB,aresample=24000,asetrate=26400,aresample=24000,highpass=f=90,lowpass=f=7500,afade=t=in:d=0.004,loudnorm=I=-16:TP=-2:LRA=7",
+      "bytes": 6937,
+      "sha256": "2cf29755f542d09600abc49f11259c96850460fc56acc47855b233940b1ae16a",
+      "text": "哪里跑！",
+      "voice": "Microsoft Kangkang",
+      "rate": "SAPI 2",
+      "pitch": "+10%"
+    },
+    {
+      "file": "wukong-call-3-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\call-3.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.005:start_threshold=-45dB,aresample=24000,asetrate=26400,aresample=24000,highpass=f=90,lowpass=f=7500,afade=t=in:d=0.004,loudnorm=I=-16:TP=-2:LRA=7",
+      "bytes": 5523,
+      "sha256": "1fcf538d5473e339f2e724e23857887a9d35434611281225f004fe1bd9b8ed1c",
+      "text": "嘿！",
+      "voice": "Microsoft Kangkang",
+      "rate": "SAPI 2",
+      "pitch": "+10%"
+    },
+    {
+      "file": "wukong-call-4-v2.ogg",
+      "source": ".playwright-mcp\\wukong-natural-audio\\call-4.wav",
+      "filters": "silenceremove=start_periods=1:start_duration=0.005:start_threshold=-45dB,aresample=24000,asetrate=26400,aresample=24000,highpass=f=90,lowpass=f=7500,afade=t=in:d=0.004,loudnorm=I=-16:TP=-2:LRA=7",
+      "bytes": 9489,
+      "sha256": "7d140b1107d4f95cde024394f350399f15005eff6dff2e4de79cec6cfd80e11c",
+      "text": "吃俺老孙一棒！",
+      "voice": "Microsoft Kangkang",
+      "rate": "SAPI 2",
+      "pitch": "+10%"
+    }
+  ],
+  "totalNewBytes": 55980
+}

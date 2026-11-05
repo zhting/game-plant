@@ -1,0 +1,23 @@
+[Unit]
+Description=Tangtang unified multiplayer game backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/tangtang-games/app
+Environment=NODE_ENV=production
+Environment=PORT=3030
+Environment=HOST=127.0.0.1
+Environment=GAMES_DATA_DIR=/home/ubuntu/tangtang-games/data
+Environment=GAMES_ALLOWED_ORIGINS=https://games.tangletang.top,https://api.tangletang.top
+ExecStart=/home/ubuntu/tangtang-games/runtime/node/bin/node backend/server.mjs
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

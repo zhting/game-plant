@@ -1,0 +1,46 @@
+{
+  "source": "H:\\download\\videoplayback.mp4",
+  "processing": "FFmpeg, Opus 96kbps stereo / 48kHz, loudness target -18 LUFS; 4ms edge fades",
+  "notes": [
+    "Title ends before the video cuts to its author-created opening at 5.205 seconds.",
+    "Loop periods measured from repeated spectral phrases in the supplied video, including stage-two corridor and boss themes.",
+    "These are extracts of the supplied mixed recording, not separate original soundtrack stems."
+  ],
+  "tracks": [
+    {
+      "key": "title",
+      "file": "../assets/audio/reference-title.ogg",
+      "sourceStart": 0,
+      "duration": 5.2,
+      "loop": false
+    },
+    {
+      "key": "opening",
+      "file": "../assets/audio/reference-opening.ogg",
+      "sourceStart": 5.25,
+      "duration": 15.97369614512471,
+      "loop": true
+    },
+    {
+      "key": "stage1",
+      "file": "../assets/audio/reference-stage1.ogg",
+      "sourceStart": 48,
+      "duration": 51.74240362811789,
+      "loop": true
+    },
+    {
+      "key": "stage2",
+      "file": "../assets/audio/reference-stage2.ogg",
+      "sourceStart": 172,
+      "duration": 19.169625,
+      "loop": true
+    },
+    {
+      "key": "stage2boss",
+      "file": "../assets/audio/reference-stage2-boss.ogg",
+      "sourceStart": 318,
+      "duration": 11.18225,
+      "loop": true
+    }
+  ]
+}

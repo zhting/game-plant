@@ -1,0 +1,332 @@
+{
+  "scope": "大闹天宫标题与开局实际下载的位图，包含当前预加载的共用关卡图片；不含音频、SVG、脚本",
+  "before": {
+    "title": [
+      {
+        "url": "/games/wukong/assets/heaven-panorama.png",
+        "bytes": 2372702
+      },
+      {
+        "url": "/games/wukong/assets/actors.png",
+        "bytes": 2199862
+      }
+    ],
+    "images": [
+      {
+        "url": "/games/wukong/assets/heaven-panorama.png",
+        "bytes": 2372702
+      },
+      {
+        "url": "/games/wukong/assets/actors.png",
+        "bytes": 2199862
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/night-snow-mountains.webp",
+        "bytes": 792544
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/night-jungle-strip.webp",
+        "bytes": 891632
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/classic-facilities.webp",
+        "bytes": 858666
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/classic-turret-base.webp",
+        "bytes": 848256
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/rock-arcade.webp",
+        "bytes": 275370
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/fortress-damage.webp",
+        "bytes": 1145234
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/environment.webp",
+        "bytes": 1406646
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/fortress-hd.webp",
+        "bytes": 1268970
+      },
+      {
+        "url": "/games/wukong/assets/somersault-cloud.png",
+        "bytes": 1296348
+      },
+      {
+        "url": "/games/wukong/assets/cloud-sea.png",
+        "bytes": 1702442
+      },
+      {
+        "url": "/games/wukong/assets/heaven-props.png",
+        "bytes": 1306539
+      },
+      {
+        "url": "/games/wukong/assets/palace-foundation.png",
+        "bytes": 2994380
+      },
+      {
+        "url": "/games/wukong/assets/heaven-casket.png",
+        "bytes": 1796200
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-hd.webp",
+        "bytes": 253426
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-power.webp",
+        "bytes": 328662
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-armory.webp",
+        "bytes": 266134
+      },
+      {
+        "url": "/games/wukong/assets/wukong-death.png",
+        "bytes": 1261595
+      },
+      {
+        "url": "/games/wukong/assets/giant-rig.png",
+        "bytes": 1736805
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-command.webp",
+        "bytes": 236230
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/mechanisms-hd.webp",
+        "bytes": 1403794
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-back-blue.webp",
+        "bytes": 928328
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-back-red.webp",
+        "bytes": 873026
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/control-wall-hd.webp",
+        "bytes": 1755032
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/soldier-front.webp",
+        "bytes": 839692
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-upward-v1.webp",
+        "bytes": 1107306
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-guardian.webp",
+        "bytes": 1594414
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-guardian-wreck.webp",
+        "bytes": 1286110
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/mossy-rock-ledge.webp",
+        "bytes": 422546
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-layers.webp",
+        "bytes": 921900
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/boulder-turns.webp",
+        "bytes": 491822
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/guardian-arm-kit.webp",
+        "bytes": 1080560
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/floating-stone.webp",
+        "bytes": 277926
+      },
+      {
+        "url": "/games/contra2026/assets/cover-zh.webp",
+        "bytes": 381164
+      }
+    ]
+  },
+  "after": {
+    "title": [
+      {
+        "url": "/games/wukong/assets/heaven-panorama.webp",
+        "bytes": 285948
+      },
+      {
+        "url": "/games/wukong/assets/actors.webp",
+        "bytes": 676330
+      }
+    ],
+    "images": [
+      {
+        "url": "/games/wukong/assets/heaven-panorama.webp",
+        "bytes": 285948
+      },
+      {
+        "url": "/games/wukong/assets/actors.webp",
+        "bytes": 676330
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/night-snow-mountains.webp",
+        "bytes": 236288
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/night-jungle-strip.webp",
+        "bytes": 268382
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/classic-facilities.webp",
+        "bytes": 112112
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/classic-turret-base.webp",
+        "bytes": 109112
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/rock-arcade.webp",
+        "bytes": 243638
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/fortress-damage.webp",
+        "bytes": 208206
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/environment.webp",
+        "bytes": 334860
+      },
+      {
+        "url": "/games/contra2026/assets/stage1/fortress-hd.webp",
+        "bytes": 251486
+      },
+      {
+        "url": "/games/wukong/assets/somersault-cloud.webp",
+        "bytes": 260120
+      },
+      {
+        "url": "/games/wukong/assets/cloud-sea.webp",
+        "bytes": 309106
+      },
+      {
+        "url": "/games/wukong/assets/heaven-props.webp",
+        "bytes": 286830
+      },
+      {
+        "url": "/games/wukong/assets/palace-foundation.webp",
+        "bytes": 395190
+      },
+      {
+        "url": "/games/wukong/assets/heaven-casket.webp",
+        "bytes": 349274
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-hd.webp",
+        "bytes": 227224
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-power.webp",
+        "bytes": 290126
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-armory.webp",
+        "bytes": 235560
+      },
+      {
+        "url": "/games/wukong/assets/wukong-death.webp",
+        "bytes": 349556
+      },
+      {
+        "url": "/games/wukong/assets/giant-rig.webp",
+        "bytes": 366396
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/corridor-command.webp",
+        "bytes": 208546
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/mechanisms-hd.webp",
+        "bytes": 346506
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-back-blue.webp",
+        "bytes": 293672
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-back-red.webp",
+        "bytes": 282860
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/control-wall-hd.webp",
+        "bytes": 354656
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/soldier-front.webp",
+        "bytes": 259524
+      },
+      {
+        "url": "/games/contra2026/assets/stage2/commando-upward-v1.webp",
+        "bytes": 162524
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-guardian.webp",
+        "bytes": 313976
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-guardian-wreck.webp",
+        "bytes": 238134
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/mossy-rock-ledge.webp",
+        "bytes": 291930
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/waterfall-layers.webp",
+        "bytes": 869336
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/boulder-turns.webp",
+        "bytes": 410216
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/guardian-arm-kit.webp",
+        "bytes": 253758
+      },
+      {
+        "url": "/games/contra2026/assets/stage3/floating-stone.webp",
+        "bytes": 209292
+      },
+      {
+        "url": "/games/contra2026/assets/cover-zh.webp",
+        "bytes": 346920
+      }
+    ]
+  },
+  "totals": {
+    "title": {
+      "beforeBytes": 4572564,
+      "afterBytes": 962278,
+      "savedPercent": 79.0
+    },
+    "images": {
+      "beforeBytes": 38602263,
+      "afterBytes": 10637594,
+      "savedPercent": 72.4
+    }
+  },
+  "verification": {
+    "allReady": true,
+    "resources": 48,
+    "httpErrors": 0,
+    "pageErrors": 0,
+    "mode": "play",
+    "titlePreview": "compressed-title.png",
+    "gameplayPreview": "compressed-gameplay.png"
+  }
+}

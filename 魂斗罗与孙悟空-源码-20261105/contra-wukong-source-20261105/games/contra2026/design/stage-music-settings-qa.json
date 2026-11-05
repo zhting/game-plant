@@ -1,0 +1,54 @@
+{
+  "url": "http://localhost:3190/games/contra2026/?art=stage-music-choices-1",
+  "saved": {
+    "1": "orchestral",
+    "2": "original",
+    "3": "original",
+    "4": "original",
+    "5": "original",
+    "6": "original",
+    "7": "original",
+    "8": "original",
+    "9": "original",
+    "10": "original",
+    "11": "original",
+    "12": "original",
+    "13": "original",
+    "14": "original",
+    "15": "original",
+    "16": "original"
+  },
+  "mobile": {
+    "panel": {
+      "x": 16,
+      "y": 64.546875,
+      "width": 358,
+      "height": 714.90625,
+      "top": 64.546875,
+      "right": 374,
+      "bottom": 779.453125,
+      "left": 16
+    },
+    "scroll": [
+      666,
+      666
+    ],
+    "allSettingsVisible": true,
+    "stageOptions": 16
+  },
+  "audio": {
+    "track": "stage1orchestral",
+    "playing": true,
+    "paused": false,
+    "loading": false,
+    "ended": false,
+    "error": null,
+    "context": "running",
+    "muted": false,
+    "music": "on",
+    "selection": "orchestral",
+    "synth": false,
+    "sfx": "on",
+    "gain": 0.550000011920929
+  }
+}

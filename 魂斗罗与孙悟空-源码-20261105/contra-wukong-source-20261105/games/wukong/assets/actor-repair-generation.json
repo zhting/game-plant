@@ -1,0 +1,47 @@
+{
+  "tool": "image_gen built-in",
+  "assets": [
+    {
+      "asset": "games/wukong/assets/wukong-death.png",
+      "source": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-cbd319f0-ec86-441a-8377-7ba581e0f26f.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent three-frame defeat/death sprite sheet for an existing side-scrolling Wukong game. REFERENCE IMAGE is an identity/style reference only: use ONLY the golden monkey king hero from its TOP ROW, with elaborate dark-and-gold armor, dark teal trousers, gold boots, red shoulder ribbons, long curling helmet plumes, brown monkey tail. Ignore all bottom-row soldiers. Generate EXACTLY THREE full-body isolated sprites in THREE equal width cells in ONE horizontal strip, no overlap, transparent background and wide padding. Left frame: same Wukong knocked backward in midair, torso leaning back, bent but substantial legs, both arms visible, readable full anatomy. Middle frame: same Wukong landing on his side in a natural collapse, one knee bent, torso and head thick and clearly visible, not squashed. Right frame: same Wukong resting defeated on his side on an implied horizontal floor, head at the left, legs extending right, one leg bent, both arms visible, red ribbons and tail draped naturally. Body volume remains normal; never flatten or compress character vertically. Consistent character scale across all cells: same head size and thick armor, so prone figures become wider and shorter NATURALLY from lying sideways. Normal anatomical proportions and readable boots, no skinny stick limbs. Painterly detailed Chinese mythological game art matching the reference. No blood or gore. No weapon, no staff, no background, no floor, no shadow cast outside figures, no text or labels. True transparent alpha, all plumes, hands, feet and tail wholly inside their respective cells.",
+      "reference": "games/wukong/assets/actors.png",
+      "scale": 0.075
+    },
+    {
+      "asset": "games/wukong/assets/giant-rig.png",
+      "source": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-d9bfa14d-68b4-44e2-a776-8005fa5195f0.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent CUTOUT ANIMATION RIG SHEET for the giant celestial general boss in a hand-painted Chinese Wukong game. Reference image is identity/style reference only: use ONLY the giant bearded silver-and-gold armored general in its BOTTOM RIGHT, white plume helmet, dark blue cape and long navy-and-gold dragon skirt armor, broad muscular proportions, gold boots. Ignore all other figures. Generate ONE wide transparent sheet with FOUR clearly separated animation parts. LEFT HALF: one large full-height BODY CORE of this giant, facing three-quarter RIGHT, both legs planted wide apart, head, helmet plume, torso, gold shoulder caps, broad hips, heavy skirt, both whole legs and boots, cape behind. NO ARMS below shoulder sockets and NO WEAPON on the body core; it is intentionally an animation puppet torso, with solid empty shoulder joints ready for separately animated arms, no injury, no exposed tissue. Keep both shoulders broad and complete. RIGHT HALF has THREE isolated vertical anatomy parts stacked with generous gaps: TOP a thick armored upper arm pointing straight down from shoulder at top to elbow at bottom, silver plate/gold rim/dark blue sleeve. MIDDLE a thick armored forearm pointing straight down from elbow at top to wrist at bottom, gold bracer silver gauntlet. BOTTOM a separate complete closed human fist in an armored gauntlet, fingers curled to grip an axe handle, side view. Right-hand parts have matching paint scale/detail and substantial thickness so they can be reused for both arms. Painterly polished detailed ancient Chinese mythological fantasy art matching reference. Every part entirely visible with generous transparent margins; do not overlap any part. No attached arms on core, no extra characters, no axe, no text, no labels, no panels or dividing lines, no background, no floor, no shadows outside the cutouts. Genuine transparent alpha background.",
+      "reference": "games/wukong/assets/actors.png",
+      "bodyBounds": [
+        25,
+        0,
+        1250,
+        887
+      ],
+      "bodyAnchor": [
+        790,
+        878
+      ],
+      "scale": 0.115,
+      "upperArm": [
+        1340,
+        45,
+        250,
+        350
+      ],
+      "forearm": [
+        1400,
+        402,
+        200,
+        265
+      ],
+      "hand": [
+        1395,
+        665,
+        205,
+        180
+      ]
+    }
+  ]
+}

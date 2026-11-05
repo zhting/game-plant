@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-19",
+  "assets": [
+    {
+      "file": "../assets/stage1/commando-run-red-hd.png",
+      "prompt": "Create a production-ready transparent RGBA sprite sheet, exactly 3 columns by 4 rows, TWELVE separate full-body side-view frames of ONE smooth running animation for the red-pants commando in the supplied reference. Use reference for character identity and painted arcade shading, NOT for leg poses. All face RIGHT, rifle held horizontally forward, same head and torso size and belt location, muscular bare arms/chest black harness red headband red detailed combat trousers and black boots. High resolution clean detailed 2D painted arcade sprite, NOT coarse pixel blocks. Each cell about 480x480, whole body about 360 pixels high, leave 30px transparent padding around each cell, never overlap. Fixed pelvis horizontal center and fixed ground line in every cell; head and hips move only subtle 10px vertical bob. Twelve CHRONOLOGICAL DISTINCT frames of a true full left-right running stride. Row1: 0 NEAR leg extends forward heel touching ground FAR leg trailing fully back; 1 near knee compresses supporting weight with heel down far foot lifts backwards; 2 near foot planted under pelvis far knee swings FORWARD toes lifted. Row2: 3 passing legs overlap under pelvis near support straight far knee driving high forward; 4 near leg extends BACK toe pushing ground far knee lifted forward lower leg folded; 5 FLIGHT both feet above ground far leg extends forward near foot tucked behind. Row3: 6 FAR leg extends forward heel touches ground NEAR leg trails fully back; 7 far knee compresses supporting weight near foot lifts backwards; 8 far foot planted under pelvis near knee swings FORWARD toes up. Row4: 9 passing legs under pelvis far support straight near knee driving high forward; 10 far leg extends BACK toe pushing ground near knee lifted forward lower leg folded; 11 FLIGHT both feet above ground near leg extends forward far foot tucked behind. Near leg brighter and far leg shaded darker to distinguish swaps. Heel rolls to toe during contact; knee bends dramatically during passing. Boots trace an oval path, never just shake at knees. EVERY frame MUST have different leg silhouette from its neighbors. The SAME head torso gun remain registered at the same pelvis x coordinate in all cells, subtle bounce only. No text, grid lines, numbers, floor, shadows, background, smoke or effects. Fully transparent background. Large portrait sprite atlas 1536x2048 or equivalent.",
+      "reference": "../assets/stage1/commando-red-hd.png"
+    },
+    {
+      "file": "../assets/stage1/commando-run-blue-hd.png",
+      "prompt": "Edit the FIRST reference sprite atlas. Preserve EXACTLY its twelve poses, limb silhouettes, gun positions, registration, spacing, scale and 3 columns x4 rows order. This is the complete 12-frame running animation, do NOT revert to idle or standing. Every entire figure must stay within its original cell. Preserve clean HD painted 2D arcade style and true RGBA transparency. No labels, floor, shadows, background or detached bits. Change only the RED headband and RED trousers to vivid cobalt BLUE, matching the second reference character. Skin, muscular bare torso, black harness, hair, gun and black boots remain identical. Use the same 12 distinct full-body run frames of the first image.",
+      "reference": [
+        "../assets/stage1/commando-run-red-hd.png",
+        "../assets/stage1/commando-blue-hd.png"
+      ]
+    },
+    {
+      "file": "../assets/stage1/commando-run-enemy-hd.png",
+      "prompt": "Edit the FIRST reference sprite atlas. Preserve EXACTLY its twelve poses, limb silhouettes, gun positions, registration, spacing, scale and 3 columns x4 rows order. This is the complete 12-frame running animation, do NOT revert to idle or standing. Every entire figure must stay within its original cell. Preserve clean HD painted 2D arcade style and true RGBA transparency. No labels, floor, shadows, background or detached bits. Convert the red commando to the OLIVE ENEMY SOLDIER in second reference: olive military helmet instead of hair and headband, remove trailing headband, olive combat vest with pouches covering torso, bare muscular tan arms, olive combat trousers and dark boots. Keep the FIRST reference's exact twelve leg poses and rifle orientation in every cell. Uniform details and shading match second reference. Running sequence must retain contact, compression, passing, knee drive and flight phases.",
+      "reference": [
+        "../assets/stage1/commando-run-red-hd.png",
+        "../assets/stage1/soldier-hd.png"
+      ]
+    },
+    {
+      "file": "../assets/stage1/fortress-hd.png",
+      "prompt": "Use the fortress at the lower-left of reference sheet as the exact design reference. Repaint ONLY that fortress as ONE standalone very high resolution detailed 2D side-scrolling arcade game boss sprite, transparent RGBA background, approximately square portrait 1440x1492. Preserve the exact silhouette, proportions and all component locations: a vertically tall blue-gray steel wall, irregular crenellated industrial towers along top, TWO small horizontal cannon assemblies projecting left at about 33% and 74% height, each black barrel with tiny orange red glowing port and square steel collar. Massive right-hand armored rectangular wall and a CENTRAL orange-white vertical oval reactor core positioned at x70% and y66% of overall sprite. Original reference boss source has bounds width328 height340: upper cannon damage zone x0..97 y94..132, lower cannon x0..97 y235..269, oval core x208..250 y192..258. Keep these relative positions EXACTLY so existing gameplay collision regions align. Leftward cannons, not front view. Thick steel plates, beveled edges, nested armor channels, rivets, vents, machined grooves, subtle scratched cool silver highlights and dark navy shadows. Dramatically increase native detail with finely painted metal edges and many small mechanical details while preserving readable original arcade design. Crisp restrained shading, rich dark contour, no blurry upscaling of old pixels. Do not turn into a robot, tank, building in perspective or photorealistic 3D. Entire structure cropped tightly to opaque bounds with minimal transparent padding, base at bottom, solid full height rear pillar at right edge, no ground or scenery. Core intact brightly lit, both cannons intact. No text, labels, characters, watermark, explosion or detached objects. Fully transparent outside silhouette.",
+      "reference": "../assets/stage1/environment.png"
+    }
+  ],
+  "integration": {
+    "actor": "Twelve full painted poses per role. Alpha components measured without resampling; vector clipping excludes neighboring sprites in overlapping rectangles. Pelvis/head anchors and per-row ground baselines align the cycle. Whole stride 42 logical units for players,36 for enemies; frame rate follows movement speed and size.",
+    "fortress": "Native opaque bounds [29,10,1201,1254], facade remains x3191,y28,w147,h148. Targets measured on new facade; original wreck parts and exit frame retained.",
+    "status": "Code-native canvas energy field, silhouette tint and animated refraction scan. No generated bitmap required for these effects."
+  }
+}

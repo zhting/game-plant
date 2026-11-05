@@ -1,0 +1,22 @@
+{
+  "source": "tools\\sources\\staff-flow-333.mp4",
+  "original": "H:\\download\\333.mp4",
+  "sha256": "0dce478b3d3d1d3b05762ca27aff3324630582a99837bf8ae9e1f78abcf53710",
+  "sourceDuration": 7.979,
+  "sampledRange": [
+    0,
+    6.6
+  ],
+  "frames": 64,
+  "gameDuration": 2.15,
+  "method": "FFmpeg video-frame extraction and white studio chroma key; no generated replacement poses",
+  "master": "hero-whole-reference3.png",
+  "runtime": "hero-whole-reference3.webp",
+  "crop": [
+    222,
+    54,
+    794,
+    540
+  ],
+  "scale": 0.21511475409836064
+}

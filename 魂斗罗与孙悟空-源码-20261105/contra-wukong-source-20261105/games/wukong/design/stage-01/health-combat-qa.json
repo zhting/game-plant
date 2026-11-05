@@ -1,0 +1,102 @@
+{
+  "errors": [],
+  "scenes": {
+    "heroHit": {
+      "hp": 88,
+      "x": 300,
+      "hurt": true,
+      "sounds": {
+        "hit": 0,
+        "hurt": 1,
+        "heal": 0
+      },
+      "fx": [
+        "martialImpact",
+        "combatNumber"
+      ],
+      "enemy": [
+        {
+          "x": 334,
+          "y": 144,
+          "hp": 8
+        }
+      ]
+    },
+    "guardHit": {
+      "hp": 74,
+      "x": 300,
+      "hurt": false,
+      "sounds": {
+        "hit": 1,
+        "hurt": 1,
+        "heal": 0
+      },
+      "fx": [
+        "impact",
+        "martialImpact",
+        "combatNumber"
+      ],
+      "enemy": [
+        {
+          "x": 335.03333333333336,
+          "y": 144,
+          "hp": 6,
+          "hurt": {
+            "t": 0.016666666666666666,
+            "duration": 0.23,
+            "heavy": false,
+            "face": 1,
+            "low": false
+          }
+        }
+      ]
+    },
+    "guardDefeat": {
+      "hp": 74,
+      "x": 300,
+      "hurt": false,
+      "sounds": {
+        "hit": 2,
+        "hurt": 1,
+        "heal": 0
+      },
+      "fx": [
+        "combatNumber",
+        "guardDefeat",
+        "landingDust"
+      ],
+      "enemy": []
+    },
+    "healing": {
+      "hp": 68,
+      "x": 300,
+      "hurt": false,
+      "sounds": {
+        "hit": 2,
+        "hurt": 1,
+        "heal": 1
+      },
+      "fx": [
+        "combatNumber",
+        "healing"
+      ],
+      "enemy": []
+    }
+  },
+  "assets": {
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 71,
+      "total": 71,
+      "failed": [],
+      "stage": 1,
+      "cached": 71
+    },
+    "audio": "running"
+  },
+  "regression": {"passed":389,"failed":0,"suites":22,"report":"../../../../.playwright-mcp/wukong-health-regression.tap"},
+  "production": {"fixture":false,"before":{"tick":151,"x":40,"hp":100},"after":{"tick":733,"x":145,"hp":100,"mode":"play"},"variants":["thrust","lowSweep","dragonCoil","carryFlower","doubleFlower","reverse","whirlwind","lotusChain","fullSwing","overhead","sweepingFinish","uppercut","skyWheel","figureEight","sideWheel"],"errors":[],"resources":{"status":"ready","ready":true,"loaded":71,"total":71,"failed":[],"stage":1,"cached":71},"debugHook":"undefined"},
+  "fixture": true,
+  "note": "Isolated browser context injected fixture positions and keyframes only; normal production damage, hit/knockback physics, pickup and audio code paths ran unchanged."
+}

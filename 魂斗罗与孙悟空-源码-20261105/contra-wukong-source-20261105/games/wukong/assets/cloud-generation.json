@@ -1,0 +1,12 @@
+{
+  "mode": "built-in image_gen",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept. Asset type: production transparent PNG game sprite, Sun Wukong's flying SOMERSAULT CLOUD (筋斗云), single isolated object for a Chinese 2D side scrolling action game. Primary request: create a beautiful new flying cloud mount that reads as Chinese mythological auspicious cloud, hand-painted with crisp ink-edged ornamental cloud curls and softly shaded volumes. Side view facing RIGHT, long horizontal silhouette, about 3:1 width to height; broad gently flattened upper riding platform on the right 65% of the cloud, generous billowing front cloud head on the RIGHT; three flowing slender tapered cloud tails streaming LEFT, one curving upward at the very tip. Connected continuous cloud mass, natural overlapping small and large rounded cloud lobes, layered flowing S-shaped contours, visible elegant ruyi spiral swirls that are integrated into the folds, soft ivory highlights, warm pale gold edging and pale cool blue-gray shadows underneath. Match a premium hand-painted Chinese Heavenly Palace arcade game with detailed gold-armored Sun Wukong: refined illustrative ink outline, convincing luminous airy vapor texture, clear readable silhouette when displayed only 44 pixels wide. Camera strictly side-on, slight top surface visible for a rider to stand on. NO rider, NO monkey, NO staff, NO palace, NO sky, NO scenery, NO text, NO UI, NO ground shadow, NO frame. Avoid generic spherical bubbles, repeated circles, balloons, caterpillar silhouettes, cream pastries, pillow or noodle shapes, flat vector art, cheap emoji. Draw only ONE complete cloud fully visible centered on a wide canvas, cloud fills about 90% of width, transparent padding around every edge. Genuine transparent alpha background, never painted checkerboard. Render at high resolution, wide landscape canvas. Output a transparent game-ready asset.",
+  "output": "somersault-cloud.png",
+  "transparent_background": true,
+  "dimensions": [
+    2172,
+    724
+  ],
+  "note": "New replacement sprite for the existing cloud mount; keeps original movement and map."
+}

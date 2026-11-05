@@ -1,0 +1,189 @@
+{
+  "generatedWith": "built-in imagegen",
+  "assets": [
+    {
+      "key": "explosionAtlas",
+      "file": "assets/shared/explosions.webp",
+      "url": "/games/contra2026/assets/shared/explosions.webp",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "bounds": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "frames": {
+        "frame0": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "frame1": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "frame2": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "frame3": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "frame4": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "frame5": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "frame6": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "frame7": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "frame8": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "frame9": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "frame10": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "frame11": [
+          768,
+          512,
+          256,
+          256
+        ]
+      },
+      "bytes": 313390,
+      "sha256": "060bd99f90858c9b67989e336fcdfc6a5156ddd8cf171a0413d554960bbbaeb4",
+      "source": "design/source-art/shared/explosions.png",
+      "prompt": "Built-in imagegen. One twelve-frame 4 by 3 transparent explosion sequence: white-hot ignition, expanding luminous orange fireball, rolling charcoal smoke and fading embers. Fixed camera, consistent center and scale, warm glow, crisp detailed HD arcade game art. No text, labels, backdrop or ground. Runtime packs the approved equal-size cells and adds a short additive light flash without changing simulation.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "equipmentTurret",
+      "file": "assets/shared/turret-kit.webp",
+      "url": "/games/contra2026/assets/shared/turret-kit.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "body": [
+          436,
+          14,
+          664,
+          680
+        ],
+        "barrel": [
+          175,
+          711,
+          1190,
+          298
+        ]
+      },
+      "bytes": 140370,
+      "sha256": "86ad78c411c35c35758e3f5d79ab80b5b9742b8c92aa41cb5c6312fcba3bfc5a",
+      "source": "design/source-art/shared/turret-kit.png",
+      "prompt": "Built-in imagegen precise-object-edit of the latest winter turret kit. Remove all snow, ice, icicles and frost while preserving heavy beveled worn ivory-grey armor, dark ribbed gunmetal, bolts, circular socket and warm amber sensor. Front-facing pedestal in upper two thirds and a separate horizontal right-facing cannon barrel in bottom third. Preserve two-component layout and transparent alpha; expose painted armor beneath snow. No text, logos or scene.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "equipmentSupply",
+      "file": "assets/shared/supply-case.webp",
+      "url": "/games/contra2026/assets/shared/supply-case.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "closed": [
+          46,
+          512,
+          689,
+          348
+        ],
+        "open": [
+          810,
+          199,
+          691,
+          661
+        ]
+      },
+      "bytes": 132370,
+      "sha256": "363300f3cd8241c4106cd3d004cadc21feba2350f39d921dd3b411197af5d607",
+      "source": "design/source-art/shared/supply-case.png",
+      "prompt": "Built-in imagegen precise-object-edit of the latest winter two-state supply case. Remove snow, frost and icicles, retaining the same ivory/slate camouflaged beveled equipment box, corner plates, rivets, handles, central latch and warm amber lamps. One closed case on left; the identical case opened on hydraulic supports on right, with visible equipment. Same body width and aligned bottom baseline. Detailed hand-painted HD arcade texture, transparent alpha, no text or scene.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "supplySaucer",
+      "file": "assets/shared/supply-saucer.webp",
+      "url": "/games/contra2026/assets/shared/supply-saucer.webp",
+      "dimensions": [
+        512,
+        144
+      ],
+      "bounds": [
+        0,
+        0,
+        512,
+        144
+      ],
+      "frames": {},
+      "bytes": 18042,
+      "sha256": "21fe904eeeca0545a4f50e5a540efe5fb6d9474d6364af7a404239a7545ea361",
+      "source": "assets/stage5/winter-supply-saucer.webp",
+      "prompt": "Built-in imagegen, transparent background, 2026-10-25.\n\nUse case: stylized-concept. Asset type: production transparent game sprite, a detailed flying supply saucer for a high-definition arcade side-scrolling action game. Primary request: redesign a small red-and-ivory pointed flying disc into a finely crafted dimensional machine. Single intact symmetrical saucer centered on a transparent canvas, wide low profile approximately 2.4:1 width to height, entire object visible with generous empty alpha padding. Almost straight-on side view, slightly elevated enough to reveal its top armor plane, compatible with a flat side-scrolling game camera. Preserve a strong diamond-like rim with sharp left and right tips, a shallow raised central red cockpit cap, ivory painted metal edging and a layered dark steel belly. Add thick beveled overlapping armor plates, red enamel with restrained worn edges, inset dark red cockpit glass, a small warm amber central optical lens, radial panel seams that follow the disc shape, small bolts, fine rim vents, ribbed lower mechanical housing, and two tiny recessed amber engine ports. Sculpt clear large readable masses first, then restrained crisp metal details; make the silhouette and red-white identity readable at a small on-screen size. Hand-painted HD arcade pixel-art style, crisp clustered texture, consistent with richly detailed snowy military tanks and cannons, cold steel reflections, warm ivory highlights, dark blue-grey recesses and understated red paint. Strong depth, precise occlusion shadows under the upper rim, controlled highlights along the top lip. No scene or ground, no snow lump, no giant halos, no exhaust trails, no cast shadow outside the body, no motion blur, no flat vector look, no plastic 3D toy look, no text, letters, labels, logos, UI or watermark. ONE saucer only, no variants or detached parts. Genuine transparent alpha background, no checkerboard printed into image.\n",
+      "alphaPreserved": true
+    }
+  ],
+  "totalBytes": 604172
+}

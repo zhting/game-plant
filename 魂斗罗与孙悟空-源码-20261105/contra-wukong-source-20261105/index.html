@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11130f">
+  <title>小游戏合集 · 随手一局</title>
+  <meta name="description" content="九款打开即玩的自研小游戏：真-果冻俄罗斯方块、果冻方块、成语守卫战、乐高战争、岁月之镜、萌兵军棋、干瞪眼、魂斗罗2026、大闹天宫。">
+  <style>
+    :root {
+      --ink: #f6f3eb;
+      --muted: rgba(246, 243, 235, .68);
+      --coal: #11130f;
+      --coal-soft: #1a1d17;
+      --paper: #f1eee6;
+      --paper-deep: #e6e2d8;
+      --paper-muted: #777970;
+      --line: rgba(246, 243, 235, .18);
+      --line-dark: rgba(17, 19, 15, .16);
+      --acid: #d9f26a;
+      --coral: #ff8063;
+      --radius: 22px;
+      --shadow: 0 28px 70px rgba(17, 19, 15, .18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--coal);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Arial", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    ::selection {
+      color: var(--coal);
+      background: var(--acid);
+    }
+
+    .site-header {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 27px clamp(20px, 5vw, 72px);
+      color: var(--ink);
+      animation: headerIn .8s .05s ease both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 0 5px rgba(217, 242, 106, .12), 0 0 22px rgba(217, 242, 106, .45);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .header-meta {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .header-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .header-link::after {
+      content: "↘";
+      display: inline-grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid rgba(246, 243, 235, .34);
+      border-radius: 50%;
+      font-size: 15px;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .header-link:hover::after,
+    .header-link:focus-visible::after {
+      color: var(--coal);
+      background: var(--acid);
+      border-color: var(--acid);
+      transform: rotate(8deg) translate(2px, 2px);
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      min-height: min(900px, 94svh);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--coal);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(10, 12, 10, .98) 0%, rgba(10, 12, 10, .92) 27%, rgba(10, 12, 10, .58) 53%, rgba(10, 12, 10, .08) 100%),
+        linear-gradient(0deg, rgba(10, 12, 10, .58) 0%, transparent 46%),
+        url("assets/covers/jelly-block.webp");
+      background-position: center, center, 62% center;
+      background-size: cover;
+      animation: heroDrift 16s ease-in-out infinite alternate;
+      transform: scale(1.03);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 78% 25%, rgba(255, 128, 99, .16), transparent 28%),
+        linear-gradient(180deg, transparent 80%, rgba(10, 12, 10, .88));
+      mix-blend-mode: screen;
+      opacity: .72;
+    }
+
+    .hero-inner {
+      position: relative;
+      display: flex;
+      flex: 0 1 auto;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: min(1200px, calc(100% - 40px));
+      min-height: inherit;
+      margin: 0 auto;
+      padding: clamp(148px, 20vh, 214px) 0 clamp(42px, 7vw, 78px);
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      animation: contentIn .9s .18s ease both;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0 0 21px;
+      color: var(--acid);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .22em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+      opacity: .85;
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      margin: 0;
+      color: var(--ink);
+      font-family: ui-serif, "Songti SC", "Noto Serif SC", serif;
+      font-size: clamp(57px, 9.7vw, 132px);
+      font-weight: 500;
+      letter-spacing: -.065em;
+      line-height: .92;
+      text-wrap: balance;
+    }
+
+    .hero h1 em {
+      color: var(--acid);
+      font-style: normal;
+    }
+
+    .hero-lede {
+      max-width: 510px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(15px, 1.55vw, 19px);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 13px;
+      margin-top: 33px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 21px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .03em;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .button-primary {
+      color: var(--coal);
+      background: var(--acid);
+      box-shadow: 0 12px 28px rgba(217, 242, 106, .18);
+    }
+
+    .button-primary::after {
+      content: "↘";
+      margin-left: 12px;
+      font-size: 16px;
+      transition: transform .2s ease;
+    }
+
+    .button-secondary {
+      color: var(--ink);
+      border-color: rgba(246, 243, 235, .28);
+      background: rgba(246, 243, 235, .07);
+      backdrop-filter: blur(12px);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-3px);
+    }
+
+    .button-primary:hover::after,
+    .button-primary:focus-visible::after {
+      transform: translate(3px, 3px);
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus-visible {
+      color: var(--coal);
+      border-color: var(--acid);
+      background: var(--acid);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: clamp(66px, 10vw, 126px);
+      animation: contentIn .9s .32s ease both;
+    }
+
+    .hero-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      max-width: 320px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .hero-fact strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .hero-fact-index {
+      flex: 0 0 auto;
+      color: var(--acid);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .hero-feature {
+      display: grid;
+      min-width: min(330px, 100%);
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      padding: 16px 0 0 20px;
+      border-top: 1px solid rgba(246, 243, 235, .28);
+    }
+
+    .hero-feature-label {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .hero-feature-title {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .hero-feature-arrow {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid rgba(246, 243, 235, .28);
+      border-radius: 50%;
+      color: var(--acid);
+      font-size: 19px;
+      transition: color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .hero-feature:hover .hero-feature-arrow,
+    .hero-feature:focus-visible .hero-feature-arrow {
+      color: var(--coal);
+      background: var(--acid);
+      transform: translate(2px, 2px);
+    }
+
+    .library {
+      color: var(--coal);
+      background:
+        radial-gradient(circle at 84% 4%, rgba(255, 128, 99, .12), transparent 22%),
+        var(--paper);
+    }
+
+    .library-shell {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(74px, 10vw, 132px) 0 clamp(84px, 10vw, 138px);
+    }
+
+    .library-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      align-items: end;
+      gap: 42px;
+    }
+
+    .eyebrow-dark {
+      color: var(--coral);
+    }
+
+    .library h2 {
+      max-width: 620px;
+      margin: 0;
+      font-family: ui-serif, "Songti SC", "Noto Serif SC", serif;
+      font-size: clamp(42px, 6.6vw, 88px);
+      font-weight: 500;
+      letter-spacing: -.065em;
+      line-height: .95;
+    }
+
+    .library-intro {
+      margin: 0 0 5px;
+      color: var(--paper-muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 46px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .filter-label {
+      margin-right: 7px;
+      color: var(--paper-muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--line-dark);
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: var(--paper-muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .filter-button:hover,
+    .filter-button:focus-visible,
+    .filter-button.is-active {
+      color: var(--paper);
+      border-color: var(--coal);
+      background: var(--coal);
+      transform: translateY(-2px);
+    }
+
+    .filter-count {
+      margin-left: auto;
+      color: var(--paper-muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(30px, 4vw, 52px) 22px;
+      margin-top: 35px;
+    }
+
+    .game-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      color: var(--coal);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .game-card.is-featured {
+      grid-column: span 2;
+    }
+
+    .game-card.is-hidden {
+      display: none;
+    }
+
+    .game-card__media {
+      position: relative;
+      aspect-ratio: 1 / 1.08;
+      overflow: hidden;
+      background: var(--paper-deep);
+      isolation: isolate;
+    }
+
+    .is-featured .game-card__media {
+      aspect-ratio: 1.72 / 1;
+    }
+
+    .game-card__media::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(17, 19, 15, .08), transparent 44%, rgba(17, 19, 15, .63));
+      pointer-events: none;
+    }
+
+    .game-card__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .65s cubic-bezier(.2, .65, .2, 1), filter .35s ease;
+    }
+
+    .game-card:hover .game-card__image,
+    .game-card:focus-within .game-card__image {
+      filter: saturate(1.1);
+      transform: scale(1.055);
+    }
+
+    .game-card__badge,
+    .game-card__number {
+      position: absolute;
+      z-index: 2;
+      top: 17px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .game-card__badge {
+      left: 17px;
+      padding: 7px 10px;
+      border: 1px solid rgba(246, 243, 235, .26);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(17, 19, 15, .34);
+      backdrop-filter: blur(10px);
+    }
+
+    .game-card__number {
+      right: 17px;
+      color: var(--ink);
+      opacity: .84;
+    }
+
+    .game-card__play {
+      position: absolute;
+      z-index: 2;
+      right: 17px;
+      bottom: 16px;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid rgba(246, 243, 235, .34);
+      border-radius: 50%;
+      color: var(--ink);
+      background: rgba(17, 19, 15, .3);
+      font-size: 18px;
+      backdrop-filter: blur(10px);
+      transition: color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .game-card:hover .game-card__play,
+    .game-card:focus-within .game-card__play {
+      color: var(--coal);
+      background: var(--acid);
+      border-color: var(--acid);
+      transform: translate(2px, 2px);
+    }
+
+    .game-card__copy {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px 20px;
+      padding-top: 17px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .game-card__title {
+      margin: 0;
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 900;
+      letter-spacing: -.045em;
+    }
+
+    .is-featured .game-card__title {
+      font-size: clamp(22px, 2.4vw, 31px);
+    }
+
+    .game-card__type {
+      align-self: center;
+      color: var(--paper-muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .game-card__desc {
+      grid-column: 1 / -1;
+      max-width: 540px;
+      margin: 0 0 17px;
+      color: var(--paper-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .final-cta {
+      color: var(--ink);
+      background: var(--coal);
+    }
+
+    .final-cta__inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 35px;
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(70px, 10vw, 120px) 0 clamp(74px, 9vw, 106px);
+    }
+
+    .final-cta h2 {
+      max-width: 660px;
+      margin: 0;
+      font-family: ui-serif, "Songti SC", "Noto Serif SC", serif;
+      font-size: clamp(40px, 6vw, 78px);
+      font-weight: 500;
+      letter-spacing: -.06em;
+      line-height: .96;
+    }
+
+    .final-cta h2 em {
+      color: var(--acid);
+      font-style: normal;
+    }
+
+    .final-cta__action {
+      flex: 0 0 auto;
+    }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 clamp(20px, 5vw, 72px) 24px;
+      color: rgba(246, 243, 235, .43);
+      background: var(--coal);
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--acid);
+      outline-offset: 5px;
+    }
+
+    @keyframes headerIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes contentIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroDrift {
+      from { transform: scale(1.03) translate3d(0, 0, 0); }
+      to { transform: scale(1.08) translate3d(-1.2%, -1%, 0); }
+    }
+
+    @media (max-width: 820px) {
+      .header-meta {
+        display: none;
+      }
+
+      .hero {
+        min-height: max(720px, 92svh);
+      }
+
+      .hero::before {
+        background-position: center, center, 68% center;
+      }
+
+      .hero-inner {
+        width: min(100% - 40px, 620px);
+      }
+
+      .hero-bottom {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 26px;
+        margin-top: 58px;
+      }
+
+      .hero-feature {
+        width: 100%;
+      }
+
+      .library-heading {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .game-card.is-featured {
+        grid-column: span 2;
+      }
+
+      .final-cta__inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .site-header {
+        padding-top: 20px;
+      }
+
+      .brand {
+        font-size: 10px;
+        letter-spacing: .12em;
+      }
+
+      .header-link {
+        font-size: 11px;
+      }
+
+      .hero h1 {
+        font-size: clamp(53px, 17vw, 82px);
+      }
+
+      .hero-lede {
+        margin-top: 22px;
+        font-size: 14px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-feature {
+        padding-left: 0;
+      }
+
+      .filter-count {
+        width: 100%;
+        margin: 5px 0 0;
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .game-card.is-featured {
+        grid-column: auto;
+      }
+
+      .game-card__media,
+      .is-featured .game-card__media {
+        aspect-ratio: 1.22 / 1;
+      }
+
+      .game-card__copy {
+        padding-top: 14px;
+      }
+
+      .site-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="返回小游戏合集首页">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>GAMES · 小游戏合集</span>
+    </a>
+    <div class="header-right">
+      <span class="header-meta">09 titles · no download</span>
+      <a class="header-link" href="#games-list">浏览游戏库</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Tang Tang / Game Collection</p>
+          <h1 id="hero-title">今晚，<em>玩点</em><br>不一样的。</h1>
+          <p class="hero-lede">九款自研小游戏，打开浏览器就能开局。想晃一晃果冻，还是冲进像素战场？把几分钟交给下一局。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#games-list">挑一款开始</a>
+            <button class="button button-secondary" id="randomGameBtn" type="button">随机开一局</button>
+          </div>
+        </div>
+
+        <div class="hero-bottom">
+          <div class="hero-fact">
+            <span class="hero-fact-index">01 / 09</span>
+            <span><strong>每一局都不太一样</strong>休闲、策略、射击、物理和生活体验，给今天的心情留个入口。</span>
+          </div>
+          <a class="hero-feature" href="/games/jelly-block/" aria-label="进入真-果冻俄罗斯方块">
+            <span>
+              <span class="hero-feature-label">Featured / 软体物理</span>
+              <span class="hero-feature-title">真·果冻俄罗斯方块</span>
+            </span>
+            <span class="hero-feature-arrow" aria-hidden="true">↘</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="library" id="games-list" aria-labelledby="library-title">
+      <div class="library-shell">
+        <div class="library-heading reveal">
+          <div>
+            <p class="eyebrow eyebrow-dark">Choose your mood / 选个心情</p>
+            <h2 id="library-title">九种快乐，<br>九种节奏。</h2>
+          </div>
+          <p class="library-intro">不做复杂的菜单，也不需要下载。每张封面下面，都是一款可以立刻开始的小游戏。</p>
+        </div>
+
+        <div class="filter-bar reveal" aria-label="游戏筛选">
+          <span class="filter-label">Filter</span>
+          <button class="filter-button is-active" type="button" data-filter="all">全部</button>
+          <button class="filter-button" type="button" data-filter="relax">放松一下</button>
+          <button class="filter-button" type="button" data-filter="think">动脑一会</button>
+          <button class="filter-button" type="button" data-filter="action">热血开打</button>
+          <button class="filter-button" type="button" data-filter="story">沉浸其中</button>
+          <span class="filter-count" id="filterCount" aria-live="polite">09 TITLES</span>
+        </div>
+
+        <div class="game-grid" id="gameGrid">
+          <a class="game-card is-featured reveal" data-type="relax" href="/games/jelly-block/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/jelly-block.webp" alt="晶莹的粉色、蓝色和黄色果冻方块在反光台面上堆叠" loading="eager" fetchpriority="high" decoding="async" width="800" height="800">
+              <span class="game-card__badge">软体物理 · 进阶</span>
+              <span class="game-card__number">01 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">真-果冻俄罗斯方块</h3>
+              <span class="game-card__type">XPBD / WEBGL2</span>
+              <p class="game-card__desc">不是网格吸附，是会受力、会融化、会继续跌落的果冻堆叠。适合想看东西软乎乎地失控一会儿的时候。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="relax" href="/games/game/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/jelly-tetris.webp" alt="霓虹方框中堆叠着彩色果冻俄罗斯方块" loading="lazy" decoding="async" width="800" height="800">
+              <span class="game-card__badge">休闲 · 经典</span>
+              <span class="game-card__number">02 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">果冻方块</h3>
+              <span class="game-card__type">2D / 3 MODES</span>
+              <p class="game-card__desc">经典、融化、流体，三种方式让熟悉的方块重新变得有点黏。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="think" href="/games/idiom/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/idiom.webp" alt="夕阳下的中国古城门与手持玉盾的守卫者" loading="lazy" decoding="async" width="800" height="800">
+              <span class="game-card__badge">策略 · 塔防</span>
+              <span class="game-card__number">03 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">成语守卫战</h3>
+              <span class="game-card__type">10 WAVES</span>
+              <p class="game-card__desc">出成语卡牌派兵防守，用反义词克制敌军，守住城池也顺便把成语记牢。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="relax" href="/games/lego/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/lego.webp" alt="阳光下由彩色积木搭成的城堡、桥梁和小士兵" loading="lazy" decoding="async" width="800" height="800">
+              <span class="game-card__badge">放置 · 建造</span>
+              <span class="game-card__number">04 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">乐高战争</h3>
+              <span class="game-card__type">IDLE / BUILD</span>
+              <p class="game-card__desc">升级建筑、囤积砖块、训练小人军团。离线以后，城堡也还在慢慢长大。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="story" href="/games/mirror/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/mirror.webp" alt="暮色房间里站在镜子前的老人，镜中映出年轻时的身影" loading="lazy" decoding="async" width="800" height="800">
+              <span class="game-card__badge">体验 · 故事</span>
+              <span class="game-card__number">05 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">岁月之镜</h3>
+              <span class="game-card__type">14 MOMENTS</span>
+              <p class="game-card__desc">你玩的不是游戏，是父母的未来，也是你自己的明天。十几分钟，走过她们普通的一天。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="think" href="/games/junqi/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/junqi.webp" alt="红蓝两方萌系军棋棋子在中式棋盘上对峙" loading="lazy" decoding="async" width="800" height="800">
+              <span class="game-card__badge">对战 · 军棋</span>
+              <span class="game-card__number">06 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">萌兵军棋</h3>
+              <span class="game-card__type">PVP / AI</span>
+              <p class="game-card__desc">国潮 Q 版两国暗棋，好友开房、人机练习与在线对战，运筹帷幄，决胜千里。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="think" href="/games/gandengyan/">
+            <div class="game-card__media">
+              <img class="game-card__image" src="assets/covers/gandengyan.webp" alt="四位机器人围坐在星际牌桌旁，前景展开一手扑克牌" loading="lazy" decoding="async" width="1254" height="1254">
+              <span class="game-card__badge">对战 · 扑克</span>
+              <span class="game-card__number">07 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">干瞪眼 · 星际版</h3>
+              <span class="game-card__type">5 PLAYERS / AI</span>
+              <p class="game-card__desc">五人星际牌桌，单张、对子、炸弹轮番交锋。先在人机练习场热身，再和朋友在线过招。</p>
+            </div>
+          </a>
+
+          <a class="game-card reveal" data-type="action" href="/games/contra2026/">
+            <div class="game-card__media" style="background: #05060f">
+              <img class="game-card__image" src="assets/covers/contra2026-zh-512.webp" srcset="assets/covers/contra2026-zh-512.webp 512w, assets/covers/contra2026-zh.webp 800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 820px) calc((100vw - 62px) / 2), (max-width: 1240px) calc((100vw - 84px) / 3), 386px" alt="魂斗罗2026中文封面，红蓝双人站在丛林岩台上，远处是河流和机械要塞" loading="lazy" decoding="async" width="512" height="512">
+              <span class="game-card__badge">前五关开放 · 联网同屏</span>
+              <span class="game-card__number">08 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">魂斗罗2026</h3>
+              <span class="game-card__type">单人闯关 / 双人联网</span>
+              <p class="game-card__desc">当前开放雨林要塞、地下指挥所、峡谷瀑布、地下基地与极地冰原。和朋友红蓝双人联网闯关，使用多种武器、手雷和载具；后续关卡制作中。</p>
+            </div>
+          </a>
+          <a class="game-card reveal" data-type="action" href="/games/wukong/">
+            <div class="game-card__media" style="background:#173e48">
+              <img class="game-card__image" src="assets/covers/wukong-512.webp" srcset="assets/covers/wukong-512.webp 512w, assets/covers/wukong.webp 800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 820px) calc((100vw - 62px) / 2), (max-width: 1240px) calc((100vw - 84px) / 3), 386px" style="object-position:68% center" alt="金甲红披风的齐天大圣手持金箍棒，身后是云海与南天门" loading="lazy" decoding="async" width="512" height="341">
+              <span class="game-card__badge">西游动作 · 首章开放</span>
+              <span class="game-card__number">09 / 09</span>
+              <span class="game-card__play" aria-hidden="true">↘</span>
+            </div>
+            <div class="game-card__copy">
+              <h3 class="game-card__title">大闹天宫</h3>
+              <span class="game-card__type">金箍连环棍 / 七十二变</span>
+              <p class="game-card__desc">挥舞金箍棒，腾云闯天宫。身外身、七十二变与怒气大招齐出，迎战三阶段巨灵神；支持单人闯关与双人协力。</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-title">
+      <div class="final-cta__inner reveal">
+        <div>
+          <p class="eyebrow">One more round / 再来一局</p>
+          <h2 id="cta-title">没有最优解，<br>只有<em>下一局。</em></h2>
+        </div>
+        <button class="button button-primary final-cta__action" id="randomGameBtnBottom" type="button">交给骰子</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>GAMES · TANGTANG.TOP</span>
+    <span>自研小游戏合集 · 2026</span>
+  </footer>
+
+  <script>
+    const games = [
+      '/games/wukong/',
+      '/games/contra2026/',
+      '/games/jelly-block/',
+      '/games/game/',
+      '/games/idiom/',
+      '/games/lego/',
+      '/games/mirror/',
+      '/games/junqi/',
+      '/games/gandengyan/'
+    ];
+
+    const randomGame = () => {
+      const pick = games[Math.floor(Math.random() * games.length)];
+      window.location.href = pick;
+    };
+
+    document.getElementById('randomGameBtn')?.addEventListener('click', randomGame);
+    document.getElementById('randomGameBtnBottom')?.addEventListener('click', randomGame);
+
+    const filterButtons = [...document.querySelectorAll('[data-filter]')];
+    const gameCards = [...document.querySelectorAll('.game-card')];
+    const filterCount = document.getElementById('filterCount');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+
+        let visible = 0;
+        gameCards.forEach((card) => {
+          const show = filter === 'all' || card.dataset.type === filter;
+          card.classList.toggle('is-hidden', !show);
+          if (show) visible += 1;
+        });
+
+        filterCount.textContent = `${String(visible).padStart(2, '0')} TITLES`;
+      });
+    });
+
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          currentObserver.unobserve(entry.target);
+        });
+      }, { threshold: .12, rootMargin: '0px 0px -30px' });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+  </script>
+</body>
+</html>

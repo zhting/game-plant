@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "prompt": "Create a production-ready transparent sprite atlas for a Chinese mythological 2D side-scrolling game set in the Heavenly Palace, richly painted fantasy illustration with fine natural material detail, softly sunlit, matches an elegant ivory-gold and jade-blue palace above clouds. Canvas landscape 1536x1024 or similar 3:2, arranged as a clean 2 by 2 grid of FOUR equally sized animation frames. Each quadrant contains the SAME single adult Chinese celestial maiden (xian nu / Dunhuang flying apsara) in a gently gliding flight pose facing RIGHT in three-quarter side view. She wears a modest full-length flowing ivory and pale peach silk hanfu with jade details and a thin gold sash, black hair in a refined high bun with a small golden floral crown, long flowing pale peach silk ribbons drifting behind her toward the LEFT. Calm graceful expression, arms softly extended, both hands present and natural. Feet and hem float together, slightly tilted forward flight, elegant full body visible. Across the four frames keep the head, torso, body size, costume and position consistent, only vary sleeve lift and the wave shape of the long silk ribbons to make a smooth gentle flight animation. Every figure centered within its own quadrant with generous transparent padding; no figure, ribbon or cloth may overlap a quadrant boundary. No dividing lines, no labels, no text, no scenery, no clouds or ground, no border, no UI, no shadows outside the figure, no wings, no modern or revealing clothes, no pixel art, no cartoon chibi. Background genuinely transparent alpha, preserve fine silk edges. Figures need clear readable silhouettes when reduced to small distant background characters.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-8d6a667b-23f2-4684-be09-8002b078f959.png",
+  "asset": "celestial-fairy.webp",
+  "transparent_background": true,
+  "atlas": {
+    "columns": 2,
+    "rows": 2,
+    "size": [
+      1536,
+      1024
+    ]
+  },
+  "purpose": "远景偶尔飞过的天宫仙女"
+}

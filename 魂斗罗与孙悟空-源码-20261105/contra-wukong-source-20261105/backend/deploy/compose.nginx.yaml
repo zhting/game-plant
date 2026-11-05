@@ -1,0 +1,5 @@
+# 服务器已有 Nginx 时，只启动 backend，复用现有 HTTPS 服务。
+services:
+  backend:
+    ports:
+      - "127.0.0.1:${GAMES_BACKEND_PORT:-3030}:3000"

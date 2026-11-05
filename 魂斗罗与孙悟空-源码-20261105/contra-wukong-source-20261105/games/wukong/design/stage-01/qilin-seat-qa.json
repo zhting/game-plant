@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-24",
+  "change": "Proper side-view straddle posture using complete rider-and-Qilin animation frames",
+  "url": "http://127.0.0.1:4173/games/wukong/",
+  "assets": {
+    "mode": "built-in image_gen",
+    "record": "assets/hero-qilin-riding-generation.json",
+    "master": "assets/hero-whole-qilin.png",
+    "runtime": "assets/hero-whole-qilin.webp",
+    "frames": 12,
+    "layout": [
+      2,
+      6
+    ],
+    "masterBytes": 2996433,
+    "runtimeBytes": 604542
+  },
+  "visualChecks": [
+    "Pelvis seated inside saddle",
+    "Near knee below hip and shin hanging beside flank",
+    "Far leg occluded naturally by animal",
+    "Complete pair remains connected in idle, run, leap, overhead and forward sweep",
+    "Rider and mount share attack facing instead of being mirrored independently",
+    "Only one mounted pair is rendered; separate Qilin is used only before the pair atlas is ready"
+  ],
+  "registration": "Combined sprite is registered at the original ground root. The temporary mounted render actor carries mountGroundY, so body canvas and staff geometry use the same world origin without applying the old rider offset twice.",
+  "regression": {
+    "passed": 354,
+    "failed": 0,
+    "tap": "../../../../.playwright-mcp/wukong-qilin-seat-regression.tap",
+    "newCoverage": [
+      "Whole mounted pair selection and shared world grip",
+      "Single pair draw with no second animal",
+      "Do not read atlas before asynchronous image decoding completes"
+    ]
+  },
+  "productionStartup": {
+    "codeInjection": false,
+    "mode": "play",
+    "tick": 145,
+    "resourcesLoaded": 70,
+    "resourcesTotal": 70,
+    "failed": [],
+    "heroAtlases": 11,
+    "errors": []
+  },
+  "mountedBrowser": {
+    "fixture": "One peach of kind m staged through normal pickup collision in an isolated QA context; real L, D, K, J and A input. No production HTML instrumentation saved.",
+    "states": [
+      {
+        "kind": "idle",
+        "frame": "qilin:0",
+        "x": 40,
+        "y": 112
+      },
+      {
+        "kind": "run",
+        "frame": "qilin:2",
+        "x": 122.16666666666659,
+        "y": 112,
+        "vx": 170
+      },
+      {
+        "kind": "leap",
+        "frame": "qilin:3",
+        "x": 122.16666666666659,
+        "y": 57.694444444444414,
+        "onGround": false
+      },
+      {
+        "kind": "attack",
+        "frame": "qilin:6",
+        "variant": "fullSwing",
+        "includesMount": true
+      },
+      {
+        "kind": "leftAttack",
+        "frame": "qilin:6",
+        "face": -1,
+        "includesMount": true
+      }
+    ],
+    "resourcesLoaded": 70,
+    "resourcesTotal": 70,
+    "errors": []
+  },
+  "startupFix": "naturalWidth can be exposed before asynchronous decode completes. Atlas extraction now waits for the decoded-image loader signal and rendering uses only prepared matching atlas data.",
+  "preserved": [
+    "Original map and platforms",
+    "Original 15 second mount duration, speed, double jump and damage rules",
+    "One-hit staff contact and power effects",
+    "Original Contra and later stages",
+    "Existing recordings retained"
+  ],
+  "preview": "qilin-seat-preview.html",
+  "screenshots": [
+    "qilin-seat-preview.png",
+    "qilin-seat-mounted-gameplay.png",
+    "qilin-seat-running-gameplay.png",
+    "qilin-seat-jump-gameplay.png",
+    "qilin-seat-swing-gameplay.png",
+    "qilin-seat-left-gameplay.png"
+  ]
+}

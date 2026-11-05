@@ -1,0 +1,38 @@
+{
+  "taskSpaceId": 158,
+  "captures": [
+    {
+      "name": "standing",
+      "path": "H:/project/games/games/contra2026/design/riot-shield-standing-4k.png",
+      "riot": 3,
+      "prone": false,
+      "mode": "pause",
+      "canvas": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "prone",
+      "path": "H:/project/games/games/contra2026/design/riot-shield-prone-4k.png",
+      "riot": 3,
+      "prone": true,
+      "mode": "pause",
+      "canvas": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "coop",
+      "path": "H:/project/games/games/contra2026/design/riot-shield-coop-4k.png",
+      "riot": 1,
+      "prone": false,
+      "mode": "pause",
+      "canvas": [
+        3840,
+        2160
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "source": "用户提供的西游记片头.mp3",
+  "providedPath": "G:\\我的云端硬盘\\西游记片头.mp3",
+  "master": "assets/journey-to-west-source.mp3",
+  "masterBytes": 6369844,
+  "masterSha256": "545D9BD269E0FCDED0F35078190F405CB83A30CFBE898EEB78B69D8927000405",
+  "sourceContainerDurationSeconds": 159.216327,
+  "decodedSourceDurationSeconds": 159.17278911564628,
+  "definition": "完整音乐从0秒起连续贯穿出世、故事、第一关介绍和游戏。曲终从8.000秒处（第9秒）循环；重开从8秒开始。",
+  "codec": "Vorbis quality 4, stereo, 44100 Hz; source level preserved; no extra fades",
+  "runtimeClip": {
+    "path": "assets/journey-to-west-theme.ogg",
+    "sourceStartSeconds": 0,
+    "durationSeconds": 159.17278911564628,
+    "bytes": 1832092,
+    "loop": true,
+    "firstPassStartSeconds": 0,
+    "loopStartSeconds": 8,
+    "directStageRestartSeconds": 8,
+    "sha256": "2DAA07738D99ADC9A2883A97543646CDF598145D8996C70160FC92D98EBF1163",
+    "command": "ffmpeg -hide_banner -loglevel error -y -i games/wukong/assets/journey-to-west-source.mp3 -vn -map_metadata -1 -c:a libvorbis -q:a 4 games/wukong/assets/journey-to-west-theme.ogg"
+  },
+  "legacyClips": [
+    {
+      "path": "assets/journey-to-west-opening.ogg",
+      "sourceStartSeconds": 0,
+      "sourceEndSeconds": 8,
+      "durationSeconds": 8,
+      "bytes": 84513,
+      "loop": false,
+      "sha256": "AE733544002BF30C05B7437267ADFD9A3D8411B5FF4C78B3E72132F5ADDD524C",
+      "command": "ffmpeg -hide_banner -loglevel error -y -i games/wukong/assets/journey-to-west-source.mp3 -vn -t 8 -map_metadata -1 -c:a libvorbis -q:a 4 games/wukong/assets/journey-to-west-opening.ogg"
+    },
+    {
+      "path": "assets/journey-to-west-stage1.ogg",
+      "sourceStartSeconds": 8,
+      "sourceEnd": "decoded source end",
+      "durationSeconds": 151.17278911564628,
+      "bytes": 1752383,
+      "loop": true,
+      "sha256": "67CF84AE20E32C4AD575849047EABE5C516B770D2CFF074E734012F12E039444",
+      "command": "ffmpeg -hide_banner -loglevel error -y -i games/wukong/assets/journey-to-west-source.mp3 -vn -ss 8 -map_metadata -1 -c:a libvorbis -q:a 4 games/wukong/assets/journey-to-west-stage1.ogg"
+    }
+  ],
+  "webBytes": 1832092,
+  "reductionPercent": 71.2380397384928,
+  "legacySplitPcmCorrelation": {
+    "headCorrelation": 0.9727698733743267,
+    "tailAt8SecondsCorrelation": 0.9862392399057102
+  },
+  "legacySplitPcmCheck": "ffmpeg decoded mono float32 at 8000 Hz; compare source 2–4 s to opening 2–4 s and source 8–10 s to tail 0–2 s. Normalized correlation, not a listening-quality score.",
+  "runtime": "Only journey-to-west-theme.ogg is referenced by the current player. The MP3 and earlier split files are retained as source and history."
+}

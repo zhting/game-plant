@@ -1,0 +1,203 @@
+{
+  "note": "QA timer and visibility suppression avoid background tab auto-pause. Guest real Up input initiates transition; host fixture advances 85 real simulation ticks to avoid browser throttling.",
+  "transition": 1.1000000000000008,
+  "host": {
+    "mode": "pause",
+    "stage": 2,
+    "role": "host",
+    "room": "2YN42V",
+    "connected": true,
+    "playing": true,
+    "tick": 269,
+    "snapshotBytes": 7840,
+    "art": {
+      "ready": true,
+      "loaded": [
+        "environment",
+        "kit",
+        "corridor",
+        "rearBlue",
+        "rearRed",
+        "frontEnemy",
+        "bossWall"
+      ],
+      "failed": [],
+      "frameCount": 16,
+      "resolution": [
+        1536,
+        864
+      ]
+    },
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": null,
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": null,
+    "base": {
+      "room": 2,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "core",
+          "hp": 12,
+          "max": 12
+        }
+      ]
+    },
+    "players": [
+      {
+        "id": 1,
+        "x": 190.6769333274075,
+        "y": 204,
+        "weapon": "rifle",
+        "dead": false,
+        "invincible": 997.1666666666683
+      },
+      {
+        "id": 2,
+        "x": 193.61708148872412,
+        "y": 204,
+        "weapon": "laser",
+        "dead": false,
+        "invincible": 997.1666666666683
+      }
+    ],
+    "shots": [],
+    "score": 4000
+  },
+  "guest": {
+    "mode": "pause",
+    "stage": 2,
+    "role": "guest",
+    "room": "2YN42V",
+    "connected": true,
+    "playing": true,
+    "tick": 265,
+    "snapshotBytes": 7832,
+    "art": {
+      "ready": true,
+      "loaded": [
+        "environment",
+        "corridor",
+        "kit",
+        "rearBlue",
+        "rearRed",
+        "bossWall",
+        "frontEnemy"
+      ],
+      "failed": [],
+      "frameCount": 14,
+      "resolution": [
+        1536,
+        864
+      ]
+    },
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": null,
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": null,
+    "base": {
+      "room": 2,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "core",
+          "hp": 12,
+          "max": 12
+        }
+      ]
+    },
+    "players": [
+      {
+        "id": 1,
+        "x": 190.6769333274075,
+        "y": 204,
+        "weapon": "rifle",
+        "dead": false,
+        "invincible": 997.1666666666683
+      },
+      {
+        "id": 2,
+        "x": 193.61708148872412,
+        "y": 204,
+        "weapon": "laser",
+        "dead": false,
+        "invincible": 997.1666666666683
+      }
+    ],
+    "shots": [],
+    "score": 4000
+  },
+  "errors": []
+}

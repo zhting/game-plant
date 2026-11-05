@@ -1,0 +1,482 @@
+{
+  "date": "2026-10-24",
+  "purpose": "将第一关大招冷却替换为受击积攒怒气并随机施放四种大招",
+  "tests": {
+    "files": 7,
+    "total": 347,
+    "passed": 347,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-rage-focused.tap"
+  },
+  "fixture": {
+    "fixture": true,
+    "errors": [],
+    "empty": {
+      "hp": 100,
+      "rage": 0,
+      "ready": false,
+      "staff": null,
+      "enemies": [],
+      "waves": 0,
+      "button": "怒气 0%",
+      "buttonReady": false
+    },
+    "casts": [
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "qi",
+            "time": 0.35,
+            "name": "万道棍气"
+          },
+          "bag": [
+            "sweep",
+            "pillar",
+            "storm"
+          ],
+          "last": "qi",
+          "enemies": [
+            {
+              "x": 356.1813205130941,
+              "hp": 188
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 2,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "sweep",
+            "pillar",
+            "storm"
+          ],
+          "last": "qi",
+          "enemies": [
+            {
+              "x": 392.00442792931926,
+              "hp": 172
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 551.5968210378362,
+              "hp": 188
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "pillar",
+            "time": 0.35,
+            "name": "定海神针"
+          },
+          "bag": [
+            "sweep",
+            "storm"
+          ],
+          "last": "pillar",
+          "enemies": [
+            {
+              "x": 351.8666666666667,
+              "hp": 193
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "sweep",
+            "storm"
+          ],
+          "last": "pillar",
+          "enemies": [
+            {
+              "x": 377.8115157985348,
+              "hp": 186
+            },
+            {
+              "x": 250,
+              "hp": 200
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "touch",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "sweep",
+            "time": 0.35,
+            "name": "横扫天宫"
+          },
+          "bag": [
+            "storm"
+          ],
+          "last": "sweep",
+          "enemies": [
+            {
+              "x": 361.5042664125481,
+              "hp": 196
+            },
+            {
+              "x": 261.5042664125481,
+              "hp": 196
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [
+            "storm"
+          ],
+          "last": "sweep",
+          "enemies": [
+            {
+              "x": 389.110722438318,
+              "hp": 188
+            },
+            {
+              "x": 289.110722438318,
+              "hp": 188
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      },
+      {
+        "input": "keyboard",
+        "hitSteps": [
+          {
+            "hp": 88,
+            "rage": 25
+          },
+          {
+            "hp": 76,
+            "rage": 50
+          },
+          {
+            "hp": 64,
+            "rage": 75
+          },
+          {
+            "hp": 52,
+            "rage": 100
+          }
+        ],
+        "shown": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": {
+            "kind": "ultimate",
+            "ultimate": "storm",
+            "time": 0.35,
+            "name": "金箍风暴"
+          },
+          "bag": [],
+          "last": "storm",
+          "enemies": [
+            {
+              "x": 361.0122184213987,
+              "hp": 196
+            },
+            {
+              "x": 261.0122184213987,
+              "hp": 196
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        },
+        "after": {
+          "hp": 52,
+          "rage": 0,
+          "ready": false,
+          "staff": null,
+          "bag": [],
+          "last": "storm",
+          "enemies": [
+            {
+              "x": 408.23092977489694,
+              "hp": 190
+            },
+            {
+              "x": 318.73002317335084,
+              "hp": 188
+            },
+            {
+              "x": 510,
+              "hp": 200
+            }
+          ],
+          "waves": 0,
+          "button": "怒气 0%",
+          "buttonReady": false
+        }
+      }
+    ],
+    "quarter": {
+      "hp": 88,
+      "rage": 25,
+      "ready": false,
+      "staff": null,
+      "enemies": [],
+      "waves": 0,
+      "button": "怒气 25%",
+      "buttonReady": false
+    },
+    "ready": {
+      "hp": 52,
+      "rage": 100,
+      "ready": true,
+      "staff": null,
+      "enemies": [
+        {
+          "x": 350,
+          "hp": 200
+        },
+        {
+          "x": 250,
+          "hp": 200
+        },
+        {
+          "x": 510,
+          "hp": 200
+        }
+      ],
+      "waves": 0,
+      "button": "大招",
+      "buttonReady": true
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "audio": "running"
+  },
+  "production": {
+    "errors": [],
+    "iterations": 46,
+    "history": [
+      {
+        "rage": 0,
+        "hp": 100
+      },
+      {
+        "rage": 25,
+        "hp": 88
+      },
+      {
+        "rage": 50,
+        "hp": 76
+      },
+      {
+        "rage": 75,
+        "hp": 64
+      },
+      {
+        "rage": 100,
+        "hp": 52
+      }
+    ],
+    "initial": {
+      "rage": 0,
+      "hp": 100
+    },
+    "full": {
+      "rage": 100,
+      "hp": 52,
+      "ready": true,
+      "x": 390.0664755006812
+    },
+    "cast": {
+      "id": 1,
+      "x": 390.0664755006812,
+      "y": 144,
+      "weapon": "rifle",
+      "dead": false,
+      "invincible": 1.043333333333334,
+      "hp": 52,
+      "maxHp": 100,
+      "rage": 0,
+      "maxRage": 100,
+      "rageReady": false,
+      "hurt": null,
+      "ride": null,
+      "rideTime": 0,
+      "rapid": false,
+      "charge": null,
+      "staffWaves": [],
+      "staffThrows": [],
+      "staff": {
+        "kind": "ultimate",
+        "variant": "overhead",
+        "combo": 3,
+        "time": 0.11666666666666665,
+        "duration": 1.08,
+        "ultimate": "pillar",
+        "name": "定海神针"
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "debug": []
+  },
+  "artifacts": [
+    "rage-quarter.png",
+    "rage-ready.png",
+    "rage-ultimate-sweep.png",
+    "rage-ultimate-pillar.png",
+    "rage-ultimate-storm.png",
+    "rage-ultimate-qi.png",
+    "rage-production.png"
+  ],
+  "notes": [
+    "正式页面仅通过真实方向键接近敌人受击，以真实 I 键施放大招，未改写游戏响应或暴露测试接口。",
+    "隔离页面通过响应中临时注入测试夹具，调用实际 killPlayer/receiveHeroHit 造成四次伤害；实际键盘和触屏大招键触发施招。",
+    "四种随机大招在一轮中全部出现；每招检查实际敌人HP变化，演出之后怒气仍为0。",
+    "完整人物动作和特效复用现有图集与原生Canvas，没有新增美术下载。"
+  ]
+}

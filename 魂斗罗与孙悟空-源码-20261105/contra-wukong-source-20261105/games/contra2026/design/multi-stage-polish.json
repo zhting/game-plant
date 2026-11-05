@@ -1,0 +1,159 @@
+{
+  "generatedWith": "built-in imagegen",
+  "prompts": "multi-stage-polish-prompts.json",
+  "assets": [
+    {
+      "url": "/games/contra2026/assets/stage3/waterfall-guardian-v3.webp",
+      "file": "assets/stage3/waterfall-guardian-v3.webp",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "frames": {
+        "closed": [
+          0,
+          0,
+          1254,
+          638
+        ],
+        "open": [
+          0,
+          638,
+          1254,
+          616
+        ]
+      },
+      "bytes": 666466,
+      "sha256": "fc0585d3768cf995d14c17034cd9e2e9e07acf26f29c7df7f280a6aad9523807",
+      "alphaPreserved": true,
+      "source": "design/source-art/stage3/waterfall-guardian-v3.png"
+    },
+    {
+      "url": "/games/contra2026/assets/stage3/waterfall-guardian-v3-wreck.webp",
+      "file": "assets/stage3/waterfall-guardian-v3-wreck.webp",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "frames": {
+        "closed": [
+          0,
+          0,
+          1254,
+          638
+        ],
+        "open": [
+          0,
+          638,
+          1254,
+          616
+        ]
+      },
+      "bytes": 408884,
+      "sha256": "fef30e15584ab708ba6753fc37626043ea9a5f1af418b7dddc4e80359e1128cf",
+      "alphaPreserved": true,
+      "source": "design/source-art/stage3/waterfall-guardian-v3-wreck.png"
+    },
+    {
+      "url": "/games/contra2026/assets/stage3/flame-jets-v2.webp",
+      "file": "assets/stage3/flame-jets-v2.webp",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "frames": {
+        "0": [
+          0,
+          0,
+          256,
+          512
+        ],
+        "1": [
+          256,
+          0,
+          256,
+          512
+        ],
+        "2": [
+          512,
+          0,
+          256,
+          512
+        ],
+        "3": [
+          768,
+          0,
+          256,
+          512
+        ],
+        "4": [
+          0,
+          512,
+          256,
+          512
+        ],
+        "5": [
+          256,
+          512,
+          256,
+          512
+        ],
+        "6": [
+          512,
+          512,
+          256,
+          512
+        ],
+        "7": [
+          768,
+          512,
+          256,
+          512
+        ]
+      },
+      "bytes": 642744,
+      "sha256": "1610c08bd6fdffd941df58a06141f4decb7989bddb45b0e70b1211c892c4d9ab",
+      "alphaPreserved": true,
+      "source": "design/source-art/stage3/flame-jets-v2.png"
+    },
+    {
+      "url": "/games/contra2026/assets/stage2/control-wall-v2.webp",
+      "file": "assets/stage2/control-wall-v2.webp",
+      "dimensions": [
+        1902,
+        827
+      ],
+      "frames": null,
+      "bytes": 440532,
+      "sha256": "128baa4aeb8391d442dd7a1c429c9ba58238a0f8746b979b5b09cce06f9fc654",
+      "alphaPreserved": true,
+      "source": "design/source-art/stage2/control-wall-v2.png"
+    },
+    {
+      "url": "/games/contra2026/assets/stage2/defense-devices-v2.webp",
+      "file": "assets/stage2/defense-devices-v2.webp",
+      "dimensions": [
+        1024,
+        320
+      ],
+      "frames": {
+        "intact": [
+          0,
+          0,
+          512,
+          320
+        ],
+        "broken": [
+          512,
+          0,
+          512,
+          320
+        ]
+      },
+      "bytes": 127858,
+      "sha256": "89054fb126a41a821da71c0c2bbb8b7780f5aba6edbb3d07d3bc303a2b3b30b0",
+      "alphaPreserved": true,
+      "source": "design/source-art/stage2/defense-devices-v2.png"
+    }
+  ]
+}

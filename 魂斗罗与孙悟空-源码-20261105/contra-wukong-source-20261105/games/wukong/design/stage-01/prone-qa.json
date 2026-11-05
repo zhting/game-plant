@@ -1,0 +1,49 @@
+{
+  "description": "实际键盘验证趴下、左右朝向、伏地攻击、松键起身和跳跃；图像使用独立等比素材",
+  "prone": {
+    "active": true,
+    "x": 150,
+    "y": 112,
+    "frame": {
+      "width": 61.95,
+      "height": 32.760000000000005
+    },
+    "renderPreservesWorld": true
+  },
+  "attack": {
+    "prone": true,
+    "staff": true
+  },
+  "left": {
+    "prone": true,
+    "face": -1
+  },
+  "stood": true,
+  "jumped": {
+    "groundY": 112,
+    "jumpY": 81.66666666666667,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 50,
+      "total": 50,
+      "failed": []
+    },
+    "errors": [],
+    "method": "未注入测试代码的真实入口，释放趴下后按住跳跃120ms"
+  },
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 50,
+    "total": 50,
+    "failed": []
+  },
+  "errors": [],
+  "bad": [],
+  "previews": [
+    "prone-right.png",
+    "prone-left.png",
+    "prone-attack.png"
+  ]
+}

@@ -1,0 +1,25 @@
+// Only the Wukong entry loads these game-specific systems.
+export { WUKONG_STAGES, WUKONG_RELEASE_MESSAGE, isWukongStageOpen } from './release-stages.mjs';
+export { WukongSkin } from './wukong-game.mjs?v=dialogue-4';
+export * as WukongSiege from './wukong-stage-two.mjs';
+export { WukongSiegeArt } from './wukong-stage-two-art.mjs';
+export { wukongMountText } from './wukong-mount.mjs';
+export { advanceStaff, resolveStaff, staffGeometry, startUltimate, ULTIMATE, STAFF_PICKUPS } from './wukong-combat.mjs';
+export { advanceGuard, guardHitsPlayer, GUARD_MELEE } from './wukong-guards.mjs';
+export { navigateGuard } from './wukong-navigation.mjs';
+export { HEAVEN_HP, flyingGuard, advanceFlyingGuard } from './wukong-enemies.mjs';
+export { GIANT_HOME, giantBody, advanceGiant, giantHitsPlayer } from './wukong-boss.mjs?v=giant-phases-1';
+export { giantEncounter, enterColossus, advanceColossus, enterGiantFinale, advanceGiantFinale, colossusDamage } from './wukong-giant-phases.mjs?v=impact-3';
+export { scheduleSupplyFairy, advanceSupplyFairy, releaseFairyPeach } from './wukong-supplies.mjs';
+export { WUKONG_MAGIC, WUKONG_MAGIC_NAMES, WUKONG_MAGIC_SHORT, WUKONG_MAGIC_STAGE, WUKONG_MAGIC_DROPS, activateWukongMagic, advanceWukongMagic, resolveWukongMagic, clearWukongMagic } from './wukong-magic.mjs';
+export { advanceHalberd, halberdHitsPlayer } from './wukong-props.mjs';
+export { TRANSFORM_FORMS, transformation, advanceTransformation, transformationSpeed, cycleTransformation } from './wukong-transform.mjs';
+export { WUKONG_HEALTH, HEALING_ITEMS, HEALING_DROPS, newVitality, receiveHeroHit, advanceVitality, healHero, receiveGuardHit, advanceGuardRecoil, guardDefeat, advanceGuardDefeat, healingEnemyDrop, advanceImpactPause } from './wukong-vitality.mjs';
+export { cancelStaffCharge } from './wukong-special-staff.mjs';
+export { WUKONG_RAGE, rageReady, ultimateSpec } from './wukong-rage.mjs';
+export { WukongBattleAudio, queueEnemyCry } from './wukong-battle-audio.mjs';
+export { WukongHeroAudio, queueHeroSounds } from './wukong-hero-audio.mjs?v=impact-5';
+export { queueHeroImpact } from './wukong-impact-audio.mjs';
+export { addMartialHit } from './wukong-impact.mjs';
+export { WUKONG_OPENING_DURATION, WUKONG_OPENING_PAGES } from './wukong-opening.mjs';
+export { WUKONG_MUSIC_TRACKS, WUKONG_STARTUP_MUSIC, WUKONG_MUSIC_OPTIONS, WUKONG_MUSIC_RECORD, WUKONG_SIEGE_MUSIC_OPTIONS, WUKONG_SIEGE_MUSIC_RECORD, normalizeWukongMusic, wukongMusicTrack } from './wukong-music.mjs';

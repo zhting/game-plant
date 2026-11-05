@@ -1,0 +1,640 @@
+{
+  "date": "2026-10-24",
+  "purpose": "第一关棍击命中特效与敌人阵亡惨叫",
+  "tests": {
+    "files": 24,
+    "total": 430,
+    "passed": 430,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-hit-death-regression.tap"
+  },
+  "production": {
+    "url": "http://127.0.0.1:4173/games/wukong/?hit-death-qa=1",
+    "errors": [],
+    "inspect": {
+      "resources": {
+        "status": "ready",
+        "ready": true,
+        "loaded": 72,
+        "total": 72,
+        "failed": [],
+        "stage": 1,
+        "cached": 72
+      },
+      "musicDownloads": {
+        "status": "ready",
+        "ready": true,
+        "loaded": 7,
+        "total": 7,
+        "failed": []
+      },
+      "gamepad": {
+        "status": "waiting",
+        "count": 0,
+        "active": null
+      },
+      "lives": {
+        "remaining": 3,
+        "infinite": true,
+        "thirty": false,
+        "armed": false
+      },
+      "mode": "play",
+      "stage": 1,
+      "role": "",
+      "room": "",
+      "connected": false,
+      "theme": "wukong-skin",
+      "combat": "staff",
+      "boss": {
+        "kind": "巨灵神",
+        "active": false,
+        "dead": false,
+        "hp": 60,
+        "max": 60,
+        "attack": null
+      },
+      "playing": false,
+      "tick": 145,
+      "snapshotBytes": 0,
+      "art": {
+        "ready": true,
+        "loaded": [
+          "skinActors",
+          "heaven",
+          "heroWholeMovement",
+          "ruyiStaff",
+          "lowJungle",
+          "snow",
+          "facilities",
+          "turretBase",
+          "rock",
+          "damage",
+          "environment",
+          "fortress",
+          "birthMountain",
+          "birthActors",
+          "somersaultCloud",
+          "celestialQilin",
+          "palaceFoundation",
+          "cloudSea",
+          "heavenProps",
+          "heavenCasket",
+          "skinDeath",
+          "giantWholeMovement",
+          "giantWholeCleave",
+          "giantWholeSweep",
+          "giantWholeSpin",
+          "giantWholeMobility",
+          "giantWholeSweepLink",
+          "heroWholeMobility",
+          "heroWholeSweep",
+          "heroWholeCleave",
+          "heroWholeFlower",
+          "heroWholeExtra",
+          "heroWholeUppercut",
+          "heroWholeAdvance",
+          "heroWholeBlossom",
+          "heroWholeCyclone",
+          "heroWholeQilin",
+          "guardReactions",
+          "fairy",
+          "skinProne",
+          "heavenEncounters"
+        ],
+        "failed": [],
+        "frameCount": 8,
+        "resolution": [
+          1536,
+          864
+        ],
+        "skin": "wukong",
+        "presentationOnly": true,
+        "actorsReady": true,
+        "backgroundReady": true,
+        "cloudReady": true,
+        "sceneryReady": true,
+        "heroAnimation": "whole-sprite-sequences",
+        "heroAtlases": 11
+      },
+      "camera": {
+        "x": 0,
+        "y": 0
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 3,
+          "preference": "original",
+          "choice": "original"
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        }
+      },
+      "exit": {
+        "open": false,
+        "actors": [
+          {
+            "id": 1,
+            "entering": false,
+            "entered": false
+          }
+        ]
+      },
+      "waterfall": null,
+      "base": null,
+      "players": [
+        {
+          "id": 1,
+          "x": 40,
+          "y": 112,
+          "weapon": "rifle",
+          "dead": false,
+          "invincible": 1.5,
+          "hp": 100,
+          "maxHp": 100,
+          "hurt": null,
+          "ride": null,
+          "rideTime": 0,
+          "rapid": false,
+          "charge": null,
+          "staffWaves": [],
+          "staffThrows": [],
+          "staff": null
+        }
+      ],
+      "ultimateCooldown": 0,
+      "guards": [
+        {
+          "type": "snp",
+          "x": 410,
+          "y": 144,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        },
+        {
+          "type": "snp",
+          "x": 1000,
+          "y": 88,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        },
+        {
+          "type": "snp",
+          "x": 1440,
+          "y": 120,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        },
+        {
+          "type": "snp",
+          "x": 1810,
+          "y": 96,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        },
+        {
+          "type": "snp",
+          "x": 2140,
+          "y": 128,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        },
+        {
+          "type": "snp",
+          "x": 2600,
+          "y": 112,
+          "hp": 8,
+          "maxHp": 8,
+          "melee": null
+        }
+      ],
+      "shots": [],
+      "score": 0
+    },
+    "debug": []
+  },
+  "productionCombat": {
+    "errors": [],
+    "attempts": 15,
+    "start": {
+      "x": 40,
+      "score": 0,
+      "voices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 0,
+        "played": 0
+      }
+    },
+    "end": {
+      "x": 418,
+      "score": 400,
+      "hp": 100,
+      "voices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 2,
+        "played": 2
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "debug": []
+  },
+  "fixture": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "hit": {
+        "tick": 151,
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 9,
+            "dead": false,
+            "x": 330,
+            "y": 144
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.045,
+            "killed": false,
+            "angle": -0.05550813734758562
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "sfx": "on",
+        "muted": false,
+        "sfxGain": 0.8999999761581421
+      },
+      "defeats": [
+        {
+          "tick": 172,
+          "mode": "pause",
+          "enemies": [
+            {
+              "type": "snp",
+              "hp": -1,
+              "dead": true,
+              "x": 330,
+              "y": 144
+            }
+          ],
+          "effects": [
+            {
+              "k": "martialImpact",
+              "x": 325,
+              "y": 122.67877679419746,
+              "t": 0.045,
+              "killed": true,
+              "angle": -0.05550813734758562
+            },
+            {
+              "k": "guardDefeat",
+              "x": 330,
+              "y": 144,
+              "t": 0
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 1,
+            "played": 1
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 242,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.9833333333333347
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.9833333333333347,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 295,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.8833333333333344
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.8833333333333344,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 2
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        },
+        {
+          "tick": 349,
+          "mode": "play",
+          "enemies": [],
+          "effects": [
+            {
+              "k": "guardDefeat",
+              "x": 378.3333333333339,
+              "y": 144,
+              "t": 0.8833333333333344
+            },
+            {
+              "k": "enemyCry",
+              "x": 330,
+              "y": 144,
+              "t": 0.8833333333333344,
+              "voice": "guard"
+            }
+          ],
+          "audio": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 3
+          },
+          "sfx": "on",
+          "muted": false,
+          "sfxGain": 0.8999999761581421
+        }
+      ],
+      "sfxOff": {
+        "tick": 385,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.16666666666666666,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 346.66666666666686,
+            "y": 125.52777777777776,
+            "t": 0.16666666666666666
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.16666666666666666,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "off",
+        "muted": false,
+        "sfxGain": 0
+      },
+      "noReplay": {
+        "tick": 395,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.3333333333333333,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 363.3333333333337,
+            "y": 126.49999999999999,
+            "t": 0.3333333333333333
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.3333333333333333,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "on",
+        "muted": false,
+        "sfxGain": 0.8999999761581421
+      },
+      "muted": {
+        "tick": 405,
+        "mode": "play",
+        "enemies": [],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 122.67877679419746,
+            "t": 0.16666666666666666,
+            "killed": true,
+            "angle": -0.05550813734758562
+          },
+          {
+            "k": "guardDefeat",
+            "x": 346.66666666666686,
+            "y": 125.52777777777776,
+            "t": 0.16666666666666666
+          },
+          {
+            "k": "enemyCry",
+            "x": 330,
+            "y": 144,
+            "t": 0.16666666666666666,
+            "voice": "guard"
+          }
+        ],
+        "audio": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 3
+        },
+        "sfx": "on",
+        "muted": true,
+        "sfxGain": 0.8999999761581421
+      }
+    },
+    "audioCapture": {
+      "bytes": 45406,
+      "peak": 0.40218889713287354,
+      "rms": 0.19445813075616397
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "audio": {
+      "track": "stage1",
+      "playing": true,
+      "paused": false,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "selection": "original",
+      "resolved": {
+        "stage": 1,
+        "entry": 3,
+        "preference": "original",
+        "choice": "original"
+      },
+      "synth": false,
+      "sfx": "on",
+      "gain": 0.550000011920929,
+      "enemyVoices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 0,
+        "played": 3
+      }
+    }
+  },
+  "artifacts": [
+    "staff-contact-burst.png",
+    "guard-death-burst.png",
+    "hit-feedback-production.png",
+    "hit-death-audio-demo.webm"
+  ],
+  "source": {
+    "author": "HaelDB",
+    "license": "CC0 1.0",
+    "page": "https://opengameart.org/content/male-gruntyelling-sounds",
+    "credits": "games/wukong/assets/audio/CREDITS.md"
+  },
+  "notes": [
+    "隔离场景通过仅测试页面的响应改写摆放敌人，调用实际 collide/killEnemy 并观察真实 Web Audio 输出。",
+    "正式页面没有测试钩子；真实 D/J 输入从 x=40 前进至418、得分0→400、阵亡人声0→2。",
+    "音频演示仅录制既有音效总线，不含背景音乐；测得峰值0.4022、最大短窗RMS0.1945。",
+    "三段Ogg总计25,130字节。命中特效原生Canvas绘制，无新增位图下载。"
+  ]
+}

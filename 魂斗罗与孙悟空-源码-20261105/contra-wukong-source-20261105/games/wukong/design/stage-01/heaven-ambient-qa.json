@@ -1,0 +1,45 @@
+{
+  "description": "实际浏览器通过贴图逐像素比较确认云层与瀑布运动、建筑固定及暂停后背景停止；仅在隔离测试页面注入时刻与镜头",
+  "viewport": [
+    1152,
+    750
+  ],
+  "water": {
+    "changed": 3205,
+    "total": 4050,
+    "meanRgbDifference": 5.937942386831275
+  },
+  "clouds": {
+    "changed": 123778,
+    "total": 138240,
+    "meanRgbDifference": 3.819552951388889
+  },
+  "palace": {
+    "changed": 0,
+    "total": 5940,
+    "meanRgbDifference": 0
+  },
+  "paused": {
+    "changed": 0,
+    "total": 746496,
+    "meanRgbDifference": 4.4653063557384544e-7
+  },
+  "averageBackgroundMs": 0.28499999940395354,
+  "unchanged": true,
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 49,
+    "total": 49,
+    "failed": []
+  },
+  "cacheEntries": 7,
+  "fairyBytes": 399318,
+  "errors": [],
+  "bad": [],
+  "previews": [
+    "heaven-ambient-fairy.png",
+    "heaven-ambient-south-gate.png"
+  ],
+  "registration": "waterfall-registration.png"
+}

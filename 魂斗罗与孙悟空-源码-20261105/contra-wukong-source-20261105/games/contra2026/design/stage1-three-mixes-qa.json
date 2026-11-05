@@ -1,0 +1,236 @@
+{
+  "taskSpaceId": 184,
+  "stageScope": "All 16 stage menus checked in prior pass; new choices only in stage 1",
+  "tracks": [
+    {
+      "choice": "epic",
+      "start": {
+        "track": "stage1epic",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 36.071999999999996,
+        "startedAt": 63.992,
+        "duration": 120.7986875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 64.032,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "paused": {
+        "track": "stage1epic",
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 36.29066666666667,
+        "startedAt": 63.992,
+        "duration": 120.7986875,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 64.21066666666667,
+        "context": "suspended",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "resumed": {
+        "track": "stage1epic",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 36.29066666666667,
+        "startedAt": 64.21066666666667,
+        "duration": 120.7986875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 64.26133333333334,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      }
+    },
+    {
+      "choice": "industrial",
+      "start": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0,
+        "startedAt": 64.76,
+        "duration": 121.2386875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 64.85066666666667,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "paused": {
+        "track": "stage1industrial",
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0.27199999999999136,
+        "startedAt": 64.76,
+        "duration": 121.2386875,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 65.032,
+        "context": "suspended",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "resumed": {
+        "track": "stage1industrial",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0.27199999999999136,
+        "startedAt": 65.032,
+        "duration": 121.2386875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 65.09066666666666,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      }
+    },
+    {
+      "choice": "cyberpunk",
+      "start": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0,
+        "startedAt": 65.56,
+        "duration": 121.0386875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 65.56,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "paused": {
+        "track": "stage1cyberpunk",
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0.19199999999999307,
+        "startedAt": 65.56,
+        "duration": 121.0386875,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 65.752,
+        "context": "suspended",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      },
+      "resumed": {
+        "track": "stage1cyberpunk",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "offset": 0.19199999999999307,
+        "startedAt": 65.752,
+        "duration": 121.0386875,
+        "loop": true,
+        "synth": false,
+        "synthGain": 0,
+        "contextTime": 65.81066666666666,
+        "context": "running",
+        "music": "on",
+        "gain": 0.550000011920929,
+        "muted": false
+      }
+    }
+  ],
+  "options": [
+    {
+      "value": "original",
+      "label": "原视频音乐"
+    },
+    {
+      "value": "orchestral",
+      "label": "YuE2 原节奏大交响 · 完整版"
+    },
+    {
+      "value": "rock",
+      "label": "第一关 BGM · 摇滚重制版"
+    },
+    {
+      "value": "epic",
+      "label": "第一关 BGM · 史诗混合版"
+    },
+    {
+      "value": "industrial",
+      "label": "第一关 BGM · 工业金属版"
+    },
+    {
+      "value": "cyberpunk",
+      "label": "第一关 BGM · 赛博朋克版"
+    },
+    {
+      "value": "chiptune",
+      "label": "电子乐"
+    },
+    {
+      "value": "off",
+      "label": "关闭本关音乐"
+    }
+  ],
+  "saved": {
+    "1": "cyberpunk",
+    "2": "original",
+    "3": "original",
+    "4": "original",
+    "5": "original",
+    "6": "original",
+    "7": "original",
+    "8": "original",
+    "9": "original",
+    "10": "original",
+    "11": "original",
+    "12": "original",
+    "13": "original",
+    "14": "original",
+    "15": "original",
+    "16": "original"
+  },
+  "restored": "cyberpunk"
+}

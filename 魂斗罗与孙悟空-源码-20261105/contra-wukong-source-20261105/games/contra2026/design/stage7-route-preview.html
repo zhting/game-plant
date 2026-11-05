@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第七关分段路线检查</title>
+<style>body{margin:0;background:#070e10;color:#dac9ae;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}nav{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;padding:12px}button{padding:8px 12px;background:#25312d;border:1px solid #65705a;color:inherit;cursor:pointer}button[aria-pressed=true]{border-color:#f4be70;color:#ffe4a9}</style>
+<canvas width="1536" height="864"></canvas><nav></nav><button id="pose">切换机关姿势</button><button id="pause">暂停预览</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=hangar-required-routes-1';
+import {drawHangarCartTrack} from '../js/stage-seven-route-art.mjs?v=hangar-required-routes-1';
+import {HANGAR_SECTIONS,createStageSevenSolids,HANGAR_PRESSES,hangarPressState,HANGAR_SNIPERS,HANGAR_IRON_PLATES} from '../js/stage-seven-layout.mjs?v=hangar-required-routes-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt,hangar:true}),solids=createStageSevenSolids();
+await Promise.all([...Object.keys(art.assets).map(k=>art.loadImage(k)),...['actorBlue','actorEnemy','runLimbs'].map(k=>baseArt.loadImage(k))]);
+let section=HANGAR_SECTIONS[0],paused=false,time=1,last=performance.now(),pose=0;
+document.querySelector('#pose').onclick=()=>pose=(pose+1)%3;
+for(const s of HANGAR_SECTIONS){const button=document.createElement('button');button.textContent=s.label;button.dataset.section=s.id;button.onclick=()=>{section=s;for(const node of document.querySelectorAll('nav button'))node.setAttribute('aria-pressed',String(node===button));};document.querySelector('nav').append(button);}
+document.querySelector('nav button').setAttribute('aria-pressed','true');document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续预览':'暂停预览';};
+const gate={x:3410,active:true,dead:false,parts:[{k:'turret',x:3235,y:155,w:20,h:19,hp:16,max:16},{k:'turret',x:3315,y:155,w:20,h:19,hp:16,max:16},{k:'core',x:3418,y:83,w:30,h:30,hp:55,max:55}]};
+function frame(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused)time+=dt;
+  const camera=section.id==='gate'?3116:section.id==='cart-tunnel'?1768:section.id==='upper-lock'?2280:section.x,presses=HANGAR_PRESSES.map(q=>({...q,...hangarPressState(q,time)}));
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={camX:camera,time,t:time*60};art.hangarBackdrop(camera);art.g.save();art.g.translate(-camera,0);art.hangarFloor(solids,camera);drawHangarCartTrack(art,camera);art.hangarGate(gate);art.hangarPresses(presses,camera);
+  for(const plate of HANGAR_IRON_PLATES)if(plate.x>camera-40&&plate.x<camera+424)art.hangarSpikeWall({...plate,rise:1,hp:24,max:24});
+  for(const [x,y]of HANGAR_SNIPERS)if(x>camera-30&&x<camera+414)StageOneArt.prototype.enemy.call(art,{t:'snp',x,y,face:-1,ax:-1,ay:0,flash:0});
+  if(section.style==='rail'){
+    const cart={x:pose===1?1804:1870,y:176,wheel:time*5},p={x:cart.x,y:154,face:1,ax:1,ay:0,cart,cartDuck:pose!==1,flashT:time%.24<.08?.05:0};art.hangarCartRider(p,'blue');art.hangarCart(cart);
+    art.bullets([{k:'b',x:cart.x+40+(time*100)%20,y:150},{k:'b',x:cart.x+80+(time*100)%20,y:150}]);
+  }else if(section.id==='upper-lock'){
+    const p=[{x:2440,y:96},{x:2475,y:56},{x:2560,y:136}][pose];art.actor({...p,face:1,onGround:true,ax:1,ay:0},'blue');
+  }else{
+    const x=camera+(section.id==='loading'?120:section.id==='gate'?155:140),surface=solids.find(s=>s.g&&x>=s.x&&x<s.x+s.w);
+    art.actor({x,y:surface?.y||176,face:1,onGround:true,ax:1,ay:0},'blue');
+  }
+  art.g.restore();art.hudText('第七关 · '+section.label,192,5,'#ffe0aa',8,'center');art.present(ctx);requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);window.routePreviewReady=true;
+</script></html>

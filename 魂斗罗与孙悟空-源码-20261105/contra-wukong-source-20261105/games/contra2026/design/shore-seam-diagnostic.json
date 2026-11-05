@@ -1,0 +1,135 @@
+{
+  "cases": [
+    {
+      "bank": "left",
+      "vx": 0,
+      "anim": 0,
+      "pixels": 27,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "left",
+      "vx": 0,
+      "anim": 0.7,
+      "pixels": 61,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "left",
+      "vx": 0,
+      "anim": 1.4,
+      "pixels": 55,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "left",
+      "vx": 60,
+      "anim": 0,
+      "pixels": 102,
+      "strong": 3,
+      "maxDelta": 9,
+      "examples": [
+        {
+          "x": 1108,
+          "y": 200.25,
+          "delta": 8
+        },
+        {
+          "x": 1108.25,
+          "y": 200.25,
+          "delta": 9
+        },
+        {
+          "x": 1085,
+          "y": 200.75,
+          "delta": 6
+        }
+      ]
+    },
+    {
+      "bank": "left",
+      "vx": 60,
+      "anim": 0.7,
+      "pixels": 96,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "left",
+      "vx": 60,
+      "anim": 1.4,
+      "pixels": 55,
+      "strong": 1,
+      "maxDelta": 6,
+      "examples": [
+        {
+          "x": 1085,
+          "y": 200.75,
+          "delta": 6
+        }
+      ]
+    },
+    {
+      "bank": "right",
+      "vx": 0,
+      "anim": 0,
+      "pixels": 90,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "right",
+      "vx": 0,
+      "anim": 0.7,
+      "pixels": 73,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "right",
+      "vx": 0,
+      "anim": 1.4,
+      "pixels": 94,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "right",
+      "vx": 60,
+      "anim": 0,
+      "pixels": 48,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "right",
+      "vx": 60,
+      "anim": 0.7,
+      "pixels": 60,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    },
+    {
+      "bank": "right",
+      "vx": 60,
+      "anim": 1.4,
+      "pixels": 54,
+      "strong": 0,
+      "maxDelta": 1,
+      "examples": []
+    }
+  ],
+  "renderIsUpdated": true
+}

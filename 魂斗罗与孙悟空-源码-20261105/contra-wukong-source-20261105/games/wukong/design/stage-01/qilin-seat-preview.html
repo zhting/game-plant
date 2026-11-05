@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>悟空 · 麒麟跨坐姿势</title>
+<style>html,body{margin:0;background:#102a31;color:#eddcb7;font:16px system-ui}main{max-width:1440px;margin:auto;padding:20px}h1{font-size:24px;margin:0 0 8px}p{color:#adc5c9;margin:0 0 16px}canvas{display:block;width:100%;aspect-ratio:16/9}button{font:inherit;color:inherit;background:#1c3d46;border:1px solid #55747c;padding:7px 14px;margin-bottom:16px;cursor:pointer}</style>
+<main><h1>麒麟 · 一体跨坐姿势</h1><p>臀部贴鞍，近侧小腿下垂；站立、奔跑、腾跃和挥棍使用完整骑乘画稿。</p><button id="toggle">暂停</button><canvas id="preview" width="1440" height="810"></canvas></main>
+<script type="module">
+import {WukongSkin} from '../../js/wukong-game.mjs';
+import {wholeHeroFrame,wholeHeroPose} from '../../js/wukong-hero-frames.mjs';
+const canvas=document.getElementById('preview'),target=canvas.getContext('2d');
+const art=new WukongSkin({createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false});
+await Promise.all(['heroWholeQilin','ruyiStaff','skinActors','celestialQilin'].map(key=>art.loadImage(key)));
+let clock=0,last=performance.now(),playing=true;
+document.getElementById('toggle').onclick=()=>{playing=!playing;document.getElementById('toggle').textContent=playing?'暂停':'播放';};
+window.qilinPreview={ready:true,art,samples:[],seek(t){clock=t;playing=false;document.getElementById('toggle').textContent='播放';}};
+function draw(now){
+ const dt=Math.min(.05,(now-last)/1000);last=now;if(playing)clock+=dt;
+ art.prepare(target);art.state={t:clock*60,time:clock,camX:0,fx:[]};const g=art.g;
+ g.fillStyle='#102a31';g.fillRect(0,0,384,216);window.qilinPreview.samples=[];
+ const labels=['待机 · 稳坐鞍心','奔跑 · 跨坐随行','腾跃 · 双腿夹稳','过顶 · 坐姿举棍','前抡 · 坐姿发力','左向 · 人兽同向'];
+ for(let i=0;i<6;i++){
+  const x=i%3*128,y=Math.floor(i/3)*108;
+  g.save();g.beginPath();g.rect(x,y,128,108);g.clip();g.fillStyle=i%2?'#173740':'#13313a';g.fillRect(x+1,y+1,126,106);
+  g.fillStyle='#e9d5a5';g.font='600 4.3px system-ui';g.fillText(labels[i],x+6,y+11);g.fillStyle='#76959d';g.fillRect(x+5,y+91,118,.4);
+  const p={pid:i+1,heroFrames:true,ride:'moto',rideT:12,x:x+60,y:y+91,face:i===5?-1:1,ax:1,ay:0,vx:i===1?170:0,vy:0,onGround:i!==2,
+   anim:clock*10,weapon:'rifle',heroAnimation:{clock,run:clock*170/32}};
+  if(i===2){p.y-=7+Math.sin(clock*2)*3;p.vy=-120;}
+  if(i>=3)p.staff={kind:'sweep',variant:'fullSwing',t:[.32,.55,.7][i-3],duration:1,combo:1,weapon:'rifle',face:p.face,hits:[]};
+  art.actor(p,'red');const pose=wholeHeroFrame(p),q=wholeHeroPose(p);
+  window.qilinPreview.samples.push({label:labels[i],clip:pose.clip,frame:pose.frame.id,includesMount:pose.includesMount,origin:q.origin});g.restore();
+ }
+ target.clearRect(0,0,canvas.width,canvas.height);target.drawImage(art.surface,0,0);requestAnimationFrame(draw);
+}requestAnimationFrame(draw);
+</script></html>

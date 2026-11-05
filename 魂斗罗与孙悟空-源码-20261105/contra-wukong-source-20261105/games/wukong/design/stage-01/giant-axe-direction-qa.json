@@ -1,0 +1,211 @@
+{
+  "date": "2026-10-26",
+  "changes": [
+    "Rotate the existing axe so the blade points down and the handle extends up toward the giant",
+    "Blade lands ahead of the boot, not through it",
+    "Downward travel completes at the host impact time; blade edge at floor 176.31 for floor 176",
+    "Remove the persistent gold oval drawn in front of the boot",
+    "Version updated view modules to reload the corrected presentation"
+  ],
+  "tests": {
+    "passed": 125,
+    "failed": 0,
+    "log": ".playwright-mcp/wukong-axe-direction-regression.tap"
+  },
+  "browser": {
+    "errors": [],
+    "poses": {
+      "idle": {
+        "ringCount": 0,
+        "axe": null,
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.05,
+          "growing": false,
+          "attack": null
+        }
+      },
+      "raised": {
+        "ringCount": 0,
+        "axe": {
+          "head": {
+            "x": 144.574543184751,
+            "y": 24.06736168233503
+          },
+          "handle": {
+            "x": 177.63554833258888,
+            "y": -249.02843378188356
+          },
+          "edge": {
+            "x": 182.00008370993913,
+            "y": 127.31383391919982
+          }
+        },
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.06666666666666667,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 1.7000000000000002,
+            "safeSide": "right"
+          }
+        }
+      },
+      "falling": {
+        "ringCount": 0,
+        "axe": {
+          "head": {
+            "x": 145.29365479525435,
+            "y": 45.284747111804855
+          },
+          "handle": {
+            "x": 225.3979043001197,
+            "y": -217.8837403119024
+          },
+          "edge": {
+            "x": 164.17152678899973,
+            "y": 153.4703795310312
+          }
+        },
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.08333333333333333,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 1.9700000000000002,
+            "safeSide": "right"
+          }
+        }
+      },
+      "impact": {
+        "ringCount": 0,
+        "axe": {
+          "head": {
+            "x": 145.725389606108,
+            "y": 66.49343439340652
+          },
+          "handle": {
+            "x": 270.4259451912766,
+            "y": -178.70875768156242
+          },
+          "edge": {
+            "x": 145.47893218150242,
+            "y": 176.31348889939395
+          }
+        },
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.09999999999999999,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 2.115,
+            "safeSide": "right"
+          }
+        }
+      },
+      "retract": {
+        "ringCount": 0,
+        "axe": {
+          "head": {
+            "x": 143.7763624089743,
+            "y": -3.3296181585848097
+          },
+          "handle": {
+            "x": 238.0712063067786,
+            "y": -261.7533515421663
+          },
+          "edge": {
+            "x": 156.74400138035836,
+            "y": 105.7224127829251
+          }
+        },
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.11666666666666665,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 2.8,
+            "safeSide": "right"
+          }
+        }
+      },
+      "impact-left-safe": {
+        "ringCount": 0,
+        "axe": {
+          "head": {
+            "x": 145.475389606108,
+            "y": 66.49343439340652
+          },
+          "handle": {
+            "x": 270.1759451912766,
+            "y": -178.70875768156242
+          },
+          "edge": {
+            "x": 145.22893218150242,
+            "y": 176.31348889939395
+          }
+        },
+        "footX": 3230.32,
+        "boss": {
+          "kind": "巨灵神",
+          "active": true,
+          "dead": false,
+          "hp": 72,
+          "max": 72,
+          "phase": 2,
+          "phaseTime": 0.13333333333333333,
+          "growing": false,
+          "attack": {
+            "kind": "skyAxe",
+            "time": 2.115,
+            "safeSide": "left"
+          }
+        }
+      }
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 90,
+      "total": 90,
+      "failed": [],
+      "stage": 1,
+      "cached": 90
+    }
+  },
+  "scope": "Presentation only; same atlas and original damage, safe strip and stomp mechanics. User's in-app game was not refreshed."
+}

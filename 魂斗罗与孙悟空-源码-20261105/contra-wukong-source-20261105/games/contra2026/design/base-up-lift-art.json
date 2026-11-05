@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen built-in",
+  "output": "H:/project/games/games/contra2026/assets/stage2/commando-upward-v1.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "transparent_background": true,
+  "references": [
+    "H:/project/games/games/contra2026/assets/stage2/commando-back-blue.png",
+    "H:/project/games/games/contra2026/assets/stage2/commando-back-red.png"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: transparent 2D arcade game character pose sheet, one row of two full-body characters. Input images: image 1 is the existing BLUE rear-view character style and identity reference; image 2 is the matching RED character reference. Create exactly two new matching rear-view upward-firing poses: BLUE on the left and RED on the right. Each is the same muscular brown-haired commando, bare back, black X-shaped tactical harness, black belt and hip pouch, heavy black boots, colored cargo trousers and colored headband with tails flowing left. Match the references' hand-painted high-definition arcade sprite shading, sharp black outlines, warm skin, body proportions and detailed fabric. Crucial pose change: looking away from camera, both arms raised above the shoulders, hands visibly holding the same black rifle pointed perfectly VERTICALLY UPWARD, with a long clear barrel extending well above the hair. The rifle is visible in silhouette, NOT the original foreshortened shoulder-level barrel. Legs in the references' neutral wide standing stance, full feet intact. Both figures have exactly identical geometry and size except trousers and headband are cobalt blue for left and bright red for right. Keep backs facing camera, do not turn sideways. Generous transparent padding around each figure and rifle. Both feet at the same baseline. Transparent alpha background, no text, grid, labels, shadows, scenery or muzzle flashes. Prefer a wide canvas with two separated full figures; fill most of canvas height but do not crop any barrel or boot. The game needs to crop each pose and align belt, feet and muzzle precisely.",
+  "registration": "Native PNG retained unchanged. Source bounds, feet, belt and muzzle anchors are in js/base-actor-poses.mjs. Moving aim is composited with the original eight rear-view running poses before whole-body effects."
+}

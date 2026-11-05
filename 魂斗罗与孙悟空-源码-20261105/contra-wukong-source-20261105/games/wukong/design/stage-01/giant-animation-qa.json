@@ -1,0 +1,244 @@
+{
+  "date": "2026-10-23",
+  "clips": {
+    "idle": {
+      "frames": 85,
+      "fps": 30,
+      "duration": 2.8
+    },
+    "walk": {
+      "frames": 36,
+      "fps": 30,
+      "duration": 1.15
+    },
+    "retreat": {
+      "frames": 36,
+      "fps": 30,
+      "duration": 1.15
+    },
+    "cleave": {
+      "frames": 61,
+      "fps": 30,
+      "duration": 1.97
+    },
+    "sweep": {
+      "frames": 61,
+      "fps": 30,
+      "duration": 1.97
+    },
+    "whirlwind": {
+      "frames": 75,
+      "fps": 30,
+      "duration": 2.45
+    },
+    "stomp": {
+      "frames": 84,
+      "fps": 30,
+      "duration": 2.75
+    },
+    "jumpStart": {
+      "frames": 23,
+      "fps": 30,
+      "duration": 0.72
+    },
+    "jumpAir": {
+      "frames": 22,
+      "fps": 30,
+      "duration": 0.68
+    },
+    "land": {
+      "frames": 15,
+      "fps": 30,
+      "duration": 0.46
+    }
+  },
+  "moves": [
+    "cleave",
+    "sweep",
+    "leap",
+    "whirlwind",
+    "stomp"
+  ],
+  "xRange": [
+    3112.194444444446,
+    3278
+  ],
+  "paused": true,
+  "renderUnchanged": true,
+  "pixels": {
+    "hair": {
+      "changed": 5469,
+      "total": 11178
+    },
+    "ribbonsAndCape": {
+      "changed": 20287,
+      "total": 39204
+    },
+    "fixedArmour": {
+      "changed": 0,
+      "total": 315
+    }
+  },
+  "frames": [
+    {
+      "time": 0,
+      "clip": "cleave",
+      "frame": 0
+    },
+    {
+      "time": 1,
+      "clip": "cleave",
+      "frame": 33
+    },
+    {
+      "time": 2,
+      "clip": "idle",
+      "frame": 60
+    },
+    {
+      "time": 3,
+      "clip": "sweep",
+      "frame": 6
+    },
+    {
+      "time": 4,
+      "clip": "sweep",
+      "frame": 40
+    },
+    {
+      "time": 5,
+      "clip": "retreat",
+      "frame": 5
+    },
+    {
+      "time": 6,
+      "clip": "jumpStart",
+      "frame": 13
+    },
+    {
+      "time": 7,
+      "clip": "land",
+      "frame": 1
+    },
+    {
+      "time": 8,
+      "clip": "land",
+      "frame": 14
+    },
+    {
+      "time": 9,
+      "clip": "retreat",
+      "frame": 31
+    },
+    {
+      "time": 10,
+      "clip": "whirlwind",
+      "frame": 31
+    },
+    {
+      "time": 11,
+      "clip": "whirlwind",
+      "frame": 59
+    },
+    {
+      "time": 12,
+      "clip": "walk",
+      "frame": 20
+    },
+    {
+      "time": 13,
+      "clip": "stomp",
+      "frame": 22
+    },
+    {
+      "time": 14,
+      "clip": "stomp",
+      "frame": 52
+    },
+    {
+      "time": 15,
+      "clip": "stomp",
+      "frame": 81
+    },
+    {
+      "time": 16,
+      "clip": "jumpStart",
+      "frame": 3
+    },
+    {
+      "time": 17,
+      "clip": "jumpAir",
+      "frame": 12
+    },
+    {
+      "time": 18,
+      "clip": "land",
+      "frame": 14
+    },
+    {
+      "time": 19,
+      "clip": "retreat",
+      "frame": 13
+    },
+    {
+      "time": 20,
+      "clip": "cleave",
+      "frame": 19
+    },
+    {
+      "time": 21,
+      "clip": "cleave",
+      "frame": 51
+    },
+    {
+      "time": 22,
+      "clip": "retreat",
+      "frame": 8
+    },
+    {
+      "time": 23,
+      "clip": "sweep",
+      "frame": 26
+    },
+    {
+      "time": 24,
+      "clip": "sweep",
+      "frame": 56
+    }
+  ],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 51,
+    "total": 51,
+    "failed": []
+  },
+  "board": {
+    "width": 1680,
+    "height": 1120
+  },
+  "errors": [],
+  "failed": [],
+  "observedClips": [
+    "cleave",
+    "idle",
+    "sweep",
+    "retreat",
+    "jumpStart",
+    "land",
+    "whirlwind",
+    "walk",
+    "stomp",
+    "jumpAir"
+  ],
+  "render": {
+    "average": 7.314583331346512,
+    "p95": 10.599999904632568,
+    "max": 11.399999976158142
+  },
+  "notes": [
+    "Whole boss frame, 1152px game canvas; CPU cloth cache frames generated during measurement.",
+    "Pixel check holds body joints fixed and changes cloth time only.",
+    "No new image or audio resources; 51 existing startup resources ready."
+  ]
+}

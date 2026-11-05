@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Xbox 手柄连接检测</title>
+<style>body{margin:0;padding:28px;background:#102d36;color:#f0e4c7;font:16px/1.6 system-ui,sans-serif}h1{font-size:25px;margin:0 0 12px}button{padding:10px 18px;border:1px solid #d5b779;background:#3b5149;color:#fff0be;font:inherit;cursor:pointer}pre{white-space:pre-wrap;word-break:break-word;background:#092029;padding:16px;border-radius:4px;font-size:13px}p{max-width:650px}a{color:#ffe3a1}</style>
+<h1>Xbox 手柄连接检测</h1>
+<p>保持手柄开机，点击下方按钮，然后按手柄 A 键或拨动摇杆。原关卡仍保留在另一个标签页。</p>
+<button id="activate" type="button">激活检测</button>
+<p id="click-status">尚未收到鼠标点击</p>
+<p id="status" role="status">正在检测…</p>
+<pre id="output"></pre>
+<script>
+if(new URLSearchParams(location.search).get('backend')==='xinput'){
+  document.title='Xbox 手柄连接检测 · 兼容模式';document.querySelector('h1').textContent='Xbox 手柄连接检测 · 兼容模式';
+}
+if(new URLSearchParams(location.search).get('backend')==='gameinput'){
+  document.title='Xbox 手柄连接检测 · 接收器兼容模式';document.querySelector('h1').textContent='Xbox 手柄连接检测 · 接收器兼容模式';
+}
+const read=()=>{
+  let pads=[],error=null;
+  try{pads=Array.from(navigator.getGamepads?.()||[]).filter(Boolean).map(p=>({index:p.index,name:p.id,connected:p.connected,mapping:p.mapping,buttons:p.buttons.map((b,i)=>b.pressed?i:null).filter(n=>n!==null),axes:p.axes.map(n=>Math.round(n*100)/100)}));}
+  catch(e){error={name:e.name,message:e.message};}
+  const state={api:typeof navigator.getGamepads,secure:isSecureContext,focused:document.hasFocus(),visibility:document.visibilityState,activation:navigator.userActivation?.hasBeenActive,allowed:document.permissionsPolicy?.allowsFeature('gamepad')??document.featurePolicy?.allowsFeature('gamepad'),count:pads.length,pads,error};
+  document.getElementById('output').textContent=JSON.stringify(state,null,2);
+  document.getElementById('status').textContent=pads.length?'已识别：'+pads.map(p=>p.name).join(' / '):error?'手柄读取受限：'+error.message:clicks?'检测已激活，尚未收到手柄。请直接按 A 键或拨动摇杆。':'尚未读取到手柄，请点击激活后按 A 键或拨动摇杆';
+};
+let clicks=0;
+document.getElementById('activate').addEventListener('click',()=>{
+  clicks++;document.getElementById('activate').textContent='检测已激活 · 点击可重检';document.getElementById('activate').style.background='#566e3c';
+  document.getElementById('click-status').textContent='已收到点击：'+clicks+' 次';window.focus();read();
+});
+addEventListener('gamepadconnected',read);addEventListener('gamepaddisconnected',read);addEventListener('focus',read);setInterval(read,250);read();
+</script>
+</html>

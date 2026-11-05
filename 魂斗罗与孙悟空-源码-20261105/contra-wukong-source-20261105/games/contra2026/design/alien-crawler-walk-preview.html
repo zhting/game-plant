@@ -1,0 +1,23 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第八关怪兽爬行动作</title>
+<style>body{margin:0;background:#080611;color:#ddc5d5;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}button{margin:12px 4px;padding:8px 14px;background:#241525;border:1px solid #75516c;color:inherit;cursor:pointer}</style>
+<canvas width="1536" height="864"></canvas><button id="pause">暂停动作</button><button id="phase">下一帧</button><button id="size">显示原尺寸</button><button id="air">腾空收肢</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=crawler-walk-1';
+import {ALIEN_CRAWLER_ART,advanceAlienCrawler,alienCrawlerFrame} from '../js/alien-crawler.mjs?v=crawler-walk-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt});await Promise.all(['cavern','terrain','crawler'].map(k=>art.loadImage(k)));
+let time=0,last=performance.now(),paused=false,zoom=3,airborne=false;
+const crawlers=[{t:'run',x:0,y:176,vx:-62,on:true,crawlDistance:0},{t:'run',x:0,y:176,vx:31,on:true,crawlDistance:0}];
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续动作':'暂停动作';};
+document.querySelector('#phase').onclick=()=>{for(const e of crawlers)e.crawlDistance+=ALIEN_CRAWLER_ART.stride/6;};
+document.querySelector('#size').onclick=()=>{zoom=zoom===3?1:3;document.querySelector('#size').textContent=zoom===3?'显示原尺寸':'放大三倍';};
+document.querySelector('#air').onclick=()=>{airborne=!airborne;document.querySelector('#air').textContent=airborne?'恢复落地':'腾空收肢';};
+function frame(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused){time+=dt;for(const e of crawlers){const x=e.x;e.x+=e.vx*dt;e.on=!airborne;advanceAlienCrawler(e,x);}}
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={stage:8,camX:0,time,t:time*60,freezeT:0};art.backdrop(0);art.floor([{x:0,y:176,w:640,h:40,g:1}],0);
+  for(const [i,e]of crawlers.entries()){art.g.save();art.g.translate(i?276:108,airborne?135:176);art.g.scale(zoom,zoom);art.enemy({...e,x:0,y:0,on:!airborne});art.g.restore();}
+  art.hudText('第八关 · 怪兽爬行'+(zoom===3?'（三倍细节预览）':''),192,8,'#edc5df',7,'center');art.present(ctx);
+  window.crawlerPreview={time,paused,zoom,frames:crawlers.map(e=>alienCrawlerFrame({...e,on:!airborne}))};requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);window.crawlerPreviewReady=true;
+</script></html>

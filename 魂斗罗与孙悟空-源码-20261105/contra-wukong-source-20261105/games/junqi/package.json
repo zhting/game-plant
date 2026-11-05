@@ -1,0 +1,31 @@
+{
+  "name": "mengbing-junqi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "萌兵军棋 · 国潮 Q 版两国暗棋，浏览器双人在线对战（排位匹配、好友房、人机练习）",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test",
+    "e2e": "node scripts/e2e-smoke.mjs"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "keywords": [
+    "junqi",
+    "军棋",
+    "暗棋",
+    "websocket",
+    "game"
+  ],
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhting/junqi.git"
+  }
+}

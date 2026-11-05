@@ -1,0 +1,70 @@
+{
+  "samples": [
+    {
+      "name": "opening",
+      "camera": 0,
+      "time": 0,
+      "rain": 0.923039917250144,
+      "drops": [
+        440,
+        300
+      ],
+      "leaves": [
+        54,
+        36
+      ],
+      "splashes": 37
+    },
+    {
+      "name": "gust",
+      "camera": 0,
+      "time": 1,
+      "rain": 0.9527666849492309,
+      "drops": [
+        438,
+        318
+      ],
+      "leaves": [
+        50,
+        35
+      ],
+      "splashes": 36
+    },
+    {
+      "name": "river",
+      "camera": 1320,
+      "time": 28,
+      "rain": 0.8402588529401316,
+      "drops": [
+        386,
+        270
+      ],
+      "leaves": [
+        55,
+        34
+      ],
+      "splashes": 45
+    },
+    {
+      "name": "fortress",
+      "camera": 2950,
+      "time": 43,
+      "rain": 0.8855163960604426,
+      "drops": [
+        420,
+        290
+      ],
+      "leaves": [
+        63,
+        13
+      ],
+      "splashes": 32
+    }
+  ],
+  "playback": {
+    "time": 6.833333333333314,
+    "tick": 410,
+    "mode": "pause",
+    "weatherModule": "http://localhost:3192/games/contra2026/js/stage-one-atmosphere.mjs?v=permanent-monsoon-1"
+  }
+}

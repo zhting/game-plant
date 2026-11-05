@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-25",
+  "tests": {
+    "passed": 121,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-guard-scale.tap"
+  },
+  "fixture": true,
+  "errors": [],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 75,
+    "total": 75,
+    "failed": [],
+    "stage": 1,
+    "cached": 75
+  },
+  "airborne": {
+    "x": 331.0833333333333,
+    "y": 142.27777777777777,
+    "vy": -103.33333333333333,
+    "landed": false,
+    "landT": 0,
+    "face": -1
+  },
+  "landed": {
+    "x": 350.583333333333,
+    "y": 144,
+    "vy": 0,
+    "landed": true,
+    "landT": 0.26666666666666666,
+    "face": -1
+  },
+  "renderPure": true,
+  "comparison": {
+    "standingBodyHeight": 28,
+    "deathScales": [
+      0.09210526315789473,
+      0.08,
+      0.08484848484848485,
+      0.08588957055214724,
+      0.07777777777777778,
+      0.07777777777777778
+    ],
+    "posesPure": true
+  }
+}

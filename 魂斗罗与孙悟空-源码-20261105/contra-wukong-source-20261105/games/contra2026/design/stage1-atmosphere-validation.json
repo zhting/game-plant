@@ -1,0 +1,106 @@
+{
+  "seams": [
+    {
+      "scale": 2,
+      "minAlpha": 107,
+      "maxAlpha": 107
+    },
+    {
+      "scale": 4,
+      "minAlpha": 107,
+      "maxAlpha": 107
+    },
+    {
+      "scale": 5,
+      "minAlpha": 107,
+      "maxAlpha": 107
+    },
+    {
+      "scale": 10,
+      "minAlpha": 107,
+      "maxAlpha": 107
+    }
+  ],
+  "stages": [
+    {
+      "camera": 0,
+      "rain": 0
+    },
+    {
+      "camera": 930,
+      "rain": 0.08115624999999999
+    },
+    {
+      "camera": 1320,
+      "rain": 1
+    },
+    {
+      "camera": 1740,
+      "rain": 1
+    },
+    {
+      "camera": 2100,
+      "rain": 0.07808746355685126
+    },
+    {
+      "camera": 2950,
+      "rain": 0
+    }
+  ],
+  "failed": [],
+  "regressionTests": 97,
+  "playback": {
+    "duration": 7.966667,
+    "width": 1536,
+    "height": 864,
+    "seek": 5.5,
+    "ready": 4
+  },
+  "synchronousReadbackTimings": [
+    {
+      "width": 768,
+      "height": 432,
+      "medianMs": 5.899999976158142,
+      "maxMs": 19.100000023841858
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "medianMs": 25.30000001192093,
+      "maxMs": 48.10000002384186
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "medianMs": 108.39999997615814,
+      "maxMs": 158.69999998807907
+    }
+  ],
+  "timingNote": "Forced per-frame pixel readback includes GPU synchronization and is not a frame-rate measurement.",
+  "animation": [
+    {
+      "width": 768,
+      "height": 432,
+      "frames": 66,
+      "elapsedMs": 1100,
+      "fps": 60,
+      "medianIntervalMs": 16.699999999953434
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "frames": 66,
+      "elapsedMs": 1100,
+      "fps": 60,
+      "medianIntervalMs": 16.699999999953434
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "frames": 67,
+      "elapsedMs": 1116.5,
+      "fps": 60.0089565606807,
+      "medianIntervalMs": 16.699999999953434
+    }
+  ]
+}

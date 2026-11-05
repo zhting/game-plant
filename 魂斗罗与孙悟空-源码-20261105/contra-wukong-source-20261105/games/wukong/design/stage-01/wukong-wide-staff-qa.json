@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-24",
+  "url": "http://127.0.0.1:4173/games/wukong/",
+  "change": "Longer continuous Ruyi staff, wider real reach, three new whole-body staff sequences and varied random choreography",
+  "assets": {
+    "tool": "built-in image_gen",
+    "newRecord": "assets/hero-wide-generation.json",
+    "allRecord": "assets/hero-whole-generation.json",
+    "prompts": "assets/hero-whole-prompts.json",
+    "atlases": 10,
+    "completeFrames": 132,
+    "newFrames": 24,
+    "newRuntimeBytes": 1058074,
+    "heroAndStaffRuntimeBytes": 4763460
+  },
+  "combat": {
+    "baseStaffLength": 68,
+    "lengthPickupStaffLength": 119,
+    "variants": 17,
+    "newVariants": [
+      "fullSwing",
+      "doubleFlower",
+      "skyWheel"
+    ],
+    "choice": "Random without replacement, with bridging choices to avoid the previous two visual families; remaining bag and recent families are network state",
+    "geometry": "Same measured grip/direction for the whole-body hands, one complete staff bitmap and both hit segments",
+    "contact": "Previous/current shaft plus intermediate swept segments, per-end wall blocking, one damage event per target per action"
+  },
+  "regression": {
+    "passed": 351,
+    "failed": 0,
+    "command": "node --test --test-reporter=tap backend/test/wukong-hero-frames.test.mjs backend/test/wukong-engine.test.mjs backend/test/wukong-animation.test.mjs backend/test/wukong-staff.test.mjs backend/test/wukong-locomotion.test.mjs backend/test/wukong-magic.test.mjs backend/test/wukong-mount.test.mjs backend/test/wukong-giant-frames.test.mjs backend/test/wukong-supplies.test.mjs backend/test/wukong-music.test.mjs backend/test/wukong-opening.test.mjs backend/test/wukong-atmosphere.test.mjs backend/test/contra-engine.test.mjs backend/test/contra-motion.test.mjs backend/test/contra-preload.test.mjs backend/test/contra-audio.test.mjs backend/test/contra-fixed-soundtrack.test.mjs backend/test/contra-stage-loading.test.mjs",
+    "tap": "../../../../.playwright-mcp/wukong-wide-staff-regression.tap"
+  },
+  "productionBrowser": {
+    "codeInjection": false,
+    "input": "Actual Single Player button, KeyboardEvents J/D, pause button",
+    "resources": {
+      "loaded": 69,
+      "total": 69,
+      "failed": []
+    },
+    "heroAtlases": 10,
+    "preparedWholeFrames": 132,
+    "scriptErrors": [],
+    "observedRandomVariants": [
+      "carryFlower",
+      "reverse",
+      "doubleFlower",
+      "sideWheel",
+      "risingSpin",
+      "thrust",
+      "lowSweep",
+      "cloud",
+      "doubleTap",
+      "cross",
+      "uppercut",
+      "overhead",
+      "skyWheel",
+      "whirlwind",
+      "fullSwing",
+      "figureEight",
+      "backFlower"
+    ],
+    "movingCombat": {
+      "before": {
+        "x": 40,
+        "score": 0
+      },
+      "after": {
+        "x": 283,
+        "y": 144,
+        "dead": false,
+        "score": 100,
+        "enemyX": 333.3666666666638,
+        "enemyHp": 2,
+        "enemyMaxHp": 6,
+        "playerBullets": 0
+      }
+    }
+  },
+  "visualChecks": [
+    "Complete connected bodies in all 24 added frames, including back views, extension, wrist turns and overhead staff",
+    "Ordinary and L-powered staves are a single continuous textured image",
+    "Hands/armor retained; isolated original short shafts/end caps removed in cached body masks",
+    "Forward extended frames calibrated from visible staff centers to avoid mistaking the monkey tail for a shaft",
+    "Golden curved trails follow both actual weapon ends instead of ghost straight poles",
+    "New 8-pose atlases use two wide columns so a long weapon does not merge with adjacent figures"
+  ],
+  "preserved": [
+    "Original level geometry and platforms",
+    "Player speed, jump, gravity and collision",
+    "Per-target damage and combo logic, original power pickups, summons and mount",
+    "Contra and later stages",
+    "Existing stage music and story"
+  ],
+  "preview": "wukong-sequence-preview.html",
+  "snapshots": [
+    "wukong-wide-staff-preview.png",
+    "wukong-long-forward-gameplay.png",
+    "wukong-wide-staff-combat.png"
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "date": "2026-10-24",
+  "purpose": "第一关敌人受击时鲜血迸出",
+  "tests": {
+    "files": 5,
+    "total": 214,
+    "passed": 214,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-blood-regression.tap"
+  },
+  "fixture": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "light": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 10,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 125.57732103257835,
+            "heavy": false,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staff",
+            "angle": -0.03493127046726586,
+            "seed": 26102,
+            "t": 0.12,
+            "life": 0.4
+          }
+        ],
+        "cries": 0
+      },
+      "heavy": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 20,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 126,
+            "heavy": true,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "seed": 29450,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      },
+      "defeat": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 0,
+            "dead": true
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 325,
+            "y": 125.57732103257835,
+            "heavy": false,
+            "killed": true,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staff",
+            "angle": -0.03493127046726586,
+            "seed": 31473,
+            "t": 0.12,
+            "life": 0.58
+          }
+        ],
+        "cries": 1
+      },
+      "flying": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "fly",
+            "hp": 8,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 126,
+            "heavy": true,
+            "killed": false,
+            "metal": false,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "seed": 32856,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      },
+      "metal": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "tur",
+            "hp": 8,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 326,
+            "y": 136,
+            "heavy": true,
+            "killed": false,
+            "metal": true,
+            "player": false,
+            "blood": false,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": -0.3,
+            "seed": 33642,
+            "t": 0.12,
+            "life": 0.36
+          }
+        ],
+        "cries": 0
+      },
+      "boss": {
+        "mode": "pause",
+        "enemies": [
+          {
+            "type": "snp",
+            "hp": 12,
+            "dead": false
+          }
+        ],
+        "effects": [
+          {
+            "k": "martialImpact",
+            "x": 3291.1827643630304,
+            "y": 121.82775119617224,
+            "heavy": true,
+            "killed": false,
+            "metal": true,
+            "player": false,
+            "blood": true,
+            "face": 1,
+            "weapon": "staffWave",
+            "angle": 0,
+            "seed": 84127,
+            "t": 0.12,
+            "life": 0.48
+          }
+        ],
+        "cries": 0
+      }
+    },
+    "renderPure": true,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "audio": {
+      "loaded": 3,
+      "total": 3,
+      "decoded": 3,
+      "failed": [],
+      "active": 0,
+      "played": 0
+    }
+  },
+  "production": {
+    "errors": [],
+    "attempts": 16,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 72,
+      "total": 72,
+      "failed": [],
+      "stage": 1,
+      "cached": 72
+    },
+    "start": {
+      "x": 40,
+      "score": 0
+    },
+    "end": {
+      "x": 449.5,
+      "score": 400,
+      "hp": 100,
+      "voices": {
+        "loaded": 3,
+        "total": 3,
+        "decoded": 3,
+        "failed": [],
+        "active": 2,
+        "played": 2
+      }
+    },
+    "debug": []
+  },
+  "artifacts": [
+    "blood-light.png",
+    "blood-heavy.png",
+    "blood-defeat.png",
+    "blood-production.png"
+  ],
+  "implementation": {
+    "file": "games/wukong/js/wukong-impact.mjs",
+    "particles": {
+      "light": 10,
+      "heavy": 15,
+      "defeat": 19
+    },
+    "lifetime": {
+      "light": 0.4,
+      "heavy": 0.48,
+      "defeat": 0.58
+    },
+    "extraImageAssets": 0
+  },
+  "notes": [
+    "隔离页面布置天兵、飞兵、机关与Boss，调用实际碰撞/伤害函数；正式页面没有测试接口。",
+    "鲜血标记随已有命中事件同步，依据稳定种子绘制，重力保持屏幕向下；同一命中不生成额外粒子实体。",
+    "已目视检查普通命中和重击截图，鲜红血滴/短喷流清晰可见。",
+    "正式页面以 D/J 真实输入前进，得分0→400，保留击杀惨叫，72/72资源就绪、无脚本错误。"
+  ]
+}

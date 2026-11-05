@@ -1,0 +1,14 @@
+[
+  {"key":"come","text":"接招！","families":["ordinary","heavy","qi"]},
+  {"key":"again","text":"再来！","families":["ordinary"]},
+  {"key":"another","text":"再接一招！","families":["ordinary","heavy","qi"]},
+  {"key":"sunHere","text":"俺老孙来也！","families":["ordinary","ultimate"]},
+  {"key":"tryStaff","text":"尝尝俺的棍法！","families":["ordinary","heavy","qi"]},
+  {"key":"fight","text":"战个痛快！","families":["ordinary","heavy","ultimate"]},
+  {"key":"sweepCall","text":"看俺横扫千军！","families":["heavy","ultimate"]},
+  {"key":"overheadCall","text":"吃俺一棍！","families":["heavy","qi","ultimate"]},
+  {"key":"noEscape","text":"休想逃！","families":["ordinary","heavy","qi"]},
+  {"key":"qiCall","text":"棍气如虹！","families":["qi"]},
+  {"key":"powerCall","text":"金箍棒，显神威！","families":["ultimate"]},
+  {"key":"monkeyKing","text":"齐天大圣在此！","families":["ultimate"]}
+]

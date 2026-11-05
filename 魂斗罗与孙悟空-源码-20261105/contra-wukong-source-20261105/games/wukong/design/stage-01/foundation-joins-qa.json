@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-23",
+  "description": "白玉台基按平台宽度排布完整龙纹浮雕和收边柱；高低台阶完整收口，悬空平台和桥梁共用整段连续檐口。沿用原素材和地图，未新增下载图片。",
+  "views": [
+    {
+      "name": "start",
+      "camera": 0,
+      "renderPreservesWorld": true
+    },
+    {
+      "name": "step",
+      "camera": 110,
+      "renderPreservesWorld": true
+    },
+    {
+      "name": "river",
+      "camera": 760,
+      "renderPreservesWorld": true
+    },
+    {
+      "name": "boss",
+      "camera": 2950,
+      "renderPreservesWorld": true
+    }
+  ],
+  "geometry": [
+    {
+      "x": 0,
+      "w": 240,
+      "panels": 3,
+      "piers": 4
+    },
+    {
+      "x": 240,
+      "w": 380,
+      "panels": 4,
+      "piers": 5
+    },
+    {
+      "x": 680,
+      "w": 196,
+      "panels": 2,
+      "piers": 3
+    },
+    {
+      "x": 876,
+      "w": 304,
+      "panels": 3,
+      "piers": 4
+    },
+    {
+      "x": 1340,
+      "w": 60,
+      "panels": 1,
+      "piers": 2
+    },
+    {
+      "x": 1560,
+      "w": 180,
+      "panels": 2,
+      "piers": 3
+    },
+    {
+      "x": 1740,
+      "w": 220,
+      "panels": 2,
+      "piers": 3
+    },
+    {
+      "x": 2010,
+      "w": 400,
+      "panels": 4,
+      "piers": 5
+    },
+    {
+      "x": 2410,
+      "w": 260,
+      "panels": 3,
+      "piers": 4
+    },
+    {
+      "x": 2670,
+      "w": 664,
+      "panels": 7,
+      "piers": 8
+    }
+  ],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 53,
+    "total": 53,
+    "failed": []
+  },
+  "errors": [],
+  "tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "previews": [
+    "foundation-before-start.png",
+    "foundation-before-step.png",
+    "foundation-before-river.png",
+    "foundation-before-boss.png",
+    "foundation-after-start.png",
+    "foundation-after-step.png",
+    "foundation-after-river.png",
+    "foundation-after-boss.png"
+  ],
+  "method": "Isolated Playwright context, camera seeks for fixed screenshots; original solids checked for full positive panel coverage and complete pilasters at both ends. Rendering compared against graph-safe snapshots, no production QA hooks."
+}

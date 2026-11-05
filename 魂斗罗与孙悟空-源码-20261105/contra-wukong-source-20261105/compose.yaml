@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    environment:
+      GAMES_ALLOWED_ORIGINS: ${GAMES_ALLOWED_ORIGINS:-https://games.tangletang.top}
+    volumes:
+      - game-data:/app/backend/data
+    expose:
+      - "3000"
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      BACKEND_DOMAIN: ${BACKEND_DOMAIN:?请在 backend/.env 设置后台域名}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./backend/deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+volumes:
+  game-data:
+  caddy-data:
+  caddy-config:

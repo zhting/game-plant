@@ -1,0 +1,115 @@
+{
+  "taskSpaceId": 149,
+  "production": {
+    "inspect": {
+      "mode": "pause",
+      "stage": 1,
+      "role": "",
+      "room": "",
+      "connected": false,
+      "playing": false,
+      "tick": 18265,
+      "snapshotBytes": 0,
+      "art": {
+        "ready": true,
+        "loaded": [
+          "palm",
+          "rock",
+          "damage",
+          "environment",
+          "fortress",
+          "actorRed",
+          "actorBlue",
+          "actorEnemy",
+          "runRed",
+          "runBlue",
+          "runEnemy",
+          "actorDeath",
+          "jungle"
+        ],
+        "failed": [],
+        "frameCount": 206,
+        "resolution": [
+          1536,
+          864
+        ]
+      },
+      "camera": {
+        "x": 0,
+        "y": 0
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "suspended",
+        "muted": false,
+        "music": "on",
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "exit": {
+        "open": false,
+        "actors": [
+          {
+            "id": 1,
+            "entering": false,
+            "entered": false
+          }
+        ]
+      },
+      "base": null,
+      "players": [
+        {
+          "id": 1,
+          "x": 50.5,
+          "y": 144,
+          "weapon": "rifle",
+          "dead": false,
+          "invincible": -0.01666666666666634
+        }
+      ],
+      "shots": [
+        {
+          "owner": 1,
+          "x": 108.5,
+          "y": 124
+        }
+      ],
+      "score": 0
+    },
+    "noQAHook": "undefined",
+    "errors": []
+  },
+  "qa": {
+    "art": {
+      "ready": true,
+      "loaded": [
+        "damage",
+        "palm",
+        "rock",
+        "jungle",
+        "environment",
+        "fortress",
+        "actorRed",
+        "actorBlue",
+        "actorEnemy",
+        "runRed",
+        "runBlue",
+        "actorDeath",
+        "runEnemy"
+      ],
+      "failed": [],
+      "frameCount": 13,
+      "resolution": [
+        3840,
+        2160
+      ]
+    },
+    "dead": true,
+    "hidden": true
+  }
+}

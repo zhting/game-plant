@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-538346d5-8f13-42c8-afda-fe7dafe09f01.png",
+  "file": "../assets/stage1/rock-arcade.png",
+  "transparent_background": false,
+  "prompt": "Use case: stylized-concept. Asset type: production game terrain texture, opaque PNG square 1536x1536 or larger. Input image is STYLE REFERENCE ONLY: recreate the distinctive rock language from the lower cliff of this classic side-scrolling jungle action game at high resolution. Output ONLY a full-bleed edge-to-edge seamless rock-face texture, NO grass, NO sky, NO water, NO characters, NO text, NO frames. Large irregular interlocking angular polygon boulders, slanted faceted planes, deep nearly black dark-green crevices, olive-brown rock bodies, mustard gold light patches on upper planes, restrained small amber zigzag mineral inclusions. About 12–16 bold stones across the whole width, evenly distributed without rows or grid, no obvious repetition or symmetric mirrored shapes. Strong 1980s arcade illustrated pixel-art shapes and controlled limited palette, refined tight fine-pixel edge detail for modern full-screen game display; bold readable shapes, not a photographic brown gravel texture, not smooth vector cells, not 3D PBR, not tiny noisy pebbles. Directional upper-left golden light, shadow lower-right. Horizontal and vertical edges tile continuously. The whole image is rock face.",
+  "implementation": {
+    "grass": "Code-native thick sod with bright upper mat, dark underside and overlapping fern fringe; 8–12 logical pixels.",
+    "water": "Continuous blue water below ground, world-space irregular cliff foot with animated foam. Interactive swimming interval retains the original boundaries."
+  }
+}

@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第八关 · 上下寄生怪与白色漂浮怪</title>
+<style>body{margin:0;background:#080611;color:#ddc5d5;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}button{margin:12px 4px;padding:8px 14px;background:#241525;border:1px solid #75516c;color:inherit}</style>
+<canvas width="1536" height="864"></canvas><button id="pause">暂停</button><button id="mount">查看底部寄生怪</button><button id="group">查看下一组</button><button id="destroy">击破寄生怪</button>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=fused-tissue-3';
+import {CEILING_NESTS,FLOOR_NESTS,createCeilingParasites,createFloorParasites,advanceCeilingParasite,advanceWhiteFloater,drawCeilingNests} from '../js/ceiling-parasite.mjs?v=floor-parasites-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt});
+await Promise.all(['cavern','terrain','intestineMotion','cystMotion','ceilingParasite','whiteFloater'].map(k=>art.loadImage(k)).concat(baseArt.loadImage('actorBlue')));
+let time=0,last=performance.now(),paused=false,group=0,mount='ceiling',parents=createCeilingParasites().slice(0,2),brood=[];
+function resetGroup(){parents=(mount==='floor'?createFloorParasites():createCeilingParasites()).slice(group*2,group*2+2);brood=[];}
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续':'暂停';};
+document.querySelector('#group').onclick=()=>{group=(group+1)%4;resetGroup();};
+document.querySelector('#mount').onclick=()=>{mount=mount==='ceiling'?'floor':'ceiling';document.querySelector('#mount').textContent=mount==='ceiling'?'查看底部寄生怪':'查看顶部寄生怪';resetGroup();};
+document.querySelector('#destroy').onclick=()=>{for(const p of parents)p.dead=true;};
+function frame(now){
+  const dt=Math.min(.04,(now-last)/1000);last=now;const camera=(mount==='floor'?FLOOR_NESTS:CEILING_NESTS)[group*2][0]-140,target={x:camera+110,y:176};
+  if(!paused){
+    time+=dt;brood=brood.filter(e=>!e.dead);
+    for(const p of parents)brood.push(...advanceCeilingParasite(p,dt,brood,{active:true}));
+    for(const e of brood)advanceWhiteFloater(e,target,dt,camera);
+  }
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={stage:8,camX:camera,time,t:time*60,freezeT:0,s8:{tissueTime:time}};
+  art.backdrop(camera);art.g.save();art.g.translate(-camera,0);drawCeilingNests(art,camera);
+  art.floor([{x:camera-20,y:176,w:430,h:40,g:1}],camera);
+  for(const p of parents)if(!p.dead)art.enemy(p);for(const e of brood)if(!e.dead)art.enemy(e);
+  art.actor({...target,face:1,onGround:true,ax:0,ay:-1},'blue');art.g.restore();
+  art.hudText('第八关 · '+(mount==='floor'?'底部寄生怪':'顶部寄生怪'),192,7,'#edc5df',7,'center');art.present(ctx);
+  window.ceilingPreview={ready:true,time,paused,group,mount,phases:parents.map(p=>p.dead?'destroyed':p.phase),brood:brood.length};requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script></html>

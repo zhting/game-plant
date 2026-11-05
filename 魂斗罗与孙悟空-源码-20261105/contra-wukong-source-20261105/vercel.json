@@ -1,0 +1,129 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/wukong",
+      "destination": "/games/wukong/index.html"
+    },
+    {
+      "source": "/games/wukong",
+      "destination": "/games/wukong/index.html"
+    },
+    {
+      "source": "/contra2026",
+      "destination": "/games/contra2026/index.html"
+    },
+    {
+      "source": "/games/contra2026",
+      "destination": "/games/contra2026/index.html"
+    },
+    {
+      "source": "/game",
+      "destination": "/games/game/index.html"
+    },
+    {
+      "source": "/game/3d",
+      "destination": "/games/game/3d/index.html"
+    },
+    {
+      "source": "/idiom",
+      "destination": "/games/idiom/index.html"
+    },
+    {
+      "source": "/lego",
+      "destination": "/games/lego/index.html"
+    },
+    {
+      "source": "/成语",
+      "destination": "/games/idiom/index.html"
+    },
+    {
+      "source": "/mirror",
+      "destination": "/games/mirror/index.html"
+    },
+    {
+      "source": "/games/game",
+      "destination": "/games/game/index.html"
+    },
+    {
+      "source": "/games/game/3d",
+      "destination": "/games/game/3d/index.html"
+    },
+    {
+      "source": "/games/idiom",
+      "destination": "/games/idiom/index.html"
+    },
+    {
+      "source": "/games/lego",
+      "destination": "/games/lego/index.html"
+    },
+    {
+      "source": "/games/mirror",
+      "destination": "/games/mirror/index.html"
+    },
+    {
+      "source": "/junqi",
+      "destination": "/games/junqi/index.html"
+    },
+    {
+      "source": "/军棋",
+      "destination": "/games/junqi/index.html"
+    },
+    {
+      "source": "/games/junqi",
+      "destination": "/games/junqi/index.html"
+    },
+    {
+      "source": "/games/jelly-block",
+      "destination": "/games/jelly-block/index.html"
+    },
+    {
+      "source": "/jelly-block",
+      "destination": "/games/jelly-block/index.html"
+    },
+    {
+      "source": "/真果冻",
+      "destination": "/games/jelly-block/index.html"
+    },
+    {
+      "source": "/games/gandengyan",
+      "destination": "/games/gandengyan/index.html"
+    },
+    {
+      "source": "/gandengyan",
+      "destination": "/games/gandengyan/index.html"
+    },
+    {
+      "source": "/干瞪眼",
+      "destination": "/games/gandengyan/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/games/contra2026/assets/:path*",
+      "has": [
+        {
+          "type": "query",
+          "key": "v",
+          "value": "[a-f0-9]{10}"
+        }
+      ],
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}

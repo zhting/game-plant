@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-23",
+  "description": "原摩托道具换为麒麟；骑乘姿势、十四种随机棍法与实际命中共用坐骑高度。",
+  "checks": {
+    "mountedAttack": {
+      "ride": "moto",
+      "enemyHp": 38,
+      "initialHp": 40,
+      "bullets": 0,
+      "banner": "麒麟 15 秒"
+    },
+    "running": {
+      "x": 201.00000000000017,
+      "y": 112,
+      "vx": 170,
+      "ride": "moto",
+      "variant": "thrust",
+      "combo": 2,
+      "anim": 5.999999999999998
+    },
+    "jump": {
+      "x": 235.00000000000028,
+      "y": 67.16666666666666,
+      "vx": 170,
+      "vy": -160.00000000000003,
+      "onGround": false,
+      "spin": false,
+      "ride": "moto",
+      "staffKind": "smash",
+      "variant": "reverse"
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 54,
+      "total": 54,
+      "failed": []
+    },
+    "boss": {
+      "hp": 58,
+      "maxHp": 60,
+      "ride": "moto",
+      "staff": "figureEight",
+      "bullets": 0
+    },
+    "renderDoesNotMutateWorld": true
+  },
+  "errors": [],
+  "unitTests": {
+    "passed": 211,
+    "failed": 0,
+    "command": "node --test --test-reporter=dot backend/test/wukong-mount.test.mjs backend/test/wukong-locomotion.test.mjs backend/test/wukong-magic.test.mjs backend/test/wukong-staff.test.mjs backend/test/wukong-opening.test.mjs backend/test/wukong-animation.test.mjs backend/test/contra-motion.test.mjs backend/test/contra-engine.test.mjs backend/test/contra-preload.test.mjs backend/test/contra-opening.test.mjs",
+    "newCoverage": [
+      "真实道具拾取与 L 召唤",
+      "原骑乘速度/双跳/15秒期限对照",
+      "十四种棍法左右实际命中，无子弹",
+      "骑乘中随机连招与跳跃保持骑姿",
+      "双手、棍身、身体高度和双腿连接",
+      "长棍/三棍/飞旋/大招/六臂兼容",
+      "原摩托贴图不被调用，绘制不改状态",
+      "Boss 真实棍击伤害",
+      "二号玩家独立骑乘与快照引用"
+    ]
+  },
+  "assets": {
+    "master": "assets/celestial-qilin.png",
+    "runtime": "assets/celestial-qilin.webp",
+    "prompt": "assets/celestial-qilin-generation.json",
+    "compression": "design/stage-01/qilin-compression.json"
+  },
+  "screenshots": [
+    "qilin-mounted-draft.png",
+    "qilin-mounted-swing.png",
+    "qilin-running.png",
+    "qilin-jump-attack.png",
+    "qilin-riding-poses.png",
+    "qilin-boss-attack.png"
+  ],
+  "notes": [
+    "浏览器使用隔离测试上下文；开局实际加载后用真实 L/J/K 按键验证骑乘、挥棍和跳跃。",
+    "Boss 场景用 QA 注入定位到原关底，再用真实 J 键确认 60->58 生命变化。",
+    "姿势图为固定时刻采样；实际持棍、腿部与坐骑均用游戏渲染模块。",
+    "QA 控制接口仅通过浏览器路由临时注入，未写入产品代码。"
+  ]
+}

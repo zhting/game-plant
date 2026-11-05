@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="group" aria-labelledby="map-title map-desc">
+  <title id="map-title">南天门攻城路线</title>
+  <desc id="map-desc">从登云桥进入天门前庭，自选巨弩风阵、回雷灵阵、镇甲力阵。破坏任意两座阵眼即可打开主门，再迎战增长天王。三支路通过侧门往返，图示表示房间连接关系。</desc>
+  <defs>
+    <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#6b8379"/><stop offset="1" stop-color="#1c3e40"/></linearGradient>
+    <linearGradient id="fade" x2="0" y2="1"><stop stop-color="#24474a" stop-opacity=".4"/><stop offset="1" stop-color="#24474a" stop-opacity="0"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#d5ac65" stop-opacity=".15"/><stop offset="1" stop-color="#d5ac65" stop-opacity="0"/></radialGradient>
+    <g id="island"><path d="M-78 18L-54 57 -22 69 0 100 31 63 61 53 79 18Z" fill="url(#stone)" opacity=".6"/><path d="M-84 10H84L78 26H-78Z" fill="#41605c" stroke="#839987" stroke-width="1.5"/><path d="M-68 17H68" stroke="#c1bb8a" opacity=".55"/></g>
+    <g id="roof"><path d="M-57-30Q-18-34 0-52 18-34 57-30L44-16H-44Z" fill="#426665" stroke="#b49965" stroke-width="2"/><path d="M-44-16H44M-33-15V7M33-15V7" stroke="#b5815d" stroke-width="5"/></g>
+  </defs>
+  <style>
+    text{font-family:"Microsoft YaHei","PingFang SC",sans-serif;fill:#dce4d8;text-anchor:middle}.road{fill:none;stroke:#698482;stroke-width:2;stroke-dasharray:5 7;opacity:.6}.branch.cleared{stroke:#8bb7a7;opacity:1;stroke-dasharray:none}.room{cursor:pointer;outline:none}.room .rim{fill:#17363b;stroke:#8f9e87;stroke-width:1.5;transition:fill .2s,stroke .2s}.room:hover .rim,.room:focus .rim,.room.selected .rim{fill:#38504a;stroke:#e8c481;stroke-width:3}.room.cleared .rim{fill:#23594e;stroke:#a7d2b5}.room.cleared .seal{fill:#a7d2b5}.label{font-size:19px;font-weight:700}.sub{font-size:12px;fill:#9db4ac;letter-spacing:2px}.seal{fill:#d6b477}.room.locked{opacity:.52}.cloud{fill:none;stroke:#668f8d;stroke-width:1;opacity:.18}.caption{font-size:12px;fill:#8ca5a2;letter-spacing:1px}
+  </style>
+  <path d="M0 270L106 195 198 265 305 143 390 243 463 191 580 265 686 164 814 260 951 175 1060 246 1200 180V450H0Z" fill="url(#fade)"/>
+  <ellipse cx="1080" cy="243" rx="145" ry="175" fill="url(#halo)"/>
+  <path class="cloud" d="M0 405Q140 350 245 397T500 398 760 402 1040 383 1230 410M-10 437Q120 386 260 430T520 434 800 428 1100 418 1260 440"/>
+  <path class="road" d="M100 264H265"/>
+  <path class="road branch" data-path="wind" d="M305 243Q370 95 544 109"/>
+  <path class="road branch" data-path="thunder" d="M315 264H612"/>
+  <path class="road branch" data-path="armor" d="M305 285Q380 417 544 410"/>
+  <path class="road" id="gate-road" d="M325 264H863"/>
+  <path class="road" d="M929 264H1060"/>
+  <g transform="translate(95 260)"><use href="#island"/><path d="M-50 7L-5-20 48 7" fill="none" stroke="#acb6a2" stroke-width="4"/><text y="-43" class="sub">入关 / 约 60 秒</text><text y="62" class="label">登云桥</text></g>
+  <g class="room selected" data-room="hub" role="button" tabindex="0" aria-label="查看天门前庭">
+    <g transform="translate(285 260)"><use href="#island"/><use href="#roof"/><circle r="20" cy="-4" class="rim"/><path d="M-9 1H9M0-8V10" stroke="#d6b477" stroke-width="2"/><text y="61" class="label">天门前庭</text><text y="82" class="sub">选路 / 补给 / 检查点</text></g>
+  </g>
+  <g class="room" data-room="wind" role="button" tabindex="0" aria-label="查看巨弩风阵">
+    <g transform="translate(565 105)"><use href="#island"/><circle r="29" cy="-6" class="rim"/><path d="M-19-7Q0-28 19-7M0-26V9M-11 9H11" fill="none" stroke="#d6b477" stroke-width="3"/><circle class="seal" r="4" cy="-6"/><text y="62" class="label">巨弩风阵</text><text y="82" class="sub">夺台 · 转弩 · 破阵</text></g>
+  </g>
+  <g class="room" data-room="thunder" role="button" tabindex="0" aria-label="查看回雷灵阵">
+    <g transform="translate(645 260)"><use href="#island"/><circle r="29" cy="-6" class="rim"/><path class="seal" d="M5-29L-13-3H-2L-8 17 15-11H3Z"/><text y="62" class="label">回雷灵阵</text><text y="82" class="sub">看准 · 挥棍 · 回雷</text></g>
+  </g>
+  <g class="room" data-room="armor" role="button" tabindex="0" aria-label="查看镇甲力阵">
+    <g transform="translate(565 410)"><use href="#island"/><circle r="29" cy="-6" class="rim"/><path d="M-15-23H15V-4Q13 8 0 15-13 8-15-4Z" fill="none" stroke="#d6b477" stroke-width="3"/><path d="M0-19V8M-10-7H10" stroke="#d6b477" stroke-width="2"/><text y="61" class="label">镇甲力阵</text><text y="81" class="sub">破锁 · 放锤 · 撞阵</text></g>
+  </g>
+  <g class="room locked" data-room="gate" role="button" tabindex="0" aria-label="查看护门封印">
+    <g transform="translate(895 260)"><use href="#island"/><path d="M-43 10V-55H43V10M-23 9V-33H23V9" fill="#213c3d" stroke="#a48d61" stroke-width="4"/><path d="M-65-59Q-21-59 0-78 21-59 65-59L45-44H-45Z" fill="#426665" stroke="#c4a36b" stroke-width="2"/><circle r="11" cy="-17" class="rim"/><path d="M0-25V-10M-5-17H5" stroke="#d6b477" stroke-width="2"/><text y="62" class="label">南天门</text><text id="gate-map-label" y="82" class="sub">破任意两阵，击开主门</text></g>
+  </g>
+  <g class="room locked" data-room="boss" role="button" tabindex="0" aria-label="查看增长天王首领战">
+    <g transform="translate(1100 260)"><use href="#island"/><circle r="39" cy="-8" class="rim"/><path d="M0-34V13M-15-25L0-34 15-25M-24-5L0-17 24-5M-11 25L0 6 11 25M26-35L9 14M19 7L34 12" fill="none" stroke="#d6b477" stroke-width="3"/><text y="62" class="label">增长天王</text><text y="82" class="sub">重劈后至少 3 秒反击</text></g>
+  </g>
+  <text x="1110" y="28" class="caption">横版房间连接示意</text>
+  <text x="165" y="491" class="caption">支路完成后开启回庭近路</text>
+</svg>

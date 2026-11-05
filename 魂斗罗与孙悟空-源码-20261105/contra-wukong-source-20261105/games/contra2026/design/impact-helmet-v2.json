@@ -1,0 +1,23 @@
+{
+  "generatedWith": "built-in imagegen",
+  "source": "games/contra2026/assets/shared/impact-helmet-v2.png",
+  "file": "games/contra2026/assets/shared/impact-helmet-v2.webp",
+  "url": "/games/contra2026/assets/shared/impact-helmet-v2.webp",
+  "dimensions": [
+    512,
+    331
+  ],
+  "sourceBounds": [
+    145,
+    70,
+    1474,
+    928
+  ],
+  "bytes": 49150,
+  "sha256": "dfcdbfb4a5521a0ac21cd054ad221190f0ce8a9a4b6a3c0d7420f4a7a3eb743b",
+  "alphaPreserved": true,
+  "prompt": "Use case: stylized-concept. Produce ONE production 2D transparent wearable helmet sprite for a detailed arcade run-and-gun commando. Helmet alone, no head or character. A compact low rounded anti-falling-rock armored climbing helmet facing RIGHT, side profile with a very slight three-quarter view. Strong fitted dome with curved layered armor plates, short projecting brow at the front RIGHT, small rear neck flange LEFT, dark fitted lower rim, small visible ear pad and short dark fastening strap only at the rear side. Face opening under front brow is empty transparent. Silhouette instantly recognizable as a snug protective helmet, never a tall hat or block. Detailed hand-painted high-resolution arcade sprite with crisp deliberate pixel clusters and smoothly stepped antialiased contour. Cool blue-grey gunmetal curved shell, graphite underside, worn brass rivets, restrained dark olive inserts. Bright thin silver upper-left highlights, plate seams, vents, small scratches and edge wear. Matching a muscular 1990s arcade commando with bright blue bandana and trousers. Clear major shapes when reduced to 90 pixels wide; richly rendered rather than flat vector. Natural upper-left game lighting. No giant visor or lamp, face mask, spikes, glowing eyes, skull ornaments or logos. One helmet centered occupying around 80% of image width, silhouette about 1.6:1 including short rear strap, full object visible with at least 7% transparent margins. TRUE TRANSPARENT RGBA background and transparent face opening. Absolutely no character, head, weapon, ground, cast shadow plane, checkerboard, text, label, border, UI or design-sheet layout.",
+  "runtime": "js/impact-helmet-art.mjs",
+  "loading": "Stage 3 only; stage 1 startup image plan unchanged.",
+  "protection": "Existing 15-second falling-rock protection is unchanged."
+}

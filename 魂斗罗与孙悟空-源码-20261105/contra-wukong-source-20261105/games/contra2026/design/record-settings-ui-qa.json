@@ -1,0 +1,61 @@
+{
+  "manual": "赛博朋克版",
+  "home": "原视频音乐",
+  "end": "关闭本关音乐",
+  "random": {
+    "pressed": "true",
+    "saved": "random"
+  },
+  "restored": "关闭本关音乐",
+  "stageCatalogs": [
+    {
+      "stage": "2",
+      "choices": [
+        "original",
+        "chiptune",
+        "off"
+      ],
+      "art": "/games/contra2026/assets/music-records/stage-02.svg"
+    },
+    {
+      "stage": "3",
+      "choices": [
+        "original",
+        "off"
+      ],
+      "art": "/games/contra2026/assets/music-records/stage-03.svg"
+    },
+    {
+      "stage": "16",
+      "choices": [
+        "original",
+        "off"
+      ],
+      "art": "/games/contra2026/assets/music-records/stage-16.svg"
+    }
+  ],
+  "help": true,
+  "persisted": {
+    "saved": {
+      "1": "random",
+      "2": "random",
+      "3": "random",
+      "4": "original",
+      "5": "original",
+      "6": "original",
+      "7": "original",
+      "8": "original",
+      "9": "original",
+      "10": "original",
+      "11": "original",
+      "12": "original",
+      "13": "original",
+      "14": "original",
+      "15": "original",
+      "16": "random"
+    },
+    "title": "随机播放",
+    "random": "true",
+    "loaded": true
+  }
+}

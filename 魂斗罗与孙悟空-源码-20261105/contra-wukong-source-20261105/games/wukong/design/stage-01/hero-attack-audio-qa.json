@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-25",
+  "tests": {
+    "passed": 567,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-hero-audio-regression.tap"
+  },
+  "assets": {
+    "newClips": 11,
+    "bytes": 70035,
+    "format": "mono 24 kHz Ogg Vorbis",
+    "voices": "Four nonverbal male effort clips, HaelDB CC0 recordings, distinct from the enemy death clips",
+    "credits": "games/wukong/assets/audio/CREDITS.md",
+    "build": "games/wukong/tools/build-hero-audio.py"
+  },
+  "behavior": {
+    "soundTypes": [
+      "swing",
+      "heavy",
+      "spin",
+      "charge",
+      "qi",
+      "land",
+      "ultimate"
+    ],
+    "voiceIntervalSeconds": 0.85,
+    "priorityUltimate": true,
+    "usesSfxVolume": true,
+    "snapshotDedupe": true,
+    "skipsStaleOrMutedEvents": true,
+    "stopsOnPause": true
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "airSwing": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 1,
+          "voices": 1,
+          "counts": {
+            "swing": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 1,
+            "voices": 1,
+            "counts": {
+              "swing": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "combo": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 4,
+          "voices": 2,
+          "counts": {
+            "swing": 1,
+            "spin": 2,
+            "heavy": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 4,
+            "voices": 2,
+            "counts": {
+              "swing": 1,
+              "spin": 2,
+              "heavy": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "wheel": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 5,
+          "voices": 3,
+          "counts": {
+            "swing": 1,
+            "spin": 3,
+            "heavy": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 5,
+            "voices": 3,
+            "counts": {
+              "swing": 1,
+              "spin": 3,
+              "heavy": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "slam": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 1,
+          "sounds": 7,
+          "voices": 4,
+          "counts": {
+            "swing": 1,
+            "spin": 3,
+            "heavy": 2,
+            "land": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 1,
+            "sounds": 7,
+            "voices": 4,
+            "counts": {
+              "swing": 1,
+              "spin": 3,
+              "heavy": 2,
+              "land": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "qi": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 1,
+          "sounds": 10,
+          "voices": 5,
+          "counts": {
+            "swing": 2,
+            "spin": 3,
+            "heavy": 2,
+            "land": 1,
+            "charge": 1,
+            "qi": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 1,
+            "sounds": 10,
+            "voices": 5,
+            "counts": {
+              "swing": 2,
+              "spin": 3,
+              "heavy": 2,
+              "land": 1,
+              "charge": 1,
+              "qi": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "contacts": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 1,
+          "sounds": 13,
+          "voices": 7,
+          "counts": {
+            "swing": 4,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 1,
+            "sounds": 13,
+            "voices": 7,
+            "counts": {
+              "swing": 4,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "ultimate": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 14,
+          "voices": 8,
+          "counts": {
+            "swing": 4,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1,
+            "ultimate": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 14,
+            "voices": 8,
+            "counts": {
+              "swing": 4,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1,
+              "ultimate": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "sfxOff": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 14,
+          "voices": 8,
+          "counts": {
+            "swing": 4,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1,
+            "ultimate": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "off",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 14,
+            "voices": 8,
+            "counts": {
+              "swing": 4,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1,
+              "ultimate": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "noReplay": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 14,
+          "voices": 8,
+          "counts": {
+            "swing": 4,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1,
+            "ultimate": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 14,
+            "voices": 8,
+            "counts": {
+              "swing": 4,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1,
+              "ultimate": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "volumeZero": {
+        "mode": "play",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 14,
+          "voices": 8,
+          "counts": {
+            "swing": 4,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1,
+            "ultimate": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": true,
+          "paused": false,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 0,
+          "sfxGain": 0,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 14,
+            "voices": 8,
+            "counts": {
+              "swing": 4,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1,
+              "ultimate": 1
+            }
+          }
+        },
+        "staff": null
+      },
+      "paused": {
+        "mode": "pause",
+        "ground": true,
+        "hero": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 15,
+          "voices": 9,
+          "counts": {
+            "swing": 5,
+            "spin": 3,
+            "heavy": 3,
+            "land": 1,
+            "charge": 1,
+            "qi": 1,
+            "ultimate": 1
+          }
+        },
+        "audio": {
+          "track": "stage1",
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "running",
+          "muted": false,
+          "music": "on",
+          "musicVolume": 30,
+          "sfxVolume": 100,
+          "sfxGain": 0.8999999761581421,
+          "selection": "original",
+          "resolved": {
+            "stage": 1,
+            "entry": 4,
+            "preference": "original",
+            "choice": "original"
+          },
+          "synth": false,
+          "sfx": "on",
+          "gain": 0.16500000655651093,
+          "enemyVoices": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 1
+          },
+          "heroActions": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 15,
+            "voices": 9,
+            "counts": {
+              "swing": 5,
+              "spin": 3,
+              "heavy": 3,
+              "land": 1,
+              "charge": 1,
+              "qi": 1,
+              "ultimate": 1
+            }
+          }
+        },
+        "staff": {
+          "kind": "sweep",
+          "command": "thrust"
+        }
+      }
+    },
+    "initial": {
+      "mode": "play",
+      "ground": true,
+      "hero": {
+        "loaded": 11,
+        "total": 11,
+        "decoded": 11,
+        "failed": [],
+        "active": 0,
+        "sounds": 0,
+        "voices": 0,
+        "counts": {}
+      },
+      "audio": {
+        "track": "stage1",
+        "playing": true,
+        "paused": false,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "running",
+        "muted": false,
+        "music": "on",
+        "musicVolume": 30,
+        "sfxVolume": 100,
+        "sfxGain": 0.8999999761581421,
+        "selection": "original",
+        "resolved": {
+          "stage": 1,
+          "entry": 4
+        },
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.16500000655651093,
+        "enemyVoices": {
+          "loaded": 3,
+          "total": 3,
+          "decoded": 3,
+          "failed": [],
+          "active": 0,
+          "played": 0
+        },
+        "heroActions": {
+          "loaded": 11,
+          "total": 11,
+          "decoded": 11,
+          "failed": [],
+          "active": 0,
+          "sounds": 0,
+          "voices": 0,
+          "counts": {}
+        }
+      },
+      "staff": null
+    },
+    "capture": {
+      "bytes": 165723,
+      "peak": 0.41291138529777527,
+      "rms": 0.04680919118857474
+    },
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 86,
+      "total": 86,
+      "failed": [],
+      "stage": 1,
+      "cached": 86
+    }
+  },
+  "recording": "games/wukong/design/stage-01/wukong-hero-combat-audio.webm",
+  "scope": "Real keyboard input and recorded Web Audio output in an isolated, test-only scene. Defaults BGM 30%, SFX 100%. No runtime audio-generation service required."
+}

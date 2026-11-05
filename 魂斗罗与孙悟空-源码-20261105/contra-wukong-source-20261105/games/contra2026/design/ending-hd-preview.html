@@ -1,0 +1,13 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>魂斗罗2026 · 高清通关动画预览</title>
+<style>body{margin:0;background:#050c15;color:#cad6d7;font:14px system-ui}canvas{display:block;width:min(100vw,1280px);height:auto;margin:auto}.controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px;flex-wrap:wrap}button{background:#182936;color:inherit;border:1px solid #4d6572;padding:7px 12px;cursor:pointer}input{width:min(48vw,560px)}</style>
+<canvas width="1920" height="1080"></canvas><div class="controls"><button id="pause">暂停</button><button data-seek="0">撤离</button><button data-seek="6">崩塌</button><button data-seek="11.6">返航</button><button data-seek="25">字幕</button><input id="seek" type="range" min="0" max="44" step=".01" value="0"><output>00.00 / 44.00</output></div>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {EndingArt} from '../js/ending-art.mjs?v=ending-hd-1';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false},baseArt=new StageOneArt(options),art=new EndingArt({...options,baseArt});
+await Promise.all(Object.keys(art.assets).map(k=>art.loadImage(k)).concat(['environment','facilities','explosionAtlas'].map(k=>baseArt.loadImage(k))));
+const G={stage:8,time:876,score:147500,deaths:0,cine:{kind:'end',t:0}},seek=document.querySelector('#seek');let paused=false,last=performance.now();
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续':'暂停';};seek.oninput=()=>{G.cine.t=Number(seek.value);};
+for(const button of document.querySelectorAll('[data-seek]'))button.onclick=()=>{G.cine.t=Number(button.dataset.seek);};
+function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!paused)G.cine.t=(G.cine.t+dt)%44;art.render(ctx,G,{settings:{shake:'on'}});seek.value=G.cine.t;document.querySelector('output').textContent=G.cine.t.toFixed(2)+' / 44.00';window.endingPreview={ready:true,time:G.cine.t,paused};requestAnimationFrame(frame);}requestAnimationFrame(frame);
+</script></html>

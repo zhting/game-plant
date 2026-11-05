@@ -1,0 +1,118 @@
+{
+  "taskSpaceId": 148,
+  "production": true,
+  "noQAHook": "undefined",
+  "electricChangedPixels": 10857,
+  "proneShots": [
+    {
+      "owner": 1,
+      "x": 192.64,
+      "y": 160.35999999999999
+    }
+  ],
+  "art": {
+    "ready": true,
+    "loaded": [
+      "environment",
+      "kit",
+      "rearBlue",
+      "rearRed",
+      "corridor",
+      "frontEnemy",
+      "bossWall"
+    ],
+    "failed": [],
+    "frameCount": 4,
+    "resolution": [
+      1536,
+      864
+    ]
+  },
+  "final": {
+    "mode": "pause",
+    "stage": 2,
+    "role": "",
+    "room": "",
+    "connected": false,
+    "playing": false,
+    "tick": 174,
+    "snapshotBytes": 0,
+    "art": {
+      "ready": true,
+      "loaded": [
+        "environment",
+        "kit",
+        "rearBlue",
+        "rearRed",
+        "corridor",
+        "frontEnemy",
+        "bossWall"
+      ],
+      "failed": [],
+      "frameCount": 4,
+      "resolution": [
+        1536,
+        864
+      ]
+    },
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": null,
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "suspended",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": null,
+    "base": {
+      "room": 0,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "core",
+          "hp": 12,
+          "max": 12
+        }
+      ]
+    },
+    "players": [
+      {
+        "id": 1,
+        "x": 201,
+        "y": 204,
+        "weapon": "rifle",
+        "dead": false,
+        "invincible": 1.0166666666666684
+      }
+    ],
+    "shots": [
+      {
+        "owner": 1,
+        "x": 192.28,
+        "y": 142.71999999999997
+      }
+    ],
+    "score": 0
+  }
+}

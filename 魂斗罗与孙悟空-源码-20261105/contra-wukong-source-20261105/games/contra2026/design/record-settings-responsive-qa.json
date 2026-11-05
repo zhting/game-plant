@@ -1,0 +1,26 @@
+{
+  "desktop": {
+    "mode": "settings",
+    "title": "赛博朋克版"
+  },
+  "responsive": [
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"width\":390,\"height\":844,\"before\":\"赛博朋克版\",\"after\":\"电子乐\",\"overflow\":false,\"panel\":{\"x\":12,\"y\":12,\"width\":366,\"height\":820,\"top\":12,\"right\":378,\"bottom\":832,\"left\":12}}"
+      }
+    },
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"width\":320,\"height\":640,\"panel\":{\"x\":7,\"y\":7,\"width\":306,\"height\":626,\"top\":7,\"right\":313,\"bottom\":633,\"left\":7},\"overflow\":false}"
+      }
+    },
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"width\":720,\"height\":480,\"panel\":{\"x\":16,\"y\":16,\"width\":688,\"height\":448,\"top\":16,\"right\":704,\"bottom\":464,\"left\":16},\"overflow\":false}"
+      }
+    }
+  ]
+}

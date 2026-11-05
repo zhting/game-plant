@@ -1,0 +1,562 @@
+{
+  "date": "2026-10-25",
+  "tests": {
+    "passed": 398,
+    "failed": 0,
+    "files": 12,
+    "report": ".playwright-mcp/wukong-command-vfx-regression.tap"
+  },
+  "reference": {
+    "url": "https://x.com/Nenlyonis/status/2113916518610420021?s=20",
+    "inspected": "Public post and 41.816-second video in browser; six video timestamps sampled",
+    "videoDuration": 41.816,
+    "notes": [
+      "Separate silhouettes and lifetimes for different skill forms",
+      "Sharp tapered stroke edges and compact hit flashes",
+      "Local selective glow while keeping figures and the scene readable"
+    ],
+    "adaptation": "Canvas 2D gold/red Wukong staff trails, projected overhead and ground arcs, form-specific contact flashes; no source media or shaders copied into game runtime assets"
+  },
+  "fixture": true,
+  "keyboard": "Playwright keyboard down/up",
+  "errors": [],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 79,
+    "total": 79,
+    "failed": [],
+    "stage": 1,
+    "cached": 79
+  },
+  "art": {
+    "ready": true,
+    "loaded": [
+      "heaven",
+      "skinActors",
+      "heroWholeMovement",
+      "ruyiStaff",
+      "snow",
+      "lowJungle",
+      "facilities",
+      "turretBase",
+      "rock",
+      "damage",
+      "environment",
+      "fortress",
+      "birthMountain",
+      "birthActors",
+      "somersaultCloud",
+      "celestialQilin",
+      "palaceFoundation",
+      "cloudSea",
+      "heavenProps",
+      "heavenCasket",
+      "skinDeath",
+      "giantWholeMovement",
+      "giantWholeCleave",
+      "giantWholeSweep",
+      "giantWholeSpin",
+      "giantWholeMobility",
+      "giantWholeSweepLink",
+      "heroWholeMobility",
+      "heroWholeSweep",
+      "heroWholeCleave",
+      "heroWholeFlower",
+      "heroWholeExtra",
+      "heroWholeUppercut",
+      "heroWholeAdvance",
+      "heroWholeBlossom",
+      "heroWholeCyclone",
+      "heroWholeQilin",
+      "heroWholeLow",
+      "guardReactions",
+      "fairy",
+      "skinProne",
+      "heavenEncounters"
+    ],
+    "failed": [],
+    "frameCount": 10,
+    "resolution": [
+      1536,
+      864
+    ],
+    "skin": "wukong",
+    "presentationOnly": true,
+    "actorsReady": true,
+    "backgroundReady": true,
+    "cloudReady": true,
+    "sceneryReady": true,
+    "heroAnimation": "whole-sprite-sequences",
+    "heroAtlases": 12
+  },
+  "scenes": {
+    "thrust": {
+      "staff": {
+        "kind": "sweep",
+        "command": "thrust",
+        "time": 0.21666666666666665,
+        "duration": 0.48
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "extra:3",
+      "wholePainting": true,
+      "hp": 38,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "thrust",
+          "t": 0.11666666666666665
+        }
+      ],
+      "trial": {
+        "frames": [
+          "extra:0",
+          "extra:1",
+          "extra:2",
+          "extra:3"
+        ],
+        "hits": [
+          "thrust"
+        ],
+        "action": {
+          "kind": "sweep",
+          "variant": "thrust",
+          "command": "thrust",
+          "duration": 0.48,
+          "combo": 1,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      },
+      "completeFrames": [
+        "extra:0",
+        "extra:1",
+        "extra:2",
+        "extra:3",
+        "extra:4",
+        "extra:5",
+        "extra:6",
+        "extra:7"
+      ],
+      "hitForms": [
+        "thrust"
+      ],
+      "endHP": 38
+    },
+    "lift": {
+      "staff": {
+        "kind": "lift",
+        "command": "lift",
+        "time": 0.24999999999999997,
+        "duration": 0.56
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "uppercut:3",
+      "wholePainting": true,
+      "hp": 38,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "lift",
+          "t": 0.19999999999999998
+        }
+      ],
+      "trial": {
+        "frames": [
+          "uppercut:0",
+          "uppercut:1",
+          "uppercut:2",
+          "uppercut:3"
+        ],
+        "hits": [
+          "lift"
+        ],
+        "action": {
+          "kind": "lift",
+          "variant": "uppercut",
+          "command": "lift",
+          "duration": 0.56,
+          "combo": 1,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": false
+        }
+      },
+      "completeFrames": [
+        "uppercut:0",
+        "uppercut:1",
+        "uppercut:2",
+        "uppercut:3",
+        "uppercut:4",
+        "uppercut:5",
+        "uppercut:6",
+        "uppercut:7"
+      ],
+      "hitForms": [
+        "lift"
+      ],
+      "endHP": 38
+    },
+    "low": {
+      "staff": {
+        "kind": "sweep",
+        "command": "low",
+        "time": 0.2833333333333333,
+        "duration": 0.64
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "low:3",
+      "wholePainting": true,
+      "hp": 38,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "low",
+          "t": 0.2333333333333333
+        }
+      ],
+      "trial": {
+        "frames": [
+          "low:0",
+          "low:1",
+          "low:2",
+          "low:3"
+        ],
+        "hits": [
+          "low"
+        ],
+        "action": {
+          "kind": "sweep",
+          "variant": "lowSweep",
+          "command": "low",
+          "duration": 0.64,
+          "combo": 1,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": false
+        }
+      },
+      "completeFrames": [
+        "low:0",
+        "low:1",
+        "low:2",
+        "low:3",
+        "low:4",
+        "low:5",
+        "low:6",
+        "low:7"
+      ],
+      "hitForms": [
+        "low"
+      ],
+      "endHP": 38
+    },
+    "wheel": {
+      "staff": {
+        "kind": "sweep",
+        "command": "wheel",
+        "time": 0.35,
+        "duration": 0.78
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "cyclone:3",
+      "wholePainting": true,
+      "hp": 38,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "wheel",
+          "t": 0.3
+        }
+      ],
+      "trial": {
+        "frames": [
+          "cyclone:0",
+          "cyclone:1",
+          "cyclone:2",
+          "cyclone:3"
+        ],
+        "hits": [
+          "wheel"
+        ],
+        "action": {
+          "kind": "sweep",
+          "variant": "skyWheel",
+          "command": "wheel",
+          "duration": 0.78,
+          "combo": 2,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      },
+      "completeFrames": [
+        "cyclone:0",
+        "cyclone:1",
+        "cyclone:2",
+        "cyclone:3",
+        "cyclone:4",
+        "cyclone:5",
+        "cyclone:6",
+        "cyclone:7"
+      ],
+      "hitForms": [
+        "wheel"
+      ],
+      "endHP": 38
+    },
+    "bench": {
+      "meanRenderMs": 1.8299999992052713,
+      "renderPure": true
+    },
+    "sweep": {
+      "staff": {
+        "kind": "smash",
+        "command": "sweep",
+        "time": 0.4666666666666666,
+        "duration": 1.05
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "uppercut:3",
+      "wholePainting": true,
+      "hp": 36,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "sweep",
+          "t": 0.08333333333333333
+        }
+      ],
+      "trial": {
+        "frames": [
+          "sweep:8",
+          "sweep:9",
+          "sweep:10",
+          "sweep:11",
+          "sweep:12",
+          "sweep:13",
+          "sweep:14",
+          "sweep:15",
+          "uppercut:0",
+          "uppercut:1",
+          "uppercut:2"
+        ],
+        "hits": [
+          "sweep"
+        ],
+        "action": {
+          "kind": "smash",
+          "variant": "sweepingFinish",
+          "command": "sweep",
+          "duration": 1.05,
+          "combo": 3,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      },
+      "completeFrames": [
+        "sweep:8",
+        "sweep:9",
+        "sweep:10",
+        "sweep:11",
+        "sweep:12",
+        "sweep:13",
+        "sweep:14",
+        "sweep:15",
+        "uppercut:0",
+        "uppercut:1",
+        "uppercut:2",
+        "uppercut:3",
+        "uppercut:4",
+        "uppercut:5",
+        "uppercut:6",
+        "uppercut:7",
+        "advance:0",
+        "advance:1",
+        "advance:2",
+        "advance:3",
+        "advance:4",
+        "advance:5",
+        "advance:6"
+      ],
+      "hitForms": [
+        "sweep"
+      ],
+      "endHP": 33
+    },
+    "flower": {
+      "staff": {
+        "kind": "smash",
+        "command": "flower",
+        "time": 0.4833333333333333,
+        "duration": 1.12
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "flower:14",
+      "wholePainting": true,
+      "hp": 36,
+      "waves": 0,
+      "hits": [
+        {
+          "form": "flower",
+          "t": 0.016666666666666666
+        }
+      ],
+      "trial": {
+        "frames": [
+          "blossom:0",
+          "blossom:1",
+          "blossom:2",
+          "blossom:3",
+          "blossom:4",
+          "blossom:5",
+          "blossom:6",
+          "blossom:7",
+          "flower:15",
+          "flower:14"
+        ],
+        "hits": [
+          "flower"
+        ],
+        "action": {
+          "kind": "smash",
+          "variant": "lotusChain",
+          "command": "flower",
+          "duration": 1.12,
+          "combo": 3,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      },
+      "completeFrames": [
+        "blossom:0",
+        "blossom:1",
+        "blossom:2",
+        "blossom:3",
+        "blossom:4",
+        "blossom:5",
+        "blossom:6",
+        "blossom:7",
+        "flower:15",
+        "flower:14",
+        "flower:13",
+        "flower:12",
+        "flower:11",
+        "flower:10",
+        "flower:9",
+        "flower:8",
+        "cleave:8",
+        "cleave:9",
+        "cleave:10",
+        "cleave:11",
+        "cleave:12",
+        "cleave:13",
+        "cleave:14",
+        "cleave:15"
+      ],
+      "hitForms": [
+        "flower"
+      ],
+      "endHP": 36
+    },
+    "protectedHold": {
+      "staff": {
+        "kind": "sweep",
+        "command": "wheel",
+        "time": 0.35,
+        "duration": 0.78
+      },
+      "charge": {
+        "active": false,
+        "ready": false
+      },
+      "frame": "cyclone:3",
+      "wholePainting": true,
+      "hp": 40,
+      "waves": 0,
+      "hits": [],
+      "trial": {
+        "frames": [
+          "cyclone:0",
+          "cyclone:1",
+          "cyclone:2",
+          "cyclone:3"
+        ],
+        "hits": [],
+        "action": {
+          "kind": "sweep",
+          "variant": "skyWheel",
+          "command": "wheel",
+          "duration": 0.78,
+          "combo": 2,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      }
+    },
+    "qi": {
+      "staff": {
+        "kind": "qiCast",
+        "time": 0.15,
+        "duration": 0.36
+      },
+      "charge": null,
+      "frame": "advance:3",
+      "wholePainting": true,
+      "hp": 40,
+      "waves": 1,
+      "hits": [],
+      "trial": {
+        "frames": [
+          "cyclone:0",
+          "cyclone:1",
+          "cyclone:2",
+          "cyclone:3",
+          "cyclone:4",
+          "cyclone:5",
+          "cyclone:6",
+          "cyclone:7"
+        ],
+        "hits": [],
+        "action": {
+          "kind": "sweep",
+          "variant": "skyWheel",
+          "command": "wheel",
+          "duration": 0.78,
+          "combo": 2,
+          "face": 1,
+          "weapon": "rifle",
+          "travel": true
+        }
+      }
+    }
+  },
+  "recording": {
+    "bytes": 3886836,
+    "mime": "video/webm;codecs=vp9"
+  },
+  "video": "H:/project/games/games/wukong/design/stage-01/command-vfx-demo.webm"
+}

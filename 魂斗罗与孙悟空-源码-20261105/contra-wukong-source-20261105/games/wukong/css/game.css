@@ -1,0 +1,98 @@
+/* Standalone title screen: gold calligraphy, a red-caped hero and jade clouds. */
+body.wukong[data-game="wukong"] #scrTitle {
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 0 0 calc(var(--s) * 25px);
+  background: linear-gradient(90deg, rgba(5, 25, 30, .94), rgba(5, 25, 30, .6) 38%, transparent 72%),
+    url('/games/wukong/assets/cover.webp') 64% 48% / cover no-repeat;
+  isolation: isolate;
+}
+.wukong-title, .wukong-eyebrow, .wukong-lede { margin: 0; }
+.wukong-title {
+  font-family: "STKaiti", "KaiTi", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(32px, calc(var(--s) * 29px), 112px);
+  font-weight: 900;
+  line-height: 1.22;
+  letter-spacing: .04em;
+  color: #ffe7ad;
+  text-shadow: 0 2px 1px #7d4c1c, 0 5px 24px #061e26;
+  animation: wukongTitleIn .7s .08s both;
+}
+.wukong-eyebrow {
+  margin-bottom: calc(var(--s) * 5px);
+  color: #d4ba80;
+  font-size: clamp(9px, calc(var(--s) * 5px), 19px);
+  letter-spacing: .28em;
+  animation: wukongTitleIn .7s both;
+}
+.wukong-lede {
+  margin: calc(var(--s) * 5px) 0 calc(var(--s) * 12px);
+  color: #d1d8cb;
+  font-size: clamp(10px, calc(var(--s) * 5px), 19px);
+  letter-spacing: .12em;
+  animation: wukongTitleIn .7s .16s both;
+}
+.wukong[data-game="wukong"] #scrTitle .menu {
+  gap: calc(var(--s) * 4px);
+  animation: wukongTitleIn .7s .24s both;
+}
+.wukong[data-game="wukong"] #scrTitle .btn {
+  padding: .3em .2em .3em 1.15em;
+  font-size: clamp(12px, calc(var(--s) * 5.5px), 23px);
+  transition: color .18s, transform .18s;
+}
+.wukong[data-game="wukong"] #scrTitle #btnStart {
+  color: #fff0c4;
+  font-weight: 900;
+}
+.wukong .btn::before {
+  content: '›';
+  width: .65em;
+  height: auto;
+  background: none;
+  color: #dcb673;
+  font-size: 1.25em;
+  line-height: 1;
+}
+.wukong[data-game="wukong"] #scrTitle .btn:hover,
+.wukong[data-game="wukong"] #scrTitle .btn:focus-visible {
+  color: #fff8df;
+  transform: translateX(4px);
+}
+.wukong .collection-link {
+  position: absolute;
+  top: calc(var(--s) * 10px);
+  left: calc(var(--s) * 12px);
+  padding: 8px;
+  color: #c6d3cb;
+  font-size: clamp(11px, calc(var(--s) * 4px), 16px);
+  text-decoration: none;
+  transition: color .18s;
+}
+.wukong .collection-link:hover { color: #ffe7ad; }
+.wukong .collection-link:focus-visible { outline: 2px solid #ffe7ad; outline-offset: 2px; }
+@media (max-width: 560px) and (orientation: portrait) {
+  body.wukong[data-game="wukong"] #scrTitle {
+    position: fixed;
+    inset: 0;
+    justify-content: flex-end;
+    padding: 0 28px max(56px, calc(env(safe-area-inset-bottom, 0px) + 40px));
+    background: linear-gradient(0deg, #071e27 0%, rgba(7, 30, 39, .96) 16%, rgba(7, 30, 39, .66) 39%, transparent 68%),
+      url('/games/wukong/assets/cover.webp') 64% 30% / auto 100% no-repeat;
+  }
+  .wukong[data-game="wukong"] #scrTitle .wukong-title { font-size: 48px; }
+  .wukong[data-game="wukong"] #scrTitle .wukong-eyebrow { font-size: 12px; margin-bottom: 8px; }
+  .wukong[data-game="wukong"] #scrTitle .wukong-lede { font-size: 13px; margin: 10px 0 22px; }
+  .wukong[data-game="wukong"] #scrTitle .menu { gap: 8px; }
+  .wukong[data-game="wukong"] #scrTitle .btn { font-size: 17px; min-height: 44px; }
+  .wukong .collection-link { top: max(18px, env(safe-area-inset-top, 0px)); left: 20px; font-size: 12px; }
+}
+@keyframes wukongTitleIn {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wukong-title, .wukong-eyebrow, .wukong-lede,
+  .wukong[data-game="wukong"] #scrTitle .menu { animation: none; }
+  .wukong[data-game="wukong"] #scrTitle .btn { transition: none; }
+}

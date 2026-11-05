@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>悟空 · 完整人物动画预览</title>
+<style>html,body{margin:0;background:#102a31;color:#eddcb7;font:16px system-ui}main{max-width:1440px;margin:auto;padding:20px}h1{font-size:24px;margin:0 0 6px}p{color:#a9c2c8;margin:0 0 16px}canvas{display:block;width:100%;aspect-ratio:16/9}button,label{font:inherit;color:inherit;background:#1c3d46;border:1px solid #55747c;padding:7px 14px;margin:0 12px 16px 0;cursor:pointer}</style>
+<main><h1>悟空 · 完整人物序列帧</h1><p id="status">正在载入完整动作图集…</p><button id="pause">暂停</button><label><input type="checkbox" id="hit">显示棍身命中线</label><canvas id="preview" width="1440" height="810"></canvas></main>
+<script type="module">
+import {WukongSkin} from '../../js/wukong-game.mjs';
+import {HERO_WHOLE_ASSETS,wholeHeroFrame,wholeHeroPose} from '../../js/wukong-hero-frames.mjs';
+const canvas=document.getElementById('preview'),target=canvas.getContext('2d');
+const art=new WukongSkin({createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false});
+await Promise.all([...Object.keys(HERO_WHOLE_ASSETS),'ruyiStaff','skinActors','celestialQilin','somersaultCloud'].map(key=>art.loadImage(key)));
+const labels=['待机 · 完整长棍','跑步 · 完整八帧','跳跃 · 起落连贯','前抡 · 转腰进步大抡','云棍 · 过顶盘旋接低扫','舞花 · 翻腕两侧回环','戳棍 · 弓步伸展','伏地 · 保持体积','麒麟 · 一体骑姿'];
+document.getElementById('status').textContent='144 张完整动作帧 · 麒麟采用一体跨坐图集 · 基础棍长 68 · 17 种随机棍招。';
+let running=true,clock=0,last=performance.now();document.getElementById('pause').onclick=()=>{running=!running;document.getElementById('pause').textContent=running?'暂停':'播放';};
+window.heroPreview={ready:true,art,labels,samples:[],seek(seconds){clock=seconds;running=false;art.heroTransitions?.clear();document.getElementById('pause').textContent='播放';}};
+function draw(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(running)clock+=dt;art.prepare(target);art.state={t:clock*60,time:clock,camX:0,fx:[]};const g=art.g;g.fillStyle='#102a31';g.fillRect(0,0,384,216);window.heroPreview.samples=[];
+ for(let i=0;i<9;i++){
+  const col=i%3,row=Math.floor(i/3),x=col*128,y=row*72;
+  g.save();g.beginPath();g.rect(x,y,128,72);g.clip();g.fillStyle=i%2?'#173740':'#13313a';g.fillRect(x+1,y+1,126,70);
+  g.font='600 4.2px system-ui';g.fillStyle='#e9d5a5';g.fillText(labels[i],x+7,y+9);g.fillStyle='#86aeb3';g.fillRect(x+5,y+65,118,.3);
+  const p={pid:i+1,heroFrames:true,x:x+58,y:y+65,vx:0,vy:0,face:1,ax:1,ay:0,onGround:true,anim:clock*10,weapon:'rifle',invT:0,heroAnimation:{clock,run:clock*90/32,prone:i===7?1:0}};
+  if(i===3)p.x-=9;
+  if(i===1)p.vx=90;
+  if(i===2){const u=clock%1;p.onGround=false;p.spin=true;p.vy=-280+560*u;p.y-=Math.sin(u*Math.PI)*8;}
+  if(i>=3&&i<=6)p.staff={kind:'sweep',variant:['fullSwing','skyWheel','doubleFlower','thrust'][i-3],t:clock%.9,duration:.9,combo:1,face:1,weapon:'rifle'};
+  if(i===7)p.prone=true;
+  if(i===8){p.ride='moto';p.vx=170;p.staff={kind:'sweep',variant:'cross',t:clock%.9,duration:.9,combo:1,face:1,weapon:'rifle'};}
+  art.actor(p,'red',false);
+  if(document.getElementById('hit').checked){const q=wholeHeroPose(p);g.strokeStyle='#65f5ec';g.lineWidth=.35;g.beginPath();g.moveTo(q.butt.x,q.butt.y);g.lineTo(q.tip.x,q.tip.y);g.stroke();g.fillStyle='#ff6589';g.beginPath();g.arc(q.origin.x,q.origin.y,.8,0,Math.PI*2);g.fill();}
+  const sample=wholeHeroFrame(p);window.heroPreview.samples.push({label:labels[i],clip:sample?.clip,frame:sample?.frame.id});g.restore();
+ }
+ target.clearRect(0,0,canvas.width,canvas.height);target.drawImage(art.surface,0,0);requestAnimationFrame(draw);
+}requestAnimationFrame(draw);
+</script></html>

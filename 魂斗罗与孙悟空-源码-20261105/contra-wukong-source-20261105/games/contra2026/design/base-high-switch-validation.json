@@ -1,0 +1,740 @@
+{
+  "taskSpaceId": 176,
+  "grounded": {
+    "room": 0,
+    "cleared": false,
+    "transition": 0,
+    "dead": false,
+    "targets": [
+      {
+        "kind": "gun",
+        "hp": 4,
+        "max": 4
+      },
+      {
+        "kind": "gun",
+        "hp": 4,
+        "max": 4
+      },
+      {
+        "kind": "core",
+        "hp": 12,
+        "max": 12
+      },
+      {
+        "kind": "switch",
+        "hp": 4,
+        "max": 4
+      }
+    ]
+  },
+  "rooms": [
+    {
+      "room": 1,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "core",
+          "hp": 12,
+          "max": 12
+        },
+        {
+          "kind": "switch",
+          "hp": 4,
+          "max": 4
+        }
+      ]
+    },
+    {
+      "room": 2,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "gun",
+          "hp": 4,
+          "max": 4
+        },
+        {
+          "kind": "core",
+          "hp": 12,
+          "max": 12
+        },
+        {
+          "kind": "switch",
+          "hp": 4,
+          "max": 4
+        }
+      ]
+    },
+    {
+      "room": 3,
+      "cleared": false,
+      "transition": 0,
+      "dead": false,
+      "targets": [
+        {
+          "kind": "bcore",
+          "hp": 50,
+          "max": 50
+        },
+        {
+          "kind": "sat",
+          "hp": 8,
+          "max": 8
+        },
+        {
+          "kind": "sat",
+          "hp": 8,
+          "max": 8
+        },
+        {
+          "kind": "sat",
+          "hp": 8,
+          "max": 8
+        },
+        {
+          "kind": "sat",
+          "hp": 8,
+          "max": 8
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "name": "base-high-switch-room",
+      "game": {
+        "mode": "pause",
+        "stage": 2,
+        "role": "",
+        "room": "",
+        "connected": false,
+        "playing": false,
+        "tick": 152,
+        "snapshotBytes": 0,
+        "art": {
+          "ready": true,
+          "loaded": [
+            "environment",
+            "corridor",
+            "power",
+            "armory",
+            "command",
+            "kit",
+            "rearBlue",
+            "bossWall",
+            "rearRed",
+            "frontEnemy"
+          ],
+          "failed": [],
+          "frameCount": 7,
+          "resolution": [
+            1536,
+            864
+          ]
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        },
+        "audio": {
+          "track": null,
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "locked",
+          "muted": false,
+          "music": "on",
+          "selection": "original",
+          "synth": false,
+          "sfx": "on",
+          "gain": 0
+        },
+        "exit": null,
+        "base": {
+          "room": 0,
+          "cleared": false,
+          "transition": 0,
+          "dead": false,
+          "targets": [
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "core",
+              "hp": 12,
+              "max": 12
+            },
+            {
+              "kind": "switch",
+              "hp": 4,
+              "max": 4
+            }
+          ]
+        },
+        "players": [
+          {
+            "id": 1,
+            "x": 192,
+            "y": 204,
+            "weapon": "rifle",
+            "dead": false,
+            "invincible": 0
+          }
+        ],
+        "shots": [],
+        "score": 0
+      },
+      "height": 204
+    },
+    {
+      "name": "base-high-switch-jump-hit",
+      "game": {
+        "mode": "pause",
+        "stage": 2,
+        "role": "",
+        "room": "",
+        "connected": false,
+        "playing": false,
+        "tick": 395,
+        "snapshotBytes": 0,
+        "art": {
+          "ready": true,
+          "loaded": [
+            "environment",
+            "corridor",
+            "power",
+            "armory",
+            "command",
+            "kit",
+            "rearBlue",
+            "bossWall",
+            "rearRed",
+            "frontEnemy"
+          ],
+          "failed": [],
+          "frameCount": 8,
+          "resolution": [
+            1536,
+            864
+          ]
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        },
+        "audio": {
+          "track": null,
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "locked",
+          "muted": false,
+          "music": "on",
+          "selection": "original",
+          "synth": false,
+          "sfx": "on",
+          "gain": 0
+        },
+        "exit": null,
+        "base": {
+          "room": 0,
+          "cleared": false,
+          "transition": 0,
+          "dead": false,
+          "targets": [
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "core",
+              "hp": 12,
+              "max": 12
+            },
+            {
+              "kind": "switch",
+              "hp": 2,
+              "max": 4
+            }
+          ]
+        },
+        "players": [
+          {
+            "id": 1,
+            "x": 192,
+            "y": 150.52777777777777,
+            "weapon": "laser",
+            "dead": false,
+            "invincible": 0
+          }
+        ],
+        "shots": [],
+        "score": 0
+      },
+      "height": 150.52777777777777
+    },
+    {
+      "name": "base-high-switch-broken",
+      "game": {
+        "mode": "pause",
+        "stage": 2,
+        "role": "",
+        "room": "",
+        "connected": false,
+        "playing": false,
+        "tick": 438,
+        "snapshotBytes": 0,
+        "art": {
+          "ready": true,
+          "loaded": [
+            "environment",
+            "corridor",
+            "power",
+            "armory",
+            "command",
+            "kit",
+            "rearBlue",
+            "bossWall",
+            "rearRed",
+            "frontEnemy"
+          ],
+          "failed": [],
+          "frameCount": 10,
+          "resolution": [
+            1536,
+            864
+          ]
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        },
+        "audio": {
+          "track": null,
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "locked",
+          "muted": false,
+          "music": "on",
+          "selection": "original",
+          "synth": false,
+          "sfx": "on",
+          "gain": 0
+        },
+        "exit": null,
+        "base": {
+          "room": 0,
+          "cleared": false,
+          "transition": 0,
+          "dead": false,
+          "targets": [
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "gun",
+              "hp": 4,
+              "max": 4
+            },
+            {
+              "kind": "core",
+              "hp": 12,
+              "max": 12
+            },
+            {
+              "kind": "switch",
+              "hp": 0,
+              "max": 4
+            }
+          ]
+        },
+        "players": [
+          {
+            "id": 1,
+            "x": 192,
+            "y": 204,
+            "weapon": "laser",
+            "dead": false,
+            "invincible": 0
+          }
+        ],
+        "shots": [
+          {
+            "owner": 1,
+            "x": 192.46666666666667,
+            "y": 146.26666666666665
+          }
+        ],
+        "score": 500
+      },
+      "height": 204
+    },
+    {
+      "name": "base-high-switch-core-open",
+      "game": {
+        "mode": "pause",
+        "stage": 2,
+        "role": "",
+        "room": "",
+        "connected": false,
+        "playing": false,
+        "tick": 573,
+        "snapshotBytes": 0,
+        "art": {
+          "ready": true,
+          "loaded": [
+            "environment",
+            "corridor",
+            "power",
+            "armory",
+            "command",
+            "kit",
+            "rearBlue",
+            "bossWall",
+            "rearRed",
+            "frontEnemy"
+          ],
+          "failed": [],
+          "frameCount": 30,
+          "resolution": [
+            1536,
+            864
+          ]
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        },
+        "audio": {
+          "track": null,
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "locked",
+          "muted": false,
+          "music": "on",
+          "selection": "original",
+          "synth": false,
+          "sfx": "on",
+          "gain": 0
+        },
+        "exit": null,
+        "base": {
+          "room": 0,
+          "cleared": false,
+          "transition": 0,
+          "dead": false,
+          "targets": [
+            {
+              "kind": "gun",
+              "hp": 0,
+              "max": 4
+            },
+            {
+              "kind": "gun",
+              "hp": 0,
+              "max": 4
+            },
+            {
+              "kind": "core",
+              "hp": 12,
+              "max": 12
+            },
+            {
+              "kind": "switch",
+              "hp": 0,
+              "max": 4
+            }
+          ]
+        },
+        "players": [
+          {
+            "id": 1,
+            "x": 192,
+            "y": 204,
+            "weapon": "homing",
+            "dead": false,
+            "invincible": 0
+          }
+        ],
+        "shots": [
+          {
+            "owner": 1,
+            "x": 217.786,
+            "y": 147.046
+          }
+        ],
+        "score": 1500
+      },
+      "height": 204
+    },
+    {
+      "name": "base-high-switch-room-cleared",
+      "game": {
+        "mode": "pause",
+        "stage": 2,
+        "role": "",
+        "room": "",
+        "connected": false,
+        "playing": false,
+        "tick": 733,
+        "snapshotBytes": 0,
+        "art": {
+          "ready": true,
+          "loaded": [
+            "environment",
+            "corridor",
+            "power",
+            "armory",
+            "command",
+            "kit",
+            "rearBlue",
+            "bossWall",
+            "rearRed",
+            "frontEnemy"
+          ],
+          "failed": [],
+          "frameCount": 32,
+          "resolution": [
+            1536,
+            864
+          ]
+        },
+        "camera": {
+          "x": 0,
+          "y": 0
+        },
+        "audio": {
+          "track": null,
+          "playing": false,
+          "paused": true,
+          "loading": false,
+          "ended": false,
+          "error": null,
+          "context": "locked",
+          "muted": false,
+          "music": "on",
+          "selection": "original",
+          "synth": false,
+          "sfx": "on",
+          "gain": 0
+        },
+        "exit": null,
+        "base": {
+          "room": 0,
+          "cleared": true,
+          "transition": 0,
+          "dead": false,
+          "targets": [
+            {
+              "kind": "gun",
+              "hp": 0,
+              "max": 4
+            },
+            {
+              "kind": "gun",
+              "hp": 0,
+              "max": 4
+            },
+            {
+              "kind": "core",
+              "hp": 0,
+              "max": 12
+            },
+            {
+              "kind": "switch",
+              "hp": 0,
+              "max": 4
+            }
+          ]
+        },
+        "players": [
+          {
+            "id": 1,
+            "x": 192,
+            "y": 204,
+            "weapon": "homing",
+            "dead": false,
+            "invincible": 0
+          }
+        ],
+        "shots": [
+          {
+            "owner": 1,
+            "x": 192.514,
+            "y": 147.046
+          }
+        ],
+        "score": 3500
+      },
+      "height": 204
+    }
+  ],
+  "production": {
+    "url": "http://localhost:3190/games/contra2026/?art=high-switch-2",
+    "game": {
+      "mode": "pause",
+      "stage": 2,
+      "role": "",
+      "room": "",
+      "connected": false,
+      "playing": false,
+      "tick": 155,
+      "snapshotBytes": 0,
+      "art": {
+        "ready": true,
+        "loaded": [
+          "environment",
+          "corridor",
+          "armory",
+          "power",
+          "command",
+          "kit",
+          "rearBlue",
+          "bossWall",
+          "rearRed",
+          "frontEnemy"
+        ],
+        "failed": [],
+        "frameCount": 6,
+        "resolution": [
+          1536,
+          864
+        ]
+      },
+      "camera": {
+        "x": 0,
+        "y": 0
+      },
+      "audio": {
+        "track": "stage2",
+        "playing": false,
+        "paused": true,
+        "loading": false,
+        "ended": false,
+        "error": null,
+        "context": "suspended",
+        "muted": false,
+        "music": "on",
+        "selection": "original",
+        "synth": false,
+        "sfx": "on",
+        "gain": 0.550000011920929
+      },
+      "exit": null,
+      "base": {
+        "room": 0,
+        "cleared": false,
+        "transition": 0,
+        "dead": false,
+        "targets": [
+          {
+            "kind": "gun",
+            "hp": 4,
+            "max": 4
+          },
+          {
+            "kind": "gun",
+            "hp": 4,
+            "max": 4
+          },
+          {
+            "kind": "core",
+            "hp": 12,
+            "max": 12
+          },
+          {
+            "kind": "switch",
+            "hp": 4,
+            "max": 4
+          }
+        ]
+      },
+      "players": [
+        {
+          "id": 1,
+          "x": 192,
+          "y": 204,
+          "weapon": "rifle",
+          "dead": false,
+          "invincible": 1.3666666666666671
+        }
+      ],
+      "shots": [],
+      "score": 0
+    },
+    "hasTestHook": false,
+    "modules": [
+      "http://localhost:3190/games/contra2026/js/base-shooting.mjs?v=high-switch-1",
+      "http://localhost:3190/games/contra2026/js/stage-two-art.mjs?v=high-switch-2"
+    ]
+  },
+  "regressionTests": {
+    "passed": 109,
+    "failed": 0
+  }
+}

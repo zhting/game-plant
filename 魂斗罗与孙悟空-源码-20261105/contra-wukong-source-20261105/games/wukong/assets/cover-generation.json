@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "prompt": "Create a premium illustrated cover artwork for an existing Chinese side-scrolling Sun Wukong action game titled 大闹天宫. Use the first attached image as the exact CHARACTER DESIGN reference: expressive golden-furred Monkey King, engraved gold armor over dark clothing, teal trousers, flowing red cape and two long red crown plumes, long dark staff with ornate golden ends. Use the second image only for the Chinese celestial architecture, cloud sea and detailed hand-painted rendering language. This is a new standalone poster illustration, not a gameplay screenshot. Wide 3:2 landscape composition, usable both as a full-screen title background and a square crop focused around 65% of the width. Wukong is the clear dominant hero in the right half, in a bold martial stance with staff angled upward, eyes fierce, his complete face and upper body readable at small thumbnail size, cape sweeping behind. Rich jade teal and deep blue cloud-ocean shadows, luminous warm gold rimlight and red cape as accent. Southern Heavenly Gate with jade roofs, gold ornaments and vermilion columns recedes into cloud mountains behind him; small distant celestial soldiers optional only as silhouettes. Left 40 percent is calm dark teal mist and atmospheric empty space, reserved for HTML game title and menu (do NOT draw letters). Composition feels like a dramatic Chinese fantasy game box illustration, visually cohesive with the references, finely painted gold engravings and fur but restrained detail in the background. No text whatsoever, no logos, no interface, no frames, no panels, no HUD, no watermark, no guns, no military commando characters. Opaque background.",
+  "references": [
+    "exports/wukong/孙悟空_侧面动作参考图.png",
+    "games/wukong/design/stage-01/01-gameplay.png"
+  ],
+  "source": "cover-source.png",
+  "runtime": "cover.webp",
+  "homepage": [
+    "/assets/covers/wukong-512.webp",
+    "/assets/covers/wukong.webp"
+  ]
+}

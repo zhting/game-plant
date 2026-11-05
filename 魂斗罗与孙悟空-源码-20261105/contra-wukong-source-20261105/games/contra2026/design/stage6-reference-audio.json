@@ -1,0 +1,8 @@
+{
+  "source": "H:/download/videoplayback.mp4",
+  "source_start_seconds": 796.4,
+  "duration_seconds": 21.568,
+  "loop_seconds": 21.568,
+  "processing": "Opus 96 kbps stereo 48 kHz; loudnorm -18 LUFS; 8 ms edge fades",
+  "notes": "The reference is gameplay audio, so the music contains sounds mixed into the original recording. The 21.568-second repetition was measured against the sixth-stage segment."
+}

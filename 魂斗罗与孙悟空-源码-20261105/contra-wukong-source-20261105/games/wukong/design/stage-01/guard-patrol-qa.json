@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-23",
+  "description": "天兵腿甲与靴子加宽，腰腿按自身髋点和身高相连；巡逻可自主跳过稳定窄坑，无法跨越时掉头走开。",
+  "jump": {
+    "jumped": true,
+    "x": 622.3999999999999,
+    "y": 124.58333333333333,
+    "vx": 112,
+    "dead": false
+  },
+  "landing": {
+    "x": 698.9333333333335,
+    "y": 176,
+    "landed": true,
+    "dead": false
+  },
+  "patrol": {
+    "turns": 2,
+    "min": 8.96666666666694,
+    "max": 171.2,
+    "position": {
+      "x": 134.00000000000006,
+      "y": 144,
+      "face": -1,
+      "remaining": 0.34999999999999865
+    },
+    "final": {
+      "x": 55.46666666666687,
+      "y": 144
+    },
+    "noFall": true
+  },
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 53,
+    "total": 53,
+    "failed": []
+  },
+  "errors": [],
+  "tests": {
+    "passed": 185,
+    "failed": 0
+  },
+  "previews": [
+    "guards-legs-natural.png",
+    "guards-gap-jump.png",
+    "guards-gap-landed.png",
+    "guards-edge-patrol.png"
+  ],
+  "method": "Isolated browser context. Real fixed-step game simulation and original 620–680 gap used for autonomous jump/landing; custom 180-wide ledge and 160-wide unsafe gap used for two patrol turns over 210 frames. Avatar hidden with existing camo power so no live target directs the guard. QA hooks not saved in production."
+}

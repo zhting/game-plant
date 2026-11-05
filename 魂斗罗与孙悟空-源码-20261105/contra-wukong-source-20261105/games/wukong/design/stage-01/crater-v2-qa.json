@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-27",
+  "change": "以低视角白玉碎裂坑洞贴图替换纯黑多边形；包含内凹石壁、遮蔽阴影、碎石坑底、碎玉边与积灰",
+  "regression": {
+    "passed": 126,
+    "failed": 0,
+    "log": ".playwright-mcp/wukong-crater-v2-regression.tap"
+  },
+  "browser": {
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 94,
+      "total": 94,
+      "failed": [],
+      "stage": 1,
+      "cached": 94
+    },
+    "assetLoaded": true,
+    "scars": [
+      {
+        "x": 3150,
+        "y": 176,
+        "r": 68.4,
+        "depth": 1,
+        "at": 1.2833333333333337,
+        "seed": 40950
+      },
+      {
+        "x": 3070,
+        "y": 176,
+        "r": 68.4,
+        "depth": 1,
+        "at": 2.9499999999999944,
+        "seed": 39910
+      },
+      {
+        "x": 3230,
+        "y": 176,
+        "r": 68.4,
+        "depth": 1,
+        "at": 2.9499999999999944,
+        "seed": 41990
+      }
+    ],
+    "bossDefeated": true,
+    "gateOpen": true,
+    "errors": [],
+    "images": [
+      {
+        "path": "H:/project/games/recordings/wukong-crater-v2-single.png",
+        "bytes": 3805630
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-crater-v2-overlap.png",
+        "bytes": 3810063
+      },
+      {
+        "path": "H:/project/games/recordings/wukong-crater-v2-gate-open.png",
+        "bytes": 4117612
+      }
+    ]
+  },
+  "assets": {
+    "bytes": 334300,
+    "runtime": "games/wukong/assets/jade-impact-crater-v2.webp",
+    "provenance": "games/wukong/assets/jade-impact-crater-v2-generation.json",
+    "original": "games/wukong/assets/jade-impact-crater-v2.png"
+  },
+  "visualReview": {
+    "single": "recordings/wukong-crater-v2-single.png",
+    "afterBattle": "recordings/wukong-crater-v2-gate-open.png",
+    "approved": true,
+    "overlap": "recordings/wukong-crater-v2-overlap.png"
+  }
+}

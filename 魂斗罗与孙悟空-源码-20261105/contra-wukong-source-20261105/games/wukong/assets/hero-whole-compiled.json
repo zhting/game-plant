@@ -1,0 +1,133 @@
+{
+  "frames": 352,
+  "assets": [
+    {
+      "name": "movement",
+      "frames": 16,
+      "masterBytes": 2387832,
+      "runtimeBytes": 652518,
+      "transparentPixels": 632510,
+      "pixels": 1572516
+    },
+    {
+      "name": "mobility",
+      "frames": 12,
+      "masterBytes": 1890859,
+      "runtimeBytes": 355382,
+      "transparentPixels": 880036,
+      "pixels": 1572528
+    },
+    {
+      "name": "sweep",
+      "frames": 16,
+      "masterBytes": 2227130,
+      "runtimeBytes": 548058,
+      "transparentPixels": 734139,
+      "pixels": 1572516
+    },
+    {
+      "name": "cleave",
+      "frames": 16,
+      "masterBytes": 2277865,
+      "runtimeBytes": 568974,
+      "transparentPixels": 734707,
+      "pixels": 1572516
+    },
+    {
+      "name": "flower",
+      "frames": 16,
+      "masterBytes": 2272687,
+      "runtimeBytes": 555816,
+      "transparentPixels": 744519,
+      "pixels": 1572516
+    },
+    {
+      "name": "extra",
+      "frames": 16,
+      "masterBytes": 2233123,
+      "runtimeBytes": 569102,
+      "transparentPixels": 731001,
+      "pixels": 1572516
+    },
+    {
+      "name": "uppercut",
+      "frames": 16,
+      "masterBytes": 1999477,
+      "runtimeBytes": 455434,
+      "transparentPixels": 854753,
+      "pixels": 1572516
+    },
+    {
+      "name": "advance",
+      "frames": 8,
+      "masterBytes": 1507555,
+      "runtimeBytes": 347962,
+      "transparentPixels": 1012785,
+      "pixels": 1572516
+    },
+    {
+      "name": "blossom",
+      "frames": 8,
+      "masterBytes": 1540017,
+      "runtimeBytes": 343330,
+      "transparentPixels": 1007572,
+      "pixels": 1572516
+    },
+    {
+      "name": "cyclone",
+      "frames": 8,
+      "masterBytes": 1487553,
+      "runtimeBytes": 343050,
+      "transparentPixels": 1016263,
+      "pixels": 1572516
+    },
+    {
+      "name": "qilin",
+      "frames": 12,
+      "masterBytes": 2996433,
+      "runtimeBytes": 604568,
+      "transparentPixels": 677853,
+      "pixels": 1572864
+    },
+    {
+      "name": "low",
+      "frames": 8,
+      "masterBytes": 2230900,
+      "runtimeBytes": 225426,
+      "transparentPixels": 990392,
+      "pixels": 1572864
+    },
+    {
+      "name": "martial",
+      "frames": 8,
+      "masterBytes": 1440186,
+      "runtimeBytes": 307434,
+      "transparentPixels": 1069153,
+      "pixels": 1572516
+    },
+    {
+      "name": "reference",
+      "frames": 64,
+      "masterBytes": 2494868,
+      "runtimeBytes": 834688,
+      "transparentPixels": 4524336,
+      "pixels": 5242880
+    },
+    {
+      "name": "reference2",
+      "frames": 64,
+      "masterBytes": 2737501,
+      "runtimeBytes": 869372,
+      "transparentPixels": 4423749,
+      "pixels": 5242880
+    },
+    {
+      "name": "reference3",
+      "frames": 64,
+      "masterBytes": 3025329,
+      "runtimeBytes": 930342,
+      "transparentPixels": 4335520,
+      "pixels": 5242880
+    }
+  ]
+}

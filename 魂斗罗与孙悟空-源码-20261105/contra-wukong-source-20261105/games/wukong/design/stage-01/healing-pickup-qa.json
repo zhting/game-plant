@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-25",
+  "tests": {
+    "passed": 216,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-healing-pickup.tap"
+  },
+  "fixture": true,
+  "errors": [],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 76,
+    "total": 76,
+    "failed": [],
+    "stage": 1,
+    "cached": 76
+  },
+  "renderPure": true,
+  "scenes": {
+    "legacyBefore": {
+      "hp": 20,
+      "x": 300,
+      "y": 144,
+      "score": 0,
+      "banner": "",
+      "weapon": "rifle",
+      "inventory": [],
+      "items": [
+        {
+          "kind": "healPill",
+          "x": 332,
+          "y": 144,
+          "rest": true,
+          "landed": false
+        }
+      ],
+      "fairy": null,
+      "healEffects": 0
+    },
+    "legacyAfter": {
+      "hp": 80,
+      "x": 313.5,
+      "y": 144,
+      "score": 200,
+      "banner": "九转金丹 · 生命 +60",
+      "weapon": "rifle",
+      "inventory": [],
+      "items": [],
+      "fairy": null,
+      "healEffects": 1
+    },
+    "fairyLanded": {
+      "hp": 20,
+      "x": 300,
+      "y": 144,
+      "score": 0,
+      "banner": "",
+      "weapon": "rifle",
+      "inventory": [],
+      "items": [
+        {
+          "kind": "healPill",
+          "x": 357.46666666666624,
+          "y": 144,
+          "rest": true,
+          "landed": true
+        }
+      ],
+      "fairy": {
+        "flee": true,
+        "kind": "healPill"
+      },
+      "healEffects": 0
+    },
+    "fairyCollected": {
+      "hp": 80,
+      "x": 339,
+      "y": 144,
+      "score": 200,
+      "banner": "九转金丹 · 生命 +60",
+      "weapon": "rifle",
+      "inventory": [],
+      "items": [],
+      "fairy": {
+        "flee": true,
+        "kind": "healPill"
+      },
+      "healEffects": 1
+    },
+    "fullHealth": {
+      "hp": 100,
+      "x": 313.5,
+      "y": 144,
+      "score": 200,
+      "banner": "九转金丹 · 生命已满",
+      "weapon": "rifle",
+      "inventory": [],
+      "items": [],
+      "fairy": null,
+      "healEffects": 1
+    }
+  }
+}

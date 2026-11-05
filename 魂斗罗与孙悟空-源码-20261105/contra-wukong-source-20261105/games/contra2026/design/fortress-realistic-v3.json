@@ -1,0 +1,105 @@
+{
+  "generatedWith": "built-in imagegen",
+  "promptFile": "fortress-realistic-v3-prompts.json",
+  "assets": [
+    {
+      "file": "assets/stage1/fortress-realistic-v3.webp",
+      "url": "/games/contra2026/assets/stage1/fortress-realistic-v3.webp",
+      "source": "design/source-art/stage1/fortress-realistic-v3.png",
+      "dimensions": [
+        1232,
+        1277
+      ],
+      "frames": {
+        "facade": [
+          29,
+          10,
+          1201,
+          1254
+        ]
+      },
+      "sourceBounds": [
+        25,
+        10,
+        1226,
+        1264
+      ],
+      "bytes": 494334,
+      "sha256": "a01a5be938207c879bf3f0c1cbb84cc9ec46d6e794d24b360f78ae04c7855576",
+      "alphaPreserved": true
+    },
+    {
+      "file": "assets/stage1/fortress-wreck-realistic-v3.webp",
+      "url": "/games/contra2026/assets/stage1/fortress-wreck-realistic-v3.webp",
+      "source": "design/source-art/stage1/fortress-wreck-realistic-v3.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "frames": {
+        "gunA": [
+          36,
+          311,
+          483,
+          416
+        ],
+        "gunB": [
+          555,
+          311,
+          491,
+          415
+        ],
+        "core": [
+          1109,
+          202,
+          383,
+          620
+        ]
+      },
+      "sourceBounds": {
+        "gunA": [
+          26,
+          259,
+          499,
+          507
+        ],
+        "gunB": [
+          550,
+          244,
+          501,
+          560
+        ],
+        "core": [
+          1071,
+          27,
+          437,
+          970
+        ]
+      },
+      "bytes": 273164,
+      "sha256": "07ec7bb0b3b9e68ce808247d8219fb68623f1cad4a29f8bc754c9e38a1c299da",
+      "alphaPreserved": true
+    },
+    {
+      "file": "assets/stage1/fortress-breach-realistic-v4.webp",
+      "url": "/games/contra2026/assets/stage1/fortress-breach-realistic-v4.webp",
+      "source": "design/source-art/stage1/fortress-breach-realistic-v4.png",
+      "dimensions": [
+        640,
+        1008
+      ],
+      "frames": {},
+      "sourceBounds": [
+        5,
+        4,
+        997,
+        1567
+      ],
+      "bytes": 264192,
+      "sha256": "7b185f6aed42a2f42df21a3a4df6c0fb7233ac9c48cb8bd56a0cc31a2ff614c2",
+      "alphaPreserved": true
+    }
+  ],
+  "totalBytes": 1031690,
+  "geometry": "Preserves facade, cannon/core targets, wall, damage crops and exit coordinates."
+}

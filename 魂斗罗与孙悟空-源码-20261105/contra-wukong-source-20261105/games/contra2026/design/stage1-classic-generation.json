@@ -1,0 +1,35 @@
+{
+  "mode": "builtin image_gen",
+  "outputs": {
+    "snow": "games/contra2026/assets/stage1/night-snow-mountains.png",
+    "jungle": "games/contra2026/assets/stage1/night-jungle-strip.png",
+    "facilities": "games/contra2026/assets/stage1/classic-facilities.png"
+  },
+  "assets": [
+    {
+      "key": "snow",
+      "prompt": "Create ONE production game sprite layer: a wide horizontal panorama strip of rugged snow-covered mountains on a genuinely transparent background. The attached game screenshot is STYLE AND COMPOSITION REFERENCE ONLY. Match the original Contra jungle first-level snowy mountain silhouette: four separated jagged pyramid peaks with angular grey exposed rock, ivory snow caps and narrow white snow streaks. No blue daylight, no sky pixels, no stars baked in, no jungle, no grass, no ground, no text, no frames, no characters. Refine original late-1980s 16-bit hand-painted pixel art with crisp tiny highlights and dense chipped rock details suitable for a 4K remaster, do NOT make coarse enlarged pixels, do NOT turn photographic or 3D. Restrained grey-white palette against alpha, dark charcoal lower foothills fading naturally into alpha. Orthographic side-scroller parallax layer, wide roughly 3:1 image. All peaks fully visible with transparent margin above and at both sides, lowest mountain baseline shared near bottom, peaks grouped mainly across the middle and right. Lighting calm cold moonlight, readable angular silhouette. This is an asset, not a full scene mockup.",
+      "refs": [
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-8ae93178-c0fc-4658-b769-78ca084551f8.png"
+      ]
+    },
+    {
+      "key": "jungle",
+      "prompt": "Create ONE production game sprite layer, a wide horizontal strip of low dense tropical jungle palms and fern undergrowth with genuinely transparent background above and between the vegetation. Attached screenshot is STYLE REFERENCE ONLY. Match original Contra first-level background vegetation: closely spaced squat palm crowns with lime and olive-green highlighted fronds, brown narrow trunks, dark green-black undergrowth, broad leaves and fern clumps. Side-on 2D orthographic game art, low band of palms rather than enormous tall rainforest trees. No mountains, sky, ground, rocks, water, horizon lighting, characters, weapons, text or UI. 4K remaster fine painted pixel-art detailing with tiny crisp stepped foliage and subtle veins, not coarse NES blocks and not realistic photo/3D. Restrained bright yellow-green tops, deep forest-green midtones, nearly black green base. Continuous broad band approx 3:1 aspect ratio, all vegetation rooted to one common bottom baseline, natural uneven canopy but roughly consistent height, outer left and right sides dense vegetation for repeating. Transparent above, fine transparent leaf edges; no floating disconnected trees. Keep the bottom root line straight enough to place directly behind a grass platform.",
+      "refs": [
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-8ae93178-c0fc-4658-b769-78ca084551f8.png"
+      ]
+    },
+    {
+      "key": "facilities",
+      "prompt": "Create ONE production 2D sprite sheet on a genuinely transparent background, exactly FOUR separate sprites arranged in a clean 2 by 2 grid, each sprite centered well within its own equal square cell with large transparent gutters. References show original Contra facilities and bridge style; faithfully retain their recognizable silhouettes but redraw with fine crisp high-resolution 16-bit remaster detail (tiny metal highlights, bolts, dark inset edges). Orthographic side-scrolling frontal/side view, no isometric tilt. Palette ivory silver steel, charcoal black, brick crimson. TOP LEFT: compact square silver open-frame rotary turret housing, circular crimson armored pivot inside, black central barrel socket, exposed white steel struts and silver pedestal feet. NO projecting cannon barrel: the game adds its rotating barrel. TOP RIGHT: square recessed silver sensor shutter crate, ivory bevel frame, grey inset panel, centered dark vertical vent with exactly three small red zigzag coil marks one above another. BOTTOM LEFT: same square bevel silver weapon supply crate but with a plain blank ivory inset panel, to later paint a black rifle pictogram in code. BOTTOM RIGHT: ONE horizontal metal bridge deck module, broad silver segmented top slabs and a dark open beam lattice underside, original game's white steel low bridge over water; full side view, no supports extending far below. No letters, labels, numbers, gradients in background, shadows outside object silhouettes, grass, landscape, characters, extra sprites or cell borders. All four sprites are independent transparent cutouts with no overlap.",
+      "refs": [
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-4199474a-ce22-4678-8c2d-2c7afbe1280a.png",
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-5e5a77b4-89fc-4c21-b372-15aef0c21838.png",
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-0e2108f5-3f84-4a4c-9f7c-46654a366dfd.png",
+        "C:/Users/zhting/AppData/Local/Temp/codex-clipboard-473a0dcc-e564-4370-954f-0c01ded52536.png"
+      ]
+    }
+  ],
+  "cleanup": "Edit this game sprite atlas only: remove ALL the smoky glow, grey haze, gradient, shadows and black/grey backdrop outside the four object silhouettes. The background must be true zero-alpha transparency including all gutters. Keep the four mechanical sprites sharp, opaque and unchanged inside their black outline. No soft glow or external drop shadows anywhere. Preserve their exact shapes, colors, positions and dimensions: top left red rotary turret, top right silver sensor box, bottom left blank weapon box, bottom right long bridge. Only background cleanup, with crisp cutout alpha edges. Export transparent PNG."
+}

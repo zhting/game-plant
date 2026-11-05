@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>第八关 · 活体组织与机关预览</title>
+<style>body{margin:0;background:#080611;color:#ddc5d5;font:15px system-ui;text-align:center}canvas{display:block;width:min(100vw,1152px);height:auto;margin:auto}button,input{margin:12px 4px;padding:8px 14px;background:#241525;border:1px solid #75516c;color:inherit}input{width:210px;vertical-align:middle}p{margin:5px 0 12px;color:#aa8ba4}</style>
+<canvas width="1536" height="864"></canvas><button id="pause">暂停</button><button id="next">逐帧查看</button><label>时间 <input id="time" type="range" min="0" max="10" value="0" step="0.025"></label><p>固定洞壁 · 融合组织断面 · 厚实平台包边 · 撕裂深坑 · 骨刺伸缩 · 黏液凝结与飞溅</p>
+<script type="module">
+import {StageOneArt} from '../js/stage-one-art.mjs?v=runner-hazards-1';
+import {StageSevenArt} from '../js/stage-seven-art.mjs?v=fused-tissue-3';
+import {hiveSlabHeight} from '../js/stage-eight-atmosphere.mjs?v=fused-tissue-3';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),options={createCanvas:()=>document.createElement('canvas'),imageFactory:()=>new Image(),autoLoad:false};
+const baseArt=new StageOneArt(options),art=new StageSevenArt({...options,baseArt});
+await Promise.all(['cavern','terrain','intestineMotion','cystMotion','chasm','boneSpike'].map(k=>art.loadImage(k)).concat(baseArt.loadImage('actorBlue')));
+const solids=[{x:0,y:176,w:200,h:40,g:1},{x:264,y:176,w:300,h:40,g:1},{x:40,y:119,w:90,h:8},{x:278,y:100,w:80,h:8}];
+let time=0,last=performance.now(),paused=false;
+const pause=document.querySelector('#pause'),slider=document.querySelector('#time');
+pause.onclick=()=>{paused=!paused;pause.textContent=paused?'继续':'暂停';};
+document.querySelector('#next').onclick=()=>{paused=true;pause.textContent='继续';time+=.08;};
+slider.oninput=()=>{paused=true;pause.textContent='继续';time=Number(slider.value);};
+function frame(now){
+  const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused)time+=dt;slider.value=time%10;
+  const camera=0,phase=time%2.2,fallT=Math.max(0,phase-.9),dropY=31+260*fallT*fallT;
+  art.prepare(ctx);baseArt.scale=art.scale;art.state={stage:8,camX:camera,time,t:time*60,freezeT:0,s8:{tissueTime:time}};
+  art.backdrop(camera);art.floor(solids,camera);
+  const drips=[{x:161,k:Math.min(1,phase/.9),forming:phase<.9}];
+  art.hazards({drips,drops:phase>=.9&&dropY<176?[{x:161,y:dropY,vy:Math.min(300,fallT*520),age:fallT}]:[],spikes:[{x:316,t:time%2.4}]});
+  const impact=.9+Math.sqrt((176-31)/260),splashT=phase-impact;
+  if(splashT>=0&&splashT<1.1)art.effects([{k:'slimeSplash',x:161,y:176,t:splashT,life:1.1}]);
+  art.actor({x:90,y:119,face:1,onGround:true,ax:1,ay:0},'blue');
+  art.hudText('第八关 · 活体组织与机关',192,7,'#edc5df',7,'center');art.present(ctx);
+  window.organicPreview={ready:true,time,paused,platformDepths:solids.filter(s=>!s.g).map(hiveSlabHeight)};requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script></html>

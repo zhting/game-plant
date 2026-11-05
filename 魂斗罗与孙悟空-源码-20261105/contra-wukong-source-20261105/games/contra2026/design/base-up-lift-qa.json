@@ -1,0 +1,86 @@
+{
+  "upPlayers": [
+    {
+      "id": 1,
+      "aimUp": true,
+      "y": 204,
+      "dead": false
+    },
+    {
+      "id": 2,
+      "aimUp": true,
+      "y": 204,
+      "dead": false
+    }
+  ],
+  "bossDamage": 6,
+  "clearedImmediately": 0,
+  "left": {
+    "stage": 2,
+    "shots": 0,
+    "players": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": 56.71224643125481,
+        "side": -1
+      },
+      {
+        "id": 2,
+        "x": 214,
+        "y": 204
+      }
+    ]
+  },
+  "waiting": {
+    "stage": 2,
+    "shots": 0,
+    "players": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": -28,
+        "side": -1,
+        "done": true
+      },
+      {
+        "id": 2,
+        "x": 214,
+        "y": 204
+      }
+    ]
+  },
+  "right": {
+    "stage": 2,
+    "shots": 0,
+    "players": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": -28,
+        "side": -1,
+        "done": true
+      },
+      {
+        "id": 2,
+        "x": 356,
+        "y": 56.71224643125481,
+        "side": 1
+      }
+    ]
+  },
+  "exit": {
+    "stage": 3,
+    "mode": "intro",
+    "players": [
+      {
+        "id": 1,
+        "weapon": "rifle"
+      },
+      {
+        "id": 2,
+        "weapon": "homing"
+      }
+    ]
+  }
+}

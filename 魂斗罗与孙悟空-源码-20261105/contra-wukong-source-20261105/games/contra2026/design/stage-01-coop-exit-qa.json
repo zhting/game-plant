@@ -1,0 +1,115 @@
+{
+  "waiting": {
+    "open": true,
+    "actors": [
+      {
+        "id": 1,
+        "entering": false,
+        "entered": true
+      },
+      {
+        "id": 2,
+        "entering": false,
+        "entered": false
+      }
+    ]
+  },
+  "host": {
+    "mode": "intro",
+    "stage": 2,
+    "role": "host",
+    "room": "UTMHTB",
+    "connected": true,
+    "playing": true,
+    "tick": 12,
+    "snapshotBytes": 7438,
+    "art": null,
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": null,
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": null,
+    "players": [
+      {
+        "id": 1,
+        "x": 192,
+        "y": 204,
+        "weapon": "spread",
+        "dead": false,
+        "invincible": 1.5
+      },
+      {
+        "id": 2,
+        "x": 216,
+        "y": 204,
+        "weapon": "laser",
+        "dead": false,
+        "invincible": 1.5
+      }
+    ],
+    "shots": [],
+    "score": 10000
+  },
+  "guest": {
+    "mode": "intro",
+    "stage": 2,
+    "role": "guest",
+    "room": "UTMHTB",
+    "connected": true,
+    "playing": true,
+    "tick": 2,
+    "snapshotBytes": 7428,
+    "art": null,
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "audio": {
+      "track": null,
+      "playing": false,
+      "paused": true,
+      "loading": false,
+      "ended": false,
+      "error": null,
+      "context": "running",
+      "muted": false,
+      "music": "on",
+      "sfx": "on",
+      "gain": 0.550000011920929
+    },
+    "exit": null,
+    "players": [
+      {
+        "id": 1,
+        "x": 192,
+        "y": 204,
+        "weapon": "spread",
+        "dead": false,
+        "invincible": 1.5
+      },
+      {
+        "id": 2,
+        "x": 216,
+        "y": 204,
+        "weapon": "laser",
+        "dead": false,
+        "invincible": 1.5
+      }
+    ],
+    "shots": [],
+    "score": 10000
+  }
+}

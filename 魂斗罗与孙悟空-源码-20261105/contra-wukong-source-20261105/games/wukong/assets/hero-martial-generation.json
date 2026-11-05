@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-29",
+  "mode": "built-in image_gen",
+  "artDirection": [
+    "中国传统武术招式",
+    "动作舒展华丽",
+    "大开大合"
+  ],
+  "references": [
+    "hero-whole-blossom.webp",
+    "hero-whole-cleave.webp"
+  ],
+  "prompt": "Use case: identity-preserve. Create a production transparent-alpha sprite atlas for this existing Sun Wukong 2D game. Reference images are character identity and painterly material references only. Keep same adult monkey face, ornate gold armor, dark teal trousers, red silk scarf and sash, long red head plumes, gold boots, curling monkey tail, one straight gold-banded dark brown staff. NEW ART DIRECTION MUST LITERALLY FOLLOW THESE CHINESE PHRASES: 中国传统武术招式，动作舒展华丽，大开大合。Authentic Chinese wushu staff choreography: deep ma bu horse stance, long gong bu bow stance, pu bu crouch sweep, kua bu waist turn, long arm extension, expansive circular lun pi overhead cleave, shoulder and hip rotation driving the whole staff. The body must OPEN UP into clearly distinct silhouettes; this is athletic flowing staff wushu, never repeated forward jabs. Exactly EIGHT chronological full-body keyframes, arranged TWO COLUMNS by FOUR ROWS in a square 2048x2048 canvas. Every cell is twice as wide as tall. Read left-right then top-bottom. Each cell contains exactly one complete connected character, both hands and both legs, and the full single straight staff. No overlap across cells, no cropping. At least 10 percent transparent margin within each cell. Side camera, same body/head scale and ground baseline in each cell, generally attacking RIGHT. One visible gold-banded rigid staff, about 1.4 times anatomical head-to-boot height in these paintings, gripped naturally by BOTH hands at separated positions. No floating weapon, extra stick, deformed hands, detached limbs. All figures are painted integrally; do not construct a paper doll. Pose 1: relaxed open diagonal guard with wide feet. Pose 2: sink into a VERY WIDE horse stance, twist chest to rear, stretch both arms high and back with the staff lifted diagonally behind the shoulder. Pose 3: turn hips through a three-quarter back view, feet planted very far apart, arms carry staff HORIZONTALLY above the crown in a large cloud-wheel. Pose 4: huge forward bow stance facing RIGHT, front knee deeply bent, rear leg long and almost straight, shoulders and arms extended far from torso; staff descends DIAGONALLY toward right at 25 degrees, staff tip remains above ground. Pose 5: very deep PU BU low sweep, one knee folded while other leg stretches sideways, pelvis low, torso open; staff perfectly HORIZONTAL at shin level, with both hands on same pole, both ends above floor. Pose 6: rise from low sweep with an expansive diagonal upward scoop, body unwinds, arms extend forward-up, weight transfers to front foot. Pose 7: one planted leg and a lifted knee, chest open, arms make one final HORIZONTAL overhead wheel with staff stretched across above head, long red cloth flying from delayed rotation. Pose 8: settle into the exact same diagonal open guard as pose 1. Foot baseline is shared. Faces and torso scale stay consistent, crouching lowers pelvis without shrinking character. Clearly different pole angles and body silhouettes across the sequence. Staff and every plume fit in each cell. TRUE transparent pixels around all figures. No background, ground, labels, grid lines, shadows, motion trails, blur, glow or impact effects.",
+  "source": "C:/Users/zhting/.codex/generated_images/01a17a55-15ef-7812-b883-f8072c398bc7/exec-074e82a4-260d-4403-b0ea-aa8678ca9d9c.png",
+  "master": "hero-whole-martial.png",
+  "runtime": "hero-whole-martial.webp",
+  "frames": 8,
+  "columns": 2,
+  "rows": 4,
+  "transparent": true
+}

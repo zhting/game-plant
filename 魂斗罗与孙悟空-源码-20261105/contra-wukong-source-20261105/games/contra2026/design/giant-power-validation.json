@@ -1,0 +1,307 @@
+{
+  "taskSpaceId": 175,
+  "initialImmunity": {
+    "x": 84,
+    "y": 112,
+    "vy": 0,
+    "giantT": 15,
+    "hits": 3,
+    "grace": 2,
+    "hitGrace": 0,
+    "inv": 0,
+    "dead": false,
+    "weapon": "rifle",
+    "lives": 3,
+    "deaths": 0,
+    "enemies": [
+      {
+        "kind": "tur",
+        "x": 155,
+        "dead": false
+      },
+      {
+        "kind": "box",
+        "x": 214,
+        "dead": false
+      },
+      {
+        "kind": "run",
+        "x": 300,
+        "dead": false
+      }
+    ],
+    "score": 0,
+    "label": "巨大15秒 · 免疫2秒",
+    "mode": "pause"
+  },
+  "crush": {
+    "x": 307.5,
+    "y": 144,
+    "vy": 0,
+    "giantT": 11.516666666666493,
+    "hits": 3,
+    "grace": 0,
+    "hitGrace": 0,
+    "inv": 0,
+    "dead": false,
+    "weapon": "spread",
+    "lives": 3,
+    "deaths": 0,
+    "enemies": [],
+    "score": 1300,
+    "label": "巨大12秒 · 护甲3次",
+    "mode": "pause"
+  },
+  "afterFirstHit": {
+    "x": 307.5,
+    "y": 144,
+    "vy": 0,
+    "giantT": 11.516666666666493,
+    "hits": 2,
+    "grace": 0,
+    "hitGrace": 0.8,
+    "inv": 0,
+    "dead": false,
+    "weapon": "spread",
+    "lives": 3,
+    "deaths": 0,
+    "enemies": [],
+    "score": 1300,
+    "label": "巨大12秒 · 护甲2次",
+    "mode": "pause"
+  },
+  "afterThirdHit": {
+    "x": 307.5,
+    "y": 144,
+    "vy": 0,
+    "giantT": 0,
+    "hits": 0,
+    "grace": 0,
+    "hitGrace": 0,
+    "inv": 1.25,
+    "dead": false,
+    "weapon": "spread",
+    "lives": 3,
+    "deaths": 0,
+    "enemies": [],
+    "score": 1300,
+    "label": "",
+    "mode": "pause"
+  },
+  "timedExpiry": {
+    "x": 192,
+    "y": 204,
+    "vy": 0,
+    "giantT": 0,
+    "hits": 0,
+    "grace": 0,
+    "hitGrace": 0,
+    "inv": 1.2333333333333334,
+    "dead": false,
+    "weapon": "rifle",
+    "lives": 3,
+    "deaths": 0,
+    "enemies": [],
+    "score": 0,
+    "label": "",
+    "mode": "pause"
+  },
+  "frames": [
+    {
+      "name": "giant-immune",
+      "state": {
+        "x": 84,
+        "y": 112,
+        "vy": 0,
+        "giantT": 15,
+        "hits": 3,
+        "grace": 2,
+        "hitGrace": 0,
+        "inv": 0,
+        "dead": false,
+        "weapon": "rifle",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [
+          {
+            "kind": "tur",
+            "x": 155,
+            "dead": false
+          },
+          {
+            "kind": "box",
+            "x": 214,
+            "dead": false
+          },
+          {
+            "kind": "run",
+            "x": 300,
+            "dead": false
+          }
+        ],
+        "score": 0,
+        "label": "巨大15秒 · 免疫2秒",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-turret-stomp",
+      "state": {
+        "x": 144,
+        "y": 112,
+        "vy": 0,
+        "giantT": 14.3333333333333,
+        "hits": 3,
+        "grace": 1.3333333333333357,
+        "hitGrace": 0,
+        "inv": 0,
+        "dead": false,
+        "weapon": "rifle",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [
+          {
+            "kind": "box",
+            "x": 214,
+            "dead": false
+          },
+          {
+            "kind": "run",
+            "x": 300,
+            "dead": false
+          }
+        ],
+        "score": 500,
+        "label": "巨大15秒 · 免疫2秒",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-box-stomp",
+      "state": {
+        "x": 202.5,
+        "y": 112,
+        "vy": 0,
+        "giantT": 13.683333333333268,
+        "hits": 3,
+        "grace": 0.6833333333333359,
+        "hitGrace": 0,
+        "inv": 0,
+        "dead": false,
+        "weapon": "spread",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [
+          {
+            "kind": "run",
+            "x": 300,
+            "dead": false
+          }
+        ],
+        "score": 1200,
+        "label": "巨大14秒 · 免疫1秒",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-armor-hit",
+      "state": {
+        "x": 307.5,
+        "y": 144,
+        "vy": 0,
+        "giantT": 11.516666666666493,
+        "hits": 2,
+        "grace": 0,
+        "hitGrace": 0.8,
+        "inv": 0,
+        "dead": false,
+        "weapon": "spread",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [],
+        "score": 1300,
+        "label": "巨大12秒 · 护甲2次",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-armor-reverted",
+      "state": {
+        "x": 307.5,
+        "y": 144,
+        "vy": 0,
+        "giantT": 0,
+        "hits": 0,
+        "grace": 0,
+        "hitGrace": 0,
+        "inv": 1.25,
+        "dead": false,
+        "weapon": "spread",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [],
+        "score": 1300,
+        "label": "",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-base-immune",
+      "state": {
+        "x": 192,
+        "y": 204,
+        "vy": 0,
+        "giantT": 15,
+        "hits": 3,
+        "grace": 2,
+        "hitGrace": 0,
+        "inv": 0,
+        "dead": false,
+        "weapon": "rifle",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [],
+        "score": 0,
+        "label": "巨大15秒 · 免疫2秒",
+        "mode": "pause"
+      }
+    },
+    {
+      "name": "giant-base-expired",
+      "state": {
+        "x": 192,
+        "y": 204,
+        "vy": 0,
+        "giantT": 0,
+        "hits": 0,
+        "grace": 0,
+        "hitGrace": 0,
+        "inv": 1.2333333333333334,
+        "dead": false,
+        "weapon": "rifle",
+        "lives": 3,
+        "deaths": 0,
+        "enemies": [],
+        "score": 0,
+        "label": "",
+        "mode": "pause"
+      }
+    }
+  ],
+  "production": {
+    "url": "http://localhost:3190/games/contra2026/?art=giant-smash-1",
+    "modules": [
+      "http://localhost:3190/games/contra2026/js/stage-two-art.mjs?v=giant-smash-1",
+      "http://localhost:3190/games/contra2026/js/stage-one-art.mjs?v=giant-smash-1",
+      "http://localhost:3190/games/contra2026/js/giant-power.mjs?v=giant-smash-1",
+      "http://localhost:3190/games/contra2026/js/hd-actors.mjs?v=giant-smash-1"
+    ],
+    "helpUpdated": true,
+    "testHookAbsent": true,
+    "artReady": true
+  },
+  "regressionTests": {
+    "passed": 105,
+    "failed": 0
+  }
+}

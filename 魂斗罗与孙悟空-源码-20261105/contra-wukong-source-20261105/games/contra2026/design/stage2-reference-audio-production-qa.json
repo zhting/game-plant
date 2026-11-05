@@ -1,0 +1,17 @@
+{
+  "url": "http://localhost:3190/games/contra2026/?art=stage2-video-audio-1",
+  "audio": {
+    "track": "stage2",
+    "playing": true,
+    "paused": false,
+    "loading": false,
+    "ended": false,
+    "error": null,
+    "context": "running",
+    "muted": false,
+    "music": "on",
+    "sfx": "on",
+    "gain": 0.550000011920929
+  },
+  "hasQAHooks": false
+}

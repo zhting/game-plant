@@ -1,0 +1,219 @@
+{
+  "description": "巨灵神整身关键帧替换运行时四肢拼接；完整身体与巨斧使用同一张画布，逐帧标定与实际近战共用。",
+  "loadMs": 1674,
+  "approach": {
+    "x": 3218.2333333333245,
+    "y": 176,
+    "clip": "walk"
+  },
+  "timeline": [
+    {
+      "kind": "cleave",
+      "distance": 63.23
+    },
+    {
+      "kind": "sweep",
+      "distance": 61.44
+    },
+    {
+      "kind": "leap",
+      "distance": 59.64
+    },
+    {
+      "kind": "whirlwind",
+      "distance": 56.4
+    },
+    {
+      "kind": "stomp",
+      "distance": 58.22
+    },
+    {
+      "kind": "leap",
+      "distance": 57.98
+    },
+    {
+      "kind": "cleave",
+      "distance": 56.4
+    },
+    {
+      "kind": "sweep",
+      "distance": 56.12
+    },
+    {
+      "kind": "leap",
+      "distance": 56.35
+    },
+    {
+      "kind": "whirlwind",
+      "distance": 56.4
+    },
+    {
+      "kind": "stomp",
+      "distance": 58.22
+    }
+  ],
+  "screenshots": [
+    "giant-whole-movement-frames.png",
+    "giant-whole-cleave-frames.png",
+    "giant-whole-sweep-frames.png",
+    "giant-whole-spin-frames.png",
+    "giant-whole-mobility-frames.png",
+    "giant-whole-approach-gameplay.png",
+    "giant-whole-cleave-gameplay.png",
+    "giant-whole-sweep-gameplay.png",
+    "giant-whole-whirlwind-gameplay.png",
+    "giant-whole-stomp-gameplay.png",
+    "giant-whole-leap-gameplay.png",
+    "giant-whole-fight-gameplay.png",
+    "giant-whole-defeated-gameplay.png"
+  ],
+  "checks": {
+    "hitKinds": [
+      "cleave",
+      "sweep",
+      "leap",
+      "whirlwind",
+      "stomp"
+    ],
+    "seenFrames": [
+      "movement:6",
+      "movement:7",
+      "movement:8",
+      "cleave:0",
+      "cleave:1",
+      "cleave:2",
+      "cleave:3",
+      "cleave:4",
+      "cleave:5",
+      "cleave:6",
+      "cleave:7",
+      "cleave:8",
+      "cleave:9",
+      "movement:5",
+      "movement:4",
+      "movement:11",
+      "movement:10",
+      "movement:9",
+      "sweep:0",
+      "sweep:1",
+      "sweep:2",
+      "sweep:3",
+      "sweep:4",
+      "sweep:5",
+      "sweep:6",
+      "sweep:7",
+      "sweep:8",
+      "sweep:9",
+      "mobility:6",
+      "mobility:7",
+      "mobility:8",
+      "mobility:9",
+      "mobility:10",
+      "mobility:11",
+      "movement:1",
+      "movement:2",
+      "spin:0",
+      "spin:1",
+      "spin:2",
+      "spin:3",
+      "spin:4",
+      "spin:5",
+      "spin:6",
+      "spin:7",
+      "spin:8",
+      "spin:9",
+      "mobility:0",
+      "mobility:1",
+      "mobility:2",
+      "mobility:3",
+      "mobility:4",
+      "movement:0"
+    ],
+    "renderPure": true,
+    "freezePure": true,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 63,
+      "total": 63,
+      "failed": []
+    },
+    "atlases": [
+      {
+        "key": "giantWholeMovement",
+        "frames": 12,
+        "components": 12
+      },
+      {
+        "key": "giantWholeCleave",
+        "frames": 12,
+        "components": 12
+      },
+      {
+        "key": "giantWholeSweep",
+        "frames": 10,
+        "components": 10
+      },
+      {
+        "key": "giantWholeSpin",
+        "frames": 12,
+        "components": 12
+      },
+      {
+        "key": "giantWholeMobility",
+        "frames": 12,
+        "components": 12
+      },
+      {
+        "key": "giantWholeSweepLink",
+        "frames": 2,
+        "components": 2
+      }
+    ],
+    "alive": true,
+    "freezeRawGraphEqual": false,
+    "freezeAudit": {
+      "kinematicsFrozen": true,
+      "frameFrozen": true,
+      "frameBefore": "cleave:7",
+      "frameAfter": "cleave:7",
+      "rawGraphEqual": false,
+      "shieldBefore": 996.9833333333352,
+      "shieldAfter": 996.6500000000021,
+      "attackHasPlayerReference": true
+    }
+  },
+  "pausePure": true,
+  "damage": {
+    "before": 60,
+    "after": 58,
+    "bullets": 0
+  },
+  "death": {
+    "dead": true,
+    "exitOpen": true,
+    "hp": -42
+  },
+  "errors": [],
+  "unitTests": {
+    "passed": 222,
+    "failed": 0,
+    "command": "node --test --test-reporter=spec backend/test/wukong-giant-frames.test.mjs backend/test/wukong-mount.test.mjs backend/test/wukong-locomotion.test.mjs backend/test/wukong-magic.test.mjs backend/test/wukong-staff.test.mjs backend/test/wukong-opening.test.mjs backend/test/wukong-animation.test.mjs backend/test/contra-motion.test.mjs backend/test/contra-engine.test.mjs backend/test/contra-preload.test.mjs backend/test/contra-opening.test.mjs",
+    "output": "✔ 十四种棍法包含不同的握把和重心轨迹，起收势回到相同的斜立持棍姿势 (9.9596ms)\r\n✔ 左右朝向与巨大化时，持棍手仍在实体棍身内，舞花的辅助手可以松开再握回 (42.8018ms)\r\n✔ 云棍在头顶水平盘旋，劈棍双手过顶，低扫沉身，弓步与转腰配合发力 (1.6021ms)\r\n✔ 旋身时棍头与棍尾都可命中，同招不重复扣血，墙体分别挡住两端 (2.855ms)\r\nℹ tests 222\r\nℹ suites 0\r\nℹ pass 222\r\nℹ fail 0\r\nℹ cancelled 0\r\nℹ skipped 0\r\nℹ todo 0\r\nℹ duration_ms 3688.9659\r\n"
+  },
+  "assets": {
+    "promptSet": "assets/giant-whole-generation.json",
+    "compression": "design/stage-01/giant-whole-compression.json",
+    "atlasCount": 6,
+    "displayedFrames": 60
+  },
+  "notes": [
+    "每张完整人物先按透明轮廓独立提取，预热后仅绘制一次完整画布，未在运行中单独拼接头部、躯干或四肢。",
+    "自然交战使用真实固定步长 step 推进，截图采样实际攻击阶段；五种攻击均命中受护盾保护的玩家。",
+    "通过真实 J 键验证 Boss 生命 60→58；Enter 暂停后等待 250ms，Boss 状态不变，再真实按 Enter 恢复。",
+    "击败画面通过 QA hitPart 触发，验证完整倒地和入口开启；未声称视频中的 Boss 是全程自然击败。",
+    "freezeRawGraphEqual=false 源于攻击 hits 保留对玩家对象的引用，而玩家护盾倒计时在冻结敌人时继续减少；以玩家 pid 替代该引用后，Boss 的全部运动参数与帧号均保持冻结。",
+    "pose sheets 使用同一个显示比例与脚下锚点，避免预览单格自适应缩放造成角色尺寸变化的错觉。",
+    "浏览器 QA 控制对象仅临时注入隔离上下文，产品代码未添加测试入口。"
+  ]
+}

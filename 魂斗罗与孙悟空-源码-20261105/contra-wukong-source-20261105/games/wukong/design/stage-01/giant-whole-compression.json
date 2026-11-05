@@ -1,0 +1,80 @@
+[
+  {
+    "source": "games/wukong/assets/giant-whole-movement.png",
+    "webp": "games/wukong/assets/giant-whole-movement.webp",
+    "originalBytes": 2616527,
+    "sourceBytes": 2616527,
+    "webpBytes": 768820,
+    "width": 1448,
+    "height": 1086,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 92,
+    "psnr": 32.43
+  },
+  {
+    "source": "games/wukong/assets/giant-whole-cleave.png",
+    "webp": "games/wukong/assets/giant-whole-cleave.webp",
+    "originalBytes": 2314555,
+    "sourceBytes": 2314555,
+    "webpBytes": 778874,
+    "width": 1448,
+    "height": 1086,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 96,
+    "psnr": 32.04
+  },
+  {
+    "source": "games/wukong/assets/giant-whole-sweep.png",
+    "webp": "games/wukong/assets/giant-whole-sweep.webp",
+    "originalBytes": 2187045,
+    "sourceBytes": 2187045,
+    "webpBytes": 599014,
+    "width": 1448,
+    "height": 1086,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 88,
+    "psnr": 32.55
+  },
+  {
+    "source": "games/wukong/assets/giant-whole-spin.png",
+    "webp": "games/wukong/assets/giant-whole-spin.webp",
+    "originalBytes": 2357477,
+    "sourceBytes": 2357477,
+    "webpBytes": 678256,
+    "width": 1448,
+    "height": 1086,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 92,
+    "psnr": 32.23
+  },
+  {
+    "source": "games/wukong/assets/giant-whole-mobility.png",
+    "webp": "games/wukong/assets/giant-whole-mobility.webp",
+    "originalBytes": 2486772,
+    "sourceBytes": 2486772,
+    "webpBytes": 814924,
+    "width": 1448,
+    "height": 1086,
+    "lossless": false,
+    "alphaPreserved": true,
+    "quality": 96,
+    "psnr": 32.11
+  },
+  {
+    "source": "games/wukong/assets/giant-whole-sweep-link.png",
+    "webp": "games/wukong/assets/giant-whole-sweep-link.webp",
+    "originalBytes": 1748952,
+    "sourceBytes": 1748952,
+    "webpBytes": 386580,
+    "width": 1024,
+    "height": 683,
+    "lossless": true,
+    "alphaPreserved": true,
+    "quality": null,
+    "psnr": null
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "scope": "Wukong stage 1 peach-carrying supply fairies",
+  "behavior": {
+    "firstEligibleDelaySeconds": [
+      0.75,
+      2
+    ],
+    "subsequentEligibleDelayAfterExitSeconds": [
+      2,
+      4.5
+    ],
+    "maxLivingSupplyFairies": 1,
+    "includesFleeing": true,
+    "pendingKindsRetained": true,
+    "ordinaryContraUnchanged": true,
+    "decorativeFairiesUnchanged": true
+  },
+  "browserSimulation": {
+    "method": "isolated browser context; four simultaneously eligible test triggers; 2400 fixed 60 Hz simulation steps in real game engine",
+    "maxLiving": 1,
+    "spawnSeconds": [
+      1.1333333333333333,
+      12.016666666666667,
+      21.916666666666668,
+      32.28333333333333
+    ],
+    "kinds": [
+      "M",
+      "arms",
+      "S",
+      "clone"
+    ],
+    "exitToNextSeconds": [
+      3.450000000000001,
+      2.4666666666666686,
+      2.93333333333333
+    ],
+    "pendingAfterRun": 0,
+    "pauseFrozen": true,
+    "resources": {
+      "loaded": 63,
+      "total": 63,
+      "failed": []
+    },
+    "pageErrors": []
+  },
+  "realKeyboardInput": {
+    "first": {
+      "wait": 1.5666666666666667,
+      "podCount": 1,
+      "kind": "M",
+      "pending": 2
+    },
+    "outcome": {
+      "fairies": 1,
+      "flee": true,
+      "peaches": 1,
+      "kind": "M",
+      "pending": 2,
+      "max": 1,
+      "afterExitGap": 2.6166666666666663,
+      "nextKind": "arms",
+      "peachesAfter": 1
+    },
+    "errors": [],
+    "screenshots": [
+      "fairy-random-carrier.png",
+      "fairy-random-flee.png"
+    ]
+  },
+  "regressions": {
+    "tests": 226,
+    "pass": 226,
+    "fail": 0,
+    "command": "node --test --test-reporter=spec backend/test/wukong-supplies.test.mjs backend/test/wukong-giant-frames.test.mjs backend/test/wukong-mount.test.mjs backend/test/wukong-locomotion.test.mjs backend/test/wukong-magic.test.mjs backend/test/wukong-staff.test.mjs backend/test/wukong-opening.test.mjs backend/test/wukong-animation.test.mjs backend/test/contra-motion.test.mjs backend/test/contra-engine.test.mjs backend/test/contra-preload.test.mjs backend/test/contra-opening.test.mjs",
+    "coverage": [
+      "simultaneously eligible supply triggers do not cluster",
+      "different random seeds produce different schedules",
+      "fleeing carrier blocks subsequent spawn",
+      "pending ordinary and magic kinds preserved in unlock order",
+      "host snapshot preserves wait and pending triggers",
+      "pause and guest do not simulate schedule",
+      "reset discards schedule",
+      "camera overtaking carrier cannot permanently block queue",
+      "real J input releases exactly one peach",
+      "original Contra and later stages retained"
+    ]
+  }
+}

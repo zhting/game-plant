@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-26",
+  "tool": "built-in image_gen.imagegen",
+  "intent": "new game atlas, matching existing character reference",
+  "reference": "games/wukong/assets/giant-whole-mobility.webp",
+  "transparent_background": true,
+  "prompt": "Create a NEW production sprite atlas for the existing Chinese fantasy side scrolling game. The input is a CHARACTER STYLE AND ARMOUR REFERENCE only: the giant deity with blue and ornate gold armour. Make an exactly 2-column by 2-row atlas on genuine transparent background, four fully separated equal cells, with wide transparent gutters. NO text, NO grid, NO background, NO smoke or floor baked into sprites. Painterly high detail 2D game artwork matching reference lighting and blue/gold materials. TOP LEFT: enormous giant deity's LEFT-facing gold dragon-armoured boot and tall blue-and-gold shin, viewed strictly side-on, foot planted horizontally; only boot and shin, no upper body. TOP RIGHT: SAME boot and shin in raised-to-stomp pose, toes tipped a little downward; consistent scale and armour. BOTTOM LEFT: SAME boot and shin firmly planted in heavy stomp follow-through, slight knee bend above shin allowed, consistent scale. All three boots must clearly point LEFT, have a thick heavy sole and readable gold curled ornament, fully contained in each cell with 5 percent transparent padding; shin extends tall upward within the cell and is cleanly terminated, not a floating sole. BOTTOM RIGHT: the giant's complete huge ornate DOUBLE-BLADED AXE, same axe as reference, long golden shaft, silver-edged dark blue broad blade and raised golden dragon decoration, diagonal from lower left shaft butt to upper right axe head. Entire axe fully contained and isolated with padding. Each of the four cells contains one complete connected painted sprite, no duplicated limb, no character, no letters. Strong opaque silhouette inside the armour with antialiased transparent edges; no shadow background.",
+  "generatedSource": "C:/Users/zhting/.codex/generated_images/01a15c63-d627-72a3-ad7e-52ccb75e0235/exec-086d9f98-e17a-4bda-826d-3a472f61d6e5.png",
+  "projectOriginal": "games/wukong/assets/giant-colossus-atlas.png",
+  "runtime": "games/wukong/assets/giant-colossus-atlas.webp",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "alphaRange": [
+    0,
+    255
+  ],
+  "runtimeBytes": 277594,
+  "runtimeSha256": "295d550eb0959ac82ea6145b0de9e40251c3db9b8d71acbd4920f54435eae21a",
+  "compression": {
+    "format": "WebP",
+    "quality": 84,
+    "method": 6
+  },
+  "frames": [
+    "planted gold boot",
+    "raised gold boot",
+    "stomp follow-through",
+    "complete ornate axe"
+  ],
+  "runtimeRegistration": "games/wukong/js/wukong-giant-phase-art.mjs"
+}

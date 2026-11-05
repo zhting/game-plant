@@ -1,0 +1,56 @@
+{
+  "version": "user-voice-v3",
+  "sourceKind": "user-supplied audio",
+  "submittedFile": "合集.mp3",
+  "source": "games/wukong/tools/sources/wukong-calls-user-20261026.mp3",
+  "sourceDuration": 6.48,
+  "sourceSha256": "9ce4e75ac15993429274b156484933d6d70a2f260a316db1ecd0fb7248efbb84",
+  "processing": "Phrase cuts, 3/8ms edge fades, two-pass loudness normalization; original pitch and speed preserved",
+  "files": [
+    {
+      "key": "effort1",
+      "text": "看棒！",
+      "file": "wukong-call-1-user-v3.ogg",
+      "start": 1.08,
+      "end": 1.86,
+      "duration": 0.78,
+      "filters": "atrim=start=1.08:end=1.86,asetpts=PTS-STARTPTS,afade=t=in:d=0.003,afade=t=out:st=0.772:d=0.008,apad=whole_dur=0.5,loudnorm=I=-16:TP=-2:LRA=7:linear=true:measured_I=-18.31:measured_TP=-3.15:measured_LRA=0.00:measured_thresh=-28.31:offset=1.15,atrim=duration=0.780",
+      "bytes": 8419,
+      "sha256": "2a1419345c6c6e5f2ab1e8e05b6d179b81abd27a1b92a05c406465f7a7177045"
+    },
+    {
+      "key": "effort2",
+      "text": "哪里跑！",
+      "file": "wukong-call-2-user-v3.ogg",
+      "start": 2.74,
+      "end": 3.81,
+      "duration": 1.07,
+      "filters": "atrim=start=2.74:end=3.81,asetpts=PTS-STARTPTS,afade=t=in:d=0.003,afade=t=out:st=1.062:d=0.008,apad=whole_dur=0.5,loudnorm=I=-16:TP=-2:LRA=7:linear=true:measured_I=-16.10:measured_TP=-3.04:measured_LRA=0.00:measured_thresh=-26.10:offset=-0.00,atrim=duration=1.070",
+      "bytes": 10564,
+      "sha256": "c052cfd2de7ebefa6adf4be2849de7e7656efedba37d340da193ae715bbd0dd6"
+    },
+    {
+      "key": "effort3",
+      "text": "嘿！",
+      "file": "wukong-call-3-user-v3.ogg",
+      "start": 0.0,
+      "end": 0.32,
+      "duration": 0.32,
+      "filters": "atrim=start=0.0:end=0.32,asetpts=PTS-STARTPTS,afade=t=in:d=0.003,afade=t=out:st=0.312:d=0.008,apad=whole_dur=0.5,loudnorm=I=-16:TP=-2:LRA=7:linear=true:measured_I=-17.84:measured_TP=-2.56:measured_LRA=0.00:measured_thresh=-27.84:offset=1.24,atrim=duration=0.320",
+      "bytes": 5489,
+      "sha256": "5f332400792b83542cac71358f2e8a9801c646f52962fbcf24634a26edd46b0b"
+    },
+    {
+      "key": "shout",
+      "text": "吃俺老孙一棒！",
+      "file": "wukong-call-4-user-v3.ogg",
+      "start": 4.55,
+      "end": 6.32,
+      "duration": 1.77,
+      "filters": "atrim=start=4.55:end=6.32,asetpts=PTS-STARTPTS,afade=t=in:d=0.003,afade=t=out:st=1.762:d=0.008,apad=whole_dur=0.5,loudnorm=I=-16:TP=-2:LRA=7:linear=true:measured_I=-19.00:measured_TP=-5.51:measured_LRA=0.00:measured_thresh=-29.00:offset=-0.00,atrim=duration=1.770",
+      "bytes": 14452,
+      "sha256": "6c118ba2c048b546964b96ca19cf783f725d8b22e8925db210baa66a730f0dff"
+    }
+  ],
+  "totalVoiceBytes": 38924
+}

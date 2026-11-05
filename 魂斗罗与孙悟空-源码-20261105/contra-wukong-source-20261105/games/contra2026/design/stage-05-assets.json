@@ -1,0 +1,568 @@
+{
+  "generatedWith": "built-in imagegen",
+  "assets": [
+    {
+      "key": "backdrop",
+      "prompt": "Use case: game environment background. Asset type: one production-ready 2D side-scrolling pixel-art mountain background, wide landscape 16:9. Primary request: arctic military snowfield for a detailed retro run-and-gun game. Huge rugged blue-grey snowy mountain peaks in the upper half, broken ridges and shaded ice gullies, cloudy polar dusk sky with a subtle pale cyan glow near the horizon. A distant dark conifer forest and low rolling snow drifts in the lower third, with soft blue frost mist separating three natural depth planes. Camera is completely side-on with a horizontal horizon. Detailed, hand-painted pixel art matching high-resolution arcade sprites, crisp deliberate clusters, no vector look, no photorealism, no blur, no visible pixel grid. Color palette: slate blue, muted steel cyan, pale ivory snow, navy shadow. Keep distant scenery low contrast so foreground gameplay silhouettes stay readable. Composition must tile gracefully sideways: left and right edges at the same horizon height, no isolated obvious centerpiece, no objects cut by a hard vertical boundary. Fill the canvas edge to edge. No foreground walking platform, no characters, no tank, no UI, no text, no logos. This is a game background, not a concept-art presentation board.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-40914d59-3385-4666-84f6-426cafe2b62a.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/polar-mountains.webp",
+      "url": "/games/contra2026/assets/stage5/polar-mountains.webp",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "bounds": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "bytes": 238494,
+      "sha256": "e249f03eab9566b2e8d7a0fdafa00de839de6d48837d91476a959113d85a8d49"
+    },
+    {
+      "key": "ledge",
+      "prompt": "Use case: game sprite asset. Asset type: one isolated broad snow-covered rock platform on a genuine transparent background, landscape width-to-height approximately 3:1. Primary request: a richly detailed thick arctic ledge for a side-scrolling arcade game. Camera side-on with just a little visible top plane. Thick rounded white snow pillows at the top form an almost level walkable lip at approximately 15 percent down the silhouette; softly uneven snow curls over the rim, with cool blue undersides. Beneath, large interlocked dark slate and steel-blue boulders with broad bevels, stratified frozen rock, cracks, pockets of translucent glacial ice and a few short uneven icicles. Deep shadow under overhangs. The platform must feel heavy and thick, not a thin slab; rounded irregular end stones and an irregular tapering bottom silhouette. One continuous wide platform, entirely visible with transparent margins, never clipped at left or right. Pixel-art style: highly detailed arcade sprite, hand-painted crisp clusters and controlled material highlights; no anti-aliased vector flatness, no Gaussian blur, no outer glow. Snow in ivory white, shadows muted cyan, rocks navy/slate with a few warm grey mineral facets. Only one platform. No scenery, no floor, no pedestal, no character, no text, no labels, no grid. Preserve real alpha transparency.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-406cfd28-610b-4e40-bc91-f919579fece1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/snow-rock-ledge.webp",
+      "url": "/games/contra2026/assets/stage5/snow-rock-ledge.webp",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bounds": [
+        30,
+        148,
+        2113,
+        493
+      ],
+      "bytes": 265040,
+      "sha256": "6ea86b73c087bbff33df97592a41aafe466bbc02c8d27780bd62bf88981ebd24"
+    },
+    {
+      "key": "tank",
+      "prompt": "Use case: game sprite asset. Asset type: isolated winter-camouflage tracked tank BODY sprite on actual transparent background, wide landscape roughly 2:1 silhouette. Primary request: massive futuristic arctic enemy tank facing LEFT, exact side view, for a richly detailed retro run-and-gun game. Show the whole chassis and all tracks, a long broad lower hull, seven large recessed steel road wheels, segmented black caterpillar tracks, angular chamfered white/grey armor plates, bolts, cooling vents, dirty ice and packed snow on upper surfaces. A heavy squat angular turret sits on the middle-to-right half. On the left side of the turret, a DARK EMPTY rectangular recessed sensor mount, for the game to add an animated colored core. IMPORTANT: NO protruding cannon barrel and NO machine gun; the game draws those as moving independent parts. The rear engine vent belongs at the RIGHT side. Tank silhouette is about twice as wide as tall, tracks on a single perfectly horizontal baseline, entire vehicle visible with transparent padding all sides. Direction is left, no three-quarter perspective, no overhead view. Crisp high-detail pixel-art arcade sprite with dimensional bevels, dark outlining, cold grey armor, weathered metal, warm tiny rivet accents; match hand-painted game sprites, not flat vectors or a photograph. No scenery, no ground, no shadow blob outside vehicle, no UI, no words, no watermark.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-c9aab2cf-e92b-4c11-a5dc-499cb154faa5.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/winter-tank.webp",
+      "url": "/games/contra2026/assets/stage5/winter-tank.webp",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bounds": [
+        21,
+        128,
+        1734,
+        668
+      ],
+      "bytes": 290476,
+      "sha256": "6fea302fe484f5c38fbe628df91f1dded4ff73acca5ba6c0b2df5bb79f9c970e"
+    },
+    {
+      "prompt": "Use case: production game environment sprite. Asset type: one wide transparent-background strip of a snow-laden conifer forest for a side-scrolling arctic pixel-art game, landscape aspect about 3:1. Primary request: richly detailed natural pine and fir trees of DIFFERENT species and heights, irregular drooping branches weighed down with snow, layered feathery needle tufts, bent slender trunks visible through gaps, open negative space around branches. One coherent forest silhouette filling the lower portion, trees rooted on a single horizontal baseline but no ground drawn. Individual snow masses broken and clustered, NEVER simple triangular cones, never repeated perfect zigzags. Lower branches spread organically. Cool midnight blue needles, desaturated dark spruce green, muted icy blue snow shadows with a few ivory tips. Forest is shaded and LOW CONTRAST, to sit behind bright foreground snowy rocks and game characters. High-detail hand-painted pixel-art sprite, crisp deliberate pixel clusters, subtle material relief, no soft photographic blur, no vector geometry. Snow on each branch, not a continuous white blanket. Thin transparent margins on all sides, complete tree tips, some gaps between grouped trees. No snowfield or mountains or sky, actual alpha transparency, no text, no UI, no labels, no watermark.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-4d19ed61-f4e3-41c1-ac9c-973bc1de2ea3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "key": "snowPines",
+      "file": "assets/stage5/snow-pines.webp",
+      "url": "/games/contra2026/assets/stage5/snow-pines.webp",
+      "dimensions": [
+        2164,
+        727
+      ],
+      "bounds": [
+        8,
+        9,
+        2150,
+        701
+      ],
+      "bytes": 603210,
+      "sha256": "2d2ee65ea3ede7e4e10511d7fff9ee54c8158ead5f9ebb4cabadd9cdf8dd6b9c"
+    },
+    {
+      "key": "winterWeapons",
+      "prompt": "Use case: production game sprite atlas. Asset type: a SINGLE transparent pixel-art weapons sheet for the winter tank in reference image 1. Input images: image 1 is the exact STYLE AND MATERIAL REFERENCE; image 2 is only an attachment/pose reference, its existing smooth vector barrel is the defect and MUST NOT be imitated. Primary request: make all weapon parts use the SAME detailed hand-painted pixel clusters as the reference tank: battered off-white winter camouflage over cold steel, chipped pale paint, small brown rust nicks, dark greasy recesses, tiny brass bolts, fine metal edge highlights and a light uneven dusting of snow along upper surfaces. No flat blue vector tubes, no perfectly smooth gradients, no plastic. Create THREE SEPARATE SPRITES in THREE HORIZONTAL ROWS on one wide landscape transparent canvas, with large empty transparent gutters. All point LEFT in an exact horizontal side view; no diagonal rotation, no perspective. TOP ROW: a complete long tank cannon barrel, muzzle brake at far LEFT and heavy armored mounting collar at RIGHT. Long tapered cylindrical barrel with 3 reinforced collars, seams, ribs, weathered white paint and scratches. A compact chamfered muzzle brake with a dark visible bore and small vent cuts. The overall silhouette is about SIX TIMES wider than tall; narrow barrel, sturdy mount, crisp rim lighting. MIDDLE ROW: the same cannon's SHORT BROKEN STUB, only the last quarter nearest its RIGHT mounting collar remains, sheared torn dark bore facing LEFT, bent chipped metal and scorching, same camera and material. BOTTOM ROW: a compact hull machine gun, thin short barrel pointing LEFT attached to a rounded armored ball mount on the RIGHT, metal bolt ring and white winter-camo casing, dark bore, same detailed sprite style. Keep all silhouettes fully visible and surrounded by transparent padding. No tank body, no whole turret, no scenery, no floor shadow, no black backdrop, no text, no numbered labels, no UI, no grid lines. Real alpha transparency. Sprite sheet, not a presentation mockup.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-9e137750-f7b5-4914-90b4-31ebad30fc42.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/winter-weapons.webp",
+      "url": "/games/contra2026/assets/stage5/winter-weapons.webp",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bounds": [
+        76,
+        15,
+        2018,
+        694
+      ],
+      "frames": {
+        "cannon": [
+          76,
+          15,
+          2018,
+          276
+        ],
+        "broken": [
+          992,
+          284,
+          738,
+          244
+        ],
+        "machineGun": [
+          987,
+          538,
+          585,
+          171
+        ],
+        "mount": [
+          1350,
+          538,
+          222,
+          171
+        ]
+      },
+      "bytes": 200128,
+      "sha256": "f66c45610232756651f3b31d430641ffe63b4de4ed2b37395e5f2e0dda16f160"
+    },
+    {
+      "key": "fieldArtillery",
+      "prompt": "Use case: game sprite animation atlas. Asset type: ONE transparent sprite sheet containing TWO complete man-operated field-cannon enemy sprites, stacked in TWO separated horizontal rows. References: image 1 gives the exact gameplay silhouette and the visible human operating behind the gun; image 2 gives our current game's weathered winter-metal pixel-art material; image 3 gives our existing character illustration/pixel style. Draw an arctic field artillery cannon with a LARGE visible HUMAN GUNNER behind it, facing LEFT, camera exact side view. A short heavy grey/snow-white cannon barrel angles about 20 degrees up-left from a sturdy swivel cradle and small armored pedestal; NO tank chassis and no big wheels. Bolts, ribbed barrel jacket, recoil cylinder, chipped winter paint, tiny brass fasteners, a little snow on the upper armor. The adult male gunner kneels at the RIGHT behind the controls, clearly visible HEAD, torso, bent navy-blue trouser legs and black boots, one bare hand grasping a control lever and the other at the breech. Grey winter jacket, olive helmet and small red neck scarf. Gunner as tall as the cannon, readable human proportions. TOP ROW: idle/loading pose, leaning forward with both hands on the controls. BOTTOM ROW: firing/recoil pose of the SAME weapon and man, same cannon size, same ground baseline, same character proportions, gunner pulls the firing lever with a slight backward lean, barrel recoils a little. Do NOT draw any muzzle flash, smoke or fired projectile; game code adds these. Each entire unit has approximately 1.5:1 silhouette width-to-height. Leave a large transparent gutter between the two rows and transparent padding all around. Exact matching hand-painted detailed arcade pixel sprites, crisp clusters, dark outlines, dimensional metal bevels and cloth folds. No smooth flat vector shapes, no photographic people, no scenery, no platforms, no floor shadow, no UI, no letters, no labels, no grid. Real alpha transparency.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-d5d6157c-8c57-491d-ae01-42bacd154ce2.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/manned-field-cannon.webp",
+      "url": "/games/contra2026/assets/stage5/manned-field-cannon.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        316,
+        90,
+        991,
+        891
+      ],
+      "frames": {
+        "idle": [
+          326,
+          90,
+          893,
+          413
+        ],
+        "fire": [
+          316,
+          576,
+          991,
+          405
+        ]
+      },
+      "bytes": 196864,
+      "sha256": "5a13da37d50ee6bc574fe04829d7f4450fb373c5a927c63a47cffee208f3afa8"
+    },
+    {
+      "key": "forestAmbusher",
+      "prompt": "Use case: production game sprite atlas. Asset type: ONE transparent snow-forest ambush kit. References: image 1 gives our game character rendering style; image 2 gives our cold snow-laden forest palette; image 3 gives the classic forest ambush setting, not a layout to copy. Top part of canvas: THREE separate full-body sprites of the SAME enemy hand-grenade soldier facing LEFT, arranged in a horizontal row with clear transparent gutters. Adult male in a worn grey-white winter jacket, dark olive trousers, olive helmet, brown gloves and boots, and small muted rust-red scarf; match the detailed hand-painted arcade pixel art character reference. Sprite 1: low crouch hiding, holding a small olive hand grenade near his chest. Sprite 2: rising from crouch, right arm pulled BACK overhead with grenade clearly in the hand, preparing to throw. Sprite 3: throws forward to the LEFT, right arm extended over shoulder, knees slightly bent, empty throwing hand. Keep body size and feet baseline consistent, whole arms and hands fully visible, no rifle. Bottom part of canvas: ONE isolated natural SNOW-LADEN FIR TREE, tall narrow irregular silhouette with drooping layered branches, dark blue-green needles, pale broken snow clumps, thin textured brown trunk visible in gaps. Its lowest branches screen a crouching soldier, but not a perfect triangle. Tree is an independent foreground occluder; do NOT place any soldier inside or behind the tree in the atlas. Leave wide transparent space separating all FOUR sprites. No background forest, no ground, no scenery, no grenade trail or explosion, no photographic blur, no vector shapes, no words, no labels, no grid. Actual transparent alpha background.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-1acc6541-c0e2-4df1-be2f-e1ab26b2a439.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/forest-ambusher.webp",
+      "url": "/games/contra2026/assets/stage5/forest-ambusher.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        125,
+        11,
+        1388,
+        1008
+      ],
+      "frames": {
+        "cover": [
+          125,
+          159,
+          233,
+          257
+        ],
+        "windup": [
+          551,
+          11,
+          342,
+          405
+        ],
+        "release": [
+          1065,
+          79,
+          448,
+          334
+        ],
+        "tree": [
+          484,
+          400,
+          599,
+          619
+        ]
+      },
+      "bytes": 218876,
+      "sha256": "b71188246182aed6cb82ecf5f8a4f7b6521b98968d22b63adf6fbc2933b4ff69"
+    },
+    {
+      "key": "fortress",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent sprite atlas for a polished side-scrolling Contra winter level. Input image 1 is ONLY the reference for the floating boss silhouette and turquoise base architecture; do not copy the screenshot or its black background. Create two independent isolated assets in a wide 1536x1024 atlas, with generous transparent gutters. TOP HALF centered at (768,240): one front-view hovering mechanical fortress boss, roughly 900px wide and 430px tall. Match the reference: blue violet serrated crown, two swept silver fins, vertical column of three blue-black glass orbs, broad circular steel platform with many little suspension rods, and large red orange central engine under the disc. Two side gun pods and detailed riveted worn gunmetal armor, luminous red muzzles. No human. BOTTOM HALF centered at (768,780): one 1300px wide, 360px tall turquoise military hangar / base building in side elevation, low on left, tall angular sloped roof on right, thick white metallic ribs, cyan-dark armored panels, doors, vents, silver pipes. Snow piled on roof, icy worn edges. Both sprites must be crisp high-definition hand-painted pixel-game art with controlled small pixel clusters, real shaded volume and sharp detail, matching snowy weathered metal game sprites, not vector art, not blurry photorealism. Ground plane and background fully transparent. No text, no labels, no numbers, no whole scene. Keep the top boss and bottom base separate, unoccluded, not touching; all parts within image margins. Boss viewed level from front, building viewed from side with slight visible roof depth. No cast shadow on a background.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-081f5cf9-f255-4607-8c22-8c73a4dffa04.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/flying-fortress.webp",
+      "url": "/games/contra2026/assets/stage5/flying-fortress.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "fortress": [
+          233,
+          11,
+          1070,
+          570
+        ],
+        "base": [
+          17,
+          621,
+          1502,
+          387
+        ]
+      },
+      "bytes": 351372,
+      "sha256": "d5f3412354dd65c63c9dc775b42b1c1d5fd8d28acb4e27aa0a63ec48c84cfc1d"
+    },
+    {
+      "key": "sky",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent atlas for a crisp high-definition hand-painted pixel-art winter military side-scroller. Create a wide 1536x1024 transparent sprite atlas with TWO completely separate rows, generous transparent gutters. TOP ROW x80..1450,y50..470: a long naturally tapered bank of storm clouds, layered cold slate blue grey with ivory silver edges, irregular soft but pixel-cluster textured cloud shapes, subtle volumetric underside shading, transparent wispy edges, no mountains, no sky rectangle. It will scroll independently across a snowy mountain background. BOTTOM ROW centered x768,y760: one isolated LEFT-facing military twin-engine fighter jet in full side/three-quarter-side elevation, about 1000px wide and 260px tall, pointed nose left, grey blue weathered metal fuselage, black canopy, swept wings, two tail fins, warm tiny orange exhaust at right, readable silhouette, shaded metal panels and crisp pixel texture. Aircraft designed for a distant flyby in a military game, absolutely no text or logos. Do not include contrails, clouds or ground in bottom row. Transparent background throughout; no checkerboard baked into image, no glow rectangle, no scene. Keep aircraft and cloud bank completely separate, no overlap, no clipping. Cohesive restrained snowy game palette.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-f08b0ee5-f24c-4ae9-85e3-b0129f1acbb1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/polar-sky-atlas.webp",
+      "url": "/games/contra2026/assets/stage5/polar-sky-atlas.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "cloud": [
+          9,
+          34,
+          1519,
+          482
+        ],
+        "fighter": [
+          156,
+          618,
+          1266,
+          310
+        ]
+      },
+      "bytes": 261304,
+      "sha256": "09e0c5caf5143bd579a909535c76106d27180338731d7172be6c1a2ccf40a1e8"
+    },
+    {
+      "key": "iceLedge",
+      "prompt": "Use case: precise-object-edit. Asset type: production game terrain sprite, alternate ICE-covered version of the attached snow-rock ledge. The attached transparent ledge is the edit target and exact style/shape reference. Preserve its wide low silhouette, chunky interlocking dark slate boulders, thick irregular rocky underside, rounded ends, detailed hand-painted pixel clusters and actual alpha background. Change only the upper snow surface into a natural slick glacier ice surface inset into snow. A broad shallow translucent grey-blue ice top plane with internal cloudy air pockets, delicate irregular branching fissures, scuffed frosted grain, faint reflected cold sky and uneven crystalline bevels. Thick ragged white snow gathers at the back edge, front edge and both ends in irregular small rounded clumps; several tufts drift over the ice edge. The near rim has a fractured translucent lip with depth and some short icicles blending into the original rocky front. The ice is integrated into the snowy rock mass and follows its rounded irregular profile, not a separate rectangle, ribbon or extrusion. Keep a mostly level playable surface around 13 percent down from the sprite's top silhouette. Keep the rocks nearly identical to reference and their original natural scale. Wide landscape asset, entire terrain chunk visible with transparent padding. Detailed sharp arcade pixel-game art, natural varied material and asymmetrical cracks. Restrained slate cyan, pale ivory, steel blue palette. Avoid uniform blue band, straight white outline, repeating diagonal marks, plastic, UI panel, rounded rectangle, neon turquoise, gradients standing alone, photorealism, blurred detail, background, floor, shadow blob, text or characters. Preserve genuine transparent alpha.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-cc78a409-fe7f-40ef-9df3-16213950b1a4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/frozen-rock-ledge.webp",
+      "url": "/games/contra2026/assets/stage5/frozen-rock-ledge.webp",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bounds": [
+        26,
+        118,
+        2121,
+        527
+      ],
+      "bytes": 386274,
+      "sha256": "396ebbf43dfb6e848974f0f9097de026e87603dbaadc181a5b5ffcf01384c348"
+    },
+    {
+      "key": "fieldBunkers",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent sprite atlas for a detailed high-definition arcade pixel-art snowy military side-scroller. Primary request: REPLACE flat placeholder houses with believable dimensional winter field bunkers matching hand-painted snowy rock platforms and weathered white-camouflage military vehicles. Create TWO separate isolated low, wide military bunker sprites arranged one above the other in a 1536x1024 landscape atlas. TOP SPRITE occupies x150..1390,y30..465. A squat arctic outpost facing mostly front in side-scroller elevation, with a little visible sloped roof and right side for depth, broad recessed ribbed steel blast door, heavy chamfered concrete and steel surround, dark slate-blue wall armor, worn white frost, bolts, panel seams, small side air vents, thick uneven snow pillows on the roof, short irregular icicles, windblown snow banks partly burying the footing. Two tiny warm amber indicator lamps, a modest antenna at one rear corner, cold shaded recesses and clear material highlights. BOTTOM SPRITE occupies x150..1390,y550..990. A matching alternative low snow-covered bunker, slightly narrower door on one side, exposed industrial piping and louvered vents on the other, beveled armored wall ribs, weathered grey-blue steel, snowy overhang and piled snow at the feet. Both buildings have natural 3D volume expressed through crisp painted pixel clusters, dark occlusion under roof rims and door reveals, layered snow and frozen metal texture, same winter game style, not photographs or vector art. Keep restrained grey blue, ivory snow, charcoal shadows and tiny amber accents. Entire buildings and their snow banks visible with transparent padding, no clipped edges. Genuine transparent alpha background, transparent horizontal gutter separating the two sprites. No ground rectangle or scenery, no mountains, no sky, no shadow blob outside the building, no grid, no glow rectangle, no label, no text, no people, no weapons. Each building is roughly 3 times as wide as its main building body is tall, sturdy and compact. Avoid flat polygon placeholder, smooth untextured slabs, simple triangular roof, neon, comic outlines, noisy excess detail, enormous hangar, or washed-out blurry surfaces.",
+      "source": "Generated images are saved to C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b as C:\\Users\\zhting\\.codex\\generated_images\\01a14d5a-42ff-7e33-bf4b-817e85c1bd0b\\exec-d29bb3bb-a884-4fa0-88e6-7f2b23c2ee40.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "file": "assets/stage5/winter-field-bunkers.webp",
+      "url": "/games/contra2026/assets/stage5/winter-field-bunkers.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "main": [
+          11,
+          17,
+          1514,
+          462
+        ],
+        "utility": [
+          24,
+          500,
+          1500,
+          484
+        ]
+      },
+      "bytes": 432136,
+      "sha256": "3cf623e8e9f32309f1406c4162c5c098072c26aafa62edfd40836ce6408e15e6"
+    },
+    {
+      "key": "explosionAtlas",
+      "file": "assets/shared/explosions.webp",
+      "url": "/games/contra2026/assets/shared/explosions.webp",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "bounds": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "frames": {
+        "frame0": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "frame1": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "frame2": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "frame3": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "frame4": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "frame5": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "frame6": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "frame7": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "frame8": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "frame9": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "frame10": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "frame11": [
+          768,
+          512,
+          256,
+          256
+        ]
+      },
+      "bytes": 313390,
+      "sha256": "060bd99f90858c9b67989e336fcdfc6a5156ddd8cf171a0413d554960bbbaeb4",
+      "source": "design/source-art/shared/explosions.png",
+      "prompt": "Built-in imagegen. One twelve-frame 4 by 3 transparent explosion sequence: white-hot ignition, expanding luminous orange fireball, rolling charcoal smoke and fading embers. Fixed camera, consistent center and scale, warm glow, crisp detailed HD arcade game art. No text, labels, backdrop or ground. Runtime packs the approved equal-size cells and adds a short additive light flash without changing simulation.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "equipmentTurret",
+      "file": "assets/shared/turret-kit.webp",
+      "url": "/games/contra2026/assets/shared/turret-kit.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "body": [
+          436,
+          14,
+          664,
+          680
+        ],
+        "barrel": [
+          175,
+          711,
+          1190,
+          298
+        ]
+      },
+      "bytes": 140370,
+      "sha256": "86ad78c411c35c35758e3f5d79ab80b5b9742b8c92aa41cb5c6312fcba3bfc5a",
+      "source": "design/source-art/shared/turret-kit.png",
+      "prompt": "Built-in imagegen precise-object-edit of the latest winter turret kit. Remove all snow, ice, icicles and frost while preserving heavy beveled worn ivory-grey armor, dark ribbed gunmetal, bolts, circular socket and warm amber sensor. Front-facing pedestal in upper two thirds and a separate horizontal right-facing cannon barrel in bottom third. Preserve two-component layout and transparent alpha; expose painted armor beneath snow. No text, logos or scene.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "equipmentSupply",
+      "file": "assets/shared/supply-case.webp",
+      "url": "/games/contra2026/assets/shared/supply-case.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "frames": {
+        "closed": [
+          46,
+          512,
+          689,
+          348
+        ],
+        "open": [
+          810,
+          199,
+          691,
+          661
+        ]
+      },
+      "bytes": 132370,
+      "sha256": "363300f3cd8241c4106cd3d004cadc21feba2350f39d921dd3b411197af5d607",
+      "source": "design/source-art/shared/supply-case.png",
+      "prompt": "Built-in imagegen precise-object-edit of the latest winter two-state supply case. Remove snow, frost and icicles, retaining the same ivory/slate camouflaged beveled equipment box, corner plates, rivets, handles, central latch and warm amber lamps. One closed case on left; the identical case opened on hydraulic supports on right, with visible equipment. Same body width and aligned bottom baseline. Detailed hand-painted HD arcade texture, transparent alpha, no text or scene.",
+      "alphaPreserved": true
+    },
+    {
+      "key": "supplySaucer",
+      "file": "assets/shared/supply-saucer.webp",
+      "url": "/games/contra2026/assets/shared/supply-saucer.webp",
+      "dimensions": [
+        512,
+        144
+      ],
+      "bounds": [
+        0,
+        0,
+        512,
+        144
+      ],
+      "frames": {},
+      "bytes": 18042,
+      "sha256": "21fe904eeeca0545a4f50e5a540efe5fb6d9474d6364af7a404239a7545ea361",
+      "source": "assets/stage5/winter-supply-saucer.webp",
+      "prompt": "Built-in imagegen, transparent background, 2026-10-25.\n\nUse case: stylized-concept. Asset type: production transparent game sprite, a detailed flying supply saucer for a high-definition arcade side-scrolling action game. Primary request: redesign a small red-and-ivory pointed flying disc into a finely crafted dimensional machine. Single intact symmetrical saucer centered on a transparent canvas, wide low profile approximately 2.4:1 width to height, entire object visible with generous empty alpha padding. Almost straight-on side view, slightly elevated enough to reveal its top armor plane, compatible with a flat side-scrolling game camera. Preserve a strong diamond-like rim with sharp left and right tips, a shallow raised central red cockpit cap, ivory painted metal edging and a layered dark steel belly. Add thick beveled overlapping armor plates, red enamel with restrained worn edges, inset dark red cockpit glass, a small warm amber central optical lens, radial panel seams that follow the disc shape, small bolts, fine rim vents, ribbed lower mechanical housing, and two tiny recessed amber engine ports. Sculpt clear large readable masses first, then restrained crisp metal details; make the silhouette and red-white identity readable at a small on-screen size. Hand-painted HD arcade pixel-art style, crisp clustered texture, consistent with richly detailed snowy military tanks and cannons, cold steel reflections, warm ivory highlights, dark blue-grey recesses and understated red paint. Strong depth, precise occlusion shadows under the upper rim, controlled highlights along the top lip. No scene or ground, no snow lump, no giant halos, no exhaust trails, no cast shadow outside the body, no motion blur, no flat vector look, no plastic 3D toy look, no text, letters, labels, logos, UI or watermark. ONE saucer only, no variants or detached parts. Genuine transparent alpha background, no checkerboard printed into image.\n",
+      "alphaPreserved": true
+    },
+    {
+      "generatedWith": "built-in imagegen",
+      "source": "games/contra2026/assets/stage5/winter-tank-core-v2.png",
+      "file": "games/contra2026/assets/stage5/winter-tank-core-v2.webp",
+      "url": "/games/contra2026/assets/stage5/winter-tank-core-v2.webp",
+      "dimensions": [
+        512,
+        192
+      ],
+      "bounds": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "sourceBounds": [
+        146,
+        161,
+        1628,
+        716
+      ],
+      "bytes": 38424,
+      "sha256": "f28ca1c02684bab9d1a9747547ffd5450063405c4fcef41b7c4e15deecf3755f",
+      "alphaPreserved": true,
+      "lamps": [
+        [
+          155.0,
+          102.5,
+          25.0
+        ],
+        [
+          251.0,
+          102.5,
+          25.0
+        ],
+        [
+          348.0,
+          102.5,
+          25.0
+        ]
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: one production transparent replacement sprite for the three-lamp core device on an arctic armored tank. Image 1 is the edit target: the flat dark blue rectangular three-amber-light panel at the center of the tank close-up. Image 2 is a supporting style reference: the existing entire winter tank, whose white-grey armor, brushed metal edges, aged bolts, dirty seams and snow must be matched. Redesign only that three-lamp device as a physical embedded armored component. Deliver ONLY the isolated replacement component on real transparent background, not the surrounding tank.\n\nOne horizontally wide, low-profile, chamfered rectangular housing, about 2:1 silhouette width to height, fully visible, face-on to the side camera with extremely restrained perspective. Cold off-white and grey steel exterior, dark graphite inset, substantial beveled armored edges, inset grooves, brass-toned worn corner bolts, layered weld seams, small chips and abrasion showing dark metal beneath paint. A modest uneven dusting of snow and fine frost along the upper lip and two corners, matching the tank reference; no oversized snow mound or icicle curtain. THREE circular recessed amber optical/reactor lenses in ONE horizontal row, evenly spaced, same diameter, all visible. Each lens has a real machined metal bezel and dimensional dark inner recess, shaded translucent amber glass with a softly hot center, subtle inner ridges and an offset specular glint. A restrained warm glow comes from the glass only. Keep lenses clear enough to identify the tank's weak point at small gameplay scale, but the device must read as bolted-in physical armor, never a clean UI widget or floating icon. Small functional side hinges and a short cable gland may be integral to the housing, without protruding loose wires. No screen, no modern flat rounded-card frame, no giant graphic circles, no blue outline, no labels or text.\n\nStyle: exact matching detailed hand-painted arcade pixel sprite of the winter tank, crisp deliberate pixel clusters, dark contact shadows, dimensional stepped metallic highlights, same upper-left lighting and cold grey palette as the reference armor. Avoid smooth vector style, glossy plastic and photorealistic rendering. The whole component fills about 82 percent of image width, centered with transparent margins. Output one component only with true transparent RGBA everywhere outside the housing. No character, tank body, weapon, ground plane, cast floor shadow, checkerboard backdrop, UI, typography, extra devices, border or presentation sheet.",
+      "key": "tankCore"
+    },
+    {
+      "key": "enemyUniform",
+      "prompt": "Use case: stylized-concept. Asset type: upper-body overlay for a 2D side-scrolling action game enemy. Input is a reference for game art style. Draw one side-view soldier facing right: white and gray winter soldier in an insulated hood, goggles, padded jacket and ammunition pouches, carrying a long-barrel battle rifle. Show only helmet to waist, both arms and the complete gun. Detailed painted game sprite with worn fabric and metallic weapon; no background, no legs, no text, true transparency.",
+      "source": "Built-in imagegen: exec-e1a7e952-d8a1-4def-b4b8-b9d4d619e04f.png; full prompt documented in stage-enemy-uniforms-prompts.md.",
+      "file": "assets/stage5/enemy-snow-upper.webp",
+      "url": "/games/contra2026/assets/stage5/enemy-snow-upper.webp",
+      "dimensions": [
+        640,
+        378
+      ],
+      "bounds": [
+        0,
+        0,
+        640,
+        378
+      ],
+      "bytes": 72016,
+      "sha256": "8e81b797c51f326716f4c78d7d301a90ac796fdf6b893fe282c4f4409955b2ee"
+    }
+  ]
+}

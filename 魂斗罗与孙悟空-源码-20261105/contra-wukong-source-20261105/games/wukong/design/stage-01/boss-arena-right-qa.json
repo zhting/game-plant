@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-25",
+  "fix": "Wukong stage-one movement uses the original map edge instead of the removed fortress wall, both before and after boss defeat. Boss defeat still gates exit entry.",
+  "before": {
+    "walkingLimit": 3222,
+    "oldWall": 3232
+  },
+  "tests": {
+    "passed": 324,
+    "failed": 0,
+    "files": [
+      "backend/test/wukong-engine.test.mjs",
+      "backend/test/wukong-mount.test.mjs",
+      "backend/test/contra-engine.test.mjs"
+    ],
+    "report": ".playwright-mcp/wukong-arena-regression.tap"
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "scenes": {
+      "walk": {
+        "mode": "play",
+        "stage": 1,
+        "cineTime": 0,
+        "x": 3324,
+        "y": 176,
+        "ride": null,
+        "onGround": true,
+        "entering": false,
+        "bossDead": false,
+        "bossHp": 60,
+        "exitOpen": false,
+        "limit": 3324,
+        "levelEnd": 3334,
+        "oldWall": 3232,
+        "boss": {
+          "x": 3274.027777777778,
+          "face": 1,
+          "attack": "cleave"
+        }
+      },
+      "moto": {
+        "mode": "play",
+        "stage": 1,
+        "cineTime": 0,
+        "x": 3324,
+        "y": 176,
+        "ride": "moto",
+        "onGround": true,
+        "entering": false,
+        "bossDead": false,
+        "bossHp": 60,
+        "exitOpen": false,
+        "limit": 3324,
+        "levelEnd": 3334,
+        "oldWall": 3232,
+        "boss": {
+          "x": 3270.1055555555554,
+          "face": 1
+        }
+      },
+      "heli": {
+        "mode": "play",
+        "stage": 1,
+        "cineTime": 0,
+        "x": 3312,
+        "y": 132,
+        "ride": "heli",
+        "onGround": false,
+        "entering": false,
+        "bossDead": false,
+        "bossHp": 60,
+        "exitOpen": false,
+        "limit": 3312,
+        "levelEnd": 3334,
+        "oldWall": 3232,
+        "boss": {
+          "x": 3267.6333333333323,
+          "face": 1
+        }
+      },
+      "jumpWhileAlive": {
+        "mode": "play",
+        "stage": 1,
+        "cineTime": 0,
+        "x": 3324,
+        "y": 163.1666666666666,
+        "ride": null,
+        "onGround": false,
+        "entering": false,
+        "bossDead": false,
+        "bossHp": 60,
+        "exitOpen": false,
+        "limit": 3324,
+        "levelEnd": 3334,
+        "oldWall": 3232,
+        "boss": {
+          "x": 3257.3055555555557,
+          "face": 1
+        }
+      },
+      "defeatedAtRight": {
+        "mode": "play",
+        "stage": 1,
+        "cineTime": 0,
+        "x": 3324,
+        "y": 176,
+        "ride": null,
+        "onGround": true,
+        "entering": false,
+        "bossDead": true,
+        "bossHp": -939,
+        "exitOpen": true,
+        "limit": 3324,
+        "levelEnd": 3334,
+        "oldWall": 3232,
+        "boss": {
+          "x": 3263.072222222222,
+          "face": 1
+        }
+      },
+      "entered": {
+        "stage": 2,
+        "mode": "intro"
+      }
+    },
+    "http": 200,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 83,
+      "total": 83,
+      "failed": [],
+      "stage": 2,
+      "cached": 83
+    }
+  },
+  "scope": "Test-only scene setup, actual keyboard movement/jump, no production mutation hooks. Original Contra retains its fortress wall."
+}

@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-29",
+  "inputVideos": [
+    {
+      "file": "111.mp4",
+      "variant": "cloudDragonFlow",
+      "name": "流云盘龙 · 舞棍回扫",
+      "frames": 64,
+      "runtimeBytes": 834688,
+      "sourceHashVerified": true
+    },
+    {
+      "file": "222.mp4",
+      "variant": "skyPiercingFlow",
+      "name": "挑云贯日 · 转棍突进",
+      "frames": 64,
+      "runtimeBytes": 869372,
+      "sourceHashVerified": true
+    },
+    {
+      "file": "333.mp4",
+      "variant": "dragonPiercingFlow",
+      "name": "游龙穿花 · 平刺转棍",
+      "frames": 64,
+      "runtimeBytes": 930342,
+      "sourceHashVerified": true
+    }
+  ],
+  "animation": {
+    "heroAtlases": 16,
+    "totalFrames": 352,
+    "randomGroundTechniques": 30,
+    "baseDuration": 2.15,
+    "beats": 3
+  },
+  "processing": "Sampled original video frames; FFmpeg white studio key and neutral trail removal; calibrated pole tracks; independent transparent atlas cells. No generated replacement poses.",
+  "browser": {
+    "tool": "ego-browser",
+    "origin": "http://127.0.0.1:4187/games/wukong/",
+    "input": "Actual keyboard short presses without direction keys",
+    "firstRandomAppearances": {
+      "cloudDragonFlow": 8,
+      "skyPiercingFlow": 23
+    },
+    "resources": {
+      "loaded": 55,
+      "total": 55,
+      "failed": []
+    },
+    "heroAtlasesReady": 15,
+    "audioError": null,
+    "fullscreen": false,
+    "screenshots": [
+      ".playwright-mcp/wukong-reference-111/cloudDragonFlow-gameplay.png",
+      ".playwright-mcp/wukong-reference-111/skyPiercingFlow-gameplay.png"
+    ]
+  },
+  "regression": {
+    "command": "npm test",
+    "backendAndGamePassed": 651,
+    "backendAndGameFailed": 0,
+    "junqiPassed": 42,
+    "gandengyanSimulatedGames": 900,
+    "gandengyanRoomTests": "passed",
+    "log": ".playwright-mcp/wukong-reference-333/full-regression.log"
+  },
+  "browser333Run": {
+    "tool": "ego-browser",
+    "origin": "http://127.0.0.1:4187/games/wukong/",
+    "input": "Actual keyboard short presses without direction keys",
+    "firstRandomAppearance": 2,
+    "seen": [
+      "doubleTap",
+      "dragonPiercingFlow"
+    ],
+    "resources": {
+      "loaded": 56,
+      "total": 56,
+      "failed": []
+    },
+    "heroAtlasesReady": 16,
+    "audioError": null,
+    "fullscreen": false,
+    "screenshots": [
+      ".playwright-mcp/wukong-reference-333/dragonPiercingFlow-thrust.png",
+      ".playwright-mcp/wukong-reference-333/dragonPiercingFlow-spin.png"
+    ]
+  },
+  "calibration333": {
+    "frames": [
+      33,
+      41,
+      42,
+      43,
+      46,
+      47,
+      50,
+      56
+    ],
+    "method": "Both end caps and holding hand measured from the original extracted cells; gripping origin projected onto the recorded staff axis.",
+    "contact": ".playwright-mcp/wukong-reference-333/calibrated.png"
+  }
+}

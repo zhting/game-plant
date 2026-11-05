@@ -1,0 +1,33 @@
+{
+  "taskSpaceId": 156,
+  "images": [
+    {
+      "path": "H:/project/games/games/contra2026/design/base-soldier-size-front-4k.png",
+      "heroHeight": 38,
+      "enemyHeight": 38,
+      "enemyFoot": 0,
+      "canvas": [
+        3840,
+        2160
+      ],
+      "depths": [
+        0.3
+      ]
+    },
+    {
+      "path": "H:/project/games/games/contra2026/design/base-soldier-size-depth-4k.png",
+      "heroHeight": 38,
+      "enemyHeight": 38,
+      "enemyFoot": 0,
+      "canvas": [
+        3840,
+        2160
+      ],
+      "depths": [
+        0.15,
+        0.55,
+        0.98
+      ]
+    }
+  ]
+}

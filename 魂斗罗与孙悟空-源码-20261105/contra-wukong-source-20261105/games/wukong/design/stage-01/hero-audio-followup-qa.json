@@ -1,0 +1,608 @@
+{
+  "date": "2026-10-26",
+  "changes": [
+    "Bind delayed swing/combo audio events to the originating action; cancel remaining cues after hurt, death or replacement",
+    "Stop active hero and enemy samples when SFX volume reaches zero, SFX is disabled or master mute is enabled",
+    "Preserve audio for already committed qi releases and other immediate effects"
+  ],
+  "tests": {
+    "passed": 232,
+    "failed": 0,
+    "report": ".playwright-mcp/wukong-audio-followup-regression.tap"
+  },
+  "browser": {
+    "fixture": true,
+    "errors": [],
+    "cases": {
+      "hurt": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 0,
+            "voices": 0,
+            "counts": {}
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "after": {
+          "hp": 88,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 1,
+            "voices": 1,
+            "counts": {
+              "swing": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "played": 1
+      },
+      "ultimate": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 1,
+            "voices": 1,
+            "counts": {
+              "swing": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "after": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 3,
+            "voices": 3,
+            "counts": {
+              "swing": 2,
+              "ultimate": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "played": 2
+      },
+      "dead": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 3,
+            "voices": 3,
+            "counts": {
+              "swing": 2,
+              "ultimate": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "after": {
+          "hp": 0,
+          "dead": true,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 4,
+            "voices": 4,
+            "counts": {
+              "swing": 3,
+              "ultimate": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "played": 1
+      },
+      "completeCombo": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 4,
+            "voices": 4,
+            "counts": {
+              "swing": 3,
+              "ultimate": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "after": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 7,
+            "voices": 5,
+            "counts": {
+              "swing": 5,
+              "ultimate": 1,
+              "heavy": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "played": 3
+      },
+      "releasedQiHit": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 7,
+            "voices": 5,
+            "counts": {
+              "swing": 5,
+              "ultimate": 1,
+              "heavy": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "after": {
+          "hp": 88,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 2,
+            "sounds": 8,
+            "voices": 6,
+            "counts": {
+              "swing": 5,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "played": 1
+      },
+      "volumeZero": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 8,
+            "voices": 6,
+            "counts": {
+              "swing": 5,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "playing": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "action": "sweep",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 2,
+            "sounds": 9,
+            "voices": 7,
+            "counts": {
+              "swing": 6,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "silenced": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "action": "sweep",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 9,
+            "voices": 7,
+            "counts": {
+              "swing": 6,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0
+        },
+        "restored": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 9,
+            "voices": 7,
+            "counts": {
+              "swing": 6,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        }
+      },
+      "masterMute": {
+        "before": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 9,
+            "voices": 7,
+            "counts": {
+              "swing": 6,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "playing": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "action": "sweep",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 2,
+            "sounds": 10,
+            "voices": 8,
+            "counts": {
+              "swing": 7,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "silenced": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "action": "sweep",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 10,
+            "voices": 8,
+            "counts": {
+              "swing": 7,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": true,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        },
+        "restored": {
+          "hp": 100,
+          "dead": false,
+          "mode": "play",
+          "hero": {
+            "loaded": 11,
+            "total": 11,
+            "decoded": 11,
+            "failed": [],
+            "active": 0,
+            "sounds": 10,
+            "voices": 8,
+            "counts": {
+              "swing": 7,
+              "ultimate": 1,
+              "heavy": 1,
+              "qi": 1
+            }
+          },
+          "enemy": {
+            "loaded": 3,
+            "total": 3,
+            "decoded": 3,
+            "failed": [],
+            "active": 0,
+            "played": 0
+          },
+          "musicPlaying": true,
+          "muted": false,
+          "musicGain": 0.16500000655651093,
+          "sfxGain": 0.8999999761581421
+        }
+      }
+    },
+    "http": 200,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 87,
+      "total": 87,
+      "failed": [],
+      "stage": 1,
+      "cached": 87
+    }
+  },
+  "scope": "Isolated test-only scene with actual keyboard attack input; native audio nodes checked before mute and after restore. Co-op cancellation/deduplication also covered by serialized-world tests."
+}

@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-23",
+  "url": "http://127.0.0.1:4173/games/wukong/",
+  "durationSeconds": 20,
+  "naturalEnd": {
+    "mode": "play",
+    "stage": 1,
+    "x": 40,
+    "y": 112,
+    "cine": null
+  },
+  "cues": [
+    0.8,
+    2.2,
+    2.38,
+    4.45,
+    6.2,
+    14.2,
+    16.6
+  ],
+  "skips": [
+    {
+      "key": "Enter",
+      "time": 1,
+      "started": true,
+      "result": "intro"
+    },
+    {
+      "key": "j",
+      "time": 3,
+      "started": true,
+      "result": "intro"
+    },
+    {
+      "key": "k",
+      "time": 18,
+      "started": true,
+      "result": "intro"
+    },
+    {
+      "key": "click",
+      "time": 3,
+      "started": true,
+      "result": "intro"
+    }
+  ],
+  "errors": [],
+  "resources": {
+    "status": "ready",
+    "ready": true,
+    "loaded": 53,
+    "total": 53,
+    "failed": []
+  },
+  "unitTests": {
+    "passed": 211,
+    "failed": 0
+  },
+  "reference": "https://tv.cctv.com/v/v2/VIDE1405487347374903.html",
+  "assets": {
+    "mode": "built-in image_gen",
+    "masters": [
+      "assets/opening-huaguoshan.png",
+      "assets/opening-birth.png"
+    ],
+    "runtime": [
+      "assets/opening-huaguoshan.webp",
+      "assets/opening-birth.webp"
+    ],
+    "bytes": 859684,
+    "prompts": "assets/opening-birth-generation.json"
+  },
+  "captures": [
+    "opening-birth-stone.png",
+    "opening-birth-burst.png",
+    "opening-birth-leap.png",
+    "opening-birth-land.png",
+    "opening-birth-land-blend.png",
+    "opening-birth-transition.png",
+    "opening-birth-flag.png",
+    "opening-birth-feast.png",
+    "opening-birth-gate.png",
+    "opening-birth-first-level.png"
+  ],
+  "method": "Isolated Playwright context, full natural playback after clicking 单人闯关; real keydown/up and pointer skip. Browser-only seek/hold instrumentation used for fixed-time screenshots; no production debug code."
+}

@@ -1,0 +1,42 @@
+{
+  "tool": "built-in image_gen",
+  "styleReference": {
+    "file": "actors-hd-style-reference.png",
+    "prompt": "Use case: stylized-concept. Production HD 2D side-scrolling shooter CHARACTER SPRITE ATLAS, genuinely transparent background. Input image is character-identity and pose-order reference, NOT its coarse pixel size. Redraw the entire sheet with exactly the same 8 columns by 3 rows, each sprite isolated in a regular cell, no overlap. Output highest native resolution possible, ideally 3840x2160, 8 columns,3 rows. Crisp finely hand-painted 2D arcade sprite art with small sharp shading clusters, detailed cloth folds, muscular anatomy, gloves, face, hair, boots and weapon metal. Preserve classic Contra-like heroic proportions and strong black contour, but use thin fine contours and fine rendering throughout the ENTIRE body, not chunky enlarged pixel blocks. Uniform style head to toe, skin and clothing use the same detail density. Orthographic SIDE VIEW, all face RIGHT. No 3D, no photorealism, no soft blur, no glow, no cast shadow outside silhouettes, no text, no labels, no lines, no checkerboard painted in. EXACTLY 24 full-body figures. Row1 same RED COMMANDO across8cells: red headband, short dark brown hair, muscular bare peach torso, tiny dark harness, red combat pants, dark leather boots, black-gray compact rifle. Row2 SAME BODY AND SCALE as row1 but blue headband and cobalt blue combat pants. Row3 olive uniform ENEMY SOLDIER, olive helmet, bare tan arms, olive fatigues, black boots, same compact rifle, same body scale. Each figure centered horizontally in its cell; feet align on identical baseline at 90percent of each row height. At least 8percent cell margin. Make each standing body about 65percent of cell height, consistent body size across all poses. Each row exact left-to-right order: 1 neutral standing rifle aimed horizontally right; 2 running with front leg forward and rear foot up rifle horizontal; 3 opposite running leg phase rifle horizontal; 4 rifle aimed straight UP, both arms raised; 5 rifle aimed45degrees UP-RIGHT; 6 rifle aimed35degrees DOWN-RIGHT; 7 prone flat on stomach facing right aiming gun right, all body fully contained in cell; 8 compact airborne tucked somersault with knees tight and rifle hugged to chest. Fine high-resolution sprite craftsmanship with readable highlights, no coarse staircase pixels. Every character has natural matching trousers and boots; no tube legs or mismatch between torso and limbs.",
+    "reference": "../assets/stage1/actors.png"
+  },
+  "assets": [
+    {
+      "role": "red",
+      "file": "../assets/stage1/commando-red-hd.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "reference": "actors-hd-style-reference.png",
+      "prompt": "Use case: stylized-concept. Production transparent HD animation sprite sheet for a 2D side-scrolling jungle shooter. Reference image is STYLE AND CHARACTER IDENTITY only. Generate ONLY THE RED COMMANDO, bare muscular peach torso, dark harness, red headband, brown short hair, red combat trousers, dark leather boots, black compact assault rifle. All sprites face RIGHT in exact orthographic side view. Match reference's fine hand-painted arcade sprite anatomy and crisp thin contours, detailed cloth folds and weapon metal throughout entire figure; fine high-definition detail, NO coarse pixel blocks, no 3D/photo. Output portrait 3:4 aspect, highest native resolution, ideally 1536x2048. EXACTLY 12 isolated complete sprites in a STRICT 3 COLUMNS x 4 ROWS equally spaced grid, no lines or labels, real transparent background without glow or shadow. Each cell is square. Sprites should be LARGE within each cell, about 78percent cell height for standing figures, consistent head, torso and leg size through all cells; centered horizontally, feet baseline at 92percent cell height. Never cross cell borders. Top row exact: 1 standing idle aiming rifle straight RIGHT; 2 standing aiming rifle straight UP; 3 standing aiming45degrees UP-RIGHT. Second row exact: 1 standing aiming35degrees DOWN-RIGHT; 2 lying flat PRONE facing right and aimingright; 3 compact airborne curled SOMERSAULT knees tucked and rifle hugged. Third row exact: running cycle frame0 front leg straight forward making heel contact, rear leg extended backward, rifle aimed right; frame1 passing pose front planted foot under body while rear knee swings forward; frame2 front foot pushes back on ground while opposite thigh lifts forward and knee bends high. Fourth row exact: frame3 OPPOSITE legs from frame0; frame4 OPPOSITE legs from frame1; frame5 OPPOSITE legs from frame2. Six running frames must form a real complete run cycle with visibly changing legs, two opposite contact poses and two knees-high passing poses. BOTH legs visible, pants seams, knee folds and boot shading painted naturally for each pose, one unified full body per frame. Upper body consistently aimed horizontally in all run frames, face profile right; no cropping at waist, no disembodied body pieces. Consistent body and rifle proportions between all twelve images. No text, background scene, grid, colored backdrop, checkerboard, particles or muzzle flash."
+    },
+    {
+      "role": "blue",
+      "file": "../assets/stage1/commando-blue-hd.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "reference": "../assets/stage1/commando-red-hd.png",
+      "prompt": "Edit target is the attached 1086x1448 transparent 3columns by4rows character sprite sheet. Preserve EXACT pixel positions, sizes, poses, silhouettes, gun shapes, clear transparent spacing, same12sprites and exact3x4 layout. Keep genuine transparency, fine sharp HD hand-painted arcade rendering, anatomy, highlights, folds, boots and thin outline. No background, glow, shadows, labels, added objects. All bodies faceRIGHT, all6runningframes preserve their different leg positions. Do not add or omit any frame. Change ONLY red trousers and red headbands to rich cobalt BLUE, including prone, tucked roll, both standing aim poses and every running pose. Keep skin, black harness, dark hair, boots and weapon unchanged. Blue highlights natural and readable."
+    },
+    {
+      "role": "enemy",
+      "file": "../assets/stage1/soldier-hd.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "reference": "../assets/stage1/commando-red-hd.png",
+      "prompt": "Edit target is the attached 1086x1448 transparent 3columns by4rows character sprite sheet. Preserve EXACT pixel positions, sizes, poses, silhouettes, gun shapes, clear transparent spacing, same12sprites and exact3x4 layout. Keep genuine transparency, fine sharp HD hand-painted arcade rendering, anatomy, highlights, folds, boots and thin outline. No background, glow, shadows, labels, added objects. All bodies faceRIGHT, all6runningframes preserve their different leg positions. Do not add or omit any frame. Convert the SAME character into a cohesive OLIVE GREEN ENEMY SOLDIER across all12poses. Replace headband with an olive military helmet on same-sized head; replace bare chest/harness with fitted olive military vest and dark webbing, keep muscular tan bare arms. Trousers olive military fatigues with yellow-green folds, black boots. Maintain body dimensions, face locations, foot locations and rifle tips EXACTLY; helmet stays within the original head/hair silhouette as much as possible. Remove headband ribbons. Detailed uniform and helmet in the same fine hand-painted style. Preserve transparent gaps between figures."
+    }
+  ],
+  "transparent_background": true,
+  "implementation": "Native alpha components measured without editing source PNGs. 12 poses per role, 6 whole-body run frames, 3 aim variants, idle, prone and roll; independently aligned hips and row baselines. Runtime caches at current display density. Legacy low-resolution limb stretching removed."
+}

@@ -1,0 +1,164 @@
+{
+  "results": {
+    "arms": {
+      "picked": {
+        "inventory": [
+          "arms"
+        ],
+        "weapon": "rifle"
+      },
+      "active": true,
+      "remaining": 10.93333333333328,
+      "enemyHP": [
+        73,
+        80,
+        80
+      ],
+      "bullets": 0,
+      "worldUnchanged": true,
+      "inventory": []
+    },
+    "clone": {
+      "picked": {
+        "inventory": [
+          "clone"
+        ],
+        "weapon": "rifle"
+      },
+      "active": true,
+      "remaining": 10.233333333333245,
+      "units": [
+        {
+          "x": 423.3333333333335,
+          "y": 144,
+          "kind": "clone",
+          "onGround": true
+        },
+        {
+          "x": 461.00000000000034,
+          "y": 144,
+          "variant": "cross",
+          "kind": "clone",
+          "onGround": true
+        }
+      ],
+      "enemyHP": [
+        72,
+        79,
+        80
+      ],
+      "bullets": 0,
+      "worldUnchanged": true,
+      "inventory": []
+    },
+    "troop": {
+      "picked": {
+        "inventory": [
+          "troop"
+        ],
+        "weapon": "rifle"
+      },
+      "active": true,
+      "remaining": 8.19999999999991,
+      "units": [
+        {
+          "x": 428.60000000000014,
+          "y": 144,
+          "variant": "lowSweep",
+          "kind": "troop",
+          "onGround": true
+        },
+        {
+          "x": 500.06666666666706,
+          "y": 144,
+          "variant": "lowSweep",
+          "kind": "troop",
+          "onGround": true
+        },
+        {
+          "x": 524.2000000000005,
+          "y": 144,
+          "variant": "uppercut",
+          "kind": "troop",
+          "onGround": true
+        },
+        {
+          "x": 456.03333333333364,
+          "y": 144,
+          "variant": "reverse",
+          "kind": "troop",
+          "onGround": true
+        },
+        {
+          "x": 473.06666666666706,
+          "y": 144,
+          "variant": "doubleTap",
+          "kind": "troop",
+          "onGround": true
+        },
+        {
+          "x": 551.633333333334,
+          "y": 144,
+          "variant": "carryFlower",
+          "kind": "troop",
+          "onGround": true
+        }
+      ],
+      "enemyHP": [
+        72,
+        74,
+        76
+      ],
+      "bullets": 0,
+      "worldUnchanged": true,
+      "inventory": []
+    }
+  },
+  "combined": {
+    "bossHP": 0,
+    "bossDead": true,
+    "units": 8,
+    "resources": {
+      "status": "ready",
+      "ready": true,
+      "loaded": 51,
+      "total": 51,
+      "failed": []
+    },
+    "worldUnchanged": true,
+    "renderMs": {
+      "mean": 12.141111110316382,
+      "p95": 23.100000023841858
+    }
+  },
+  "errors": [],
+  "bad": [],
+  "date": "2026-10-23",
+  "method": "Isolated browser context; actual landed-peach collision pickup and physical L key activation. Ordinary enemies frozen during controlled screenshots; boss assist scene uses the normal boss update. Original map and atlas reused.",
+  "automated": {
+    "tests": 206,
+    "passed": 206,
+    "failed": 0
+  },
+  "artifacts": [
+    "magic-arms.png",
+    "magic-clone.png",
+    "magic-troop.png",
+    "magic-boss-assist.png"
+  ],
+  "networkStress": {
+    "units": [
+      8,
+      8
+    ],
+    "nodes": 125,
+    "bytes": 20712,
+    "roundTripOwners": [
+      1,
+      2
+    ],
+    "cacheEntries": 16,
+    "maximumPayloadBytes": 262144,
+    "note": "Earlier stress pass with both players and sixteen helpers; actual world packed and unpacked successfully."
+  }
+}

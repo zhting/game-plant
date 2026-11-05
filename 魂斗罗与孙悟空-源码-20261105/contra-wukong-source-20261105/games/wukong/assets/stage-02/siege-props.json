@@ -1,0 +1,70 @@
+{
+  "image": "/games/wukong/assets/stage-02/siege-props.webp",
+  "width": 1254,
+  "height": 1254,
+  "columns": 2,
+  "rows": 2,
+  "frames": [
+    {
+      "index": 0,
+      "id": "crossbow",
+      "bounds": [
+        126,
+        198,
+        462,
+        293
+      ],
+      "pivot": [
+        361,
+        371
+      ],
+      "face": 1
+    },
+    {
+      "index": 1,
+      "id": "thunder",
+      "bounds": [
+        788,
+        124,
+        334,
+        382
+      ],
+      "pivot": [
+        956,
+        316
+      ],
+      "face": 0
+    },
+    {
+      "index": 2,
+      "id": "hammer",
+      "bounds": [
+        122,
+        781,
+        455,
+        305
+      ],
+      "pivot": [
+        352,
+        784
+      ],
+      "face": -1
+    },
+    {
+      "index": 3,
+      "id": "armor",
+      "bounds": [
+        819,
+        725,
+        271,
+        391
+      ],
+      "pivot": [
+        953,
+        1115
+      ],
+      "face": 0
+    }
+  ],
+  "measurement": "Bounds from alpha>32 with two-pixel pad. Pivot is crossbow turntable, thunder center, hammer suspension midpoint, or armor pedestal baseline. Hammer drawing faces left; mirror if needed."
+}

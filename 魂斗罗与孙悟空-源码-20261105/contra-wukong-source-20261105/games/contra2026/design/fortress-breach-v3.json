@@ -1,0 +1,20 @@
+{
+  "generatedWith": "built-in imagegen",
+  "url": "/games/contra2026/assets/stage1/fortress-breach-v3.webp",
+  "file": "assets/stage1/fortress-breach-v3.webp",
+  "source": "design/source-art/stage1/fortress-breach-v3.png",
+  "promptFile": "fortress-breach-v3-prompt.txt",
+  "dimensions": [
+    640,
+    1008
+  ],
+  "sourceBounds": [
+    45,
+    17,
+    999,
+    1519
+  ],
+  "bytes": 241264,
+  "sha256": "5334c2c28ef48e659bc276cf44be3077af54558c80c6af7305309686c95eaa4a",
+  "alphaPreserved": true
+}

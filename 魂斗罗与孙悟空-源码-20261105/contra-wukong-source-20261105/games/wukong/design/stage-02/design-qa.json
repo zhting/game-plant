@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-29",
+  "scope": "Stage 02 detailed design and standalone interactive mechanism demonstration; released game stage list remains [1]",
+  "preview": "http://127.0.0.1:4187/games/wukong/assets/stage-02-design/index.html",
+  "browser": "ego-browser",
+  "checks": [
+    "Initial and one-seal boss/gate locks",
+    "Crossbow incorrect angle feedback and correct aim clear",
+    "Three actual keyboard J thunder returns",
+    "Any two seals open gate; all three combinations checked in the design state module",
+    "Base 3-second heavy-cleave counter sequence accepts three keyboard hits",
+    "Both hammer locks required before release",
+    "Optional third seal extends counter window to 4 seconds",
+    "Reset cancels a pending hammer completion callback",
+    "390px viewport: document width 390px, internal map viewport 350px and content 800px",
+    "Mobile button successfully returns a thunder orb",
+    "JS syntax and README whitespace checks"
+  ],
+  "mobile": {
+    "viewport": 390,
+    "documentWidth": 390,
+    "mapViewport": 350,
+    "mapContent": 800,
+    "actionButtonWidth": 350
+  },
+  "screenshots": [
+    ".playwright-mcp/wukong-stage-02-design/desktop-cover.png",
+    ".playwright-mcp/wukong-stage-02-design/desktop-map.png",
+    ".playwright-mcp/wukong-stage-02-design/mobile-cover.png",
+    ".playwright-mcp/wukong-stage-02-design/mobile-mechanic.png"
+  ],
+  "concept": {
+    "tool": "built-in image_gen",
+    "master": "concept-source.png",
+    "runtime": "../../assets/stage-02-design/concept.webp",
+    "runtimeBytes": 380470,
+    "prompt": "concept-generation.json"
+  },
+  "limitations": "Demonstrates route choice and mechanism rules, not the production platforming level or final boss art. Production implementation is specified in DESIGN.md."
+}
