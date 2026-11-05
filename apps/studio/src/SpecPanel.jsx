@@ -85,6 +85,7 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
           {Object.entries(schema.enemyTypes).filter(([t]) => !types[t]).map(([t, name]) => <option key={t} value={t}>{name}（{t}）</option>)}
         </select>
       </fieldset>
+      {section(P.bosses, ['bosses'], 'Boss')}
       {section(P.scoring, ['scoring'], '计分')}
       <fieldset>
         <legend>关卡</legend>

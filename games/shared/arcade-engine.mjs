@@ -59,7 +59,7 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
-import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=spec-1';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=spec-2';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
 export function startArcade(wukongDependencies, gameSpec) {
@@ -309,7 +309,26 @@ function tuneEnemies() {
     if (typeof e.maxHp === 'number') e.maxHp = Math.max(1, Math.round(e.maxHp * ratio));
   }
 }
-const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 10 秒', ...SPECIALS };
+// GameSpec boss hp tuning: every boss keeps its damageable parts in `<obj>.parts`.
+const BOSS_HP_SCALE = SPEC.bosses.hpScale, BOSS_TUNED = BOSS_HP_SCALE !== 1;
+const BOSS_KEYS = ['boss', 'mech', 'tank', 'fortress', 'golem', 'gate', 'ship', 'hive', 'shark', 'ghost', 'crab', 'queen', 'angler', 'fcore', 'serp', 'mcore'];
+function tuneBosses() {
+  for (const key of BOSS_KEYS) {
+    const parts = G[key]?.parts;
+    if (!Array.isArray(parts)) continue;
+    for (const pt of parts) {
+      if (!pt || tunedEnemies.has(pt)) continue;
+      tunedEnemies.add(pt);
+      if (typeof pt.hp !== 'number' || pt.hp <= 0 || pt.hp >= 999) continue;
+      const hp = Math.max(1, Math.ceil(pt.hp * BOSS_HP_SCALE)), ratio = hp / pt.hp; pt.hp = hp;
+      if (typeof pt.max === 'number') pt.max = Math.max(1, Math.round(pt.max * ratio));
+    }
+  }
+}
+const SHIELD_T = SPEC.items.shieldSeconds;
+const GAME_TITLE = SPEC.meta?.title || '魂斗罗2026', CREDIT_TEAM = GAME_TITLE + '制作组';
+if (SPEC.meta?.title && typeof document !== 'undefined') { document.title = GAME_TITLE; const brand = document.querySelector?.('.loading-brand'); if (brand) brand.textContent = GAME_TITLE; }
+const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 ' + SHIELD_T + ' 秒', ...SPECIALS };
 
 function findLand(x, b0, b1, hw, skipLedge) {
   let best = null;
@@ -5731,7 +5750,7 @@ function pickItem(kind) {
   else if (kind === 'F') p.weapon = 'fire';
   else if (kind === 'H') p.weapon = 'homing';
   else if (kind === 'R') p.rapid = true;
-  else if (kind === 'B') p.shieldT = 10;
+  else if (kind === 'B') p.shieldT = SHIELD_T;
   else if (kind in SPECIALS) addSpecial(kind);
   if(isCelestial()&&STAFF_PICKUPS[kind])banner(STAFF_PICKUPS[kind],2.2);
 }
@@ -6796,6 +6815,7 @@ function step() {
   if(isCelestial()&&advanceImpactPause(G,DT,[I,remoteInput]))return;
   G.t++; G.time += DT;
   if (ENEMY_TUNED) tuneEnemies();
+  if (BOSS_TUNED) tuneBosses();
   if(G.martialCombo?.remaining>0)G.martialCombo.remaining=Math.max(0,G.martialCombo.remaining-DT);
   for (const actor of players()) if (updateGiant(actor, DT)) {
     puff(actor.x, actor.y); sfx.hit(); banner('巨大化时间结束 · 恢复原尺寸', 1.4);
@@ -7666,11 +7686,12 @@ function drawBanner() {
 function drawLogo(cx2, y) {
   ctx.save();
   ctx.font = `900 40px ${UI_FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.lineJoin = 'round';
-  ctx.fillStyle = 'rgba(90,10,4,0.85)'; ctx.fillText('魂斗罗2026', cx2 + 2.5, y + 2.5);
-  ctx.lineWidth = 5; ctx.strokeStyle = '#2a0904'; ctx.strokeText('魂斗罗2026', cx2, y);
+  const fit = Math.min(40, Math.floor(40 * (W - 24) / Math.max(1, ctx.measureText(GAME_TITLE).width || 1))); if (fit < 40) ctx.font = `900 ${Math.max(12, fit)}px ${UI_FONT}`;
+  ctx.fillStyle = 'rgba(90,10,4,0.85)'; ctx.fillText(GAME_TITLE, cx2 + 2.5, y + 2.5);
+  ctx.lineWidth = 5; ctx.strokeStyle = '#2a0904'; ctx.strokeText(GAME_TITLE, cx2, y);
   const g = ctx.createLinearGradient(0, y, 0, y + 44); g.addColorStop(0, '#fff6cf'); g.addColorStop(0.35, '#ffc23a'); g.addColorStop(0.7, '#f0561c'); g.addColorStop(1, '#a3180b');
-  ctx.fillStyle = g; ctx.fillText('魂斗罗2026', cx2, y);
-  ctx.lineWidth = 0.8; ctx.strokeStyle = 'rgba(255,245,210,0.75)'; ctx.strokeText('魂斗罗2026', cx2, y);
+  ctx.fillStyle = g; ctx.fillText(GAME_TITLE, cx2, y);
+  ctx.lineWidth = 0.8; ctx.strokeStyle = 'rgba(255,245,210,0.75)'; ctx.strokeText(GAME_TITLE, cx2, y);
   ctx.restore();
 }
 function drawTitle() {
@@ -7678,7 +7699,7 @@ function drawTitle() {
   if (coverArt.complete && coverArt.naturalWidth) {
     ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, W, H);
     ctx.imageSmoothingEnabled = false; ctx.drawImage(coverArt, 0, 0, H, H);
-    drawText('魂斗罗2026', 296, 25, '#f8b800', 'center', 15);
+    drawText(GAME_TITLE, 296, 25, '#f8b800', 'center', GAME_TITLE.length > 9 ? Math.max(7, Math.floor(135 / GAME_TITLE.length)) : 15);
     drawText('单人闯关 · 双人联网', 296, 49, '#fcfcfc', 'center', 7);
     drawText('最高分 ' + pad6(HI), 296, 181, '#7c7c7c', 'center', 7);
     drawTitleToast();
@@ -7690,7 +7711,7 @@ function drawTitle() {
   ctx.globalAlpha = 1;
   glow(W / 2, 48, 120, 'rgba(200,60,20,0.32)', 'rgba(200,60,20,0)');
   drawLogo(W / 2, 22);
-  drawText('魂斗罗2026', W / 2, 92, '#f2f2f2', 'center', 9);
+  drawText(GAME_TITLE, W / 2, 92, '#f2f2f2', 'center', 9);
   drawText('最高分 ' + pad6(HI), W / 2, 106, '#9aa0a8', 'center', 8);
   drawTitleToast();
 }
@@ -8059,7 +8080,7 @@ function drawOpening(t) {
       ctx.save(); ctx.globalAlpha = a;
       glow(W / 2, 74, 110, 'rgba(200,60,20,0.35)', 'rgba(200,60,20,0)');
       drawText('行动开始', W / 2, 52, '#ffd25a', 'center', 22);
-      drawText('魂斗罗2026 · 行动开始', W / 2, 84, '#ffffff', 'center', 11);
+      drawText(GAME_TITLE + ' · 行动开始', W / 2, 84, '#ffffff', 'center', 11);
       ctx.restore();
     }
   }
@@ -8117,7 +8138,7 @@ function drawEnding(t) {
     const rows = [
       ['恭喜通关！', '#ffd25a', 18, 0], ['恭喜你通关了全部 8 关', '#ffffff', 11, 30],
       ['最终得分  ' + pad6(G.score), '#f2f2f2', 10, 66], ['通关用时  ' + tm, '#f2f2f2', 10, 82], ['阵亡次数  ' + G.deaths, '#f2f2f2', 10, 98],
-      ['— 制作人员 —', '#9fd6ff', 10, 140], ['游戏设计  魂斗罗2026制作组', '#f2f2f2', 10, 162], ['关卡与美术  魂斗罗2026制作组', '#f2f2f2', 10, 178], ['音乐音效  魂斗罗2026制作组', '#f2f2f2', 10, 194], ['制作  玩家与克劳德', '#f2f2f2', 10, 210],
+      ['— 制作人员 —', '#9fd6ff', 10, 140], ['游戏设计  ' + CREDIT_TEAM, '#f2f2f2', 10, 162], ['关卡与美术  ' + CREDIT_TEAM, '#f2f2f2', 10, 178], ['音乐音效  ' + CREDIT_TEAM, '#f2f2f2', 10, 194], ['制作  玩家与克劳德', '#f2f2f2', 10, 210],
       ['特别感谢', '#9fd6ff', 10, 246], ['每一位坚持到这里的玩家', '#f2f2f2', 10, 262],
       ['全剧终', '#ff7a3a', 22, 330],
     ];
@@ -8227,7 +8248,7 @@ function drawUWEnding(t) {
       ['恭喜通关！', '#ffd25a', 18, 0], ['传说中的水下八关全部通关', '#ffffff', 11, 30],
       ['最终得分  ' + pad6(G.score), '#f2f2f2', 10, 66], ['通关用时  ' + tm, '#f2f2f2', 10, 82], ['阵亡次数  ' + G.deaths, '#f2f2f2', 10, 98],
       ['— 水下八关 —', '#9fd6ff', 10, 140], ['珊瑚浅海 · 沉船墓场 · 海底火山 · 深海洋流', '#f2f2f2', 9, 160], ['黑暗深渊 · 海底要塞 · 冰封海沟 · 远古母体', '#f2f2f2', 9, 176],
-      ['— 制作人员 —', '#9fd6ff', 10, 216], ['游戏设计  魂斗罗2026制作组', '#f2f2f2', 10, 238], ['制作  玩家与克劳德', '#f2f2f2', 10, 254],
+      ['— 制作人员 —', '#9fd6ff', 10, 216], ['游戏设计  ' + CREDIT_TEAM, '#f2f2f2', 10, 238], ['制作  玩家与克劳德', '#f2f2f2', 10, 254],
       ['感谢游玩', '#9fd6ff', 10, 290],
       ['全剧终', '#ff7a3a', 22, 380],
     ];

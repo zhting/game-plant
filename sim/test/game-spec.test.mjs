@@ -110,6 +110,27 @@ test('engine: score scale multiplies awarded points', () => {
   assert.equal(e.G.score, 300);
 });
 
+test('engine: boss part hp scales with bosses.hpScale', () => {
+  const parts = spec => { const e = boot(spec); e.play(1); e.frames(1); return e.G.boss.parts.map(({ hp, max }) => [hp, max]); };
+  const stock = parts(), tough = parts({ bosses: { hpScale: 2.5 } });
+  assert.ok(stock.length > 0);
+  assert.deepEqual(JSON.parse(JSON.stringify(tough)), JSON.parse(JSON.stringify(stock.map(([hp, max]) => {
+    if (!(hp > 0 && hp < 999)) return [hp, max];
+    const next = Math.max(1, Math.ceil(hp * 2.5));
+    return [next, typeof max === 'number' ? Math.max(1, Math.round(max * next / hp)) : max];
+  }))));
+});
+
+test('engine: shield duration and game title come from the spec', () => {
+  const e = boot({ items: { shieldSeconds: 25 }, meta: { title: '星际突击' } });
+  e.play(1);
+  e.pickItem('B');
+  assert.equal(e.G.p.shieldT, 25);
+  assert.equal(e.G.bannerText, '护盾 25 秒');
+  assert.equal(e.GAME_TITLE, '星际突击');
+  assert.equal(boot().GAME_TITLE, '魂斗罗2026');
+});
+
 test('engine: an invalid spec refuses to boot', () => {
   assert.throws(() => boot({ weapons: { rifle: { cd: -1 } } }), /weapons\.rifle\.cd/);
 });

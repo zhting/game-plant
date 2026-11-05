@@ -30,8 +30,9 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
     fire:    { name: '螺旋火焰', cd: 0.28, max: 4, per: 1, spd: 170 },
     homing:  { name: '跟踪导弹', cd: 0.32, max: 4, per: 1, spd: 150 },
   },
-  items: { specialCooldown: 2, inventorySize: 3 },
+  items: { specialCooldown: 2, inventorySize: 3, shieldSeconds: 10 },
   enemies: { hpScale: 1, types: {} },
+  bosses: { hpScale: 1 },
   scoring: { scale: 1 },
   stages: {
     1: {
@@ -96,7 +97,7 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
     specVersion: num('GameSpec 版本', 1, GAME_SPEC_VERSION, { integer: true }),
     template: { type: 'enum', desc: '模板', values: ['contra'] },
     meta: { type: 'object', desc: '项目信息', props: {
-      title: { type: 'string', desc: '游戏名称', maxLength: 40 },
+      title: { type: 'string', desc: '游戏名称（显示在标题画面、开场、制作人员名单和浏览器标签）', maxLength: 20 },
       description: { type: 'string', desc: '简介', maxLength: 400 },
     } },
     player: { type: 'object', desc: '玩家', props: {
@@ -123,6 +124,7 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
     items: { type: 'object', desc: '特殊道具', props: {
       specialCooldown: num('使用特殊道具后的冷却（秒）', 0, 30),
       inventorySize: num('道具栏格数', 1, 6, { integer: true }),
+      shieldSeconds: num('护盾道具 B 的持续时间（秒）', 1, 120),
     } },
     enemies: { type: 'object', desc: '敌人', props: {
       hpScale: num('全体普通敌人血量倍率（不含 Boss，向上取整，至少 1）', 0.1, 20),
@@ -131,6 +133,9 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
           hp: num('固定血量（优先于倍率）', 1, 9999, { integer: true }),
           hpScale: num('血量倍率（与全体倍率相乘）', 0.1, 20),
         } } },
+    } },
+    bosses: { type: 'object', desc: 'Boss（各关关底 Boss 及其可破坏部位）', props: {
+      hpScale: num('全体 Boss 部位血量倍率（向上取整，至少 1）', 0.1, 20),
     } },
     scoring: { type: 'object', desc: '计分', props: { scale: num('得分倍率', 0, 100) } },
     stages: { type: 'map', desc: '按关卡调整，键为关卡号', key: /^[1-8]$/, value: { type: 'object', props: {

@@ -33,7 +33,7 @@ export const EXPOSED = [
   'killSoldier', 'hitTarget', 'baseBlast', 'stageFourArt', 'stageFiveArt', 'hitTank', 'hitFlyingFortress', 'hitBossPart', 'placeTank',
   'pBox', 'toTitle', 'infiniteLives', 'gameplaySettings', 'syncSettingsUI', 'updateHud',
   'killEnemy', 'wukong', 'throwGrenade', 'updateGrenades', 'updatePartner', 'hitPart', 'endCine', 'applyAudio', 'setMuted',
-  'wukongHeroAudio', 'wukongBattleAudio', 'continueGame', 'setMode', 'players',
+  'wukongHeroAudio', 'wukongBattleAudio', 'continueGame', 'setMode', 'players', 'pickItem', 'GAME_TITLE',
 ];
 
 function seededRandom(seed) {

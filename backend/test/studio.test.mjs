@@ -139,7 +139,7 @@ test('studio HTTP API: token auth, projects, chat, preview page and undo', { tim
     // The preview page and its game.json are public so play links can be shared.
     const page = await fetch(origin + '/play/web/');
     assert.equal(page.status, 200);
-    assert.match(await page.text(), /main\.mjs\?v=spec-1/);
+    assert.match(await page.text(), /main\.mjs\?v=spec-2/);
     assert.equal((await (await fetch(origin + '/api/projects/web/game.json')).json()).enemies.hpScale, 2);
     assert.equal((await fetch(origin + '/play/missing/')).status, 404);
 

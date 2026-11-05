@@ -202,5 +202,7 @@ flowchart LR
 - [x] 创作 Agent（轨道 A）：`spec_get / spec_patch / playtest / history / undo`。每次修改先校验字段和范围，再用无头引擎试玩相关关卡，通过后才提交。
 - [x] Studio（`apps/studio`，Vite + React）：对话、实时预览、参数面板、版本历史（改动对比、试玩旧版本、回到此版本）、game.json 编辑。`STUDIO_TOKEN` 共享口令。
 - [ ] 用真实 Gemini key 跑一轮验收：一句话改射速、命数、敌人血量、掉落，30 秒内看到效果，可撤销。
-- [ ] 标题画面、开场文字使用 `meta.title`（目前只在 Studio 里显示）。
+- [x] 标题画面、开场文字、制作人员名单、浏览器标签使用 `meta.title`（标题过长时自动缩小字号）。
+- [x] 新增可调字段：`bosses.hpScale`（各关 Boss 可破坏部位血量倍率）、`items.shieldSeconds`（护盾道具时长）。
+- [ ] 继续提取：敌人刷新频率、关卡顺序（关卡顺序也被联机服务使用，需要同步改测试）。
 - [ ] png 源图挪到 `design/source-art`（M0 遗留）。
