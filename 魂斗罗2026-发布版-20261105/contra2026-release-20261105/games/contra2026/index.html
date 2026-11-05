@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>魂斗罗2026</title>
+<link rel="stylesheet" href="/games/contra2026/css/settings.css?v=audio-mix-2">
+<link rel="stylesheet" href="/games/contra2026/css/loading.css?v=lean-load-1">
+</head>
+<body data-game="contra2026">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/games/shared/arcade.css?v=standalone-1">
+
+<div id="wrap">
+  <div id="stage">
+    <canvas id="game" width="384" height="216" aria-label="魂斗罗2026游戏画面"></canvas>
+
+    <div id="hud" hidden>
+      <button id="btnMute" type="button" aria-label="静音"><svg viewBox="0 0 8 8" fill="currentColor"><rect x="0" y="3" width="2" height="2"/><rect x="2" y="2" width="1" height="4"/><rect x="3" y="1" width="1" height="6"/><g id="muteWave"><rect x="5" y="3" width="1" height="2"/><rect x="6" y="1" width="1" height="6"/></g><g id="muteX" display="none"><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="6" y="3" width="1" height="2"/><rect x="5" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/></g></svg></button>
+      <button id="btnPause" type="button" aria-label="暂停"><svg viewBox="0 0 8 8" fill="currentColor"><rect x="1" y="1" width="2" height="6"/><rect x="5" y="1" width="2" height="6"/></svg></button>
+    </div>
+
+    <section id="scrLoading" class="screen" hidden aria-labelledby="loadingTitle" aria-busy="true">
+      <div class="loading-content">
+        <p class="loading-brand">魂斗罗2026</p>
+        <h2 id="loadingTitle">准备出击</h2>
+        <div class="loading-row"><span id="loadingStatus" role="status" tabindex="-1">正在准备画面与音乐</span><output id="loadingPercent">0%</output></div>
+        <div id="loadingProgress" class="loading-track" role="progressbar" aria-label="游戏资源加载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="loadingFill"></span></div>
+        <p id="loadingDetail">加载完成后自动开始</p>
+        <div class="menu loading-actions"><button id="loadingRetry" class="btn" type="button" hidden>重试加载</button><button id="loadingCancel" class="btn" type="button">返回标题</button></div>
+      </div>
+    </section>
+    <section id="scrTitle" class="screen">
+      <h1 class="sr">魂斗罗2026 前八关试玩：雨林要塞、地下指挥所、峡谷瀑布、地下基地、极地冰原、高温能源厂、机械机库、异形巢穴</h1>
+      <p id="lifeCheatStatus" class="sr" role="status" aria-live="polite"></p>
+      <div class="menu"><button id="btnStart" class="btn" type="button">单人闯关</button><button id="btnCoop" class="btn" type="button">双人联网同屏</button><button id="btnSelect" class="btn" type="button">选择关卡</button><button id="btnSettings2" class="btn" type="button">设置与说明</button></div>
+      <dl class="keys kb-only">
+        <dt><kbd>WASD</kbd> / <kbd>方向键</kbd></dt><dd>移动与 8 方向瞄准</dd>
+        <dt><kbd>J</kbd></dt><dd>射击（按住连射）</dd>
+        <dt><kbd>K</kbd> / <kbd>空格</kbd></dt><dd>跳跃，空中再按一次为二段跳</dd>
+        <dt><kbd>S</kbd> + <kbd>K</kbd></dt><dd>从平台落下</dd>
+        <dt><kbd>I</kbd></dt><dd>手雷 / 机载跟踪导弹（冷却 4 秒）</dd>
+        <dt><kbd>L</kbd> / <kbd>Q</kbd></dt><dd>使用特殊道具 / 切换道具</dd>
+        <dt><kbd>回车</kbd></dt><dd>暂停</dd>
+      </dl>
+      <dl class="keys touch-only">
+        <dt>左侧拖动</dt><dd>移动与 8 方向瞄准</dd>
+        <dt>右侧按键</dt><dd>射击（按住连射）、跳跃（空中可二段跳）、手雷（冷却 4 秒）、道具（特殊道具）</dd>
+      </dl>
+    </section>
+
+    <section id="scrCoop" class="screen" hidden aria-labelledby="coopTitle">
+      <div class="coop-panel">
+        <h2 id="coopTitle">双人联网同屏</h2>
+        <p>现已开放前八关 · 红蓝双人 · 共享镜头，各自操作</p>
+        <div id="coopSetup">
+          <div class="coop-row">
+            <label for="coopStage">起始关卡</label>
+            <select id="coopStage" aria-label="起始关卡"><option value="1">01 雨林要塞</option><option value="2">02 地下指挥所</option><option value="3">03 峡谷瀑布</option><option value="4">04 地下基地</option><option value="5">05 极地冰原</option><option value="6">06 高温能源厂</option></select>
+            <button id="coopCreate" class="btn" type="button">创建房间</button>
+          </div>
+          <form id="coopJoinForm" class="coop-row">
+            <label for="coopCode">房间码</label><input id="coopCode" maxlength="6" pattern="[A-Za-z2-9]{6}" placeholder="六位房间码" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+            <button id="coopJoin" class="btn" type="submit">加入房间</button>
+          </form>
+        </div>
+        <div id="coopWaiting" hidden>
+          <div id="coopRoomCode" aria-label="房间码"></div>
+          <p id="coopSeats">玩家一 已就位 · 等待 玩家二</p>
+          <div class="coop-row"><button id="coopCopy" class="btn" type="button">复制邀请链接</button><button id="coopStart" class="btn" type="button" disabled>双人开始</button></div>
+        </div>
+        <p id="coopMessage" role="status" aria-live="polite"></p>
+        <button id="coopBack" class="btn" type="button">返回标题</button>
+      </div>
+    </section>
+    <div id="coopBar" hidden><span id="coopStatus"></span><button id="coopLeave" type="button">离开房间</button></div>
+
+    <section id="scrSelect" class="screen" hidden>
+      <div class="dialog">
+        <h2 class="h2 px">关卡选择</h2>
+        <p class="sub">现已开放前八关，后续关卡制作中</p>
+        <div class="menu"><button id="btnSel1" class="btn" type="button">第一关 · 雨林要塞</button><button id="btnSel2" class="btn" type="button">第二关 · 地下指挥所</button><button id="btnSel3" class="btn" type="button">第三关 · 峡谷瀑布</button><button id="btnSel4" class="btn" type="button">第四关 · 地下基地 · 双生投影</button><button id="btnSel5" class="btn" type="button">第五关 · 极地冰原</button><button id="btnSel6" class="btn" type="button">第六关 · 高温能源厂</button><button id="btnSel7" class="btn" type="button" hidden disabled>第七关 · 机械机库</button><button id="btnSel8" class="btn" type="button" hidden disabled>第八关 · 异形巢穴</button><button id="btnSelW1" class="btn" type="button" hidden disabled>水下第一关 · 珊瑚浅海</button><button id="btnSelW2" class="btn" type="button" hidden disabled>水下第二关 · 沉船墓场</button><button id="btnSelW3" class="btn" type="button" hidden disabled>水下第三关 · 海底火山</button><button id="btnSelW4" class="btn" type="button" hidden disabled>水下第四关 · 深海洋流</button><button id="btnSelW5" class="btn" type="button" hidden disabled>水下第五关 · 黑暗深渊</button><button id="btnSelW6" class="btn" type="button" hidden disabled>水下第六关 · 海底要塞</button><button id="btnSelW7" class="btn" type="button" hidden disabled>水下第七关 · 冰封海沟</button><button id="btnSelW8" class="btn" type="button" hidden disabled>水下第八关 · 远古母体</button><button id="btnSelBack" class="btn" type="button">返回</button></div>
+      </div>
+    </section>
+
+    <section id="scrPause" class="screen" hidden>
+      <div class="dialog">
+        <h2 class="h2 px">游戏暂停</h2>
+        <div class="menu"><button id="btnResume" class="btn" type="button">继续</button><button id="btnSettings" class="btn" type="button">设置</button><button id="btnRestart" class="btn" type="button">重新开始</button><button id="btnHome" class="btn" type="button">回到标题</button></div>
+      </div>
+    </section>
+
+    <section id="scrOver" class="screen" hidden>
+      <h2 class="h2 px red">游戏结束</h2>
+      <p class="sub">继续？从本关开头重来</p>
+      <div id="count">9</div>
+      <div class="menu"><button id="btnContinue" class="btn" type="button">继续</button><button id="btnQuit" class="btn" type="button">回到标题</button></div>
+    </section>
+
+    <section id="scrClear" class="screen" hidden>
+      <h2 id="clearTitle" class="h2 px">关卡完成</h2>
+      <p class="sub" id="clearSub">第一关 · 雨林要塞</p>
+      <dl class="stats">
+        <dt>得分</dt><dd id="stScore">0</dd>
+        <dt>用时</dt><dd id="stTime">0:00</dd>
+        <dt>阵亡次数</dt><dd id="stDeaths">0</dd>
+        <dt>最高分</dt><dd id="stHi">0</dd>
+      </dl>
+      <div class="menu"><button id="btnNext" class="btn" type="button">进入第二关</button><button id="btnAgain" class="btn" type="button">再玩一次</button><button id="btnHome2" class="btn" type="button">回到标题</button></div>
+    </section>
+
+    <section id="scrSettings" class="screen" hidden>
+      <div class="panel" role="dialog" aria-modal="true" aria-label="设置与操作说明">
+        <div class="panel-head">
+          <div class="settings-brand"><span>CONTRA 2026</span><strong>作战设置</strong></div>
+          <div class="settings-tabs" role="tablist" aria-label="设置与操作说明">
+          <button id="tabSet" class="tab" type="button" role="tab" aria-selected="true" aria-controls="paneSet">设置</button>
+          <button id="tabHelp" class="tab" type="button" role="tab" aria-selected="false" aria-controls="paneHelp">操作说明</button>
+          </div>
+          <button id="btnBack" class="btn" type="button" aria-label="保存并返回">完成 <span aria-hidden="true">↗</span></button>
+        </div>
+        <div id="paneSet" class="panel-body" role="tabpanel" aria-labelledby="tabSet">
+        <template id="stageMusicTemplate">
+        <div class="music-settings" role="group" aria-labelledby="lbl-stage-music">
+          <div class="music-heading"><div><span class="settings-eyebrow">SOUNDTRACK COLLECTION</span><h2 id="lbl-stage-music">关卡唱片</h2></div><span class="saved-indicator"><i></i> 自动保存</span></div>
+          <label class="music-field" for="set-music-stage"><span class="sr">选择关卡</span><select id="set-music-stage"></select></label>
+          <div class="record-player" id="record-player" role="region" aria-roledescription="唱片轮播" aria-label="选择本关音乐" tabindex="0" aria-describedby="record-key-hint">
+            <div class="record-visual">
+              <span class="record-side" aria-hidden="true">SIDE A</span>
+              <button id="record-prev" class="record-arrow record-prev" type="button" aria-label="上一张唱片"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+              <img id="record-art" class="record-art" src="/games/contra2026/assets/music-records/orchestral.svg" alt="" width="512" height="512" loading="lazy" draggable="false">
+              <button id="record-next" class="record-arrow record-next" type="button" aria-label="下一张唱片"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+              <span id="record-count" class="record-count" aria-hidden="true"></span>
+            </div>
+            <div class="record-caption" aria-live="polite" aria-atomic="true"><div class="record-edition" id="record-edition"></div><h3 id="record-title"></h3><p id="record-description"></p></div>
+          </div>
+          <div id="record-shelf" class="record-shelf" role="group" aria-label="本关可选唱片"></div>
+          <button id="set-music-random" class="shuffle-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c5 0 7-12 12-12h3m-4-4 4 4-4 4"/></svg><span><strong>每次入关随机播放</strong><small id="shuffle-pool-note"></small></span><span class="shuffle-switch" aria-hidden="true"></span></button>
+          <p class="music-note" id="stage-music-note">各关独立保存；暂停中切换，继续游戏后播放。</p>
+          <span id="record-key-hint" class="sr">左右滑动或使用左右方向键切换唱片，Home 跳至第一张，End 跳至最后一张。</span>
+        </div>
+        </template>
+        <div class="settings-controls">
+        <h2 class="controls-heading">游玩设置</h2>
+        <div class="set-row">
+          <div class="set-name">手柄连接<small>蓝牙配对或 USB 连接后，按任意手柄键激活</small></div>
+          <span id="gamepad-status" role="status" aria-live="polite">等待手柄</span>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-music">背景音乐</div>
+          <div class="audio-controls"><fieldset class="seg" aria-labelledby="lbl-music"><legend>音乐</legend><label><input type="radio" name="music" id="set-music-on" value="on"><span>开</span></label><label><input type="radio" name="music" id="set-music-off" value="off"><span>关</span></label></fieldset><div class="volume-control" id="music-volume-control" hidden><input type="range" id="set-music-volume" name="musicVolume" min="0" max="100" step="1" aria-labelledby="lbl-music" aria-describedby="music-volume-value"><output id="music-volume-value" for="set-music-volume">30%</output></div></div>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-sfx">音效</div>
+          <div class="audio-controls"><fieldset class="seg" aria-labelledby="lbl-sfx"><legend>音效</legend><label><input type="radio" name="sfx" id="set-sfx-on" value="on"><span>开</span></label><label><input type="radio" name="sfx" id="set-sfx-off" value="off"><span>关</span></label></fieldset><div class="volume-control" id="sfx-volume-control" hidden><input type="range" id="set-sfx-volume" name="sfxVolume" min="0" max="100" step="1" aria-labelledby="lbl-sfx" aria-describedby="sfx-volume-value"><output id="sfx-volume-value" for="set-sfx-volume">100%</output></div></div>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-inf">无限生命<small id="life-rule-note">关闭后按原作规则：命用完要续关，从本关开头重来</small></div>
+          <fieldset class="seg" aria-labelledby="lbl-inf"><legend>无限生命</legend><label><input type="radio" name="inf" id="set-inf-on" value="on"><span>开</span></label><label><input type="radio" name="inf" id="set-inf-off" value="off"><span>关</span></label></fieldset>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-diff">难度<small>简单：敌弹慢 20%；关闭无限生命时有 5 条命</small></div>
+          <fieldset class="seg" aria-labelledby="lbl-diff"><legend>难度</legend><label><input type="radio" name="diff" id="set-diff-easy" value="easy"><span>简单</span></label><label><input type="radio" name="diff" id="set-diff-normal" value="normal"><span>普通</span></label></fieldset>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-autofire">按住连射<small>关闭后每按一次射击键只发一发</small></div>
+          <fieldset class="seg" aria-labelledby="lbl-autofire"><legend>按住连射</legend><label><input type="radio" name="autofire" id="set-autofire-on" value="on"><span>开</span></label><label><input type="radio" name="autofire" id="set-autofire-off" value="off"><span>关</span></label></fieldset>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-shake">屏幕震动</div>
+          <fieldset class="seg" aria-labelledby="lbl-shake"><legend>屏幕震动</legend><label><input type="radio" name="shake" id="set-shake-on" value="on"><span>开</span></label><label><input type="radio" name="shake" id="set-shake-off" value="off"><span>关</span></label></fieldset>
+        </div>
+        <div class="set-row">
+          <div class="set-name" id="lbl-scan">扫描线<small>模拟老式显像管电视的横向扫描线</small></div>
+          <fieldset class="seg" aria-labelledby="lbl-scan"><legend>扫描线</legend><label><input type="radio" name="scan" id="set-scan-on" value="on"><span>开</span></label><label><input type="radio" name="scan" id="set-scan-off" value="off"><span>关</span></label></fieldset>
+        </div>
+        <div class="set-row touch-only">
+          <div class="set-name" id="lbl-pad">触屏按键大小</div>
+          <fieldset class="seg" aria-labelledby="lbl-pad"><legend>触屏按键大小</legend><label><input type="radio" name="pad" id="set-pad-s" value="s"><span>小</span></label><label><input type="radio" name="pad" id="set-pad-m" value="m"><span>中</span></label><label><input type="radio" name="pad" id="set-pad-l" value="l"><span>大</span></label></fieldset>
+        </div>
+        </div>
+        </div>
+        <div id="paneHelp" class="panel-body help" role="tabpanel" aria-labelledby="tabHelp" hidden>
+          <h3>键盘</h3>
+          <dl>
+            <dt><kbd>WASD</kbd> / <kbd>方向键</kbd></dt><dd>移动；按住方向即可 8 方向瞄准</dd>
+            <dt><kbd>J</kbd> / <kbd>X</kbd></dt><dd>射击</dd>
+            <dt><kbd>K</kbd> / <kbd>Z</kbd> / <kbd>空格</kbd></dt><dd>跳跃；空中再按一次为二段跳</dd>
+            <dt><kbd>S</kbd> + <kbd>K</kbd></dt><dd>站在平台上时，从平台落下</dd>
+            <dt><kbd>I</kbd> / <kbd>V</kbd></dt><dd>扔手雷，冷却 4 秒；驾驶直升机时改为发射跟踪导弹。步行时按住上可以把手雷扔得更高</dd>
+            <dt><kbd>L</kbd> / <kbd>C</kbd></dt><dd>使用选中的特殊道具，用完冷却 2 秒；扔手雷时按住上可以扔得更高</dd>
+            <dt><kbd>Q</kbd></dt><dd>切换选中的特殊道具</dd>
+            <dt><kbd>回车</kbd> / <kbd>退出键</kbd></dt><dd>暂停、继续</dd>
+          </dl>
+          <h3>手柄</h3>
+          <p>先在系统中通过蓝牙配对或 USB 连接手柄，再按任意手柄键。连接状态可在设置中查看；断开后重新连接即可继续操作。</p>
+          <dl>
+            <dt>左摇杆 / 十字键</dt><dd>移动与瞄准</dd>
+            <dt>A / ×（下方键）</dt><dd>跳跃、二段跳；菜单确认</dd>
+            <dt>X / □ / RB / RT</dt><dd>射击；菜单确认</dd>
+            <dt>B / ○（右侧键）</dt><dd>扔手雷；菜单返回</dd>
+            <dt>Y / △</dt><dd>使用特殊道具</dd>
+            <dt>LB / LT</dt><dd>切换特殊道具</dd>
+            <dt>Start / Options</dt><dd>暂停、继续；菜单确认</dd>
+            <dt>Back / Share</dt><dd>暂停、返回</dd>
+            <dt>菜单方向键</dt><dd>上下选择；左右调整设置</dd>
+          </dl>
+          <h3>30 条命秘籍</h3>
+          <dl>
+            <dt>PC 键盘</dt><dd>在标题画面依次输入 ↑ ↑ ↓ ↓ ← → ← → B A B A，再选择开始；按键间隔不超过 2 秒，长按不算重复输入。</dd>
+            <dt>手机触屏</dt><dd>在标题画面的魂斗罗 Logo 上，4 秒内轻点 8 次；滑动和长按不计入。</dd>
+            <dt>成功提示</dt><dd>显示“30 条命已就绪”。本局以 30 条命开局，死亡扣命，过关保留剩余生命；重复输入不叠加。退出本局回到标题后取消，本来的无限生命设置保持不变。</dd>
+          </dl>
+          <h3>触屏</h3>
+          <dl>
+            <dt>左半屏拖动</dt><dd>摇杆：移动与 8 方向瞄准</dd>
+            <dt>右下“射击”</dt><dd>按住连射</dd>
+            <dt>右下“跳”</dt><dd>跳跃；空中再点一次为二段跳；摇杆向下再点跳，从平台落下</dd>
+            <dt>右侧“手雷 / 导弹”</dt><dd>步行时扔手雷，驾驶直升机时发射跟踪导弹；冷却时显示剩余秒数</dd>
+            <dt>右下“道具”</dt><dd>使用选中的特殊道具；按键上显示道具名，冷却时显示剩余秒数</dd>
+            <dt>左上道具格</dt><dd>点一下选中要使用的道具</dd>
+          </dl>
+          <h3>规则</h3>
+          <ul>
+            <li>被子弹或敌人碰到即阵亡，阵亡后会失去强化武器</li>
+            <li>正式网站默认有限生命，普通难度 3 条命、简单难度 5 条命；本机测试默认无限生命。每到 20,000 分和此后每 70,000 分奖励一条命，可在设置里调整</li>
+            <li>在水中按下可以潜水躲子弹，但潜水时不能射击</li>
+            <li>站立时按住上可以朝正上方射击，卧倒可以躲过齐胸高的子弹</li>
+          </ul>
+          <h3>第二关 地下指挥所（立体 基地）</h3>
+          <ul>
+            <li>角色站在画面下方，射击键朝走廊深处开火；按住上再按左或右可以斜着射</li>
+            <li>每个普通房间的核心上方有一个高位机关，需要跳起来射击；先打掉它和两侧炮台，中间核心的护盖才会打开。打掉核心解除电网，再按上进入下一个房间。共 3 个房间，最后是中枢能量核心</li>
+            <li>墙上的炮台和士兵的子弹在胸口高度，卧倒可以躲开；地上滚来的手雷要跳过去</li>
+            <li>红色小兵携带装备，在战斗中击败他才会掉落；道具落地后靠近拾取，过关时不会额外掉落装备</li>
+            <li>关底先摧毁两排共六个装置，再按住上举枪攻击顶部左右移动的装置，躲开蓝色圆环气泡。击败后走入左侧或右侧升降梯，升到顶部完成本次试玩</li>
+            <li>武器、特殊道具和命数从第一关继承；这里用不了摩托车和直升机</li>
+          </ul>
+          <h3>本关限定道具（紫色徽章）</h3>
+          <ul>
+            <li>第一关 · 迷彩披风：8 秒内狙击兵、炮台和要塞炮台看不见你，不会开火；冲锋的步兵照样会撞上来</li>
+            <li>第一关 · 炸药包：放在脚下，1.6 秒后大爆炸，范围和威力都比手雷大，专门用来拆要塞</li>
+            <li>第二关 · 电磁脉冲：6 秒内墙上炮台和 首领 卫星炮全部瘫痪，核心护盖也会打开</li>
+            <li>第二关 · 防爆盾：举在身前，能挡住接下来的 3 次子弹、滚雷或冲锋士兵</li>
+            <li>限定道具只在本关出现，进入下一关时会从道具格里移除</li>
+          </ul>
+          <h3>开场与关卡流程</h3>
+          <ul>
+            <li>从「单人闯关」或选关第一关进入时会播放开场动画；完成第六关后走进右侧大门，进入第七关</li>
+            <li>动画中按回车、射击、跳跃键，或点一下屏幕都可以跳过</li>
+          </ul>
+          <h3>道具来源</h3>
+          <ul>
+            <li>飞行胶囊：从屏幕左侧飞过，击落后掉出道具</li>
+            <li>地面感应箱：周期性开合，只有打开时能被打坏，打坏后掉出道具</li>
+          </ul>
+          <h3>道具（金色徽章上的图案）</h3>
+          <ul>
+            <li>双箭头：连发机枪，射速最快</li>
+            <li>扇形：扇形散弹，一次 5 发</li>
+            <li>光束：贯穿光束，穿透敌人；同屏只有一道，再开火会替换前一道</li>
+            <li>火苗：螺旋火焰，螺旋前进的火球，伤害高</li>
+            <li>导弹：跟踪导弹，自动飞向最近的目标</li>
+            <li>闪电：速射芯片，子弹更快，可叠加在任何武器上</li>
+            <li>圆环：护盾 10 秒，碰到敌人可直接消灭</li>
+          </ul>
+          <h3>特殊道具（青色徽章，最多存 3 个）</h3>
+          <ul>
+            <li>手雷：扔出后大范围爆炸，伤害很高，对 首领 也有效</li>
+            <li>闪光弹：冻结所有敌人 5 秒，并清除所有敌弹；冻结期间碰到敌人不会受伤</li>
+            <li>摩托车：乘坐 15 秒，跑得更快、跳得更高，撞到步兵直接撞飞；被打中只会毁掉摩托车；进水会沉</li>
+            <li>直升机：乘坐 12 秒，可以自由飞行并朝 8 个方向射击；被打中只会毁掉直升机</li>
+            <li>蘑菇：身体变大一倍 15 秒，子弹伤害翻倍，可踩碎敌兵、炮台和补给箱；前 2 秒完全免疫，之后可挡 3 次攻击，次数耗尽或时间结束后恢复原大小</li>
+            <li>存满 3 个时再捡新道具，最早的那个会被替换；乘坐载具和变大不能同时使用</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div id="rotate" hidden>把手机横过来玩，画面更大</div>
+<div id="foot">
+  <span><b>WASD</b> 移动 / 瞄准</span><span><b>J</b> 射击</span><span><b>K</b> 跳跃 / 二段跳</span><span><b>I</b> 手雷</span><span><b>L</b> 用道具</span><span><b>Q</b> 切换道具</span><span><b>下 + 跳</b> 落下平台</span><span><b>回车</b> 暂停</span><span id="gamepad-indicator">支持蓝牙 / USB 手柄</span>
+</div>
+
+<div id="touch">
+  <div id="stickHint">移动</div>
+  <div id="stick" hidden><div id="knob"></div></div>
+  <div id="bJump" class="pad"><b>跳跃</b>二段跳</div>
+  <div id="bFire" class="pad"><b>射击</b>连射</div>
+  <div id="bGren" class="pad">道具</div>
+  <div id="bNade" class="pad">手雷</div>
+</div>
+
+<script src="/backend-config.js"></script>
+<script type="module" src="/games/contra2026/js/main.mjs?v=foundry-exit-art-1"></script>
+
+</body>
+</html>

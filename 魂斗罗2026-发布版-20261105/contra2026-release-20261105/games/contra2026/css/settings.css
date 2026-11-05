@@ -1,0 +1,92 @@
+/* Listening deck: warm metal, ink-black vinyl and a single brass control accent. */
+#stage #scrSettings{position:fixed;inset:0;z-index:40;padding:24px;background:rgb(2 7 6 / .88);backdrop-filter:blur(10px);--settings-ink:#edf0e5;--settings-muted:#91a098;--settings-line:#303d36;--settings-accent:#d7b77d}
+#scrSettings .panel{width:min(960px,100%);max-height:min(740px,100%);min-height:0;background:#121a16;border:1px solid #435046;border-radius:12px;box-shadow:0 28px 100px #0009;color:var(--settings-ink);overflow:hidden;animation:settings-arrive .2s ease-out}
+#scrSettings .panel-head{padding:20px 26px;gap:26px;border-bottom:1px solid var(--settings-line);background:#17201b}
+#scrSettings .settings-brand{display:grid;gap:4px;margin-right:auto;white-space:nowrap}
+#scrSettings .settings-brand>span{font:700 10px/1.2 var(--f-px);letter-spacing:.2em;color:var(--settings-accent)}
+#scrSettings .settings-brand>strong{font-size:22px;letter-spacing:.1em}
+#scrSettings .settings-tabs{display:flex;gap:18px;align-self:stretch}
+#scrSettings .tab{position:relative;padding:6px 0;border:0;box-shadow:none;color:var(--settings-muted);font:500 14px/1.4 var(--f-cn);letter-spacing:0}
+#scrSettings .tab[aria-selected=true]{color:var(--settings-ink)}
+#scrSettings .tab[aria-selected=true]::after{content:"";position:absolute;bottom:-21px;left:0;right:0;height:2px;background:var(--settings-accent)}
+#scrSettings .panel-head .btn{display:flex;gap:20px;align-items:center;margin:0 0 0 10px;padding:10px 14px;border:1px solid #596149;border-radius:5px;color:var(--settings-accent);font:600 13px/1.3 var(--f-cn);letter-spacing:0;transition:background .15s,border-color .15s}
+#scrSettings .btn::before{display:none}
+#scrSettings .panel-head .btn:hover{background:#d7b77d16;border-color:var(--settings-accent)}
+#scrSettings .panel-body{padding:22px 26px;font:400 13px/1.5 var(--f-cn);scrollbar-width:thin;scrollbar-color:#53604f #17201b;overscroll-behavior:contain}
+#scrSettings .panel-body[hidden]{display:none!important}
+#scrSettings #paneSet{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:30px}
+#scrSettings .music-settings{min-width:0;padding:0;border:0}
+#scrSettings .music-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:17px}
+#scrSettings .settings-eyebrow{display:block;font:700 9px/1.5 var(--f-px);letter-spacing:.16em;color:var(--settings-muted)}
+#scrSettings .music-heading h2{margin:4px 0 0;font-size:20px;line-height:1.3;font-weight:600}
+#scrSettings .saved-indicator{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--settings-muted);white-space:nowrap}
+#scrSettings .saved-indicator i{width:5px;height:5px;border-radius:50%;background:#a5b77a}
+#scrSettings .music-field{display:block;font:400 13px/1.4 var(--f-cn)}
+#scrSettings .music-field select{appearance:auto;padding:10px 12px;width:100%;border:1px solid #465244;border-radius:5px;background:#1b261e;color:var(--settings-ink);font:inherit;cursor:pointer}
+#scrSettings .music-field select:hover{border-color:#879177}
+#scrSettings .record-player{--record-accent:var(--settings-accent);margin-top:8px;border-radius:8px;outline-offset:4px;touch-action:pan-y}
+#scrSettings .record-visual{position:relative;display:flex;align-items:center;justify-content:center;height:236px;isolation:isolate}
+#scrSettings .record-visual::before{content:"";position:absolute;inset:8% 11%;z-index:-1;background:radial-gradient(ellipse,#52674724,transparent 68%)}
+#scrSettings .record-side,#scrSettings .record-count{position:absolute;top:18px;color:#87927d;font:700 9px/1.4 var(--f-px);letter-spacing:.12em}
+#scrSettings .record-side{left:0}
+#scrSettings .record-count{right:0;font-variant-numeric:tabular-nums}
+#scrSettings .record-art{display:block;width:228px;height:228px;max-width:76%;object-fit:contain;filter:drop-shadow(3px 12px 12px #0008);pointer-events:none}
+#scrSettings .record-art.record-changing{animation:record-change .32s ease-out}
+#scrSettings .record-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:44px;display:grid;place-items:center;appearance:none;border:1px solid #414e40;border-radius:50%;background:#1a261e;color:#c3cbb6;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+#scrSettings .record-prev{left:0}
+#scrSettings .record-next{right:0}
+#scrSettings .record-arrow:hover{color:var(--settings-accent);border-color:var(--settings-accent);background:#293427}
+#scrSettings .record-arrow svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#scrSettings .record-caption{text-align:center;min-height:80px;padding:0 0 10px}
+#scrSettings .record-edition{font:700 9px/1.4 var(--f-px);letter-spacing:.22em;color:var(--record-accent)}
+#scrSettings .record-caption h3{margin:5px 0;font-size:21px;line-height:1.35;font-weight:600;letter-spacing:.03em;color:var(--settings-ink)}
+#scrSettings .record-caption p{margin:0;color:var(--settings-muted);font-size:11px;line-height:1.6}
+#scrSettings .record-shelf{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin;scrollbar-color:#4d5945 transparent;touch-action:pan-x pan-y}
+#scrSettings .record-choice{appearance:none;flex:1 0 44px;max-width:64px;display:grid;justify-items:center;gap:6px;min-height:68px;padding:3px 0 8px;border:0;border-bottom:2px solid transparent;background:transparent;color:#91a098;font:400 10px/1.2 var(--f-cn);white-space:nowrap;cursor:pointer;transition:color .15s,border-color .15s}
+#scrSettings .record-choice img{width:40px;height:40px;transition:transform .18s,opacity .18s;opacity:.7;pointer-events:none}
+#scrSettings .record-choice:hover img{transform:translateY(-3px);opacity:1}
+#scrSettings .record-choice[aria-pressed=true]{color:var(--settings-accent);border-color:var(--settings-accent)}
+#scrSettings .record-choice[aria-pressed=true] img{opacity:1;transform:translateY(-2px)}
+#scrSettings .shuffle-toggle{width:100%;display:flex;align-items:center;gap:12px;margin-top:10px;padding:12px 0;border:0;border-top:1px solid var(--settings-line);border-bottom:1px solid var(--settings-line);appearance:none;background:transparent;color:var(--settings-ink);text-align:left;font:inherit;cursor:pointer}
+#scrSettings .shuffle-toggle>svg{width:21px;height:21px;fill:none;stroke:var(--settings-accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#scrSettings .shuffle-toggle strong{display:block;font-size:12px;font-weight:500}
+#scrSettings .shuffle-toggle small{display:block;margin-top:3px;color:var(--settings-muted);font-size:10px}
+#scrSettings .shuffle-switch{flex:none;width:33px;height:19px;margin-left:auto;border:1px solid #5a6559;border-radius:20px;background:#263229;transition:background .18s,border-color .18s}
+#scrSettings .shuffle-switch::after{content:"";display:block;margin:3px;width:11px;height:11px;border-radius:50%;background:#a3ad9d;transition:transform .18s,background .18s}
+#scrSettings .shuffle-toggle[aria-pressed=true] .shuffle-switch{background:var(--settings-accent);border-color:var(--settings-accent)}
+#scrSettings .shuffle-toggle[aria-pressed=true] .shuffle-switch::after{background:#283024;transform:translateX(14px)}
+#scrSettings .music-note{margin:11px 0 0;font-size:10px;line-height:1.6;color:var(--settings-muted)}
+#scrSettings .settings-controls{min-width:0;padding-left:28px;border-left:1px solid var(--settings-line)}
+#scrSettings .controls-heading{margin:0 0 7px;font-size:15px;font-weight:500;color:var(--settings-ink)}
+#scrSettings .set-row{flex-wrap:nowrap;gap:12px;padding:17px 0;border-bottom:1px solid var(--settings-line)}
+#scrSettings .set-row:last-child{border-bottom:0}
+#scrSettings .set-name{color:var(--settings-ink);font-size:13px;font-weight:500;line-height:1.5}
+#scrSettings .set-name small{margin-top:5px;max-width:24em;color:var(--settings-muted);font-size:10px;font-weight:400;line-height:1.6}
+#scrSettings .audio-controls{display:grid;gap:9px;justify-items:end;flex:none}
+#scrSettings .volume-control{display:flex;align-items:center;gap:9px;width:180px;max-width:42vw}
+#scrSettings .volume-control[hidden]{display:none}
+#scrSettings .volume-control input{min-width:0;width:100%;height:20px;accent-color:#d6bb78;cursor:pointer}
+#scrSettings .volume-control output{min-width:4ch;color:var(--settings-ink);font-size:11px;font-variant-numeric:tabular-nums;text-align:right}
+#scrSettings .volume-control input:focus-visible{outline:2px solid #d6bb78;outline-offset:3px;border-radius:3px}
+#scrSettings .seg{gap:0;flex:none;padding:3px;border:1px solid #394938;border-radius:5px;background:#0d150f}
+#scrSettings .seg span{padding:5px 9px;min-width:32px;text-align:center;border-radius:3px;box-shadow:none;color:#8c9b8e;font-size:11px;font-weight:500;line-height:1.4;transition:background .15s,color .15s}
+#scrSettings .seg input:checked+span{background:#c7b583;color:#192216;box-shadow:0 1px 3px #0005}
+#scrSettings .seg label:hover span{color:#f1e4bd}
+#scrSettings .seg label:has(input:checked):hover span{color:#192216}
+#scrSettings :focus-visible{outline:2px solid var(--settings-accent);outline-offset:3px}
+#scrSettings .help{line-height:1.8}
+#scrSettings .help h3{margin:18px 0 8px;color:var(--settings-accent);font-size:15px}
+#scrSettings .help h3:first-child{margin-top:0}
+#scrSettings .help dl{gap:8px 22px}
+#scrSettings .help dd,#scrSettings .help li{color:#b2bdb0;font-size:13px}
+@keyframes settings-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes record-change{from{opacity:.25;transform:translateX(12px) rotate(9deg)}to{opacity:1;transform:translateX(0) rotate(0)}}
+@media(max-height:740px) and (min-width:701px){#stage #scrSettings{padding:16px}#scrSettings .panel-head{padding:14px 24px}#scrSettings .tab[aria-selected=true]::after{bottom:-15px}#scrSettings .panel-body{padding:20px 24px}#scrSettings .record-visual{height:222px}#scrSettings .record-art{width:216px;height:216px}#scrSettings .set-row{padding:14px 0}#scrSettings .record-caption{min-height:78px}#scrSettings .record-caption h3{font-size:19px}}
+@media(max-width:700px){#stage #scrSettings{padding:12px}#scrSettings .panel{max-width:490px;max-height:100%;border-radius:10px}#scrSettings .panel-head{padding:16px;gap:16px}#scrSettings .settings-brand>strong{font-size:18px}#scrSettings .settings-brand>span{font-size:8px}#scrSettings .settings-tabs{gap:13px}#scrSettings .tab{font-size:12px}#scrSettings .tab[aria-selected=true]::after{bottom:-17px}#scrSettings .panel-head .btn{padding:9px 11px;margin-left:0;font-size:12px;gap:8px}#scrSettings .panel-body{padding:21px 18px}#scrSettings #paneSet{grid-template-columns:minmax(0,1fr);gap:28px}#scrSettings .settings-controls{padding:24px 0 0;border-left:0;border-top:1px solid var(--settings-line)}#scrSettings .record-visual{height:260px}#scrSettings .record-art{width:250px;height:250px}#scrSettings .record-shelf{gap:4px}#scrSettings .record-choice{flex-basis:42px}#scrSettings .set-row{padding:16px 0}#scrSettings .record-caption h3{font-size:21px}#scrSettings .help dl{grid-template-columns:1fr;gap:2px}#scrSettings .help dd{margin-bottom:10px}}
+@media(max-width:370px){#stage #scrSettings{padding:7px}#scrSettings .panel-head{gap:10px;padding:14px 12px}#scrSettings .settings-tabs{gap:10px}#scrSettings .settings-brand>strong{font-size:16px}#scrSettings .settings-brand>span{font-size:7px}#scrSettings .panel-body{padding:18px 14px}#scrSettings .record-visual{height:235px}#scrSettings .record-art{width:225px;height:225px}#scrSettings .saved-indicator{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#scrSettings .panel,#scrSettings .record-art.record-changing{animation:none}#scrSettings *{transition:none!important;scroll-behavior:auto!important}}
+
+/* Fixed soundtrack settings keep one concise control column. */
+.fixed-music #scrSettings .panel{width:min(680px,100%)}
+.fixed-music #scrSettings #paneSet{display:block}
+.fixed-music #scrSettings .settings-controls{border:0;padding:0}
