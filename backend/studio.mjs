@@ -131,7 +131,7 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
     busy.add(id);
     try {
       const history = (await store.readChat(id)).slice(-(aiConfig.agent?.historyTurns || 12));
-      const turn = await runAgentTurn({ llm, store, projectId: id, message, history, maxSteps: aiConfig.agent?.maxSteps || 8 });
+      const turn = await runAgentTurn({ llm, config: aiConfig, store, projectId: id, message, history, maxSteps: aiConfig.agent?.maxSteps || 8 });
       const at = new Date().toISOString();
       await store.appendChat(id, [{ role: 'user', text: message, at }, { role: 'model', text: turn.reply, changes: turn.changes, steps: turn.steps, at }]);
       res.json({ ...turn, spec: await store.readSpec(id) });

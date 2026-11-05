@@ -14,5 +14,9 @@
   },
   "limits": {
     "dailyTokens": 5000000
+  },
+  "image": {
+    "styleRef": "games/contra2026/assets/stage1/commando-run-enemy-hd.webp",
+    "scale": 4
   }
 }

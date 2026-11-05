@@ -36,6 +36,8 @@ npm run studio:dev   # 改 Studio 界面时用：http://localhost:5173/studio/�
 
 项目数据在 `backend/data/projects/<id>/`（每个项目一个 git 仓库：`game.json`、`modules/`、`assets/`），AI 用量记在 `backend/data/ai-usage.json`。模型在 `backend/config/ai.json` 里配置，也可以用环境变量 `GEMINI_MODEL_AGENT` 等覆盖。
 
+生图用 `models.image`（`quality: pro` 时用 `models.imagePro`），风格参考图和存储倍率在 `ai.json` 的 `image` 里配置（`styleRef` 是仓库内的图片路径）。
+
 需要 **Node.js 24**：AI 写的代码模块在独立子进程里试玩（`sim/isolated.mjs`），用 `node --permission` 禁止写文件、开子进程和读环境变量，并有超时强杀。这是内测级别的隔离，不是对抗恶意代码的沙箱，Studio 口令只发给可信的人。
 
 ## 云服务器部署（Docker + Caddy）

@@ -44,7 +44,7 @@ export function moduleGuide(stockTypes = []) {
     '  不写 spawn 的敌人只能由 game.spawn(type, props) 生成（例如由别的敌人或钩子召唤）。',
     '  回调：init(e, game) 生成时；update(e, game) 每帧（1/60 秒）；draw(g, e, game) 用 Canvas 2D 在世界坐标里画；onHit(e, game, dmg)；onKill(e, game)。',
     '- api.on(hook, fn)：stageStart(game, stage)、step(game) 每帧、kill(enemy, game) 任何敌人被消灭（含原版）、drawScreen(ctx, game) 屏幕坐标的最上层。',
-    '- api.image(name)：读取项目 assets/ 里的图片（PNG），配合 game.sprite 画出来；图片没加载完时 sprite 会先画 fallback 颜色的方块。',
+    '- api.image(name) / game.image(name)：读取项目 assets/ 里的图片（PNG，可以用 image_gen 生成），配合 game.sprite(g, img, 左上x, 左上y, 宽, 高, {flip, frame, frames}) 画出来；生成的图朝左，e.face > 0 时 flip: true；多帧图横向排列，frame 可以用 e.age * 10 循环。图片没加载完（以及无头试玩里）sprite 会先画 fallback 颜色的方块。',
     '',
     '### 敌人对象 e',
     't 类型, x, y, vx, vy, hp, face(-1 朝左/1 朝右), age(存活秒数), flash(>0 表示刚被打中，通常画成白色)，可以随意加自己的字段。',
