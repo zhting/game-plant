@@ -1,0 +1,345 @@
+{
+ "game": "contra2026",
+ "stage": 2,
+ "seed": 20261105,
+ "script": [
+  {
+   "frames": 30,
+   "keys": []
+  },
+  {
+   "frames": 1200,
+   "keys": [
+    "KeyD",
+    "KeyJ"
+   ],
+   "tap": {
+    "key": "KeyK",
+    "every": 50,
+    "hold": 8
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "frame": 60,
+   "hash": "080e82c6b28b4c29",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 0,
+   "lives": 3,
+   "p": {
+    "x": 237,
+    "y": 154.4,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 120,
+   "hash": "b708966bd5efd873",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 0,
+   "lives": 3,
+   "p": {
+    "x": 327,
+    "y": 176.8,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 180,
+   "hash": "06bc86342d4dd670",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 0,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 240,
+   "hash": "33644dd0422a17ba",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 0,
+   "lives": 3,
+   "p": {
+    "x": 342.7,
+    "y": 172.3,
+    "weapon": "rifle",
+    "dead": true
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 300,
+   "hash": "0f95328ac6bc008c",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 0,
+   "lives": 3,
+   "p": {
+    "x": 328.5,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": true
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 360,
+   "hash": "a3b8215d98159951",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 100,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 154.4,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 420,
+   "hash": "48ff7c9dfb7f2e1c",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 100,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 176.8,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 480,
+   "hash": "e1fd8067127746c4",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 100,
+   "lives": 3,
+   "p": {
+    "x": 351.8,
+    "y": 184,
+    "weapon": "rifle",
+    "dead": true
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 540,
+   "hash": "c9152547f56bf717",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 100,
+   "lives": 3,
+   "p": {
+    "x": 329.3,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": true
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 600,
+   "hash": "15b7a40e2319d7a9",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 100,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 151.5,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 660,
+   "hash": "092ed26ae1cf15ce",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 154.4,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 720,
+   "hash": "bd1eea8b7d2c1e3f",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 176.8,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 780,
+   "hash": "cd2664c2ab271f17",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 840,
+   "hash": "ff2a549b7baab7d9",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 168,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 900,
+   "hash": "51c1f89bed02348b",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 321.8,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": true
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 960,
+   "hash": "d25dab94ab76f4f6",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 200,
+   "lives": 3,
+   "p": {
+    "x": 347.3,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 1020,
+   "hash": "3f017b64acfad147",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 300,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 176.8,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 1080,
+   "hash": "d16d306cf79951c2",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 300,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 204,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 1140,
+   "hash": "733b181a4789e231",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 300,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 168,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  },
+  {
+   "frame": 1200,
+   "hash": "12054b2af9ad8e89",
+   "mode": "play",
+   "stage": 2,
+   "camX": 0,
+   "score": 300,
+   "lives": 3,
+   "p": {
+    "x": 356,
+    "y": 151.5,
+    "weapon": "rifle",
+    "dead": false
+   },
+   "enemies": 0
+  }
+ ]
+}
