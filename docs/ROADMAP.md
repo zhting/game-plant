@@ -151,7 +151,7 @@ flowchart LR
 - **验收**：一句话加一种"会飞、会俯冲的敌人"，包括美术和行为，自动测试通过后进入预览
 
 ### M3 资源编辑器（3 周）
-- [ ] 第六节列出的编辑器功能，所有编辑写回资源清单并提交
+- [x] 第六节列出的编辑器功能，所有编辑写回资源清单并提交
 - **验收**：一套主角加敌人的换皮，能通过"对话生成 + 手工微调"在半天内完成
 
 ### M4 悟空基准 + 持续数据化
@@ -220,5 +220,17 @@ B 轨（项目代码模块）与美术生图/截图自检管线已经跑通：AI
 - [x] 截图工具 `screenshot`（`sim/screenshot.mjs` + `agent.mjs`）：在隔离无头子进程里把 Canvas 2D 调用与项目 PNG 精灵录制成 SVG，再用 `sharp` 光栅化成 768×432 PNG（可选叠加碰撞框调试层、指定相机位置或刷出指定自定义敌人），作为多模态图片回传给 AI 自查美术与碰撞框效果。
 - [x] 悟空模式加载项目模块；第 2、4 关和水下关支持模块敌人。
 - [ ] 用真实 Gemini Key 完成验收：「加一种会飞、会俯冲的敌人」（行为、生图和截图自查流程均已用测试验证，待配置真实 `GEMINI_API_KEY` 跑线上验收）。
+
+## 十四、M3 进度
+
+可视化资源与关卡编辑器（M3）已完成：支持「对话生成 + 可视化微调」双模式协作，所有手工编辑都通过 `game.json` 或 `assets/` 提交为 Git 版本，可随时撤销与对比。
+
+- [x] 角色与原版敌人换皮 / 调色（`skins.player`、`skins.player2`、`skins.enemies.<type|all>`）：支持绑定 `assets/*.png` 多帧精灵图（可设 `frames / fps / width / height / anchor / offsetX / offsetY / flip`）以及实时 `hue / saturate / brightness` 调色滤镜；通过 `stageOneArt.customSkin / customEnemySkin` 与 `stageTwoArt` 委托自动覆盖全部 1–8 关。
+- [x] 关卡音乐替换（`audio.stages`）：1–8 关可自由切换内置曲目或绑定上传到项目 `assets/` 的 `.ogg / .mp3 / .wav` 音频。
+- [x] 像素画布与精灵工作台（`apps/studio/src/AssetEditor.jsx` + `backend/ai/sprites.mjs`）：支持缩放像素画布、画笔、橡皮擦、吸管、同色替换（`recolorSprite`）、一键去纯色背景、切帧辅助线、锚点十字、实时循环动画预览。
+- [x] 框选区域 AI 局部重绘（`compositeRegionEdit` + `POST /api/projects/:id/sprites/ai`）：在画布上框选 `{ rx, ry, rw, rh }` 区域后交给 AI 重绘，框外像素严格锁定保留。
+- [x] 关卡顺序编排与补给可视化时间轴（`apps/studio/src/SpecPanel.jsx`）：可视化拖拽/调整 `stages.order`，并在横向关卡时间轴上直观查看、点选、增删、编辑飞行补给胶囊（`pods`）和地面感应补给箱（`boxes`）。
+- [x] 实时预览调试工具栏（`apps/studio/src/App.jsx` + `arcade-engine.mjs` `studioControl` / `drawStudioDebugOverlay`）：预览窗顶部支持一键跳关（1–8 关）、进度坐标跳转（起点/前段/中段/Boss 前）、碰撞框/地形实心线/补给触发线/锚点十字调试层开关、以及无敌测试模式开关。
+
 
 

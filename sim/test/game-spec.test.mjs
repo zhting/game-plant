@@ -169,6 +169,31 @@ test('engine: stages.order validates unique stages and controls stage progressio
   assert.equal(e.G.stage, 5, 'stage 1 boss exit advances to next stage in stages.order (5)');
 });
 
+test('engine: skins, audio.stages and studioControl apply in-game', () => {
+  const e = boot({
+    skins: {
+      player: { sprite: 'hero.png', width: 28, height: 36, frames: 4, hue: 120 },
+      enemies: { run: { sprite: 'orc.png', width: 24, height: 30, frames: 2 }, tur: { sprite: 'cannon.png', width: 24, height: 24 } },
+    },
+    audio: { stages: { 1: 'stage5', 2: 'custom-boss.ogg' } },
+  }, { modules: { modules: [], assetBase: '/api/projects/demo/files/assets' } });
+  e.play(1);
+  assert.equal(e.inspect().audio.resolved.track, 'stage5');
+  e.render();
+  assert.ok(e.MOD.api.image('hero.png').src.endsWith('/hero.png'), 'player skin image requested');
+
+  const ctrl = e.studioControl({ stage: 2, debug: true, god: true });
+  assert.equal(ctrl.stage, 2);
+  assert.equal(ctrl.debug, true);
+  assert.equal(ctrl.god, true);
+  assert.equal(e.inspect().audio.resolved.track, 'project_stage_2');
+  e.frames(5);
+  assert.ok(e.G.p.invT >= 0.4, 'god mode maintains player invulnerability');
+  e.studioControl({ stage: 1, x: 1200 });
+  assert.equal(e.G.p.x, 1200);
+  assert.ok(e.G.camX >= 1000);
+});
+
 test('engine: an invalid spec refuses to boot', () => {
   assert.throws(() => boot({ weapons: { rifle: { cd: -1 } } }), /weapons\.rifle\.cd/);
 });

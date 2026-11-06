@@ -14,16 +14,16 @@ import { createCeilingParasites, createFloorParasites, ceilingParasiteBox, white
 import { createCeilingStalkers, ceilingStalkerBox, advanceCeilingStalker } from '/games/contra2026/js/ceiling-stalker.mjs?v=ceiling-stalker-1';
 import { createHiveBrainParts, hiveBroodRemaining, hiveBroodHealth, hiveDamageableParts, advanceHiveBrood, advanceHiveHatchling, hiveHatchlingBox, hiveShotBlocked } from '/games/contra2026/js/hive-brood.mjs?v=hive-four-ports-1';
 import { hiveSpikeHeight } from '/games/contra2026/js/stage-eight-hazards.mjs?v=organic-motion-2';
-import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=mods-1';
+import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=m3-1';
 import { createFortressRoofGuard, advanceFortressRoofGuard, roofGuardBox, fortressRoofY } from '/games/contra2026/js/fortress-roof-guard.mjs?v=roof-guard-1';
 import { riverFishJumps, riverFishBox, riverFishLifeReward } from '/games/contra2026/js/river-fish.mjs?v=fish-life-1';
 import {fortressCannonMuzzle,advanceFortressCannon} from '/games/contra2026/js/fortress-cannon.mjs?v=cannon-recoil-1';
 import {advanceMotorcycle,motorcycleMuzzle,motorcycleDust} from '/games/contra2026/js/motorcycle-motion.mjs?v=moto-wheelie-2';
-import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=mods-2';
-import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=mods-2';
-import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=mods-1';
-import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=mods-1';
-import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=mods-1';
+import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=m3-1';
+import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=m3-1';
+import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=m3-1';
+import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=m3-1';
+import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=m3-1';
 import { HANGAR_PLATE, createHangarPlates, hangarPlateBox, collideHangarPlates } from '/games/contra2026/js/stage-seven-obstacles.mjs?v=hangar-required-routes-1';
 import { MINECART, isMinecartRider, syncMinecartRider, leaveMinecart, boardMinecart, minecartMuzzle, minecartRiderBox, minecartCanRise, collideMinecartClearance } from '/games/contra2026/js/minecart-rider.mjs?v=hangar-required-routes-1';
 import { STAGE_SEVEN_ROUTE, hangarSectionAt, createStageSevenSolids, HANGAR_CART_TUNNEL, HANGAR_PRESSES, hangarPressState, hangarPressCrushBox, HANGAR_SNIPERS, HANGAR_BOXES, HANGAR_PODS, HANGAR_CART_DEPOTS, HANGAR_ENCOUNTERS } from '/games/contra2026/js/stage-seven-layout.mjs?v=hangar-required-routes-1';
@@ -33,7 +33,7 @@ import { STAGE_SIX_GALLERY, createStageSixGallerySolids, createStageSixGunners, 
 import { drawExplosion, drawSupplyDisc, drawEquipmentTurret, drawEquipmentSupply } from '/games/contra2026/js/combat-art.mjs?v=combat-polish-1';
 import { STAGE_FIVE_ROUTE, createSnowDefenders, snowDefenderBox, advanceSnowDefender, advanceSnowOrdnance, createFlyingFortress, placeFlyingFortress, advanceFlyingFortress, advanceFortressEscorts, advanceFortressSaucer, fortressSaucerBox } from '/games/contra2026/js/stage-five-combat.mjs?v=fortress-saucers-1';
 import { STAGE_FOUR_ROOMS, STAGE_FOUR_DEVICES, makeTwinProjections, advanceTwinProjections, initStageFourDefenses, advanceStageFourShutters, stageFourFacilityClosed, advanceStageFourGallery, stageFourGalleryTargets } from '/games/contra2026/js/stage-four-layout.mjs?v=stage-four-defense-1';
-import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=mods-1';
+import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=m3-1';
 import { drawImpactHelmet } from '/games/contra2026/js/impact-helmet-art.mjs?v=helmet-detail-2';
 import { GamepadInput } from '/games/contra2026/js/gamepad-input.mjs?v=controller-refinements-1';
 import { THIRTY_LIVES, ThirtyLivesCheat, inTitleLogo } from '/games/contra2026/js/thirty-lives.mjs?v=lives-load-1';
@@ -48,7 +48,7 @@ import { BASE_BOSS_DEVICES, BASE_BOSS_MOVER, bossDevicesRemaining, movingBossX, 
 import { baseSupplyKind } from '/games/contra2026/js/base-supply.mjs?v=stage-four-1';
 import { drawSupplySaucer } from '/games/contra2026/js/supply-saucer.mjs?v=pointed-drop-1';
 import { OPENING_DURATION, OPENING_PAGES } from '/games/contra2026/js/opening-story.mjs?v=opening-story-1';
-import { EndingArt } from '/games/contra2026/js/ending-art.mjs?v=single-enemy-rifle-1';
+import { EndingArt } from '/games/contra2026/js/ending-art.mjs?v=m3-1';
 import { ENDING_DURATION, ENDING_PAGES } from '/games/contra2026/js/ending-story.mjs?v=ending-hd-1';
 import { canEnterExit, beginExitEntry, advanceExitEntry, teamInsideExit } from '/games/contra2026/js/stage-one-exit.mjs?v=exit-right-1';
 import { addImpact } from '/games/contra2026/js/impact-effects.mjs?v=hit-feedback-1';
@@ -59,7 +59,7 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
-import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=mods-2';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=m3-1';
 import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=mods-2';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
@@ -421,6 +421,51 @@ function drawModEnemy(e, g) {
   return true;
 }
 if (MOD.enemies.size) for (const art of [stageOneArt, stageTwoArt, stageThreeArt, stageFourArt, stageFiveArt, stageSixArt, hangarArt, stageSevenArt]) art.modEnemy = function (e) { return drawModEnemy(e, this.g); };
+const SKINS = SPEC.skins || {};
+const HAS_SKINS = Boolean(Object.keys(SKINS.player || {}).length || Object.keys(SKINS.player2 || {}).length || Object.keys(SKINS.enemies || {}).length);
+function resolveSkinRule(role, enemy, p) {
+  if (!HAS_SKINS) return null;
+  if (enemy) {
+    const base = SKINS.enemies?.all, specific = SKINS.enemies?.[p?.t || 'sold'];
+    return base || specific ? { ...(base || {}), ...(specific || {}) } : null;
+  }
+  const p1 = SKINS.player, p2 = role === 'blue' ? SKINS.player2 : null;
+  return p1 || p2 ? { ...(p1 || {}), ...(p2 || {}) } : null;
+}
+function skinFilter(skin) {
+  if (!skin) return '';
+  return [
+    skin.hue ? `hue-rotate(${skin.hue}deg)` : '',
+    skin.saturate !== undefined && skin.saturate !== 1 ? `saturate(${skin.saturate})` : '',
+    skin.brightness !== undefined && skin.brightness !== 1 ? `brightness(${skin.brightness})` : '',
+  ].filter(Boolean).join(' ');
+}
+function applyActorSkin(p, role, enemy, g) {
+  const skin = resolveSkinRule(role, enemy, p);
+  if (!skin) return false;
+  const flt = skinFilter(skin);
+  if (flt) g.filter = (g.filter && g.filter !== 'none' ? g.filter + ' ' : '') + flt;
+  if (!skin.sprite) return false;
+  const w = skin.width || 24, h = skin.height || 32, frames = skin.frames || 1, fps = skin.fps || 10;
+  const moving = Math.abs(p?.vx || 0) > 0.5 || (!enemy && !p?.onGround);
+  const frame = frames > 1 && moving ? Math.floor((G.time || G.t / 60) * fps) % frames : 0;
+  const ox = (skin.offsetX || 0) - w / 2, oy = (skin.offsetY || 0) + (skin.anchor === 'center' ? -h / 2 : -h);
+  drawModSprite(g, MOD.api.image(skin.sprite), ox, oy, w, h, { flip: Boolean(skin.flip), frame, frames, fallback: enemy ? '#e04848' : role === 'blue' ? '#3b82f6' : '#f97316' });
+  return true;
+}
+function applyEnemySkin(e, g) {
+  if (!e || ['run', 'sold', 'snp', 'box'].includes(e.t)) return false;
+  const skin = resolveSkinRule('enemy', true, e);
+  if (!skin?.sprite) return false;
+  g.save();
+  const face = e.face || (e.vx < 0 ? -1 : 1) || -1;
+  g.translate(Math.round(e.x), Math.round(e.y)); g.scale(face, 1);
+  if (e.flash > 0) g.filter = 'brightness(1.65) saturate(.65)';
+  applyActorSkin(e, 'enemy', true, g);
+  g.restore();
+  return true;
+}
+if (HAS_SKINS) { stageOneArt.customSkin = applyActorSkin; stageOneArt.customEnemySkin = applyEnemySkin; }
 
 function findLand(x, b0, b1, hw, skipLedge) {
   let best = null;
@@ -471,7 +516,20 @@ if(WUKONG)SET.stageMusic=normalizeWukongMusic(SET.stageMusic);else delete SET.st
 const stageMusicSession = new StageMusicSession();
 const gameMusicOptions=stage=>WUKONG?(stage===2?WUKONG_SIEGE_MUSIC_OPTIONS:WUKONG_MUSIC_OPTIONS):stageMusicOptions(stage);
 const gameMusicRecord=(stage,choice)=>WUKONG?(stage===2?WUKONG_SIEGE_MUSIC_RECORD:WUKONG_MUSIC_RECORD):musicRecord(stage,choice);
+const STAGE_AUDIO_MAP = {};
+const EXTRA_TRACKS = {};
+for (const [st, val] of Object.entries(SPEC.audio?.stages || {})) {
+  if (!val) continue;
+  if (CONTRA_TRACKS[val] || (WUKONG && WUKONG_MUSIC_TRACKS?.[val])) STAGE_AUDIO_MAP[st] = val;
+  else {
+    const key = `project_stage_${st}`;
+    EXTRA_TRACKS[key] = Object.freeze({ url: `${projectModules?.assetBase || ''}/${encodeURIComponent(val)}`, loop: true });
+    STAGE_AUDIO_MAP[st] = key;
+  }
+}
 function sceneMusicTrack(state){
+  const custom = STAGE_AUDIO_MAP[state.stage];
+  if (custom && ['intro', 'play'].includes(state.mode)) return custom;
   if(!WUKONG)return fixedMusicTrack(state);
   const selected=stageMusicSession.forScene(state,SET.stageMusic);
   return WUKONG?wukongMusicTrack(state,SET.stageMusic,selected):selected;
@@ -485,7 +543,8 @@ function saveSettings() { try { localStorage.setItem(WUKONG ? 'wukong-settings' 
 
 // ================= audio =================
 let AC = null, master, sfxGain, musGain, synthGain, noiseBuf, muted = false;
-const musicTracks=WUKONG?WUKONG_MUSIC_TRACKS:CONTRA_TRACKS;
+const baseTracks=WUKONG?WUKONG_MUSIC_TRACKS:CONTRA_TRACKS;
+const musicTracks=Object.keys(EXTRA_TRACKS).length?Object.freeze({...baseTracks,...EXTRA_TRACKS}):baseTracks;
 const referenceMusic = new ReferenceMusic({ getContext: () => AC, getOutput: () => musGain, tracks:musicTracks });
 const wukongBattleAudio=WUKONG?new WukongBattleAudio({getContext:()=>AC,getOutput:()=>sfxGain,enabled:()=>SET.sfx==='on'&&!muted}):null;
 const wukongHeroAudio=WUKONG?new WukongHeroAudio({getContext:()=>AC,getOutput:()=>sfxGain,enabled:()=>SET.sfx==='on'&&SET.sfxVolume>0&&!muted}):null;
@@ -498,7 +557,7 @@ const gameResourceOptions = {
 };
 const resourceCache = new Set();
 const gameVisualResources = stage => WUKONG ? gameResourceJobs({...gameResourceOptions,arts:stage===2?[stageOneArt,siegeArt]:[stageOneArt],records:gameMusicOptions(stage).map(({value})=>gameMusicRecord(stage,value).art)}) : stageResourceJobs(stage,gameResourceOptions);
-const startupMusicKeys = stage => WUKONG ? (stage===1?WUKONG_STARTUP_MUSIC:[startupMusicTrack(stage)]) : SET.music==='on'?fixedStageMusicKeys(stage):[];
+const startupMusicKeys = stage => WUKONG ? (stage===1?WUKONG_STARTUP_MUSIC:[startupMusicTrack(stage)]) : SET.music==='on'?(STAGE_AUDIO_MAP[stage]?[STAGE_AUDIO_MAP[stage]]:fixedStageMusicKeys(stage)):[];
 const stageJobs = stage => [...gameVisualResources(stage),...musicResourceJobs(referenceMusic,startupMusicKeys(stage)),...(WUKONG?[wukongBattleAudio.resourceJob(),wukongHeroAudio.resourceJob()]:[])];
 const stageResourcesReady = stage => stageJobs(stage).every(job=>resourceCache.has(job.id));
 let gameResources = new ResourcePreloader([]), backgroundMusic = null, remoteWorld = null;
@@ -6963,6 +7022,7 @@ function step() {
   if (ENEMY_TUNED) tuneEnemies();
   if (BOSS_TUNED) tuneBosses();
   if (MOD.hooks.step.length && G.mode === 'play') MOD.emit('step', MOD_GAME);
+  if (STUDIO_DEBUG.god) for (const actor of players()) if (!actor.dead) actor.invT = Math.max(actor.invT || 0, 0.5);
   if(G.martialCombo?.remaining>0)G.martialCombo.remaining=Math.max(0,G.martialCombo.remaining-DT);
   for (const actor of players()) if (updateGiant(actor, DT)) {
     puff(actor.x, actor.y); sfx.hit(); banner('巨大化时间结束 · 恢复原尺寸', 1.4);
@@ -7875,6 +7935,7 @@ function drawIntro() {
 function render() {
   renderFrame();
   if (MOD.hooks.drawScreen.length && G.mode === 'play') { setT(); ctx.save(); MOD.emit('drawScreen', ctx, MOD_GAME); ctx.restore(); }
+  if (STUDIO_DEBUG.overlay) drawStudioDebugOverlay(ctx);
 }
 function renderFrame() {
   document.body.classList.toggle('wukong-finale',isCelestial()&&G.boss.encounter?.stage===3);
@@ -8917,7 +8978,7 @@ window[WUKONG ? 'WukongGame' : 'Contra2026'] = Object.freeze({ inspect: () => ({
   siege:isSiege()?WukongSiege.inspect(G):null,
   boss: isSiege()?{kind:'增长天王',active:G.boss.active,dead:G.boss.dead,hp:G.boss.parts[2].hp,max:G.boss.parts[2].max,phase:G.boss.king?.phase||1,attack:G.boss.king?.attack?{kind:G.boss.king.attack.kind,time:G.boss.king.attack.t}:null}:isCelestial()?{kind:'巨灵神',active:G.boss.active,dead:G.boss.dead,hp:G.boss.parts[2].hp,max:G.boss.parts[2].max,phase:G.boss.encounter?.stage||1,phaseTime:G.boss.encounter?.time||0,growing:(G.boss.encounter?.growth||0)>0,scars:(G.boss.encounter?.scars||[]).map(s=>({...s})),attack:G.boss.giant?.attack?{kind:G.boss.giant.attack.kind,time:G.boss.giant.attack.t,aimX:G.boss.giant.attack.aimX,locked:G.boss.giant.attack.locked}:null}:null,
   playing: cooperative(), tick: G.t, snapshotBytes: coop.snapshotBytes || 0, art: isSiege()?{...stageOneArt.inspect(),siege:siegeArt.inspect()}:G.stage === 1 ? stageOneArt.inspect() : G.stage===2?stageTwoArt.inspect():G.stage===3?stageThreeArt.inspect():G.stage===4?stageFourArt.inspect():G.stage===5?stageFiveArt.inspect():G.stage===6?stageSixArt.inspect():G.stage===7?hangarArt.inspect():G.stage===8?stageSevenArt.inspect():null, camera: { x: G.camX, y: G.camY },
-  audio: { ...referenceMusic.inspect(), ...(weaponAudio?{weaponShots:weaponAudio.inspect()}:{}), context: AC?.state || 'locked', muted, music: SET.music, musicVolume:SET.musicVolume,sfxVolume:SET.sfxVolume,sfxGain:sfxGain?.gain.value??0,selection: WUKONG?SET.stageMusic[G.stage]:'fixed', resolved: WUKONG?stageMusicSession.inspect():{track:fixedMusicTrack(G)}, synth: Music.on, sfx: SET.sfx, gain: musGain?.gain.value ?? 0,...(WUKONG?{enemyVoices:wukongBattleAudio.inspect(),heroActions:wukongHeroAudio.inspect()}:{}) },
+  audio: { ...referenceMusic.inspect(), ...(weaponAudio?{weaponShots:weaponAudio.inspect()}:{}), context: AC?.state || 'locked', muted, music: SET.music, musicVolume:SET.musicVolume,sfxVolume:SET.sfxVolume,sfxGain:sfxGain?.gain.value??0,selection: WUKONG?SET.stageMusic[G.stage]:'fixed', resolved: WUKONG?stageMusicSession.inspect():{track:sceneMusicTrack(G)}, synth: Music.on, sfx: SET.sfx, gain: musGain?.gain.value ?? 0,...(WUKONG?{enemyVoices:wukongBattleAudio.inspect(),heroActions:wukongHeroAudio.inspect()}:{}) },
   exit: G.stage===1?{open:!!G.boss.exitOpen,actors:players().map(p=>({id:p.pid,entering:!!p.enteringExit,entered:!!p.exitEntered}))}:null,
   snowfield:G.stage===5?{progress:G.fortress.active?'fortress':G.tank.dead?'approach':G.tank.active?'tank':'snowfield',fortress:{active:G.fortress.active,dead:G.fortress.dead,x:G.fortress.x,y:G.fortress.y,entryT:G.fortress.entryT,phase:G.fortress.phase,parts:G.fortress.parts.map(p=>({kind:p.k,hp:p.hp,max:p.max}))},weather:{...G.s5,snowfall:'heavy'},defenders:G.en.filter(e=>!e.dead&&(e.t==='artillery'||e.t==='grenadier')).map(e=>({kind:e.t,x:e.x,y:e.y,phase:e.phase,peek:e.peek||0})),ordnance:G.eb.filter(b=>!b.dead&&b.snowOrdnance).map(b=>({kind:b.snowOrdnance,x:b.x,y:b.y,fuse:b.fuse,bounces:b.bounces||0})),tank:{active:G.tank.active,dead:G.tank.dead,mode:G.tank.mode,phase2:G.tank.phase2,parts:G.tank.parts.map(p=>({kind:p.k,hp:p.hp,max:p.max}))}}:null,
   waterfall:G.stage===3?{boss:{active:G.mech.active,dead:G.mech.dead,open:G.mech.open,exitOpen:G.mech.exitOpen,parts:G.mech.parts.map(p=>({kind:p.k,hp:p.hp,max:p.max}))},flames:flameJetBoxes(G.time).length,movingRocks:solids.filter(s=>s.drift).map(s=>({x:s.x,y:s.y}))}:null,
@@ -8934,6 +8995,80 @@ window[WUKONG ? 'WukongGame' : 'Contra2026'] = Object.freeze({ inspect: () => ({
   ...(WUKONG ? { ultimateCooldown: Math.max(0,G.nadeCd||0), guards:G.en.filter(e=>!e.dead&&['run','snp','fly'].includes(e.t)).map(e=>({type:e.t,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp,melee:e.melee?{kind:e.melee.kind,time:e.melee.t,phase:e.melee.t<GUARD_MELEE.windup?'windup':e.melee.t<GUARD_MELEE.windup+GUARD_MELEE.strike?'strike':'recover'}:null})) } : {}),
   shots: G.pb.map(b => ({ owner: b.owner || 1, x: b.x, y: b.y })), score: G.score
 }) });
+
+const STUDIO_DEBUG = { overlay: false, god: false };
+function studioControl(cmd = {}) {
+  if (typeof cmd.debug === 'boolean') STUDIO_DEBUG.overlay = cmd.debug;
+  if (typeof cmd.god === 'boolean') STUDIO_DEBUG.god = cmd.god;
+  if (cmd.stage !== undefined) {
+    const st = Number(cmd.stage);
+    if (st >= 1 && st <= 8) {
+      for (const job of stageJobs(st)) resourceCache.add(job.id);
+      reset(st); setMode('play');
+      gameResources = new ResourcePreloader(stageJobs(st));
+      void gameResources.load(() => {}).catch(() => {});
+    }
+  }
+  if (cmd.x !== undefined && !isBase()) {
+    const tx = Math.max(24, Number(cmd.x) || 40);
+    G.p.x = tx; G.p.vx = 0; G.p.vy = 0;
+    if (G.stage !== 3) G.camX = Math.max(0, tx - 96);
+    const s = groundAt(tx) || supplySurfaceAt(tx);
+    if (s) { G.p.y = s.y; G.p.onGround = true; }
+    G.p.invT = Math.max(G.p.invT || 0, 2);
+  }
+  return { stage: G.stage, mode: G.mode, x: G.p.x, y: G.p.y, camX: G.camX, debug: STUDIO_DEBUG.overlay, god: STUDIO_DEBUG.god };
+}
+function drawStudioDebugOverlay(g) {
+  if (!STUDIO_DEBUG.overlay || !['play', 'pause', 'intro'].includes(G.mode)) return;
+  g.save();
+  g.setTransform(R, 0, 0, R, 0, 0);
+  const cx = isBase() ? 0 : G.camX, cy = isBase() ? 0 : G.camY;
+  g.save();
+  g.translate(-cx, -cy);
+  g.lineWidth = 1;
+  g.font = '6px monospace';
+  if (!isBase()) {
+    g.strokeStyle = 'rgba(56,189,248,0.55)';
+    for (const s of solids) {
+      if (s.gone || s.x + s.w < cx || s.x > cx + W) continue;
+      g.strokeRect(s.x, s.y, s.w, Math.max(2, s.h || 2));
+    }
+    for (const pd of G.pods || []) {
+      if (pd.done) continue;
+      if (pd.active) {
+        g.strokeStyle = '#06b6d4'; g.strokeRect(pd.x - 10, pd.y - 7, 20, 14);
+        g.fillStyle = '#67e8f9'; g.fillText(`飞盘:${pd.kind}`, pd.x - 12, pd.y - 9);
+      } else if (pd.at >= cx - 20 && pd.at <= cx + W + 40) {
+        g.strokeStyle = 'rgba(6,182,212,0.55)'; g.beginPath(); g.moveTo(pd.at, cy); g.lineTo(pd.at, cy + H); g.stroke();
+        g.fillStyle = '#67e8f9'; g.fillText(`补给:${pd.kind}@${pd.at}`, pd.at + 2, pd.y0);
+      }
+    }
+  }
+  for (const e of G.en || []) {
+    if (e.dead) continue;
+    const def = e.mod ? MOD.enemies.get(e.t) : null;
+    const b = def ? modBox(def, e) : ebox(e);
+    if (!b) continue;
+    g.strokeStyle = e.mod ? '#f97316' : e.t === 'box' ? '#eab308' : '#ef4444';
+    g.strokeRect(b.x, b.y, b.w, b.h);
+    g.beginPath(); g.moveTo(e.x - 2, e.y); g.lineTo(e.x + 2, e.y); g.moveTo(e.x, e.y - 2); g.lineTo(e.x, e.y + 2); g.stroke();
+    g.fillStyle = '#fde68a';
+    g.fillText(e.t === 'box' ? `箱:${e.kind || ''}` : `${e.t}:${e.hp}`, b.x, b.y - 2);
+  }
+  for (const p of players()) {
+    if (p.dead) continue;
+    const b = pBox(p);
+    if (b) { g.strokeStyle = '#22c55e'; g.strokeRect(b.x, b.y, b.w, b.h); }
+    g.strokeStyle = '#86efac'; g.beginPath(); g.moveTo(p.x - 3, p.y); g.lineTo(p.x + 3, p.y); g.moveTo(p.x, p.y - 3); g.lineTo(p.x, p.y + 3); g.stroke();
+  }
+  g.restore();
+  g.fillStyle = 'rgba(15,23,42,0.78)'; g.fillRect(4, 24, 196, 11);
+  g.fillStyle = '#38bdf8'; g.font = '6px monospace';
+  g.fillText(`S${G.stage} X:${Math.round(G.p.x)} Y:${Math.round(G.p.y)} CAM:${Math.round(G.camX)} EN:${G.en.filter(e => !e.dead).length}${STUDIO_DEBUG.god ? ' [GOD]' : ''}`, 7, 32);
+  g.restore();
+}
+addEventListener('message', ev => { if (ev?.data?.type === 'studio:control') studioControl(ev.data); });
 
 // ================= loop =================
 let last = performance.now(), acc = 0;
@@ -8957,5 +9092,14 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 if (G.mode !== 'lobby') setMode('title');
+const studioParams = new URLSearchParams(location.search);
+if (studioParams.has('debug') || studioParams.has('god') || studioParams.has('stage') || studioParams.has('x')) {
+  studioControl({
+    debug: studioParams.has('debug') ? studioParams.get('debug') === '1' : undefined,
+    god: studioParams.has('god') ? studioParams.get('god') === '1' : undefined,
+    stage: studioParams.has('stage') ? Number(studioParams.get('stage')) : undefined,
+    x: studioParams.has('x') ? Number(studioParams.get('x')) : undefined,
+  });
+}
 requestAnimationFrame(frame);
 }

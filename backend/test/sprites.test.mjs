@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import sharp from 'sharp';
-import { processSprite, keyBackground } from '../ai/sprites.mjs';
+import { processSprite, keyBackground, recolorSprite, compositeRegionEdit } from '../ai/sprites.mjs';
 import { nearestRatio, spritePrompt } from '../ai/image-tool.mjs';
 import { createProjectStore } from '../projects.mjs';
 import { runAgentTurn, systemPrompt } from '../ai/agent.mjs';
@@ -158,4 +158,23 @@ test('agent screenshot: renders stage + custom enemy sprite + hitbox into a 768x
   const meta = await sharp(pngBuf).metadata();
   assert.deepEqual([meta.width, meta.height], [768, 432]);
 });
+
+test('sprite editing: recolorSprite replaces palette colors and modulates HSL, compositeRegionEdit locks pixels outside region', async () => {
+  const base = await processSprite(await fakeSheet({ frames: 2, fill: '#3a8a30' }), { width: 20, height: 16, frames: 2, scale: 4 });
+  const recolored = await recolorSprite(base.png, { replace: [{ from: '#3a8a30', to: '#2060e0', tolerance: 40 }] });
+  assert.ok(recolored.replaced > 100);
+  const [r, g, b, a] = await pixel(recolored.png, 40, 50);
+  assert.equal(a, 255);
+  assert.ok(b > r && b > g, `expected blue after replace, got rgb(${r},${g},${b})`);
+
+  // Region composite: replace only right frame (rx: 0.5..1), left frame stays green.
+  const redSheet = await processSprite(await fakeSheet({ frames: 2, fill: '#e03020' }), { width: 20, height: 16, frames: 2, scale: 4 });
+  const comp = await compositeRegionEdit(base.png, redSheet.png, { rx: 0.5, ry: 0, rw: 0.5, rh: 1 });
+  assert.deepEqual(comp.region, { x: 80, y: 0, w: 80, h: 64 });
+  const leftPx = await pixel(comp.png, 40, 50);
+  const rightPx = await pixel(comp.png, 120, 50);
+  assert.ok(leftPx[1] > leftPx[0], 'left half stays green');
+  assert.ok(rightPx[0] > rightPx[1], 'right half becomes red');
+});
+
 

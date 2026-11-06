@@ -3,7 +3,7 @@
 // The result carries a small preview image so the agent can look at what it got.
 import fs from 'node:fs';
 import sharp from 'sharp';
-import { KEY_COLOR, processSprite } from './sprites.mjs';
+import { KEY_COLOR, processSprite, compositeRegionEdit } from './sprites.mjs';
 
 const REPO = new URL('../../', import.meta.url);
 export const ASSET_NAME = /^[a-z][a-z0-9-]{0,39}\.png$/;
@@ -18,10 +18,12 @@ export function nearestRatio(w, h) {
   return `${best[0]}:${best[1]}`;
 }
 
-export function spritePrompt({ prompt, frames, width, height, edit }) {
+export function spritePrompt({ prompt, frames, width, height, edit, region }) {
   const key = 'solid flat pure magenta (#FF00FF) background filling the whole image, no gradient, no floor, no shadow';
+  const regionNote = region ? `Focus the change inside the selected box (x=${Math.round((region.rx ?? 0) * 100)}%..${Math.round(((region.rx ?? 0) + (region.rw ?? 1)) * 100)}%, y=${Math.round((region.ry ?? 0) * 100)}%..${Math.round(((region.ry ?? 0) + (region.rh ?? 1)) * 100)}%) while keeping the rest of the sprite aligned.` : '';
   const lines = edit ? [
     `Edit this game sprite: ${prompt}.`,
+    regionNote,
     `Keep the same character, size, side-view angle and art style unless asked otherwise. ${frames > 1 ? `Keep the ${frames} poses in one horizontal row.` : ''}`,
     `Output on a ${key}.`,
   ] : [
@@ -67,29 +69,38 @@ export async function runImageTool({ llm, store, projectId, args, changes, confi
   const width = clamp(args.width, 6, 192, 32), height = clamp(args.height, 6, 160, 32), frames = clamp(args.frames, 1, 8, 1);
   const source = args.source ? String(args.source).replace(/^assets\//, '') : '';
   const images = [];
+  let sourceBuf = null;
   if (source) {
     if (!ASSET_NAME.test(source)) return { ok: false, error: 'source 需要是项目 assets/ 里已有的 png' };
-    let buf;
-    try { buf = await store.readFile(projectId, `assets/${source}`); } catch { return { ok: false, error: `assets/${source} 不存在` }; }
+    try { sourceBuf = await store.readFile(projectId, `assets/${source}`); } catch { return { ok: false, error: `assets/${source} 不存在` }; }
     // Put the transparent sprite on the key colour so the model keeps the same background convention.
-    images.push({ mimeType: 'image/png', data: await sharp(buf).flatten({ background: KEY_COLOR }).png().toBuffer() });
+    images.push({ mimeType: 'image/png', data: await sharp(sourceBuf).flatten({ background: KEY_COLOR }).png().toBuffer() });
   } else {
     const ref = await styleReference(config);
     if (ref) images.push(ref);
   }
+  const region = args.region && typeof args.region === 'object' ? args.region : null;
   const generated = await llm.image({
-    prompt: spritePrompt({ prompt, frames, width, height, edit: !!source }),
+    prompt: spritePrompt({ prompt, frames, width, height, edit: !!source, region }),
     images, aspectRatio: nearestRatio(width * frames, height), pro: args.quality === 'pro',
   });
   const sprite = await processSprite(generated.data, { width, height, frames, scale: config?.image?.scale || 4 });
-  const result = await store.writeFiles(projectId, [{ path: `assets/${name}`, content: sprite.png }], String(args.summary || `${source ? '修改' : '生成'}图片 ${name}`).slice(0, 120));
+  let finalPng = sprite.png;
+  let editedRegion = null;
+  if (sourceBuf && region) {
+    const comp = await compositeRegionEdit(sourceBuf, sprite.png, region);
+    finalPng = comp.png;
+    editedRegion = comp.region;
+  }
+  const result = await store.writeFiles(projectId, [{ path: `assets/${name}`, content: finalPng }], String(args.summary || `${source ? '修改' : '生成'}图片 ${name}`).slice(0, 120));
   if (result.changed) changes.push({ commit: result.commit, message: args.summary || `生成图片 ${name}` });
   return {
     ok: true, commit: result.commit.slice(0, 7), path: `assets/${name}`,
     size: { width, height }, frames: sprite.frames, pixels: { width: sprite.width, height: sprite.height, frameWidth: sprite.frameWidth },
     backgroundRemoved: sprite.keyed > 0,
+    ...(editedRegion ? { editedRegion } : {}),
     usage: `const img = game.image('${name}'); game.sprite(g, img, e.x - ${width / 2}, e.y - ${height / 2}, ${width}, ${height}, { flip: e.face > 0${sprite.frames > 1 ? `, frame: e.age * 10, frames: ${sprite.frames}` : ''} })`,
     note: '附带的预览图是处理后的结果（灰底=透明）。不满意可以用 source 参数在它的基础上修改，或换个描述重新生成。',
-    _images: [await previewOf(sprite.png)],
+    _images: [await previewOf(finalPng)],
   };
 }

@@ -124,3 +124,65 @@ export async function processSprite(input, { width = 32, height = 32, frames = 1
     .png({ compressionLevel: 9 }).toBuffer();
   return { png, width: outW * cells.length, height: outH, frameWidth: outW, frames: cells.length, keyed };
 }
+
+function parseHexColor(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || '').trim());
+  if (!m) return null;
+  const n = parseInt(m[1], 16);
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+
+/**
+ * Palette color replacement + HSL modulation for an existing sprite PNG.
+ * `replace` is an optional array of `{ from: '#rrggbb', to: '#rrggbb', tolerance = 32 }`.
+ */
+export async function recolorSprite(input, { hue = 0, saturate = 1, brightness = 1, replace = [], keyBg = false, tolerance = 70 } = {}) {
+  const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width: w, height: h } = info;
+  const keyed = keyBg ? keyBackground(data, w, h, { tolerance }) : 0;
+  let replaced = 0;
+  const rules = (Array.isArray(replace) ? replace : []).map(r => ({
+    from: parseHexColor(r?.from), to: parseHexColor(r?.to), tol: Math.max(0, Math.min(255, Number(r?.tolerance ?? 32))),
+  })).filter(r => r.from && r.to);
+  if (rules.length) {
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3] < 8) continue;
+      for (const rule of rules) {
+        if (dist(data, i, rule.from) <= rule.tol) {
+          data[i] = rule.to.r; data[i + 1] = rule.to.g; data[i + 2] = rule.to.b;
+          replaced++; break;
+        }
+      }
+    }
+  }
+  let pipeline = sharp(data, { raw: { width: w, height: h, channels: 4 } });
+  const dh = Number(hue) || 0, ds = Number(saturate ?? 1), db = Number(brightness ?? 1);
+  if (dh !== 0 || ds !== 1 || db !== 1) pipeline = pipeline.modulate({ hue: dh, saturation: ds, brightness: db });
+  const png = await pipeline.png({ compressionLevel: 9 }).toBuffer();
+  return { png, width: w, height: h, replaced, keyed };
+}
+
+/**
+ * Composite an AI-edited sprite into only the selected rectangular region of the original sprite,
+ * preserving every pixel outside `region` ({ x, y, w, h } in pixels or { rx, ry, rw, rh } in 0..1).
+ */
+export async function compositeRegionEdit(originalInput, editedInput, region) {
+  const orig = await sharp(originalInput).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width: w, height: h } = orig.info;
+  const rx = region.rx !== undefined ? Math.round(region.rx * w) : Math.round(region.x || 0);
+  const ry = region.ry !== undefined ? Math.round(region.ry * h) : Math.round(region.y || 0);
+  const rw = region.rw !== undefined ? Math.round(region.rw * w) : Math.round(region.w || w);
+  const rh = region.rh !== undefined ? Math.round(region.rh * h) : Math.round(region.h || h);
+  const x0 = Math.max(0, Math.min(w - 1, rx)), y0 = Math.max(0, Math.min(h - 1, ry));
+  const x1 = Math.max(x0 + 1, Math.min(w, x0 + rw)), y1 = Math.max(y0 + 1, Math.min(h, y0 + rh));
+  const edited = await sharp(editedInput).ensureAlpha().resize(w, h, { fit: 'fill', kernel: 'nearest' }).raw().toBuffer();
+  for (let y = y0; y < y1; y++) {
+    for (let x = x0; x < x1; x++) {
+      const i = (y * w + x) * 4;
+      orig.data[i] = edited[i]; orig.data[i + 1] = edited[i + 1]; orig.data[i + 2] = edited[i + 2]; orig.data[i + 3] = edited[i + 3];
+    }
+  }
+  const png = await sharp(orig.data, { raw: { width: w, height: h, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
+  return { png, width: w, height: h, region: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 } };
+}
+

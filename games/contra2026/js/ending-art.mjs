@@ -1,4 +1,4 @@
-import {StageOneArt} from './stage-one-art.mjs?v=mods-1';
+import {StageOneArt} from './stage-one-art.mjs?v=m3-1';
 import {drawExplosion} from './combat-art.mjs?v=combat-polish-1';
 import {ENDING_DURATION,endingEase,endingCaption,endingPose} from './ending-story.mjs?v=ending-hd-1';
 

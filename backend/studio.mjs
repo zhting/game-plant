@@ -8,6 +8,8 @@ import { checkModuleSource, runIsolated } from '../sim/isolated.mjs';
 import { loadAiConfig, createUsageMeter } from './ai/config.mjs';
 import { createGemini } from './ai/gemini.mjs';
 import { runAgentTurn, describeSchema } from './ai/agent.mjs';
+import { processSprite, recolorSprite } from './ai/sprites.mjs';
+import { runImageTool } from './ai/image-tool.mjs';
 import { GAME_SPEC_SCHEMA, CONTRA_SPEC_DEFAULTS, ITEM_KINDS, ENEMY_TYPES } from '../games/shared/game-spec.mjs';
 
 const require = createRequire(import.meta.url);
@@ -113,6 +115,28 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   router.delete('/api/projects/:id/files/:folder/:name', wrap(async (req, res) => {
     const rel = `${req.params.folder}/${req.params.name}`;
     res.json(await store.deleteFiles(req.params.id, [rel], `删除 ${rel}`));
+  }));
+  router.post('/api/projects/:id/sprites/edit', wrap(async (req, res) => {
+    const id = req.params.id, body = req.body || {};
+    const name = String(body.name || '').replace(/^assets\//, '');
+    if (!name) throw new ProjectError(400, '缺少图片文件名 name');
+    const rel = `assets/${name}`;
+    const input = await store.readFile(id, rel);
+    let out;
+    if (body.op === 'process') {
+      out = await processSprite(input, { width: body.width, height: body.height, frames: body.frames, scale: body.scale ?? 4, background: body.background || 'key' });
+    } else {
+      out = await recolorSprite(input, { hue: body.hue, saturate: body.saturate, brightness: body.brightness, replace: body.replace, keyBg: Boolean(body.keyBg), tolerance: body.tolerance });
+    }
+    const wr = await store.writeFiles(id, [{ path: rel, content: out.png }], String(body.message || `资源编辑 ${name}`).slice(0, 120));
+    res.json({ ok: true, ...wr, path: rel, width: out.width, height: out.height, replaced: out.replaced || 0, keyed: out.keyed || 0 });
+  }));
+  router.post('/api/projects/:id/sprites/ai', wrap(async (req, res) => {
+    const id = req.params.id, changes = [];
+    const out = await runImageTool({ llm, store, projectId: id, args: req.body || {}, changes, config: aiConfig });
+    if (!out.ok) throw new ProjectError(422, out.error || 'AI 生图失败');
+    const { _images, ...rest } = out;
+    res.json({ ...rest, changes });
   }));
   router.put('/api/projects/:id/game.json', wrap(async (req, res) => res.json(await store.writeSpec(req.params.id, req.body?.spec, req.body?.message || '手动编辑 game.json'))));
   router.patch('/api/projects/:id/game.json', wrap(async (req, res) => res.json(await store.patchSpec(req.params.id, req.body?.patch, req.body?.message || '手动修改'))));

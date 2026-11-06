@@ -34,6 +34,7 @@ export const EXPOSED = [
   'pBox', 'toTitle', 'infiniteLives', 'gameplaySettings', 'syncSettingsUI', 'updateHud',
   'killEnemy', 'wukong', 'throwGrenade', 'updateGrenades', 'updatePartner', 'hitPart', 'endCine', 'applyAudio', 'setMuted',
   'wukongHeroAudio', 'wukongBattleAudio', 'continueGame', 'setMode', 'players', 'pickItem', 'GAME_TITLE', 'MOD', 'MOD_GAME', 'spawnModEnemy',
+  'STUDIO_DEBUG', 'studioControl',
 ];
 
 function seededRandom(seed) {

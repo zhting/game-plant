@@ -602,16 +602,18 @@ export class StageOneArt {
     if(p.enteringExit){this.exitPath();g.clip();}
     g.translate(this.snap(p.x), this.snap(y)); g.scale(face * giant, giant);
     if (enemy && p.flash > 0) g.filter = 'brightness(1.65) saturate(.65)';
-    const actorState={...p,statusTime:this.state.time||tick/60,...(p.enteringExit?{onGround:true,vx:p.enteringExit.speed||90,ay:0}:{})};
-    const drawBody=()=>this.hdActors.draw(g,actorState,role,this.scale*giant);
-    // The old downward-aim rifle extends below the waist clip. Use the
-    // level pose for the legs and let the new upper body own the aim.
-    const drawLegs=()=>this.hdActors.draw(g,{...actorState,ay:0,artPose:undefined},role,this.scale*giant);
-    const uniform=enemy&&!p.roofGuard&&(p.t==='run'||p.t==='snp')&&drawStageEnemyUniform(this,p,drawBody,{drawLegs});
-    if (!uniform&&!drawBody()) {
-      this.rect(-4, -27, 7, 7, '#f8c080'); this.rect(-5, -20, 10, 12, role === 'enemy' ? '#688020' : '#f8b878');
-      this.rect(-5, -10, 4, 10, role === 'blue' ? '#0058f8' : '#f83800'); this.rect(2, -10, 4, 10, role === 'blue' ? '#0058f8' : '#f83800');
-      this.rect(4, -21, 11, 3, '#bcbcbc');
+    if ((this.baseArt || this).customSkin?.(p, role, enemy, g) !== true) {
+      const actorState={...p,statusTime:this.state.time||tick/60,...(p.enteringExit?{onGround:true,vx:p.enteringExit.speed||90,ay:0}:{})};
+      const drawBody=()=>this.hdActors.draw(g,actorState,role,this.scale*giant);
+      // The old downward-aim rifle extends below the waist clip. Use the
+      // level pose for the legs and let the new upper body own the aim.
+      const drawLegs=()=>this.hdActors.draw(g,{...actorState,ay:0,artPose:undefined},role,this.scale*giant);
+      const uniform=enemy&&!p.roofGuard&&(p.t==='run'||p.t==='snp')&&drawStageEnemyUniform(this,p,drawBody,{drawLegs});
+      if (!uniform&&!drawBody()) {
+        this.rect(-4, -27, 7, 7, '#f8c080'); this.rect(-5, -20, 10, 12, role === 'enemy' ? '#688020' : '#f8b878');
+        this.rect(-5, -10, 4, 10, role === 'blue' ? '#0058f8' : '#f83800'); this.rect(2, -10, 4, 10, role === 'blue' ? '#0058f8' : '#f83800');
+        this.rect(4, -21, 11, 3, '#bcbcbc');
+      }
     }
     if(!enemy&&p.helmT>0){
       g.save();if(moto){const {seatX,waist}=MOTORCYCLE_RIDER;g.translate(seatX,waist);g.rotate(ridePose.pitch);g.translate(-seatX,-waist);}
@@ -643,6 +645,7 @@ export class StageOneArt {
   }
   enemy(e) {
     if(e.mod&&this.modEnemy?.(e))return; // project modules (games/shared/mod-runtime.mjs)
+    if((this.baseArt||this).customEnemySkin?.(e,this.g))return;
     if(e.t!=='box'&&drawFrozenEnemy(this,e,()=>this.enemy(e)))return;
     if (e.t === 'tur') {
       const image=(this.baseArt||this).images?.equipmentTurret;

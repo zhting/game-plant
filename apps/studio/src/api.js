@@ -37,4 +37,7 @@ export const api = {
   readFile: (id, rel) => fetch(`/api/projects/${id}/files/${rel}`, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))),
   writeFile: (id, rel, content, type, message) => request('PUT', `/api/projects/${id}/files/${rel}`, null, { raw: content, type, headers: message ? { 'x-message': encodeURIComponent(message) } : {} }),
   deleteFile: (id, rel) => request('DELETE', `/api/projects/${id}/files/${rel}`),
+  editSprite: (id, body) => request('POST', `/api/projects/${id}/sprites/edit`, body),
+  aiSprite: (id, body) => request('POST', `/api/projects/${id}/sprites/ai`, body),
 };
+

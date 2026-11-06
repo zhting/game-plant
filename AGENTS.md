@@ -79,3 +79,11 @@ console.log(e.G.p.x, e.G.score, e.G.en.length);
 - 引擎新增原版敌人类型时，把类型名加进 `STOCK_ENEMY_TYPES`（模块不能重名）。
 - 模块敌人只在 `MOD_STAGES` 列出的关卡生成；美术类在 `enemy(e)` 开头把 `e.mod` 交给 `this.modEnemy`。不要改美术类的原型（无头测试里多个引擎共享同一个类），用实例属性。
 - 没有模块时引擎行为必须和以前完全一样（黄金回放不变）。模块出错只记录、停用对应钩子或敌人，不能让游戏崩溃。
+
+## 角色换皮、音乐与预览调试（M3）
+
+- **外观配置（`skins`）**：`skins.player`、`skins.player2`、`skins.enemies.<type|all>` 支持通过 `sprite`（`assets/*.png`）替换贴图，或通过 `hue / saturate / brightness` 调整原版矢量/高清精灵色相。不要改美术类的原型，通过 `stageOneArt.customSkin / customEnemySkin` 实例钩子生效（第 2–8 关美术类通过 `this.baseArt` 复用）。
+- **关卡音乐（`audio.stages`）**：支持为 1–8 关绑定内置曲目名或 `assets/*.ogg/.mp3/.wav` 文件。
+- **精灵编辑与局部重绘（`backend/ai/sprites.mjs`）**：`recolorSprite` 负责同色替换与 HSL 调色，`compositeRegionEdit` 负责框选区域 AI 局部重绘（严格保留框外像素）。
+- **实时预览控制（`studioControl`）**：引擎监听 `window.postMessage({ type: 'studio:control', stage, x, debug, god })` 及 URL 参数 `?stage=&x=&debug=1&god=1`，用于 Studio 跳关、坐标跳转、碰撞框调试层与无敌模式。
+

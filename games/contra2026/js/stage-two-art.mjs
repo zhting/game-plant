@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
+import { StageOneArt } from './stage-one-art.mjs?v=m3-1';
 import { drawExplosion } from './combat-art.mjs?v=combat-polish-1';
 import { HDActorArt } from './hd-actors.mjs?v=webp-1';
 import { BASE_ACTORS, BASE_KIT } from './stage-two-atlas.mjs?v=webp-1';
@@ -342,28 +342,30 @@ export class StageTwoArt extends StageOneArt{
     if(enemy&&p.flash>0)g.filter='brightness(1.65) saturate(.65)';
     if(!sideExit&&p.aimDx&&!p.prone&&!p.spin)g.transform(1,0,-p.aimDx*.2,1,0,0);
     if(transition>0)g.globalAlpha*=1-transition*.65;
-    const actorState={...world,artPose,ay:p.aimUp?-1:0,statusTime:this.state.time};
-    const drawBody=()=>{
-      if(!sideExit)return this.baseActors.draw(g,actorState,role,this.scale*size*giant);
-      g.save();g.scale(1.25,1.25);
-      const result=this.hdActors.draw(g,{...world,artPose:undefined,ay:0,face:Math.sign(p.vx),inWater:false,ride:null,statusTime:this.state.time},role,this.scale*size*giant*1.25);
-      g.restore();return result;
-    };
-    const sideLegs=enemy&&p.patrolArmed&&p.st==='walk'&&Math.abs(p.vx||0)>.5&&!(p.jumpY>0)&&
-      this.hdActors?.ready('enemy')&&this.hdActors.images?.runLimbs?.naturalWidth>0;
-    const drawSideLegs=sideLegs?()=>{
-      g.save();g.scale((p.vx<0?-1:1)*1.25,1.25);
-      this.hdActors.draw(g,{...world,artPose:undefined,ay:0,vx:Math.abs(p.vx),onGround:true,inWater:false,ride:null},'enemy',this.scale*size*1.25);
-      g.restore();
-    }:null;
-    const uniformDrawn=enemy&&role==='enemy'&&drawStageEnemyUniform(this,p,drawBody,{front:true,drawLegs:drawSideLegs});
-    if(!uniformDrawn&&enemy&&role==='supply'&&drawSideLegs){
-      // Red carriers use the same articulated stride with a red uniform;
-      // their original front-facing upper body and weapon stay unchanged.
-      g.save();g.beginPath();g.rect(-60,-16,120,70);g.clip();
-      g.filter=(g.filter&&g.filter!=='none'?g.filter+' ':'')+'grayscale(1) sepia(1) saturate(4) hue-rotate(320deg) brightness(.85)';drawSideLegs();g.restore();
-      g.save();g.beginPath();g.rect(-60,-60,120,44);g.clip();drawBody();g.restore();
-    }else if(!uniformDrawn)drawBody();
+    if((this.baseArt||this).customSkin?.(p,role,enemy,g)!==true){
+      const actorState={...world,artPose,ay:p.aimUp?-1:0,statusTime:this.state.time};
+      const drawBody=()=>{
+        if(!sideExit)return this.baseActors.draw(g,actorState,role,this.scale*size*giant);
+        g.save();g.scale(1.25,1.25);
+        const result=this.hdActors.draw(g,{...world,artPose:undefined,ay:0,face:Math.sign(p.vx),inWater:false,ride:null,statusTime:this.state.time},role,this.scale*size*giant*1.25);
+        g.restore();return result;
+      };
+      const sideLegs=enemy&&p.patrolArmed&&p.st==='walk'&&Math.abs(p.vx||0)>.5&&!(p.jumpY>0)&&
+        this.hdActors?.ready('enemy')&&this.hdActors.images?.runLimbs?.naturalWidth>0;
+      const drawSideLegs=sideLegs?()=>{
+        g.save();g.scale((p.vx<0?-1:1)*1.25,1.25);
+        this.hdActors.draw(g,{...world,artPose:undefined,ay:0,vx:Math.abs(p.vx),onGround:true,inWater:false,ride:null},'enemy',this.scale*size*1.25);
+        g.restore();
+      }:null;
+      const uniformDrawn=enemy&&role==='enemy'&&drawStageEnemyUniform(this,p,drawBody,{front:true,drawLegs:drawSideLegs});
+      if(!uniformDrawn&&enemy&&role==='supply'&&drawSideLegs){
+        // Red carriers use the same articulated stride with a red uniform;
+        // their original front-facing upper body and weapon stay unchanged.
+        g.save();g.beginPath();g.rect(-60,-16,120,70);g.clip();
+        g.filter=(g.filter&&g.filter!=='none'?g.filter+' ':'')+'grayscale(1) sepia(1) saturate(4) hue-rotate(320deg) brightness(.85)';drawSideLegs();g.restore();
+        g.save();g.beginPath();g.rect(-60,-60,120,44);g.clip();drawBody();g.restore();
+      }else if(!uniformDrawn)drawBody();
+    }
     g.restore();
     if(p.dead||enemy)return;
     drawShieldField(g,p,this.state.time,false,hit?1-hit.t/.2:0);

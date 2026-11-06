@@ -139,7 +139,7 @@ test('studio HTTP API: token auth, projects, chat, preview page and undo', { tim
     // The preview page and its game.json are public so play links can be shared.
     const page = await fetch(origin + '/play/web/');
     assert.equal(page.status, 200);
-    assert.match(await page.text(), /main\.mjs\?v=mods-1/);
+    assert.match(await page.text(), /main\.mjs\?v=m3-1/);
     assert.equal((await (await fetch(origin + '/api/projects/web/game.json')).json()).enemies.hpScale, 2);
     assert.equal((await fetch(origin + '/play/missing/')).status, 404);
 
@@ -188,9 +188,17 @@ test('agent: code_write checks, playtests and commits a module enemy; broken cod
   assert.ok(systemPrompt().includes('api.defineEnemy'));
 });
 
-test('studio HTTP API: module and asset files', { timeout: 30000 }, async () => {
+test('studio HTTP API: module and asset files + sprite edit & AI region inpaint', { timeout: 30000 }, async () => {
   const { EXAMPLE_MODULE } = await import('../ai/mod-guide.mjs');
-  const app = await createBackend({ studio: { dataDir: tmp(), token: 't', llm: null, aiConfig: { models: {}, agent: {}, limits: {} } } });
+  const sharp = (await import('sharp')).default;
+  const fakeLlmImg = {
+    async image() {
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><circle cx="30" cy="30" r="24" fill="#e03020" stroke="#101010" stroke-width="4"/></svg>';
+      const data = await sharp({ create: { width: 120, height: 120, channels: 3, background: '#ff00ff' } }).composite([{ input: Buffer.from(svg), left: 30, top: 30 }]).png().toBuffer();
+      return { data, mimeType: 'image/png', text: '' };
+    },
+  };
+  const app = await createBackend({ studio: { dataDir: tmp(), token: 't', llm: fakeLlmImg, aiConfig: { models: {}, agent: {}, limits: {} } } });
   app.server.listen(0, '127.0.0.1');
   await once(app.server, 'listening');
   const origin = `http://127.0.0.1:${app.server.address().port}`;
@@ -203,9 +211,29 @@ test('studio HTTP API: module and asset files', { timeout: 30000 }, async () => 
     assert.equal(bad.status, 422);
     assert.match((await bad.json()).details.join(), /原版敌人重名/);
     assert.equal((await put('modules/../x.mjs', 'x', 'text/plain')).status, 404);
-    const png = Buffer.from('89504e470d0a1a0a', 'hex');
+    const png = await sharp({ create: { width: 32, height: 32, channels: 4, background: { r: 60, g: 140, b: 50, alpha: 1 } } }).png().toBuffer();
     assert.equal((await put('assets/bird.png', png, 'image/png')).status, 200);
     assert.equal((await put('assets/Bird.PNG', png, 'image/png')).status, 400);
+
+    // Studio sprite edit endpoint (recolor)
+    const editRes = await fetch(origin + '/api/projects/files/sprites/edit', {
+      method: 'POST', headers: { ...auth, 'content-type': 'application/json' },
+      body: JSON.stringify({ name: 'bird.png', replace: [{ from: '#3c8c32', to: '#2060e0', tolerance: 20 }], message: '怪鸟换成蓝色' }),
+    });
+    assert.equal(editRes.status, 200);
+    const editJson = await editRes.json();
+    assert.equal(editJson.ok, true);
+    assert.equal(editJson.replaced, 32 * 32);
+
+    // Studio AI sprite generation + region inpainting endpoint
+    const aiRes = await fetch(origin + '/api/projects/files/sprites/ai', {
+      method: 'POST', headers: { ...auth, 'content-type': 'application/json' },
+      body: JSON.stringify({ name: 'bird.png', source: 'bird.png', prompt: '加一个红眼睛', width: 16, height: 16, frames: 1, region: { rx: 0.25, ry: 0.25, rw: 0.5, rh: 0.5 }, summary: '局部重绘怪鸟头部' }),
+    });
+    assert.equal(aiRes.status, 200);
+    const aiJson = await aiRes.json();
+    assert.equal(aiJson.ok, true);
+    assert.ok(aiJson.editedRegion.w > 0);
 
     // Public loader endpoints (used by /play/<id>/).
     const list = await (await fetch(origin + '/api/projects/files/modules.json')).json();
@@ -217,7 +245,6 @@ test('studio HTTP API: module and asset files', { timeout: 30000 }, async () => 
     assert.equal(await mod.text(), EXAMPLE_MODULE);
     const image = await fetch(origin + '/api/projects/files/files/assets/bird.png');
     assert.equal(image.headers.get('content-type'), 'image/png');
-    assert.deepEqual(Buffer.from(await image.arrayBuffer()), png);
 
     const project = await (await fetch(origin + '/api/projects/files', { headers: auth })).json();
     assert.deepEqual(project.files.assets.map(f => f.path), ['assets/bird.png']);

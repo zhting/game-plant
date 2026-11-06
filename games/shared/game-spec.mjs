@@ -53,6 +53,8 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
       pods: [pod(120, 'M', 66), pod(500, 'p', 60), pod(900, 'S', 58), pod(1250, 'z', 62), pod(1550, 'g', 60), pod(1850, 'p', 56), pod(2000, 'H', 64), pod(2200, 'F', 60), pod(2450, 'z', 58), pod(2700, 'R', 64), pod(2950, 'B', 60)],
     },
   },
+  skins: { player: {}, player2: {}, enemies: {} },
+  audio: { stages: {} },
 });
 
 /** Item letters accepted in pods / boxes. Upper case = weapon chips, lower case & others = special items. */
@@ -91,6 +93,22 @@ const boxList = {
   type: 'array', desc: '地面补给箱：[x 坐标, 掉落道具]，开合循环，打开时才能击破', maxItems: 20,
   items: { type: 'tuple', items: [num('x 坐标', 0, 20000), { type: 'enum', desc: '掉落道具', values: Object.keys(ITEM_KINDS) }] },
 };
+const skinRule = desc => ({
+  type: 'object', desc, props: {
+    sprite: { type: 'string', desc: '项目 assets/ 下的图片文件名（如 hero.png），留空则使用原版模型', maxLength: 80 },
+    frames: num('水平切帧数量（动画帧数）', 1, 16, { integer: true }),
+    fps: num('动画播放帧率（帧/秒）', 1, 30),
+    width: num('游戏内显示宽度（像素）', 6, 160),
+    height: num('游戏内显示高度（像素）', 6, 160),
+    anchor: { type: 'enum', desc: '对齐锚点（feet=脚底居中，center=中心）', values: ['feet', 'center'] },
+    offsetX: num('水平像素偏移', -80, 80),
+    offsetY: num('垂直像素偏移', -80, 80),
+    flip: num('图片默认朝向（0=默认朝右，1=默认朝左自动翻转）', 0, 1, { integer: true }),
+    hue: num('色相旋转角度（-180~180 度，0 为原色）', -180, 180),
+    saturate: num('饱和度倍率（0~4，1 为原色）', 0, 4),
+    brightness: num('亮度倍率（0.2~3，1 为原色）', 0.2, 3),
+  },
+});
 
 /** Schema for overrides (and the resolved spec). Unknown keys are rejected so typos surface early. */
 export const GAME_SPEC_SCHEMA = deepFreeze({
@@ -146,6 +164,24 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
       name: { type: 'string', desc: '关卡名称（显示在关卡开场和选关菜单）', maxLength: 20 },
       pods: podList, boxes: boxList,
     } } },
+    skins: { type: 'object', desc: '角色与敌人换皮（可替换为 assets/ 图片或调整色相/饱和度/亮度）', props: {
+      player: skinRule('1P 主角外观'),
+      player2: skinRule('2P 搭档外观（未填部分继承 1P）'),
+      enemies: {
+        type: 'map',
+        desc: '按敌人类型换皮，键为 all（全体普通敌人）或类型 id：' + Object.entries(ENEMY_TYPES).map(([k, v]) => `${k}=${v}`).join('，'),
+        key: /^[A-Za-z]{2,16}$/,
+        value: skinRule('敌人外观覆盖'),
+      },
+    } },
+    audio: { type: 'object', desc: '音乐与音频分配', props: {
+      stages: {
+        type: 'map',
+        desc: '各关卡背景音乐（键为关卡号 1~8，值为内置曲目名或 assets/ 音频文件名如 bgm.ogg）',
+        key: /^[1-8]$/,
+        value: { type: 'string', desc: '内置曲目（stage1rock/stage2/stage3/stage4/stage5/stage6/stage7）或 assets/ 音频文件名', maxLength: 80 },
+      },
+    } },
   },
 });
 
