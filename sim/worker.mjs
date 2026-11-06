@@ -4,12 +4,14 @@
 // Jobs:
 //   { kind: 'inspect',  modules: [{ path, source }] }
 //   { kind: 'playtest', modules, spec, stages, seconds, seed }
+//   { kind: 'screenshot', modules, spec, assets, stage, seconds, cameraX, spawnEnemy, debug, seed }
 //
 // Module sources are imported from data: URLs, so a module must be a single
 // self-contained file (no import statements).
 import { createModRuntime, MOD_HOOKS, STOCK_ENEMY_TYPES } from '../games/shared/mod-runtime.mjs';
 import { ITEM_KINDS } from '../games/shared/game-spec.mjs';
 import { playtestSpec } from './playtest.mjs';
+import { renderScreenshotSvg } from './screenshot.mjs';
 
 const chunks = [];
 for await (const chunk of process.stdin) chunks.push(chunk);
@@ -43,6 +45,9 @@ try {
   } else if (job.kind === 'playtest') {
     if (errors.length) result = { ok: false, error: '模块加载失败：' + errors.map(e => `${e.where}: ${e.message}`).join('；'), moduleErrors: errors, stages: [] };
     else result = playtestSpec(job.spec, { stages: job.stages, seconds: job.seconds, seed: job.seed, modules: loaded });
+  } else if (job.kind === 'screenshot') {
+    if (errors.length) result = { ok: false, error: '模块加载失败：' + errors.map(e => `${e.where}: ${e.message}`).join('；'), moduleErrors: errors };
+    else result = renderScreenshotSvg({ spec: job.spec, modules: { modules: loaded, assetBase: '/assets' }, assets: job.assets, stage: job.stage, seconds: job.seconds, cameraX: job.cameraX, spawnEnemy: job.spawnEnemy, debug: job.debug, seed: job.seed });
   } else result = { ok: false, error: `未知任务 ${job.kind}` };
 } catch (err) {
   result = { ok: false, error: String(err?.message || err).slice(0, 600) };

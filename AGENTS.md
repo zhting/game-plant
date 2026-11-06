@@ -21,7 +21,7 @@ Game Plant 是一个内部使用的 **AI 游戏创作工具**。底座是一套�
 | `backend/ai/` | Gemini 接入和创作 Agent（`agent.mjs` 的工具就是 AI 能做的全部事情；`mod-guide.mjs` 是教 AI 写代码模块的文档） |
 | `games/shared/mod-runtime.mjs` | 项目代码模块（B 轨）运行时：`defineEnemy`、钩子、出错隔离。引擎里的 `MOD_GAME` 是模块能用的全部接口 |
 | `backend/ai/image-tool.mjs` `backend/ai/sprites.mjs` | AI 生图工具：提示词 + 风格参考图 → 抠图、裁边、切帧、缩放（sharp）→ 存到项目 `assets/` |
-| `sim/isolated.mjs` `sim/worker.mjs` | 在独立子进程里加载和试玩 AI 写的模块（`node --permission`、超时强杀） |
+| `sim/isolated.mjs` `sim/worker.mjs` `sim/screenshot.mjs` | 在独立子进程里加载、试玩和无头截图渲染 AI 写的模块（`node --permission`、超时强杀、Canvas→SVG→PNG） |
 | `apps/studio/` | Studio 界面（Vite + React，唯一允许打包构建的地方） |
 | `docs/` | 路线图和架构文档 |
 

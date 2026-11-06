@@ -40,7 +40,7 @@ export function moduleGuide(stockTypes = []) {
     '- api.defineEnemy(type, def)：type 小写字母开头的英文/数字（2~24 字符），不能和原版敌人重名' + (stockTypes.length ? `（${stockTypes.join(', ')}）` : '') + '。',
     '  def：name 中文名；hp 1~9999；score 得分；box {w, h, anchor: "center"|"feet"}（e.x/e.y 是碰撞框中心，feet 时是脚底中心）；',
     '  contact 默认 true（碰到玩家会让玩家死亡，false 则无害）；drop 被消灭时掉落的道具字母；boom 爆炸大小 0~40；color 没写 draw 时画方块的颜色；',
-    '  spawn {stages: 从 [1,3,5,6,7,8] 里选, every: [最短秒, 最长秒], max: 同屏上限, from: "right"|"left"|"both", height: "sky"|"ground"|屏幕内 y, after/before: 关卡 x 范围, firstDelay: 首次出现前的秒数}；',
+    '  spawn {stages: 从 [1,2,3,4,5,6,7,8] 里选, every: [最短秒, 最长秒], max: 同屏上限, from: "right"|"left"|"both", height: "sky"|"ground"|屏幕内 y, after/before: 关卡 x 范围, firstDelay: 首次出现前的秒数}；',
     '  不写 spawn 的敌人只能由 game.spawn(type, props) 生成（例如由别的敌人或钩子召唤）。',
     '  回调：init(e, game) 生成时；update(e, game) 每帧（1/60 秒）；draw(g, e, game) 用 Canvas 2D 在世界坐标里画；onHit(e, game, dmg)；onKill(e, game)。',
     '- api.on(hook, fn)：stageStart(game, stage)、step(game) 每帧、kill(enemy, game) 任何敌人被消灭（含原版）、drawScreen(ctx, game) 屏幕坐标的最上层。',

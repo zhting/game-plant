@@ -129,19 +129,19 @@ flowchart LR
 ```
 
 ### M0 底座（1 周）——批准后可以马上开始
-- [ ] 调整仓库结构：源码提升到仓库根目录（`games/`、`backend/`、`tools/`）；发布包从主分支移走，打一个 tag 存档（仓库体积大约减半）
-- [ ] 移除军棋、干瞪眼和 `unified` 相关内容，`npm test` 只跑魂斗罗和悟空
-- [ ] 设置 GitHub Actions，每次推送都跑这 835 个测试
-- [ ] 把测试里的 `engine()` 抽成可复用的 `sim/headless.mjs`（测试和 Agent 共用）
-- [ ] 每关录制一段"输入序列 → 状态哈希"作为黄金回放，用来做 Bot 试玩的基线
-- [ ] 写 `AGENTS.md`：架构说明、红线（测试必须全绿、不碰联机协议等），供 AI 编程助手和 Studio Agent 共同遵守
+- [x] 调整仓库结构：源码提升到仓库根目录（`games/`、`backend/`、`tools/`）；发布包从主分支移走，打一个 tag 存档（仓库体积大约减半）
+- [x] 移除军棋、干瞪眼和 `unified` 相关内容，`npm test` 只跑魂斗罗和悟空
+- [x] 设置 GitHub Actions，每次推送都跑这 835 个测试
+- [x] 把测试里的 `engine()` 抽成可复用的 `sim/headless.mjs`（测试和 Agent 共用）
+- [x] 每关录制一段"输入序列 → 状态哈希"作为黄金回放，用来做 Bot 试玩的基线
+- [x] 写 `AGENTS.md`：架构说明、红线（测试必须全绿、不碰联机协议等），供 AI 编程助手和 Studio Agent 共同遵守
 - [ ] 资源去重：png 和 webp 只保留运行时实际用到的那一份，源图挪到 `design/source-art`
 
 ### M1 项目化 + A 轨 + Studio 骨架（3 周）
-- [ ] `startArcade(loadProject())` 通用化，悟空改成走同一个入口
-- [ ] 抽出第一批表到 `templates/contra/game.json`，并为 GameSpec 写好 Schema
-- [ ] 服务端：项目增删改查、每个项目一个 git 仓库、预览路由（`/play/<project>`）、Gemini 封装
-- [ ] Studio：对话、预览热重载、版本历史和撤销
+- [x] `startArcade(loadProject())` 通用化，悟空改成走同一个入口
+- [x] 抽出第一批表到 `templates/contra/game.json`，并为 GameSpec 写好 Schema
+- [x] 服务端：项目增删改查、每个项目一个 git 仓库、预览路由（`/play/<project>`）、Gemini 封装
+- [x] Studio：对话、预览热重载、版本历史和撤销
 - **验收**：一句话把机枪射速、生命数、敌人血量、道具掉落改掉，30 秒内在预览里看到效果，可以撤销
 
 ### M2 B 轨 + 资源生成（3 周）
@@ -192,10 +192,10 @@ flowchart LR
 - [x] 无头引擎抽成 `sim/headless.mjs`，测试和 Agent 共用
 - [x] 黄金回放：魂斗罗 8 关 + 悟空 2 关，每秒一个状态指纹（`sim/golden/`）
 - [x] `AGENTS.md`
-- [ ] 资源去重：运行时只加载 webp，png 源图（约 241 MB）暂时不出现在 Docker 镜像里；把源图挪到 `design/source-art` 需要同步修改工具和测试里的路径，放到 M1
+- [ ] 资源去重：运行时只加载 webp，png 源图（约 241 MB）暂时不出现在 Docker 镜像里；把源图挪到 `design/source-art` 需要同步修改工具和测试里的路径，放到后续处理
 
 ## 十二、M1 进度
-- [x] GameSpec 数据层 `games/shared/game-spec.mjs`：物理、命数、加命分数、6 种武器、道具栏、敌人血量倍率（全体/按类型）、得分倍率、第 1/5/6/7/8 关的空中补给和补给箱、关卡名称。每个字段都有中文说明，供 Agent 和参数面板使用。
+- [x] GameSpec 数据层 `games/shared/game-spec.mjs`：物理、命数、加命分数、6 种武器、道具栏、敌人血量倍率（全体/按类型）、敌人刷新频率倍率（`enemies.spawnRateScale`）、得分倍率、第 1/5/6/7/8 关的空中补给和补给箱、关卡名称、关卡顺序（`stages.order`）。每个字段都有中文说明，供 Agent 和参数面板使用。
 - [x] 引擎改为 `startArcade(deps, gameSpec)`，默认值等于原来的常量，黄金回放没有变化。
 - [x] 项目：每个项目一个 git 仓库（`backend/data/projects/<id>/`），版本历史、撤销、回到任意版本；`/play/<id>/` 用项目的 game.json 运行游戏，`?rev=` 可以试玩历史版本。
 - [x] Gemini 接入：`backend/config/ai.json` 配置各角色的模型（环境变量可覆盖），`GEMINI_API_KEY` 只放在环境变量；每日 token 上限。
@@ -203,22 +203,22 @@ flowchart LR
 - [x] Studio（`apps/studio`，Vite + React）：对话、实时预览、参数面板、版本历史（改动对比、试玩旧版本、回到此版本）、game.json 编辑。`STUDIO_TOKEN` 共享口令。
 - [ ] 用真实 Gemini key 跑一轮验收：一句话改射速、命数、敌人血量、掉落，30 秒内看到效果，可撤销。
 - [x] 标题画面、开场文字、制作人员名单、浏览器标签使用 `meta.title`（标题过长时自动缩小字号）。
-- [x] 新增可调字段：`bosses.hpScale`（各关 Boss 可破坏部位血量倍率）、`items.shieldSeconds`（护盾道具时长）。
-- [ ] 继续提取：敌人刷新频率、关卡顺序（关卡顺序也被联机服务使用，需要同步改测试）。
+- [x] 新增可调字段：`bosses.hpScale`（各关 Boss 可破坏部位血量倍率）、`items.shieldSeconds`（护盾道具时长）、`enemies.spawnRateScale`（杂兵刷新频率倍率）、`stages.order`（自定义关卡顺序与子集）。
 - [ ] png 源图挪到 `design/source-art`（M0 遗留）。
 
 ## 十三、M2 进度
 
-B 轨（项目代码模块）已经跑通：AI 可以一句话写出新敌人，经过检查和试玩后保存为新版本，预览直接生效。
+B 轨（项目代码模块）与美术生图/截图自检管线已经跑通：AI 可以一句话写出新敌人、生成配套精灵图并在关卡里截图自查，经过检查和试玩后保存为新版本，预览直接生效。
 
 - [x] 模块运行时 `games/shared/mod-runtime.mjs`：`api.defineEnemy`（血量、碰撞框、刷新规则、掉落、init/update/draw/onHit/onKill）和钩子 `stageStart / step / kill / drawScreen`。模块出错只记录并停用对应部分，不会让游戏崩溃。
-- [x] 引擎接入：冻结的 `MOD_GAME` 接口（瞄准、射子弹、生成敌人、爆炸、音效、加分、横幅、震屏、掉落、图片……）。没有模块时行为完全不变，黄金回放不变。模块敌人支持第 1、3、5、6、7、8 关。
+- [x] 引擎接入：冻结的 `MOD_GAME` 接口（瞄准、射子弹、生成敌人、爆炸、音效、加分、横幅、震屏、掉落、图片……）。没有模块时行为完全不变，黄金回放不变。模块敌人支持全部 1–8 关（含第 2、4 关伪 3D 基地关）以及悟空模式（第 1、2 关）。
 - [x] 隔离试玩 `sim/isolated.mjs`：独立子进程 + `node --permission`（不能写文件、开子进程、读环境变量）+ 超时强杀；静态检查禁止 import/require。
 - [x] Agent 代码工具 `code_list / code_read / code_write / code_delete`：`code_write` 依次做静态检查 → 加载检查 → 相关关卡无头试玩（包括绘制）→ 保存；返回新敌人出现和被击杀的次数。
 - [x] 项目文件 API（`modules/`、`assets/`，带版本），试玩页按版本加载模块。
 - [x] Studio「代码与资源」页：查看/编辑模块（保存前检查）、上传图片和音频资源。
 - [x] 生图和改图工具 `image_gen`（`backend/ai/image-tool.mjs` + `sprites.mjs`）：Gemini 图片模型 + 原作风格参考图 → 品红底抠图（去边缘溢色）→ 裁边 → 多帧切分对齐 → 按游戏内尺寸 ×4 保存到 `assets/`，作为一个版本。处理后的预览图作为多模态工具结果回传给 AI，AI 可以自己判断效果，不满意就用 `source` 参数在原图基础上修改。
-- [ ] 截图工具：让 AI 看到真实画面，自查美术效果。
-- [ ] 悟空模式加载项目模块；第 2、4 关和水下关支持模块敌人。
-- [ ] 用真实 Gemini Key 完成验收：「加一种会飞、会俯冲的敌人」（行为和美术流程都已用脚本化模型验证，还没用真实模型跑过；风格提示词可能需要按实际出图效果调整）。
+- [x] 截图工具 `screenshot`（`sim/screenshot.mjs` + `agent.mjs`）：在隔离无头子进程里把 Canvas 2D 调用与项目 PNG 精灵录制成 SVG，再用 `sharp` 光栅化成 768×432 PNG（可选叠加碰撞框调试层、指定相机位置或刷出指定自定义敌人），作为多模态图片回传给 AI 自查美术与碰撞框效果。
+- [x] 悟空模式加载项目模块；第 2、4 关和水下关支持模块敌人。
+- [ ] 用真实 Gemini Key 完成验收：「加一种会飞、会俯冲的敌人」（行为、生图和截图自查流程均已用测试验证，待配置真实 `GEMINI_API_KEY` 跑线上验收）。
+
 

@@ -36,7 +36,7 @@ export const STOCK_ENEMY_TYPES = Object.freeze(['run', 'sold', 'snp', 'tur', 'bo
   'artillery', 'grenadier', 'heavyGunner', 'waterAmbush', 'fortressSaucer', 'hiveHatchling', 'ceilingStalker', 'ceilingParasite', 'whiteFloater', 'guardianFlyer', 'spikeWall', 'alienHead']);
 
 /** Stage numbers whose renderer draws G.en through the shared enemy hook. */
-export const MOD_STAGES = Object.freeze([1, 3, 5, 6, 7, 8]);
+export const MOD_STAGES = Object.freeze([1, 2, 3, 4, 5, 6, 7, 8]);
 
 const TYPE_PATTERN = /^[a-z][A-Za-z0-9]{1,23}$/;
 const MAX_ERRORS = 20;

@@ -510,6 +510,7 @@ export class StageTwoArt extends StageOneArt{
     this.groundItems(G);
     g.restore();
     this.soldiers(B);if(!B.cleared&&!B.def.boss&&!B.dead)this.barrier();this.soldiers(B,true);
+    for(const e of G.en||[])if(e.mod&&!e.dead)this.modEnemy?.(e);
     this.shots(G);
     if(trans>=BASE_GATE_ROLL_START)this.transitionTunnel(Math.min(1,(trans-BASE_GATE_ROLL_START)/.08));
     this.sideLifts(G,options.players);

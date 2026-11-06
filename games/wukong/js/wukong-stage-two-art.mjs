@@ -1,4 +1,4 @@
-import {ROOM_WIDTHS,ROOM_NAMES,SEALS,doors,objective,counterWindow,kingFrame} from './wukong-stage-two.mjs';
+import {ROOM_WIDTHS,ROOM_NAMES,SEALS,doors,objective,counterWindow,kingFrame} from './wukong-stage-two.mjs?v=mods-2';
 export class WukongSiegeArt {
   constructor({imageFactory=()=>new Image()}={}){
     this.imageFactory=imageFactory;this.images={};this.pending={};this.meta={};

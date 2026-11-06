@@ -191,7 +191,7 @@ export function advance(G,actors,inputs,dt,hooks={}){
   }
   s.orbs=s.orbs.filter(o=>!o.dead);
   if(s.lightning){s.lightning.t-=dt;if(s.lightning.t<=0)s.lightning=null;}
-  if(s.room==='wind'&&!s.captured&&!s.cleared.includes('wind')&&G.en.every(e=>e.dead||e.x<650)){s.captured=true;hooks.onTell?.('巨弩已夺下 · 左拨杆调到中档，右金扣发弩',4);}
+  if(s.room==='wind'&&!s.captured&&!s.cleared.includes('wind')&&G.en.every(e=>e.dead||e.mod||e.x<650)){s.captured=true;hooks.onTell?.('巨弩已夺下 · 左拨杆调到中档，右金扣发弩',4);}
   if(s.shotT>0){s.shotT=Math.max(0,s.shotT-dt);if(s.shotT<=0&&s.pendingSeal){clearSeal(G,s.pendingSeal,actors,hooks);s.pendingSeal=null;}}
   if(s.hammerT>0){s.hammerT=Math.max(0,s.hammerT-dt);if(s.hammerT<=0)clearSeal(G,'armor',actors,hooks);}
   const available=doors(G),alive=actors.filter(p=>!p.dead);

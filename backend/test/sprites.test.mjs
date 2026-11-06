@@ -113,3 +113,49 @@ test('agent image_gen without an image model reports a clear error', async () =>
   await runAgentTurn({ llm, store, projectId: 'noimg', message: 'x' });
   assert.match(seen.parts[0].functionResponse.response.error, /图片生成没有配置/);
 });
+
+test('agent screenshot: renders stage + custom enemy sprite + hitbox into a 768x432 PNG for the model', async () => {
+  const store = newStore();
+  await store.create({ id: 'shot' });
+  const modSource = [
+    "export default function (api) {",
+    "  api.defineEnemy('diveBird', {",
+    "    name: '怪鸟', hp: 2, score: 200,",
+    "    box: { w: 24, h: 16 },",
+    "    spawn: { stages: [1], every: [1, 2], firstDelay: 0.5, after: 0, max: 2, height: 64 },",
+    "    update(e, game) { e.x -= 40 * game.dt; },",
+    "    draw(g, e, game) {",
+    "      const img = game.image('dive-bird.png');",
+    "      game.sprite(g, img, e.x - 12, e.y - 8, 24, 16, { flip: e.face > 0, frame: e.age * 10, frames: 2 });",
+    "    },",
+    "  });",
+    "}",
+  ].join('\n');
+  const requests = [];
+  const script = [
+    { calls: [{ name: 'image_gen', args: { name: 'dive-bird.png', prompt: '怪鸟', width: 24, height: 16, frames: 2, summary: '生成怪鸟图片' } }] },
+    { calls: [{ name: 'code_write', args: { path: 'modules/dive-bird.mjs', content: modSource, summary: '加入怪鸟模块' } }] },
+    { calls: [{ name: 'screenshot', args: { stage: 1, seconds: 1, spawnEnemy: 'diveBird' } }] },
+    { text: '已确认怪鸟画面正常' },
+  ];
+  const llm = {
+    async generate(r) {
+      requests.push(structuredClone(r.contents));
+      const n = script.shift();
+      const parts = n.calls ? n.calls.map((c, i) => ({ functionCall: { id: `s${requests.length}-${i}`, ...c } })) : [{ text: n.text }];
+      return { content: { role: 'model', parts }, functionCalls: parts.filter(p => p.functionCall).map(p => p.functionCall), text: n.text || '' };
+    },
+    async image() { return { data: await fakeSheet({ frames: 2, fill: '#d04090' }), mimeType: 'image/png', text: '' }; },
+  };
+  const turn = await runAgentTurn({ llm, store, projectId: 'shot', message: '做一只怪鸟并截图检查' });
+  assert.equal(turn.reply, '已确认怪鸟画面正常');
+  assert.deepEqual(turn.steps.map(s => [s.name, s.ok]), [['image_gen', true], ['code_write', true], ['screenshot', true]]);
+  const shotResp = requests[3].at(-1).parts[0].functionResponse;
+  assert.equal(shotResp.response.ok, true);
+  assert.ok(shotResp.response.enemies.some(e => e.type === 'diveBird' && e.mod), 'custom enemy appears in visible enemies');
+  assert.equal(shotResp.parts[0].inlineData.mimeType, 'image/png');
+  const pngBuf = Buffer.from(shotResp.parts[0].inlineData.data, 'base64');
+  const meta = await sharp(pngBuf).metadata();
+  assert.deepEqual([meta.width, meta.height], [768, 432]);
+});
+

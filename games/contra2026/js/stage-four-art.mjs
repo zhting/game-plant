@@ -1,6 +1,6 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
 import { StageOneArt } from './stage-one-art.mjs?v=mods-1';
-import { StageTwoArt, STAGE_TWO_ASSETS } from './stage-two-art.mjs?v=single-enemy-rifle-1';
+import { StageTwoArt, STAGE_TWO_ASSETS } from './stage-two-art.mjs?v=mods-2';
 import { STAGE_FOUR_ROOMS, STAGE_FOUR_GALLERY_TIERS } from './stage-four-layout.mjs?v=stage-four-defense-1';
 import { baseCoreShielded } from './base-shooting.mjs?v=stage-four-1';
 import { bossDevicesRemaining, deviceAimHint } from './base-boss.mjs?v=polish-closeout-1';

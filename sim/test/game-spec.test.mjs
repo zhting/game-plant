@@ -131,6 +131,44 @@ test('engine: shield duration and game title come from the spec', () => {
   assert.equal(boot().GAME_TITLE, '魂斗罗2026');
 });
 
+test('engine: enemies.spawnRateScale scales runner and base patrol spawn timers', () => {
+  const countRunners = scale => {
+    const e = boot({ enemies: { spawnRateScale: scale } });
+    e.play(1);
+    let spawned = 0;
+    const seen = new Set();
+    for (let i = 0; i < 360; i++) {
+      e.frames(1, { KeyD: true });
+      for (const en of e.G.en) if (en.t === 'run' && !seen.has(en)) { seen.add(en); spawned++; }
+    }
+    return spawned;
+  };
+  const slow = countRunners(0.25), fast = countRunners(4);
+  assert.ok(fast > slow, `spawnRateScale=4 spawned more runners than 0.25 (${fast} vs ${slow})`);
+});
+
+test('engine: stages.order validates unique stages and controls stage progression', () => {
+  assert.deepEqual(validateGameSpec({ stages: { order: [3, 3] } }), ['stages.order: 不能有重复项']);
+  assert.deepEqual(validateGameSpec({ stages: { order: [9] } }), ['stages.order[0]: 不能大于 8']);
+
+  const e = boot({ stages: { order: [3, 1, 5] } });
+  assert.equal(e.startStage(2), false, 'stage 2 is excluded from custom order');
+  e.play(3);
+  assert.equal(e.G.stage, 3);
+  e.stageClear();
+  assert.equal(e.G.mode, 'clear');
+  e.play(1);
+  // Defeating stage 1 boss transitions to the next stage in stages.order (5 instead of 2)
+  e.G.boss.active = true;
+  e.G.boss.dead = true;
+  e.G.boss.deadT = 0;
+  e.G.boss.exitOpen = true;
+  e.G.boss.exitTransitionT = 0.25;
+  e.G.p.exitEntered = true;
+  e.frames(1);
+  assert.equal(e.G.stage, 5, 'stage 1 boss exit advances to next stage in stages.order (5)');
+});
+
 test('engine: an invalid spec refuses to boot', () => {
   assert.throws(() => boot({ weapons: { rifle: { cd: -1 } } }), /weapons\.rifle\.cd/);
 });

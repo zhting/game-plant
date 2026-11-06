@@ -18,13 +18,13 @@ test('enemy definitions are validated with Chinese errors', () => {
   assert.throws(() => normalizeEnemyDef('Bird', {}), /不合法/);
   assert.throws(() => normalizeEnemyDef('run', {}, ['run']), /原版敌人重名/);
   assert.throws(() => normalizeEnemyDef('bird', { hp: 0 }), /hp 需要/);
-  assert.throws(() => normalizeEnemyDef('bird', { spawn: { stages: [2] } }), /spawn\.stages/);
+  assert.throws(() => normalizeEnemyDef('bird', { spawn: { stages: [9] } }), /spawn\.stages/);
   assert.throws(() => normalizeEnemyDef('bird', { spawn: { every: [5, 1] } }), /spawn\.every/);
   assert.throws(() => normalizeEnemyDef('bird', { drop: '?' }, [], ['S']), /drop/);
   assert.throws(() => normalizeEnemyDef('bird', { update: 1 }), /update 需要是函数/);
   const def = normalizeEnemyDef('bird', { spawn: {} });
   assert.equal(def.hp, 1);
-  assert.deepEqual([...def.spawn.stages], [1, 3, 5, 6, 7, 8]);
+  assert.deepEqual([...def.spawn.stages], [1, 2, 3, 4, 5, 6, 7, 8]);
   assert.equal(def.box.anchor, 'center');
 });
 
@@ -87,14 +87,44 @@ test('a throwing update removes only that enemy and records the error', () => {
   assert.match(e.MOD.errors[0].message, /翅膀坏了/);
 });
 
-test('stage renderers draw custom enemies through the module hook', () => {
-  for (const stage of [1, 5]) {
+test('stage renderers draw custom enemies through the module hook across all stage modes', () => {
+  for (const stage of [1, 2, 4, 5]) {
     let drawn = 0;
     const e = boot([bird({ spawn: undefined, draw(g, enemy) { drawn++; g.fillRect(enemy.x - 9, enemy.y - 6, 18, 12); } })]);
     e.play(stage); e.frames(1);
     e.spawnModEnemy('diveBird', { x: e.G.camX + 200, y: e.G.camY + 80 });
     e.render();
     assert.ok(drawn >= 1, `stage ${stage} drew ${drawn}`);
+  }
+});
+
+test('custom enemies spawn, update, take bullet damage and fire in Stage 2 (base) and Wukong mode', () => {
+  // Stage 2 (isBase): spawn, shoot, and take player bullet damage
+  const e2 = boot([bird({
+    hp: 1,
+    spawn: { stages: [2], every: [0.3, 0.3], max: 1, firstDelay: 0.1 },
+    init(enemy) { enemy.x = 192; enemy.y = 110; enemy.vx = 0; enemy.vy = 0; },
+    update(enemy, game) { if (!enemy.fired) { enemy.fired = true; game.shoot(enemy.x, enemy.y, 0, 120); } },
+  })]);
+  e2.play(2);
+  e2.frames(12);
+  const b2 = e2.G.en.find(x => x.t === 'diveBird' && !x.dead);
+  assert.ok(b2, 'spawned in stage 2');
+  assert.ok(e2.G.eb.some(b => !b.base), 'fired a 2D bullet in stage 2');
+  e2.G.pb.push({ k: 'b', t: 0, x0: b2.x, y0: b2.y, x: b2.x, y: b2.y, xe: b2.x, ye: b2.y, spd: 1, dmg: 2 });
+  e2.frames(2);
+  assert.equal(b2.dead, true, 'player bullet killed custom enemy in stage 2');
+
+  // Wukong mode: stages 1 and 2 run custom enemies
+  for (const stage of [1, 2]) {
+    let updated = 0;
+    const ew = boot([bird({
+      spawn: { stages: [stage], every: [0.3, 0.3], max: 1, firstDelay: 0.1 },
+      update(enemy, game) { updated++; enemy.x += -40 * game.dt; },
+    })], { game: 'wukong' });
+    ew.play(stage);
+    ew.frames(20);
+    assert.ok(updated > 0, `wukong stage ${stage} updated custom enemy`);
   }
 });
 

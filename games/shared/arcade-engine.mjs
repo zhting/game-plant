@@ -19,8 +19,8 @@ import { createFortressRoofGuard, advanceFortressRoofGuard, roofGuardBox, fortre
 import { riverFishJumps, riverFishBox, riverFishLifeReward } from '/games/contra2026/js/river-fish.mjs?v=fish-life-1';
 import {fortressCannonMuzzle,advanceFortressCannon} from '/games/contra2026/js/fortress-cannon.mjs?v=cannon-recoil-1';
 import {advanceMotorcycle,motorcycleMuzzle,motorcycleDust} from '/games/contra2026/js/motorcycle-motion.mjs?v=moto-wheelie-2';
-import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=single-enemy-rifle-1';
-import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=single-enemy-rifle-1';
+import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=mods-2';
+import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=mods-2';
 import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=mods-1';
 import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=mods-1';
 import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=mods-1';
@@ -59,8 +59,8 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
-import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=spec-2';
-import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=mods-1';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=mods-2';
+import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=mods-2';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
 // projectModules: optional { modules, assetBase } with the project's code modules; see games/shared/mod-runtime.mjs.
@@ -96,11 +96,12 @@ const WUKONG = document.body.dataset?.game === 'wukong';
 const GAME_ID = WUKONG ? 'wukong' : 'contra2026';
 const isCelestial=()=>WUKONG&&(G.stage===1||G.stage===2);
 const isSiege=()=>WUKONG&&G.stage===2;
-const GAME_STAGES = WUKONG ? WUKONG_STAGES : OPEN_STAGES;
+const GAME_STAGES = WUKONG ? WUKONG_STAGES : (SPEC.stages?.order?.length ? SPEC.stages.order : OPEN_STAGES);
 const RELEASE_MESSAGE = WUKONG ? WUKONG_RELEASE_MESSAGE : STAGE_RELEASE_MESSAGE;
-const canPlayStage = stage => WUKONG ? isWukongStageOpen(stage) : isStageOpen(stage);
+const canPlayStage = stage => WUKONG ? isWukongStageOpen(stage) : (stage >= 9 ? isStageOpen(stage) : GAME_STAGES.includes(stage));
+const firstPlayableStage = () => GAME_STAGES[0] || 1;
 const lastPlayableStage = () => GAME_STAGES.at(-1);
-const nextPlayableStage = stage => canPlayStage(stage + 1) ? stage + 1 : null;
+const nextPlayableStage = stage => { const idx = GAME_STAGES.indexOf(stage); return idx >= 0 && idx + 1 < GAME_STAGES.length ? GAME_STAGES[idx + 1] : null; };
 const W = 384, H = 216, DT = 1 / 60;
 const { gravity: GRAV, runSpeed: RUN, jumpVelocity: JUMPV, airJumpVelocity: JUMPV2, maxFallSpeed: MAXFALL } = SPEC.player.physics;
 let LEVEL_W = 3334, CAM_MAX = LEVEL_W - W; const BX = 3196;
@@ -299,6 +300,7 @@ const SCORE_SCALE = SPEC.scoring.scale;
 // GameSpec enemy hp tuning: applied once to each new entry of G.en at the start of a frame.
 // Skipped entirely for the stock spec so golden replays stay byte-identical.
 const ENEMY_SPEC = SPEC.enemies, ENEMY_TUNED = ENEMY_SPEC.hpScale !== 1 || Object.keys(ENEMY_SPEC.types).length > 0;
+const SPAWN_RATE_SCALE = ENEMY_SPEC.spawnRateScale ?? 1;
 const tunedEnemies = new WeakSet();
 function tuneEnemies() {
   for (const e of G.en) {
@@ -350,11 +352,11 @@ const MOD_GAME = Object.freeze({
   aim: (x, y) => aimAtPlayer(x, y),
   shoot(x, y, vx, vy, options = {}) { const b = ebullet(x, y, vx, vy, options.gravity || 0, options.r || 2); b.from = 'mod'; if (options.sound !== false) sfx.eshot(); return b; },
   spawn: (type, props) => spawnModEnemy(type, props),
-  ground(x) { const s = groundAt(x); return s ? s.y : null; },
+  ground(x) { if (isBase()) return BASE_FLOOR; const s = groundAt(x); return s ? s.y : null; },
   land(e, halfWidth = 4) {
     e.vy = Math.min((e.vy || 0) + GRAV * DT, MAXFALL);
     const b0 = e.y; e.y += e.vy * DT; e.on = false;
-    if (e.vy >= 0) { const s = findLand(e.x, b0, e.y, halfWidth, false); if (s) { e.y = s.y; e.vy = 0; e.on = true; } }
+    if (e.vy >= 0) { const s = isBase() ? (e.y >= BASE_FLOOR ? { y: BASE_FLOOR } : null) : findLand(e.x, b0, e.y, halfWidth, false); if (s) { e.y = s.y; e.vy = 0; e.on = true; } }
     return e.on;
   },
   onScreen: (x, margin = 0) => onScreen(x, margin),
@@ -391,7 +393,7 @@ function modSpawn() {
     const x = left ? G.camX - 16 : G.camX + W + 16;
     let y;
     if (rule.height === 'ground') {
-      const s = groundAt(x) || groundAt(left ? G.camX + 24 : G.camX + W - 24);
+      const s = isBase() ? { y: BASE_FLOOR } : (groundAt(x) || groundAt(left ? G.camX + 24 : G.camX + W - 24));
       if (!s) continue;
       y = def.box.anchor === 'feet' ? s.y : s.y - def.box.h / 2;
     } else y = G.camY + (rule.height === 'sky' ? 30 + rnd() * 50 : rule.height);
@@ -418,7 +420,7 @@ function drawModEnemy(e, g) {
   g.restore();
   return true;
 }
-if (MOD.enemies.size) for (const art of [stageOneArt, stageThreeArt, stageFiveArt, stageSixArt, hangarArt, stageSevenArt]) art.modEnemy = function (e) { return drawModEnemy(e, this.g); };
+if (MOD.enemies.size) for (const art of [stageOneArt, stageTwoArt, stageThreeArt, stageFourArt, stageFiveArt, stageSixArt, hangarArt, stageSevenArt]) art.modEnemy = function (e) { return drawModEnemy(e, this.g); };
 
 function findLand(x, b0, b1, hw, skipLedge) {
   let best = null;
@@ -1320,7 +1322,7 @@ function updateBase() {
     }
     // soldiers out of the two side doors on the back wall
     if (!def.boss && B.spawned < def.sol && B.sol.filter(s=>!s.dead).length<BASE_PATROL_MAX) {
-      B.spawnT -= DT;
+      B.spawnT -= DT * SPAWN_RATE_SCALE;
       if (B.spawnT <= 0) {
         B.spawnT = 1.5 + rnd() * 1.4; B.spawned++;
         const dropKind=baseSupplyKind(G.stage,def,B.spawned),side=rnd()<.5?-1:1;
@@ -1328,6 +1330,7 @@ function updateBase() {
           t:0,flash:0,anim:0,dropKind,patrolArmed:true,fireT:.7+rnd()*.6,jumpT:.35+rnd()*.65,jumpY:0,jumpV:0,shotFlash:0});
       }
     }
+    if (MOD.spawners.length) modSpawn();
     // Pick the outlet before release so its shutter opens ahead of the mine.
     const quota = def.boss ? 0 : def.rol;
     if (B.rolled < quota) {
@@ -1343,6 +1346,12 @@ function updateBase() {
     }
   }
   if (!frozen) {
+    for (const e of G.en) {
+      if (e.dead || !e.mod) continue;
+      if (e.flash > 0) e.flash -= DT;
+      const mdef = MOD.enemies.get(e.t);
+      if (mdef) updateModEnemy(mdef, e);
+    }
     for (const s of B.sol) {
       if (s.dead) continue;
       if(s.patrolArmed)advanceBaseSoldierJump(s,DT,rnd,G.pb);
@@ -1414,7 +1423,11 @@ function updateBase() {
   }
   const bubblePositions=new Map();
   for (const b of G.eb) {
-    if (!b.base) continue;
+    if (!b.base) {
+      if (!frozen) { b.vy += (b.g || 0) * DT; b.x += b.vx * DT; b.y += b.vy * DT; }
+      if (b.x < -30 || b.x > W + 30 || b.y < -40 || b.y > H + 30) b.dead = true;
+      continue;
+    }
     if(b.bubble&&!b.dead)bubblePositions.set(b,{x:b.x,y:b.y});
     if (!frozen) b.t += DT / b.dur;
     b.x = b.x0 + (b.x1 - b.x0) * b.t+(b.bubble?Math.sin(b.t*7+b.phase)*4*Math.sin(b.t*Math.PI):0); b.y = b.y0 + (b.y1 - b.y0) * b.t; b.r = b.bubble?(b.rx??b.r):b.ring?3.2+Math.min(1,b.t)*3.5:1+Math.min(2,b.t*2);
@@ -1450,6 +1463,15 @@ function updateBase() {
     }
     if(b.dead)continue;
     if (b.k === 'msl' && (G.t & 1) === 0) G.fx.push({ k: 'smoke', x: b.x, y: b.y + 3, t: 0, life: 0.3 });
+    for (const e of G.en) {
+      if (e.dead || !e.mod || (b.hits && b.hits.has(e))) continue;
+      const box = ebox(e);
+      if (box && b.x >= box.x - 2 && b.x <= box.x + box.w + 2 && b.y >= box.y - 2 && b.y <= box.y + box.h + 2) {
+        damageEnemy(e, b.dmg, b.x, b.y);
+        if (b.hits) b.hits.add(e); else { b.dead = true; break; }
+      }
+    }
+    if (b.dead) continue;
     for (const s of B.sol) {
       if (s.dead || (b.hits && b.hits.has(s))) continue;
       if (Math.abs(b.t - s.z) < 0.07 && Math.abs(b.x - bx(s.u, s.z)) < (isBase()?BASE_SOLDIER.halfWidth*baseSoldierScale(s.z):8*sc(s.z)) + 2
@@ -1485,7 +1507,17 @@ function collideBasePlayer() {
   const pb = pBox(p);
   if (p.dead || !pb) return;
   for (const b of G.eb) {
-    if (b.dead || !b.base || b.t < 0.86 || b.t > 1.1) continue;
+    if (b.dead) continue;
+    if (!b.base) {
+      const r = b.r || 2;
+      if (overlap(pb, { x: b.x - r, y: b.y - r, w: r * 2, h: r * 2 })) {
+        if (p.shieldT > 0 || riotBlock()) { b.dead = true; spark(b.x, b.y, { material: 'shield' }); continue; }
+        if (p.invT > 0) continue;
+        b.dead = true; killPlayer(); return;
+      }
+      continue;
+    }
+    if (b.t < 0.86 || b.t > 1.1) continue;
     if(p.prone&&!b.bomb&&!b.explosive)continue;
     const rx=b.bubble?(b.rx??b.r):b.r,ry=b.bubble?(b.ry??b.r):b.r;
     if (overlap(pb, { x: b.x - rx, y: b.y - ry, w: rx * 2, h: ry * 2 })) {
@@ -1495,6 +1527,14 @@ function collideBasePlayer() {
     }
   }
   if (frozen) return;
+  for (const e of G.en) {
+    if (e.dead || !e.mod || e.harmless) continue;
+    const box = ebox(e);
+    if (box && overlap(pb, box)) {
+      if (p.shieldT > 0 || p.giantT > 0 || riotBlock()) { killEnemy(e); continue; }
+      if (p.invT <= 0) { killPlayer(); return; }
+    }
+  }
   for (const r of B.rol) {
     if (r.dead || r.z > 0.05 || r.z < -0.05) continue;
     const u = r.u0 + (r.ut - r.u0) * (1 - r.z);
@@ -2233,7 +2273,7 @@ function updateStage6() {
       for(const actor of players())if(canEnterStageSixExit(actor))beginExitEntry(actor);
       if(teamInsideExit(players(),G.lives)){
         S.exitTransitionT=(S.exitTransitionT||0)+DT;
-        if(S.exitTransitionT>=.2){const next=nextPlayableStage(6);if(next)startStage(next,true);else stageClear();}
+        if(S.exitTransitionT>=.2){const next=nextPlayableStage(G.stage);if(next)startStage(next,true);else stageClear();}
       }
     }
     return;
@@ -6042,7 +6082,7 @@ function updateEnemies() {
   if (G.freezeT <= 0) { // frozen by a flash grenade: no spawns, no AI
   if(WUKONG&&G.stage===1&&!G.boss.dead)for(const trigger of G.wukongFlights||[])if(!trigger.done&&G.camX>=trigger.at){trigger.done=true;G.en.push(flyingGuard(G.camX+W-32));}
   // spawner
-  if(!isSiege())G.spawnT -= DT;
+  if(!isSiege())G.spawnT -= DT * SPAWN_RATE_SCALE;
   if (G.spawnT <= 0) {
     G.spawnT = 1.3 + rnd() * 1.6;
     if (G.stage !== 3 && G.stage !== 7 && !G.uw && G.camX < CAM_MAX - 80 && !(G.stage===5&&G.fortress?.active) && G.en.filter(e => e.t === 'run').length < 4) {
@@ -6051,7 +6091,7 @@ function updateEnemies() {
       if (s && !s.water && (G.stage!==6||stageSixRunnerSpawnSafe(sx,s.y,G.jets,G.time,G.s6.coolT))) G.en.push(runner(sx, s.y, left ? 1 : -1));
     }
   }
-  if (MOD.spawners.length && !isSiege()) modSpawn();
+  if (MOD.spawners.length) modSpawn();
   for (const e of G.en) {
     if (e.flash > 0) e.flash -= DT;
     if (e.mod) { const def = MOD.enemies.get(e.t); if (def) { updateModEnemy(def, e); continue; } }
@@ -6232,7 +6272,7 @@ function updateEnemies() {
       if (e.x < G.camX - 40) { e.dead = true; continue; }
       if (e.puls > 0) e.puls -= DT;
       if (!onScreen(e.x, -10)) continue;
-      e.spawnT -= DT;
+      e.spawnT -= DT * SPAWN_RATE_SCALE;
       if (e.spawnT <= 0) { e.spawnT = 3.2 + rnd(); if (G.en.filter(q => q.t === 'larva').length < 5) { G.en.push(larva(e.x - 6, e.y - 14, -60, -160)); e.puls = 0.4; tone(180, 0.12, 'sine', 0.06, 90); } }
     } else if (e.t === 'larva') {
       const previouslyGrounded=e.on,previousVX=e.vx;
@@ -6422,7 +6462,7 @@ function updateBoss() {
       for(const actor of players())if(canEnterExit(actor,FORTRESS_EXIT))beginExitEntry(actor);
       if(teamInsideExit(players(),G.lives)){
         B.exitTransitionT=(B.exitTransitionT||0)+DT;
-        if(B.exitTransitionT>=.2){const next=nextPlayableStage(1);if(next)startStage(next,true);else stageClear();}
+        if(B.exitTransitionT>=.2){const next=nextPlayableStage(G.stage);if(next)startStage(next,true);else stageClear();}
       }
     }
     return;
@@ -6465,7 +6505,7 @@ function updateBoss() {
     }
   }
   if (B.phase2) {
-    B.spawnT -= DT;
+    B.spawnT -= DT * SPAWN_RATE_SCALE;
     if (B.spawnT <= 0) { B.spawnT = 2.3; if (G.en.filter(e => e.t === 'run').length < 3) G.en.push(runner(3200, 176, -1)); }
   }
 }
@@ -7912,6 +7952,7 @@ function renderFrame() {
   for (const e of G.en) {
     if (!onScreen(e.x, 20)) continue;
     if (e.y < G.camY - 30 || e.y > G.camY + H + 40) continue;
+    if (e.mod && drawModEnemy(e, ctx)) continue;
     if (G.stage === 8) { drawAlien(e); if (G.freezeT > 0) ice(ebox(e)); continue; }
     if (G.uw && e.t !== 'box') { drawSeaEnemy(e); if (G.freezeT > 0) ice(ebox(e)); continue; }
     if (e.t === 'tur') { drawTurret(e); if (G.stage === 5) snowCap(e.x, e.y - 8, 9); }
@@ -8002,7 +8043,7 @@ const CINE_LEN = { open: WUKONG ? WUKONG_OPENING_DURATION : OPENING_DURATION, en
 const CINE_TYPE = 16; // characters per second for the typewriter text
 const OPEN_PAGES = WUKONG ? WUKONG_OPENING_PAGES : OPENING_PAGES;
 const END_PAGES = ENDING_PAGES;
-function startOpening() { initAudio(); if(WUKONG)Music.stop(); reset(1); G.cine = { kind: 'open', t: 0, typed: 0, skip: false, ev: {} }; setMode('cine'); Music.start(false, -5, 108); }
+function startOpening() { initAudio(); if(WUKONG)Music.stop(); reset(firstPlayableStage()); G.cine = { kind: 'open', t: 0, typed: 0, skip: false, ev: {} }; setMode('cine'); Music.start(false, -5, 108); }
 const UWO_PAGES = [
   { from: 0.8, to: 4.9, lines: ['黑礁群岛沉没三个月后，', '深海声呐捕捉到一阵规律的心跳声。'] },
   { from: 5.1, to: 9.2, lines: ['声源来自海沟最深处——', '陨星真正的核心「远古母体」还活着。'] },
@@ -8021,7 +8062,7 @@ function startEnding() { G.cine = { kind: 'end', t: 0, typed: 0, skip: false, ev
 function endCine() {
   const k = G.cine.kind,continueMusic=WUKONG&&k==='open'; G.cine = null;
   if(!continueMusic)Music.stop();
-  if (k === 'open') startStage(1,undefined,continueMusic); else if (k === 'uwopen') startStage(9, G.uwCarry); else showClear();
+  if (k === 'open') startStage(firstPlayableStage(),undefined,continueMusic); else if (k === 'uwopen') startStage(9, G.uwCarry); else showClear();
 }
 function lineStarts(pg) { const st = []; let t0 = pg.from + 0.3; for (const l of pg.lines) { st.push(t0); t0 += l.length / CINE_TYPE + 0.25; } return st; }
 function typedCount(pages, t) {
@@ -8462,7 +8503,7 @@ function setMode(m) {
   if (['cine','intro','play'].includes(m)) startBackgroundMusic();
 }
 function startGame() {
-  return startAfterLoading(startOpening, 1);
+  return startAfterLoading(startOpening, firstPlayableStage());
 }
 function updateLoadingUI(state) {
   const percent = Math.floor(state.loaded / Math.max(1,state.total) * 100);
@@ -8533,10 +8574,9 @@ function gameOver() {
 function continueGame() { clearInterval(overTimer);if(isSiege()){G.lives=SET.diff==='easy'?5:3;G.p=newPlayer(G.siege.checkpointX);if(cooperative())G.p2={...newPlayer(G.siege.checkpointX+22),pid:2};WukongSiege.retryRoom(G,players(),siegeHooks());setMode('play');Music.start(false,-3);return;}startStage(G.stage || 1); }
 function toTitle() { ++loadingSerial;pendingStart=null;remoteWorld=null;clearThirtyLives();if (coop?.room) coop.leave(); if (soloSettings) { Object.assign(SET, soloSettings); soloSettings = null; } $('coopBar').hidden = true; for (const id of ['btnRestart', 'btnAgain', 'btnNext', 'btnContinue', 'btnSettings']) $(id).disabled = false; clearInterval(overTimer); Music.stop(); reset(); setMode('title'); }
 function stageClear() {
-  if (!WUKONG && G.stage === LAST_STAGE && G.mode === 'play') { startEnding(); return; }
+  if (!WUKONG && G.stage === lastPlayableStage() && G.mode === 'play') { startEnding(); return; }
   if (G.stage === lastPlayableStage()) { showClear();return; }
   if (G.stage === 16 && G.mode === 'play') { startUWEnding(); return; } // the last underwater boss leads into its own ending
-  if (G.stage === LAST_STAGE && G.mode === 'play') { startEnding(); return; } // the last boss leads into the ending
   showClear();
 }
 function showClear() {

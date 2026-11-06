@@ -31,10 +31,11 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
     homing:  { name: '跟踪导弹', cd: 0.32, max: 4, per: 1, spd: 150 },
   },
   items: { specialCooldown: 2, inventorySize: 3, shieldSeconds: 10 },
-  enemies: { hpScale: 1, types: {} },
+  enemies: { hpScale: 1, spawnRateScale: 1, types: {} },
   bosses: { hpScale: 1 },
   scoring: { scale: 1 },
   stages: {
+    order: [1, 2, 3, 4, 5, 6, 7, 8],
     1: {
       boxes: [[560, 'F'], [1660, 'H'], [2470, 'L'], [2880, 'g']],
       pods: [pod(160, 'M', 70), pod(520, 'g', 64), pod(980, 'S', 58), pod(1420, 'B', 64), pod(1700, 'u', 62), pod(1880, 'm', 66), pod(2040, 'R', 66), pod(700, 'c', 62), pod(2300, 'f', 60), pod(2780, 't', 60), pod(2560, 'h', 56), pod(2680, 'S', 58)],
@@ -128,6 +129,7 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
     } },
     enemies: { type: 'object', desc: '敌人', props: {
       hpScale: num('全体普通敌人血量倍率（不含 Boss，向上取整，至少 1）', 0.1, 20),
+      spawnRateScale: num('普通杂兵刷新频率倍率（越大刷得越密，默认 1）', 0.1, 5),
       types: { type: 'map', desc: '按敌人类型调整，键为类型 id：' + Object.entries(ENEMY_TYPES).map(([k, v]) => `${k}=${v}`).join('，'),
         key: /^[A-Za-z]{2,16}$/, value: { type: 'object', props: {
           hp: num('固定血量（优先于倍率）', 1, 9999, { integer: true }),
@@ -138,7 +140,9 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
       hpScale: num('全体 Boss 部位血量倍率（向上取整，至少 1）', 0.1, 20),
     } },
     scoring: { type: 'object', desc: '计分', props: { scale: num('得分倍率', 0, 100) } },
-    stages: { type: 'map', desc: '按关卡调整，键为关卡号', key: /^[1-8]$/, value: { type: 'object', props: {
+    stages: { type: 'map', desc: '按关卡调整，键为关卡号 1~8', key: /^[1-8]$/, props: {
+      order: { type: 'array', desc: '关卡顺序与启用的关卡列表（1~8，不重复）', minItems: 1, maxItems: 8, unique: true, items: num('关卡号', 1, 8, { integer: true }) },
+    }, value: { type: 'object', props: {
       name: { type: 'string', desc: '关卡名称（显示在关卡开场和选关菜单）', maxLength: 20 },
       pods: podList, boxes: boxList,
     } } },
@@ -173,7 +177,9 @@ function check(value, node, path, errors) {
       return;
     case 'array':
       if (!Array.isArray(value)) return void errors.push(`${at}: 需要数组`);
+      if (node.minItems && value.length < node.minItems) errors.push(`${at}: 至少 ${node.minItems} 项`);
       if (node.maxItems && value.length > node.maxItems) errors.push(`${at}: 最多 ${node.maxItems} 项`);
+      if (node.unique && new Set(value).size !== value.length) errors.push(`${at}: 不能有重复项`);
       value.forEach((item, i) => check(item, node.items, `${path}[${i}]`, errors));
       return;
     case 'tuple':
@@ -186,7 +192,8 @@ function check(value, node, path, errors) {
       for (const [key, child] of Object.entries(value)) {
         const sub = path ? `${path}.${key}` : key;
         if (node.type === 'map') {
-          if (!node.key.test(key)) errors.push(`${sub}: 不支持的键`);
+          if (node.props && Object.hasOwn(node.props, key)) check(child, node.props[key], sub, errors);
+          else if (!node.key.test(key)) errors.push(`${sub}: 不支持的键`);
           else check(child, node.value, sub, errors);
         } else if (!Object.hasOwn(node.props, key)) errors.push(`${sub}: 未知字段`);
         else check(child, node.props[key], sub, errors);

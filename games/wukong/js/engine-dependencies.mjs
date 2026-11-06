@@ -1,8 +1,8 @@
 // Only the Wukong entry loads these game-specific systems.
 export { WUKONG_STAGES, WUKONG_RELEASE_MESSAGE, isWukongStageOpen } from './release-stages.mjs';
 export { WukongSkin } from './wukong-game.mjs?v=dialogue-4';
-export * as WukongSiege from './wukong-stage-two.mjs';
-export { WukongSiegeArt } from './wukong-stage-two-art.mjs';
+export * as WukongSiege from './wukong-stage-two.mjs?v=mods-2';
+export { WukongSiegeArt } from './wukong-stage-two-art.mjs?v=mods-2';
 export { wukongMountText } from './wukong-mount.mjs';
 export { advanceStaff, resolveStaff, staffGeometry, startUltimate, ULTIMATE, STAFF_PICKUPS } from './wukong-combat.mjs';
 export { advanceGuard, guardHitsPlayer, GUARD_MELEE } from './wukong-guards.mjs';
