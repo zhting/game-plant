@@ -24,8 +24,21 @@ header { display: flex; align-items: center; gap: 10px; padding: 8px 14px; borde
 .ai.ok { color: var(--accent2); } .ai.off { color: var(--danger); }
 .banner { padding: 6px 14px; background: #3a1d1b; cursor: pointer; }
 
-.empty { max-width: 640px; margin: 10vh auto; padding: 0 20px; }
+.empty { max-width: 680px; margin: 6vh auto; padding: 0 20px; }
 .empty li { margin: 4px 0; color: var(--dim); }
+.empty-create-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.empty-create-form input { flex: 1; min-width: 180px; padding: 6px 10px; }
+.empty-create-form select, .empty-create-form button { padding: 6px 12px; }
+.create-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 14px; background: var(--panel2); border-bottom: 1px solid var(--line); font-size: 13px; }
+.create-bar input { width: 220px; }
+.existing-projects { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 14px; }
+.existing-projects h4 { margin: 0 0 10px; color: var(--dim); font-size: 13px; }
+.project-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 10px; }
+.project-card { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px 12px; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.project-card strong { color: var(--accent); font-size: 14px; }
+.project-card small { color: var(--dim); font-size: 12px; }
+.inline-row { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.inline-row input { flex: 1; }
 .gate { max-width: 420px; margin: 20vh auto; text-align: center; }
 .gate form { display: flex; gap: 8px; justify-content: center; }
 

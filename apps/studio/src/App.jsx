@@ -17,9 +17,14 @@ export default function App() {
   const [tab, setTab] = useState('params');
   const [error, setError] = useState('');
 
+  // Inline project creation state (avoids window.prompt which is blocked in sandboxed preview iframes)
+  const [newTemplate, setNewTemplate] = useState('contra');
+  const [newTitle, setNewTitle] = useState('我的横版射击');
+  const [showCreateBar, setShowCreateBar] = useState(false);
+  const [creating, setCreating] = useState(false);
+
   // Studio preview live controls (stage jump, checkpoint X, hitbox debug overlay, god mode)
   const iframeRef = useRef(null);
-  const [newTemplate, setNewTemplate] = useState('contra');
   const [previewStage, setPreviewStage] = useState('');
   const [previewX, setPreviewX] = useState('');
   const [debugOverlay, setDebugOverlay] = useState(false);
@@ -61,15 +66,30 @@ export default function App() {
     setProjects(await api.projects());
   }, [currentId, loadProject]);
 
-  async function createProject() {
+  function handleTemplateChange(tpl) {
+    setNewTemplate(tpl);
+    if (!newTitle.trim() || newTitle === '我的横版射击' || newTitle === '我的大闹天宫') {
+      setNewTitle(tpl === 'wukong' ? '我的大闹天宫' : '我的横版射击');
+    }
+  }
+
+  async function submitCreateProject(e) {
+    if (e) e.preventDefault();
+    if (creating) return;
     const defTitle = newTemplate === 'wukong' ? '我的大闹天宫' : '我的横版射击';
-    const title = prompt('新游戏的名字', defTitle);
-    if (title === null) return;
+    const title = (newTitle || '').trim().slice(0, 20) || defTitle;
+    setCreating(true);
+    setError('');
     try {
-      const { id } = await api.createProject({ title: title.trim() || undefined, template: newTemplate });
+      const { id } = await api.createProject({ title, template: newTemplate });
       setProjects(await api.projects());
       setCurrentId(id);
-    } catch (e) { setError(e.message); }
+      setShowCreateBar(false);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCreating(false);
+    }
   }
 
   if (status?.auth && !status.authorized) {
@@ -97,21 +117,41 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <strong className="brand">🌱 Game Plant Studio</strong>
+        <strong className="brand" style={{ cursor: 'pointer' }} onClick={() => setCurrentId('')} title="返回项目首页">🌱 Game Plant Studio</strong>
         <select value={currentId} onChange={e => setCurrentId(e.target.value)}>
           <option value="">选择项目…</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.title}（{p.id}）</option>)}
         </select>
-        <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => setNewTemplate(e.target.value)}>
+        <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => handleTemplateChange(e.target.value)}>
           <option value="contra">模板：魂斗罗2026</option>
           <option value="wukong">模板：悟空大闹天宫</option>
         </select>
-        <button onClick={createProject}>＋ 新项目</button>
+        {project ? (
+          <button onClick={() => setShowCreateBar(v => !v)}>＋ 新项目</button>
+        ) : (
+          <button className="primary" disabled={creating} onClick={submitCreateProject}>{creating ? '创建中…' : '＋ 新项目'}</button>
+        )}
         <span className="spacer" />
         {status && <span className={'ai ' + (status.ai.configured ? 'ok' : 'off')} title={JSON.stringify(status.ai.models, null, 1)}>
-          {status.ai.configured ? `AI：${status.ai.models.agent} · 今日 ${Math.round(status.ai.usage.tokens / 1000)}k / ${Math.round((status.ai.usage.limit || 0) / 1000)}k tokens` : 'AI 未配置（GEMINI_API_KEY）'}
+          {status.ai.mock
+            ? `AI：模拟测试模式（已就绪 · 今日 ${ status.ai.usage.requests || 0 } 次调用）`
+            : status.ai.configured
+              ? `AI：${status.ai.models.agent} · 今日 ${Math.round(status.ai.usage.tokens / 1000)}k / ${Math.round((status.ai.usage.limit || 0) / 1000)}k tokens`
+              : 'AI 未配置（GEMINI_API_KEY）'}
         </span>}
       </header>
+      {showCreateBar && project && (
+        <form className="create-bar" onSubmit={submitCreateProject}>
+          <span>新建游戏项目：</span>
+          <input value={newTitle} maxLength={20} placeholder="输入新游戏名称（最多20字）" onChange={e => setNewTitle(e.target.value)} autoFocus />
+          <select value={newTemplate} onChange={e => handleTemplateChange(e.target.value)}>
+            <option value="contra">模板：魂斗罗2026</option>
+            <option value="wukong">模板：悟空大闹天宫</option>
+          </select>
+          <button type="submit" className="primary" disabled={creating}>{creating ? '创建中…' : '立即创建'}</button>
+          <button type="button" onClick={() => setShowCreateBar(false)}>取消</button>
+        </form>
+      )}
       {error && <div className="banner error" onClick={() => setError('')}>{error}（点击关闭）</div>}
       {!project ? (
         <main className="empty">
@@ -122,7 +162,27 @@ export default function App() {
             <li>“开启近战棍花斩击并能反弹敌弹，第一关天色改成晚霞金红”</li>
             <li>“给主角画一套银色机甲皮肤并换上”</li>
           </ul>
-          <button className="primary" onClick={createProject}>＋ 新建项目</button>
+          <form className="empty-create-form" onSubmit={submitCreateProject}>
+            <input value={newTitle} maxLength={20} placeholder="新游戏的名字（最多20字）" onChange={e => setNewTitle(e.target.value)} />
+            <select value={newTemplate} onChange={e => handleTemplateChange(e.target.value)}>
+              <option value="contra">模板：魂斗罗2026</option>
+              <option value="wukong">模板：悟空大闹天宫</option>
+            </select>
+            <button type="submit" className="primary" disabled={creating}>{creating ? '正在创建…' : '＋ 新建项目'}</button>
+          </form>
+          {projects.length > 0 && (
+            <div className="existing-projects">
+              <h4>或者直接打开已有项目：</h4>
+              <div className="project-cards">
+                {projects.map(p => (
+                  <button key={p.id} type="button" className="project-card" onClick={() => setCurrentId(p.id)}>
+                    <strong>{p.title}</strong>
+                    <small>{p.template === 'wukong' ? '🐒 悟空大闹天宫' : '🔫 魂斗罗2026'} · <code>{p.id}</code></small>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </main>
       ) : (
         <main className="workspace">
@@ -172,7 +232,7 @@ export default function App() {
               <a href={basePlayUrl} target="_blank" rel="noreferrer">新窗口 ↗</a>
             </div>
             <iframe ref={iframeRef} key={previewKey} title="游戏预览" src={playUrl} allow="fullscreen; gamepad; autoplay" />
-            <p className="hint">点击画面后用键盘操作：WASD 移动，J 射击，K 跳跃，I 手雷，L 道具，Enter 开始/暂停。顶部工具栏可随时跳关、看碰撞框或开无敌。</p>
+            <p className="hint">点击画面后用键盘操作：WASD 移动，J 射击，K 跳跃，I 手雷/大招，L 道具/法术，Enter 开始/暂停。顶部工具栏可随时跳关、看碰撞框或开无敌。</p>
           </section>
           <aside className="side">
             <nav>

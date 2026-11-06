@@ -260,3 +260,43 @@ test('studio HTTP API: module and asset files + sprite edit & AI region inpaint'
     await app.close();
   }
 });
+
+test('studio built-in Mock AI mode works without GEMINI_API_KEY', { timeout: 30000 }, async () => {
+  const app = await createBackend({ studio: { dataDir: tmp(), token: '', aiConfig: { apiKey: '', models: {}, agent: {}, limits: {} } } });
+  app.server.listen(0, '127.0.0.1');
+  await once(app.server, 'listening');
+  const origin = `http://127.0.0.1:${app.server.address().port}`;
+  try {
+    const st = await (await fetch(origin + '/api/studio/status')).json();
+    assert.equal(st.ai.configured, true);
+    assert.equal(st.ai.mock, true);
+
+    const createRes = await fetch(origin + '/api/projects', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ title: '模拟测试项目', template: 'wukong' }),
+    });
+    assert.equal(createRes.status, 201);
+    const { id } = await createRes.json();
+
+    const chatRes = await fetch(`${origin}/api/projects/${id}/chat`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ message: '步枪射速快一倍，开局 5 条命，开启 64 点血条和怒气大招' }),
+    });
+    assert.equal(chatRes.status, 200);
+    const chat = await chatRes.json();
+    assert.match(chat.reply, /模拟测试模式/);
+    assert.equal(chat.spec.weapons.rifle.cd, 0.12);
+    assert.equal(chat.spec.player.lives.normal, 5);
+    assert.equal(chat.spec.rules.health.maxHp, 64);
+
+    const skinRes = await fetch(`${origin}/api/projects/${id}/chat`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ message: '给主角画一套银色机甲皮肤并换上' }),
+    });
+    assert.equal(skinRes.status, 200);
+    const skinChat = await skinRes.json();
+    assert.equal(skinChat.spec.skins.player.sprite, 'hero-mecha.png');
+  } finally {
+    await app.close();
+  }
+});

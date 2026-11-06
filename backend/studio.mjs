@@ -77,7 +77,8 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   }));
 
   router.get('/api/studio/status', (req, res) => res.json({
-    auth: !!token, authorized: authorized(req), ai: { configured: !!llm, models: aiConfig.models, usage: usage.snapshot() },
+    auth: !!token, authorized: authorized(req),
+    ai: { configured: !!llm, mock: Boolean(llm?.mock), models: llm?.models || aiConfig.models, usage: usage.snapshot() },
   }));
 
   router.use('/api', auth, json);

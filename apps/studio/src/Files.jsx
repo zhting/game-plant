@@ -14,8 +14,10 @@ export default function Files({ project, onChanged, onError }) {
   const [open, setOpen] = useState(null);       // { path, text, original }
   const [busy, setBusy] = useState(false);
   const [problems, setProblems] = useState(null);
+  const [addingMod, setAddingMod] = useState(false);
+  const [newModName, setNewModName] = useState('my-enemy');
 
-  useEffect(() => { setOpen(null); setProblems(null); }, [project.id]);
+  useEffect(() => { setOpen(null); setProblems(null); setAddingMod(false); }, [project.id]);
 
   async function openModule(path) {
     try { const text = await api.readFile(project.id, path); setOpen({ path, text, original: text }); setProblems(null); }
@@ -31,17 +33,17 @@ export default function Files({ project, onChanged, onError }) {
     finally { setBusy(false); }
   }
   async function remove(path) {
-    if (!confirm(`删除 ${path}？（会生成一个新版本，可以撤销）`)) return;
     setBusy(true);
     try { await api.deleteFile(project.id, path); if (open?.path === path) setOpen(null); await onChanged(); }
     catch (e) { onError(e.message); }
     finally { setBusy(false); }
   }
-  function newModule() {
-    const name = prompt('模块文件名（小写英文、数字、连字符）', 'my-enemy');
-    if (name === null) return;
+  function submitNewModule(e) {
+    e.preventDefault();
+    const name = newModName.trim();
     if (!MODULE_NAME.test(name)) return onError('文件名只能用小写英文字母开头，包含字母、数字和连字符');
     setOpen({ path: `modules/${name}.mjs`, text: STARTER, original: '' });
+    setAddingMod(false);
   }
   async function upload(event) {
     const file = event.target.files?.[0];
@@ -59,14 +61,21 @@ export default function Files({ project, onChanged, onError }) {
   return (
     <div className="files">
       <p className="note">新敌人、新玩法写在代码模块里，通常由 AI 生成。手动保存前会做加载检查，不通过不会保存。</p>
-      <h4>代码模块 <button disabled={busy} onClick={newModule}>＋ 新模块</button></h4>
+      <h4>代码模块 <button disabled={busy} onClick={() => setAddingMod(v => !v)}>＋ 新模块</button></h4>
+      {addingMod && (
+        <form className="inline-row" onSubmit={submitNewModule}>
+          <input value={newModName} placeholder="小写英文模块名，如 my-enemy" onChange={e => setNewModName(e.target.value)} autoFocus />
+          <button type="submit" className="primary">新建</button>
+          <button type="button" onClick={() => setAddingMod(false)}>取消</button>
+        </form>
+      )}
       {!modules.length && <p className="muted">还没有模块。试试对 AI 说"加一种会飞、会俯冲的敌人"。</p>}
       <ul className="file-list">
         {modules.map(f => (
           <li key={f.path} className={open?.path === f.path ? 'active' : ''}>
             <button className="link" onClick={() => openModule(f.path)}>{f.path.slice(8)}</button>
             <small>{(f.size / 1024).toFixed(1)} KB</small>
-            <button disabled={busy} onClick={() => remove(f.path)} title="删除">✕</button>
+            <button disabled={busy} onClick={() => remove(f.path)} title="删除（可在版本页撤销）">✕</button>
           </li>
         ))}
       </ul>
@@ -88,7 +97,7 @@ export default function Files({ project, onChanged, onError }) {
             {/\.(png|webp|jpg)$/.test(f.path) && <img src={`/api/projects/${project.id}/files/${f.path}?t=${f.size}`} alt="" />}
             <span>{f.path.slice(7)}</span>
             <small>{(f.size / 1024).toFixed(1)} KB</small>
-            <button disabled={busy} onClick={() => remove(f.path)} title="删除">✕</button>
+            <button disabled={busy} onClick={() => remove(f.path)} title="删除（可在版本页撤销）">✕</button>
           </li>
         ))}
       </ul>
