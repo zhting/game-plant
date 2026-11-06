@@ -78,12 +78,12 @@ if (isMain) {
     console.warn('[studio] 预置示例项目跳过:', err.message);
   }
 
-  const startPort = Number(process.env.PORT || 3000);
+  const startPort = Number(process.env.PORT || 8787);
   const host = process.env.HOST || '0.0.0.0';
-  function tryListen(port, maxAttempts = 10) {
+  function tryListen(port, maxAttempts = 20) {
     const onError = err => {
-      if (err.code === 'EADDRINUSE' && !process.env.PORT && maxAttempts > 0) {
-        console.warn(`端口 ${port} 已被占用，自动尝试端口 ${port + 1}...`);
+      if (err.code === 'EADDRINUSE' && maxAttempts > 0) {
+        console.warn(`端口 ${port} 已被占用，自动切换到端口 ${port + 1}...`);
         tryListen(port + 1, maxAttempts - 1);
       } else {
         console.error('无法启动服务:', err.message);

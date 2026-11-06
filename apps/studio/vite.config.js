@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Dev: `npm run studio:dev` serves the UI on :5173 and proxies the backend (npm start on :3000).
-const backend = process.env.STUDIO_BACKEND || 'http://localhost:3000';
+// Dev: `npm run studio:dev` serves the UI on :5173 and proxies the backend (npm start on :8787).
+const backend = process.env.STUDIO_BACKEND || 'http://localhost:8787';
 export default defineConfig({
   base: '/studio/',
   plugins: [react()],
