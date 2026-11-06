@@ -2,8 +2,7 @@
 // post-process it (backend/ai/sprites.mjs) and save it to the project's assets/.
 // The result carries a small preview image so the agent can look at what it got.
 import fs from 'node:fs';
-import sharp from 'sharp';
-import { KEY_COLOR, processSprite, compositeRegionEdit } from './sprites.mjs';
+import { KEY_COLOR, getSharp, processSprite, compositeRegionEdit } from './sprites.mjs';
 
 const REPO = new URL('../../', import.meta.url);
 export const ASSET_NAME = /^[a-z][a-z0-9-]{0,39}\.png$/;
@@ -43,7 +42,9 @@ async function styleReference(config) {
   const rel = config?.image?.styleRef;
   if (!rel) return null;
   if (!styleRefCache || styleRefCache.rel !== rel) {
-    const data = await sharp(fs.readFileSync(new URL(rel, REPO))).resize(512, 512, { fit: 'inside' }).png().toBuffer();
+    const raw = fs.readFileSync(new URL(rel, REPO));
+    const sharp = await getSharp();
+    const data = sharp ? await sharp(raw).resize(512, 512, { fit: 'inside' }).png().toBuffer() : raw;
     styleRefCache = { rel, image: { mimeType: 'image/png', data } };
   }
   return styleRefCache.image;
@@ -51,6 +52,8 @@ async function styleReference(config) {
 
 /** Preview for the model: sprite on a neutral checker-free grey so transparency is visible. */
 async function previewOf(png) {
+  const sharp = await getSharp();
+  if (!sharp) return { mimeType: 'image/png', data: png };
   const data = await sharp(png).resize(320, 160, { fit: 'inside', kernel: 'nearest', withoutEnlargement: false })
     .flatten({ background: '#6b7280' }).png().toBuffer();
   return { mimeType: 'image/png', data };
@@ -73,8 +76,9 @@ export async function runImageTool({ llm, store, projectId, args, changes, confi
   if (source) {
     if (!ASSET_NAME.test(source)) return { ok: false, error: 'source 需要是项目 assets/ 里已有的 png' };
     try { sourceBuf = await store.readFile(projectId, `assets/${source}`); } catch { return { ok: false, error: `assets/${source} 不存在` }; }
-    // Put the transparent sprite on the key colour so the model keeps the same background convention.
-    images.push({ mimeType: 'image/png', data: await sharp(sourceBuf).flatten({ background: KEY_COLOR }).png().toBuffer() });
+    const sharp = await getSharp();
+    const flattened = sharp ? await sharp(sourceBuf).flatten({ background: KEY_COLOR }).png().toBuffer() : sourceBuf;
+    images.push({ mimeType: 'image/png', data: flattened });
   } else {
     const ref = await styleReference(config);
     if (ref) images.push(ref);

@@ -43,7 +43,7 @@ export function createProjectStore({ dir, templatesDir }) {
   function checkRev(rev) { if (!REV_PATTERN.test(rev || '')) throw new ProjectError(400, '版本号格式不对'); }
   /** Validate a project-relative path such as modules/bird.mjs; returns the matching rule. */
   function fileRule(rel) {
-    const parts = String(rel || '').split('/');
+    const parts = String(rel || '').replace(/\\/g, '/').split('/');
     const rule = PROJECT_FILE_RULES[parts[0]];
     if (!rule || parts.length !== 2 || !rule.pattern.test(parts[1])) {
       throw new ProjectError(400, `文件路径 "${rel}" 不允许：只能是 modules/<小写名>.mjs 或 assets/<小写名>.(png|webp|jpg|ogg|mp3|wav)`);
@@ -105,7 +105,8 @@ export function createProjectStore({ dir, templatesDir }) {
       const spec = JSON.parse(base);
       if (title) spec.meta = { ...spec.meta, title: String(title).slice(0, 40) };
       try {
-        await run('git', ['init', '-q', '-b', 'main', target]);
+        try { await run('git', ['init', '-q', '-b', 'main', target]); }
+        catch { await run('git', ['init', '-q', target]); }
         // .studio/ holds Studio-side state (chat log) that must not pollute version history.
         await fs.writeFile(path.join(target, '.gitignore'), '.studio/\n');
         await git(id, ['add', '.gitignore']);

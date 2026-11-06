@@ -1,16 +1,9 @@
 // Thin wrapper over @google/genai, plus a built-in Mock AI simulator when
 // GEMINI_API_KEY is not configured so Studio can be tested end-to-end offline.
-//
-//   llm.generate({ role, contents, systemInstruction, tools }) →
-//     { content, functionCalls: [{id, name, args}], text, usage }
-//   llm.image({ prompt, images, aspectRatio, pro }) → { data: Buffer, mimeType, text }
-//
-// `content` is the model turn exactly as returned (including thought
-// signatures); callers must append it to `contents` unchanged when continuing a
-// function-calling loop.
-import { GoogleGenAI } from '@google/genai';
-import sharp from 'sharp';
+// Neither @google/genai nor sharp is imported at module evaluation time so
+// `npm start` works even before optional AI/image packages are installed.
 import { EXAMPLE_MODULE } from './mod-guide.mjs';
+import { createMockSpritePng } from './sprites.mjs';
 
 const MOCK_SPELLS_MODULE = `export default function setup(api) {
   api.on('useItem', (player, kind, game) => {
@@ -116,7 +109,6 @@ export function createMockGemini({ config = {}, usage } = {}) {
       usage?.check();
       usage?.record(role, { totalTokenCount: 120 });
 
-      // Find the last plain user message and any functionResponse turns since then
       let lastUserIdx = -1;
       for (let i = contents.length - 1; i >= 0; i--) {
         if (contents[i].role === 'user' && contents[i].parts?.some(p => typeof p.text === 'string')) {
@@ -139,7 +131,6 @@ export function createMockGemini({ config = {}, usage } = {}) {
         return { content: { role: 'model', parts }, functionCalls: [fc], text: '', finishReason: 'STOP', usage: { totalTokenCount: 120 } };
       };
 
-      // First step for this user message: choose a tool call
       if (toolResponses.length === 0) {
         if (/撤销|回退|还原/.test(userText)) {
           return makeCall('undo', {});
@@ -172,7 +163,6 @@ export function createMockGemini({ config = {}, usage } = {}) {
         return makeCall('spec_patch', { patch_json: JSON.stringify(patch), summary });
       }
 
-      // Follow-up step: if we just generated a sprite for the player skin, bind it via spec_patch
       const lastRes = toolResponses.at(-1);
       if (lastRes?.name === 'image_gen' && lastRes.response?.ok && !toolResponses.some(r => r.name === 'spec_patch')) {
         const fileName = String(lastRes.response.path || 'assets/hero-mecha.png').replace(/^assets\//, '');
@@ -182,13 +172,12 @@ export function createMockGemini({ config = {}, usage } = {}) {
         });
       }
 
-      // Summarize completed tool calls in Chinese
       const notes = toolResponses.map(r => {
         const res = r.response || {};
         if (!res.ok) return `工具 ${r.name} 执行提示：${res.error || '未通过'}`;
         if (r.name === 'spec_patch') return `已更新设置（${res.message || 'game.json'}），并通过自动试玩校验`;
         if (r.name === 'code_write') return `已写入代码模块 ${res.path || ''} 并通过隔离试玩检查`;
-        if (r.name === 'image_gen') return `已生成模拟精灵图 ${res.path || ''}（${res.width}×${res.height}）`;
+        if (r.name === 'image_gen') return `已生成模拟精灵图 ${res.path || ''}（${res.size?.width || 24}×${res.size?.height || 32}）`;
         if (r.name === 'undo') return `已撤销最近一次修改（${res.message || ''}）`;
         return `已完成 ${r.name}`;
       });
@@ -205,33 +194,7 @@ export function createMockGemini({ config = {}, usage } = {}) {
     async image({ prompt = '', images = [] }) {
       usage?.check();
       usage?.record('image', { totalTokenCount: 200 });
-      let primary = '#38d878', accent = '#ffe050', visor = '#ff4040';
-      if (/银|机甲|蓝|冰|钢/.test(prompt)) { primary = '#88d8ff'; accent = '#e8f8ff'; visor = '#00e5ff'; }
-      else if (/金|悟空|大圣|火|红|晚霞/.test(prompt)) { primary = '#ffb830'; accent = '#ff4020'; visor = '#fff080'; }
-      else if (/紫|怪鸟|暗|魔/.test(prompt)) { primary = '#9848f0'; accent = '#ffd24a'; visor = '#ff3880'; }
-
-      const svg = images.length > 0
-        ? `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
-            <rect x="8" y="8" width="64" height="64" rx="12" fill="${primary}" stroke="#101018" stroke-width="4"/>
-            <circle cx="40" cy="36" r="14" fill="${visor}"/>
-            <rect x="22" y="54" width="36" height="10" fill="${accent}"/>
-          </svg>`
-        : `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="96">
-            <rect x="18" y="6" width="36" height="26" rx="4" fill="${primary}" stroke="#101018" stroke-width="4"/>
-            <rect x="26" y="14" width="22" height="8" fill="${visor}"/>
-            <rect x="14" y="32" width="44" height="38" rx="6" fill="${primary}" stroke="#101018" stroke-width="4"/>
-            <rect x="22" y="40" width="28" height="14" fill="${accent}"/>
-            <rect x="6" y="38" width="12" height="24" fill="${accent}" stroke="#101018" stroke-width="3"/>
-            <rect x="54" y="36" width="16" height="12" fill="${visor}" stroke="#101018" stroke-width="3"/>
-            <rect x="18" y="70" width="14" height="22" fill="${primary}" stroke="#101018" stroke-width="4"/>
-            <rect x="40" y="70" width="14" height="22" fill="${primary}" stroke="#101018" stroke-width="4"/>
-          </svg>`;
-      const left = images.length > 0 ? 20 : 24;
-      const top = images.length > 0 ? 20 : 12;
-      const data = await sharp({ create: { width: 120, height: 120, channels: 3, background: '#ff00ff' } })
-        .composite([{ input: Buffer.from(svg), left, top }])
-        .png()
-        .toBuffer();
+      const data = await createMockSpritePng(prompt, images.length > 0);
       return { data, mimeType: 'image/png', text: 'mock sprite' };
     },
   };
@@ -242,7 +205,13 @@ export function createGemini({ config, usage }) {
     if (config.mock === false) return null;
     return createMockGemini({ config, usage });
   }
-  const ai = new GoogleGenAI({ apiKey: config.apiKey });
+  let aiPromise;
+  const getAi = async () => {
+    if (!aiPromise) {
+      aiPromise = import('@google/genai').then(m => new m.GoogleGenAI({ apiKey: config.apiKey }));
+    }
+    return aiPromise;
+  };
   return {
     mock: false,
     models: config.models,
@@ -250,6 +219,7 @@ export function createGemini({ config, usage }) {
       usage?.check();
       const model = config.models[role];
       if (!model) throw new Error(`没有为角色 ${role} 配置模型`);
+      const ai = await getAi();
       const res = await ai.models.generateContent({
         model, contents,
         config: {
@@ -269,16 +239,12 @@ export function createGemini({ config, usage }) {
         usage: res.usageMetadata,
       };
     },
-    /**
-     * Generate or edit one image. `images` are reference/source images
-     * ({ mimeType, data: Buffer }) sent before the prompt.
-     * @returns {Promise<{ data: Buffer, mimeType: string, text: string }>}
-     */
     async image({ prompt, images = [], aspectRatio = '1:1', pro = false, signal }) {
       usage?.check();
       const role = pro && config.models.imagePro ? 'imagePro' : 'image';
       const model = config.models[role];
       if (!model) throw new Error('没有配置图片模型（models.image）');
+      const ai = await getAi();
       const res = await ai.models.generateContent({
         model,
         contents: [{ role: 'user', parts: [...images.map(img => ({ inlineData: { mimeType: img.mimeType, data: Buffer.from(img.data).toString('base64') } })), { text: prompt }] }],

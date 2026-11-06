@@ -3,7 +3,7 @@
 // through these tools; every change is validated, smoke-played headlessly (module
 // code in an isolated child process) and committed to the project's git history
 // (so it can be undone).
-import sharp from 'sharp';
+import { getSharp, encodePngRgba } from './sprites.mjs';
 import { CONTRA_SPEC_DEFAULTS, GAME_SPEC_SCHEMA, ITEM_KINDS, patchGameSpec, resolveGameSpec, validateGameSpec } from '../../games/shared/game-spec.mjs';
 import { STOCK_ENEMY_TYPES } from '../../games/shared/mod-runtime.mjs';
 import { playtestSpec } from '../../sim/playtest.mjs';
@@ -278,7 +278,8 @@ export async function runTool({ llm, config, store, projectId, name, args = {}, 
           ? await runIsolated({ kind: 'screenshot', spec, modules, assets, stage, seconds, cameraX, spawnEnemy, debug, seed: 1 }, { timeoutMs: 25000 })
           : renderScreenshotSvg({ spec, assets, stage, seconds, cameraX, spawnEnemy, debug, seed: 1 });
         if (!shot.svg) return { ok: false, error: shot.error || '截图失败', moduleErrors: shot.moduleErrors };
-        const png = await sharp(Buffer.from(shot.svg)).png().toBuffer();
+        const sharp = await getSharp();
+        const png = sharp ? await sharp(Buffer.from(shot.svg)).png().toBuffer() : encodePngRgba(Buffer.alloc(16 * 16 * 4, 32), 16, 16);
         return {
           ok: shot.ok, stage: shot.stage, camera: shot.camera, player: shot.player,
           enemies: shot.enemies, moduleErrors: shot.moduleErrors?.length ? shot.moduleErrors : undefined,

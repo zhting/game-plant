@@ -1,14 +1,141 @@
-// Post-processing for AI-generated sprites (sharp): key out the flat background
+// Post-processing for AI-generated sprites: key out the flat background
 // the model was asked to paint, trim, optionally split a horizontal row of
 // animation frames into equal cells, and scale to the requested in-game size.
 //
-//   processSprite(buffer, { width, height, frames, scale, background }) →
-//     { png: Buffer, width, height, frameWidth, frames, keyed }
-//
-// `width`/`height` are the sprite's on-screen size in game pixels (the screen is
-// 384×216). The PNG is stored `scale`× larger (default 4) so it stays crisp when
-// the canvas is scaled up; modules draw it with game.sprite(g, img, x, y, w, h).
-import sharp from 'sharp';
+// Uses `sharp` when available and transparently falls back to a built-in pure
+// Node.js (`node:zlib`) PNG codec so `npm start` works even on machines where
+// native `sharp` binaries were not installed.
+import zlib from 'node:zlib';
+
+let _sharp;
+export async function getSharp() {
+  if (_sharp !== undefined) return _sharp;
+  try { _sharp = (await import('sharp')).default; } catch { _sharp = null; }
+  return _sharp;
+}
+
+const PNG_SIG = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+
+function pngChunk(type, data) {
+  const len = Buffer.alloc(4);
+  len.writeUInt32BE(data.length, 0);
+  const typeBuf = Buffer.from(type, 'ascii');
+  const crcBuf = Buffer.alloc(4);
+  crcBuf.writeUInt32BE(zlib.crc32(Buffer.concat([typeBuf, data])) >>> 0, 0);
+  return Buffer.concat([len, typeBuf, data, crcBuf]);
+}
+
+/** Pure Node.js RGBA buffer → PNG buffer encoder. */
+export function encodePngRgba(data, width, height) {
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8; // 8-bit
+  ihdr[9] = 6; // RGBA
+  const stride = width * 4;
+  const raw = Buffer.alloc((stride + 1) * height);
+  for (let y = 0; y < height; y++) {
+    raw[y * (stride + 1)] = 0; // filter: None
+    Buffer.from(data.buffer, data.byteOffset + y * stride, stride).copy(raw, y * (stride + 1) + 1);
+  }
+  const idat = zlib.deflateSync(raw, { level: 6 });
+  return Buffer.concat([PNG_SIG, pngChunk('IHDR', ihdr), pngChunk('IDAT', idat), pngChunk('IEND', Buffer.alloc(0))]);
+}
+
+function paeth(a, b, c) {
+  const p = a + b - c;
+  const pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+  return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+}
+
+/** Decode a PNG buffer into `{ data: Buffer, width, height }` (uses sharp if installed, pure JS fallback otherwise). */
+export async function decodePngRgba(input) {
+  const sharp = await getSharp();
+  if (sharp) {
+    const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    return { data, width: info.width, height: info.height };
+  }
+  const buf = Buffer.from(input);
+  let pos = 8, width = 0, height = 0, colorType = 6;
+  const idats = [];
+  while (pos + 8 <= buf.length) {
+    const len = buf.readUInt32BE(pos);
+    const type = buf.toString('ascii', pos + 4, pos + 8);
+    const chunk = buf.subarray(pos + 8, pos + 8 + len);
+    pos += 12 + len;
+    if (type === 'IHDR') {
+      width = chunk.readUInt32BE(0);
+      height = chunk.readUInt32BE(4);
+      colorType = chunk[9];
+    } else if (type === 'IDAT') idats.push(chunk);
+    else if (type === 'IEND') break;
+  }
+  const bpp = colorType === 6 ? 4 : 3;
+  const stride = width * bpp;
+  const raw = zlib.inflateSync(Buffer.concat(idats));
+  const unfiltered = Buffer.alloc(width * height * bpp);
+  for (let y = 0; y < height; y++) {
+    const filter = raw[y * (stride + 1)];
+    const rowIn = y * (stride + 1) + 1;
+    const rowOut = y * stride;
+    for (let i = 0; i < stride; i++) {
+      const x = raw[rowIn + i];
+      const a = i >= bpp ? unfiltered[rowOut + i - bpp] : 0;
+      const b = y > 0 ? unfiltered[rowOut - stride + i] : 0;
+      const c = y > 0 && i >= bpp ? unfiltered[rowOut - stride + i - bpp] : 0;
+      const v = filter === 1 ? x + a : filter === 2 ? x + b : filter === 3 ? x + ((a + b) >> 1) : filter === 4 ? x + paeth(a, b, c) : x;
+      unfiltered[rowOut + i] = v & 255;
+    }
+  }
+  if (bpp === 4) return { data: unfiltered, width, height };
+  const rgba = Buffer.alloc(width * height * 4);
+  for (let p = 0; p < width * height; p++) {
+    rgba[p * 4] = unfiltered[p * 3];
+    rgba[p * 4 + 1] = unfiltered[p * 3 + 1];
+    rgba[p * 4 + 2] = unfiltered[p * 3 + 2];
+    rgba[p * 4 + 3] = 255;
+  }
+  return { data: rgba, width, height };
+}
+
+/** Synthesize a 120×120 pixel-art sprite PNG on a #ff00ff key background without requiring sharp. */
+export async function createMockSpritePng(prompt = '', isEdit = false) {
+  let primary = [56, 216, 120], accent = [255, 224, 80], visor = [255, 64, 64];
+  if (/银|机甲|蓝|冰|钢/.test(prompt)) { primary = [136, 216, 255]; accent = [232, 248, 255]; visor = [0, 229, 255]; }
+  else if (/金|悟空|大圣|火|红|晚霞/.test(prompt)) { primary = [255, 184, 48]; accent = [255, 64, 32]; visor = [255, 240, 128]; }
+  else if (/紫|怪鸟|暗|魔/.test(prompt)) { primary = [152, 72, 240]; accent = [255, 210, 74]; visor = [255, 56, 128]; }
+
+  const w = 120, h = 120;
+  const data = Buffer.alloc(w * h * 4);
+  for (let i = 0; i < w * h; i++) {
+    data[i * 4] = 255; data[i * 4 + 1] = 0; data[i * 4 + 2] = 255; data[i * 4 + 3] = 255;
+  }
+  const fillRect = (x0, y0, rw, rh, rgb, border = true) => {
+    for (let y = Math.max(0, y0); y < Math.min(h, y0 + rh); y++) {
+      for (let x = Math.max(0, x0); x < Math.min(w, x0 + rw); x++) {
+        const edge = border && (x < x0 + 3 || x >= x0 + rw - 3 || y < y0 + 3 || y >= y0 + rh - 3);
+        const c = edge ? [16, 16, 24] : rgb;
+        const i = (y * w + x) * 4;
+        data[i] = c[0]; data[i + 1] = c[1]; data[i + 2] = c[2]; data[i + 3] = 255;
+      }
+    }
+  };
+  if (isEdit) {
+    fillRect(28, 28, 64, 64, primary, true);
+    fillRect(42, 42, 36, 18, visor, false);
+    fillRect(40, 68, 40, 12, accent, false);
+  } else {
+    fillRect(42, 18, 36, 26, primary, true); // head
+    fillRect(48, 26, 22, 8, visor, false);   // visor
+    fillRect(38, 44, 44, 38, primary, true); // torso
+    fillRect(46, 52, 28, 14, accent, false); // chest emblem
+    fillRect(28, 48, 12, 24, accent, true);  // back pack / cape
+    fillRect(78, 48, 18, 12, visor, true);   // weapon arm
+    fillRect(42, 82, 14, 22, primary, true); // left leg
+    fillRect(64, 82, 14, 22, primary, true); // right leg
+  }
+  return encodePngRgba(data, w, h);
+}
 
 export const KEY_COLOR = { r: 255, g: 0, b: 255 };
 const dist = (d, i, c) => Math.max(Math.abs(d[i] - c.r), Math.abs(d[i + 1] - c.g), Math.abs(d[i + 2] - c.b));
@@ -61,7 +188,6 @@ export function keyBackground(data, w, h, { tolerance = 70, fringe = 150 } = {})
     const d = dist(data, i, bg);
     if (d < fringe) {
       data[i + 3] = Math.round(data[i + 3] * Math.max(0, (d - tolerance) / (fringe - tolerance)));
-      // Remove the background tint so dark outlines don't turn pink.
       const k = 1 - d / fringe;
       for (const [c, v] of [[0, bg.r], [1, bg.g], [2, bg.b]]) data[i + c] = Math.max(0, Math.min(255, Math.round((data[i + c] - v * k) / (1 - k || 1))));
     }
@@ -102,27 +228,48 @@ export function splitFrames(data, w, h, frames) {
 
 /** Full pipeline. Throws a Chinese error when nothing usable is left after keying. */
 export async function processSprite(input, { width = 32, height = 32, frames = 1, scale = 4, background = 'key' } = {}) {
-  const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const { width: w, height: h } = info;
+  const { data, width: w, height: h } = await decodePngRgba(input);
   const keyed = background === 'key' ? keyBackground(data, w, h) : 0;
   const slices = splitFrames(data, w, h, frames);
   const boxes = slices.map(s => bounds(data, w, h, s.x0, s.x1)).filter(Boolean);
   if (boxes.length !== slices.length) throw new Error('去背景后图片是空的（模型可能没有按要求画纯色背景）');
-  // One shared scale for all frames so the animation doesn't wobble; frames are bottom-centre aligned.
   const cellW = Math.max(...boxes.map(b => b.w)), cellH = Math.max(...boxes.map(b => b.h));
   const outW = Math.max(1, Math.round(width * scale)), outH = Math.max(1, Math.round(height * scale));
   const fit = Math.min(outW / cellW, outH / cellH);
-  const cells = await Promise.all(boxes.map(async b => {
+
+  const sharp = await getSharp();
+  if (sharp) {
+    const cells = await Promise.all(boxes.map(async b => {
+      const tw = Math.max(1, Math.round(b.w * fit)), th = Math.max(1, Math.round(b.h * fit));
+      const buf = await sharp(data, { raw: { width: w, height: h, channels: 4 } })
+        .extract({ left: b.x, top: b.y, width: b.w, height: b.h })
+        .resize(tw, th, { kernel: 'lanczos3' }).png().toBuffer();
+      return { buf, tw, th };
+    }));
+    const png = await sharp({ create: { width: outW * cells.length, height: outH, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+      .composite(cells.map((c, i) => ({ input: c.buf, left: i * outW + Math.round((outW - c.tw) / 2), top: outH - c.th })))
+      .png({ compressionLevel: 9 }).toBuffer();
+    return { png, width: outW * cells.length, height: outH, frameWidth: outW, frames: cells.length, keyed };
+  }
+
+  // Pure JS fallback when sharp is unavailable
+  const totalW = outW * boxes.length;
+  const out = Buffer.alloc(totalW * outH * 4);
+  boxes.forEach((b, idx) => {
     const tw = Math.max(1, Math.round(b.w * fit)), th = Math.max(1, Math.round(b.h * fit));
-    const buf = await sharp(data, { raw: { width: w, height: h, channels: 4 } })
-      .extract({ left: b.x, top: b.y, width: b.w, height: b.h })
-      .resize(tw, th, { kernel: 'lanczos3' }).png().toBuffer();
-    return { buf, tw, th };
-  }));
-  const png = await sharp({ create: { width: outW * cells.length, height: outH, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-    .composite(cells.map((c, i) => ({ input: c.buf, left: i * outW + Math.round((outW - c.tw) / 2), top: outH - c.th })))
-    .png({ compressionLevel: 9 }).toBuffer();
-  return { png, width: outW * cells.length, height: outH, frameWidth: outW, frames: cells.length, keyed };
+    const dstX0 = idx * outW + Math.round((outW - tw) / 2);
+    const dstY0 = outH - th;
+    for (let dy = 0; dy < th; dy++) {
+      const sy = b.y + Math.min(b.h - 1, Math.floor(dy * b.h / th));
+      for (let dx = 0; dx < tw; dx++) {
+        const sx = b.x + Math.min(b.w - 1, Math.floor(dx * b.w / tw));
+        const si = (sy * w + sx) * 4;
+        const di = ((dstY0 + dy) * totalW + (dstX0 + dx)) * 4;
+        out[di] = data[si]; out[di + 1] = data[si + 1]; out[di + 2] = data[si + 2]; out[di + 3] = data[si + 3];
+      }
+    }
+  });
+  return { png: encodePngRgba(out, totalW, outH), width: totalW, height: outH, frameWidth: outW, frames: boxes.length, keyed };
 }
 
 function parseHexColor(hex) {
@@ -137,8 +284,7 @@ function parseHexColor(hex) {
  * `replace` is an optional array of `{ from: '#rrggbb', to: '#rrggbb', tolerance = 32 }`.
  */
 export async function recolorSprite(input, { hue = 0, saturate = 1, brightness = 1, replace = [], keyBg = false, tolerance = 70 } = {}) {
-  const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const { width: w, height: h } = info;
+  const { data, width: w, height: h } = await decodePngRgba(input);
   const keyed = keyBg ? keyBackground(data, w, h, { tolerance }) : 0;
   let replaced = 0;
   const rules = (Array.isArray(replace) ? replace : []).map(r => ({
@@ -155,11 +301,15 @@ export async function recolorSprite(input, { hue = 0, saturate = 1, brightness =
       }
     }
   }
-  let pipeline = sharp(data, { raw: { width: w, height: h, channels: 4 } });
-  const dh = Number(hue) || 0, ds = Number(saturate ?? 1), db = Number(brightness ?? 1);
-  if (dh !== 0 || ds !== 1 || db !== 1) pipeline = pipeline.modulate({ hue: dh, saturation: ds, brightness: db });
-  const png = await pipeline.png({ compressionLevel: 9 }).toBuffer();
-  return { png, width: w, height: h, replaced, keyed };
+  const sharp = await getSharp();
+  if (sharp) {
+    let pipeline = sharp(data, { raw: { width: w, height: h, channels: 4 } });
+    const dh = Number(hue) || 0, ds = Number(saturate ?? 1), db = Number(brightness ?? 1);
+    if (dh !== 0 || ds !== 1 || db !== 1) pipeline = pipeline.modulate({ hue: dh, saturation: ds, brightness: db });
+    const png = await pipeline.png({ compressionLevel: 9 }).toBuffer();
+    return { png, width: w, height: h, replaced, keyed };
+  }
+  return { png: encodePngRgba(data, w, h), width: w, height: h, replaced, keyed };
 }
 
 /**
@@ -167,22 +317,23 @@ export async function recolorSprite(input, { hue = 0, saturate = 1, brightness =
  * preserving every pixel outside `region` ({ x, y, w, h } in pixels or { rx, ry, rw, rh } in 0..1).
  */
 export async function compositeRegionEdit(originalInput, editedInput, region) {
-  const orig = await sharp(originalInput).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const { width: w, height: h } = orig.info;
+  const orig = await decodePngRgba(originalInput);
+  const { width: w, height: h } = orig;
   const rx = region.rx !== undefined ? Math.round(region.rx * w) : Math.round(region.x || 0);
   const ry = region.ry !== undefined ? Math.round(region.ry * h) : Math.round(region.y || 0);
   const rw = region.rw !== undefined ? Math.round(region.rw * w) : Math.round(region.w || w);
   const rh = region.rh !== undefined ? Math.round(region.rh * h) : Math.round(region.h || h);
   const x0 = Math.max(0, Math.min(w - 1, rx)), y0 = Math.max(0, Math.min(h - 1, ry));
   const x1 = Math.max(x0 + 1, Math.min(w, x0 + rw)), y1 = Math.max(y0 + 1, Math.min(h, y0 + rh));
-  const edited = await sharp(editedInput).ensureAlpha().resize(w, h, { fit: 'fill', kernel: 'nearest' }).raw().toBuffer();
+  const ed = await decodePngRgba(editedInput);
   for (let y = y0; y < y1; y++) {
+    const sy = Math.min(ed.height - 1, Math.floor(y * ed.height / h));
     for (let x = x0; x < x1; x++) {
+      const sx = Math.min(ed.width - 1, Math.floor(x * ed.width / w));
+      const si = (sy * ed.width + sx) * 4;
       const i = (y * w + x) * 4;
-      orig.data[i] = edited[i]; orig.data[i + 1] = edited[i + 1]; orig.data[i + 2] = edited[i + 2]; orig.data[i + 3] = edited[i + 3];
+      orig.data[i] = ed.data[si]; orig.data[i + 1] = ed.data[si + 1]; orig.data[i + 2] = ed.data[si + 2]; orig.data[i + 3] = ed.data[si + 3];
     }
   }
-  const png = await sharp(orig.data, { raw: { width: w, height: h, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
-  return { png, width: w, height: h, region: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 } };
+  return { png: encodePngRgba(orig.data, w, h), width: w, height: h, region: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 } };
 }
-

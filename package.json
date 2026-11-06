@@ -6,6 +6,8 @@
   "description": "游戏生产平台：基于魂斗罗2026 / 大闹天宫引擎的 AI 游戏创作工具",
   "scripts": {
     "start": "node backend/server.mjs",
+    "dev": "node backend/server.mjs",
+    "preview": "node backend/server.mjs",
     "test": "node --test backend/test/*.test.mjs sim/test/*.test.mjs",
     "test:contra": "node --test backend/test/contra*.test.mjs",
     "test:wukong": "node --test backend/test/wukong-*.test.mjs",
@@ -15,7 +17,7 @@
     "studio:build": "npm run build --prefix apps/studio"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
