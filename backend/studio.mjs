@@ -2,7 +2,7 @@
 // and the /play/<project>/ preview pages. Mounted by backend/server.mjs.
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { createRequire } from 'node:module';
+import { loadExpress } from './mini-express.mjs';
 import { createProjectStore, ProjectError, ASSET_TYPES, PROJECT_FILE_RULES } from './projects.mjs';
 import { checkModuleSource, runIsolated } from '../sim/isolated.mjs';
 import { loadAiConfig, createUsageMeter } from './ai/config.mjs';
@@ -12,8 +12,7 @@ import { processSprite, recolorSprite } from './ai/sprites.mjs';
 import { runImageTool } from './ai/image-tool.mjs';
 import { GAME_SPEC_SCHEMA, CONTRA_SPEC_DEFAULTS, ITEM_KINDS, ENEMY_TYPES } from '../games/shared/game-spec.mjs';
 
-const require = createRequire(import.meta.url);
-const express = require('express');
+const express = loadExpress();
 
 /**
  * @param {object} options

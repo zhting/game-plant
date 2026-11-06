@@ -1,18 +1,18 @@
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
-import { attachGames } from './runtime.mjs';
+import { spawn } from 'node:child_process';
+import { loadExpress } from './mini-express.mjs';
 import { createStudio } from './studio.mjs';
 
-const require = createRequire(import.meta.url);
-const express = require('express');
+const express = loadExpress();
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
 export async function createBackend(options = {}) {
   const app = express();
   app.disable('x-powered-by');
   app.use((req, res, next) => { res.set('X-Content-Type-Options', 'nosniff'); next(); });
-  let games;
+  let games = { health: () => ({ ok: true, ws: false }), close: async () => {} };
   app.get('/healthz', (req, res) => res.json(games.health()));
   // 后台同时提供入口页面；只公开前端目录。
   for (const file of ['index.html', 'backend-config.js']) {
@@ -27,9 +27,9 @@ export async function createBackend(options = {}) {
   app.use('/games/shared', express.static(path.join(root, 'games/shared')));
   for (const name of ['contra2026', 'wukong']) {
     const dir = path.join(root, 'games', name);
-    app.get(['/'+name, '/games/'+name, '/games/'+name+'/'], (req, res) => res.sendFile(path.join(dir, 'index.html')));
+    app.get(['/' + name, '/games/' + name, '/games/' + name + '/'], (req, res) => res.sendFile(path.join(dir, 'index.html')));
     const staticFiles = express.static(dir);
-    app.use('/games/'+name, (req, res, next) => {
+    app.use('/games/' + name, (req, res, next) => {
       if (/(?:^|\/)(?:server|lib|data|node_modules|test|scripts|public|artifacts)(?:\/|$)/.test(req.path) || req.path.includes('..')) return res.sendStatus(404);
       if (!/^\/(?:assets|css|js|shared|3d)\//.test(req.path) &&
           !/^\/(?:index\.html|favicon\.svg|logo\.png|manifest\.webmanifest|sw\.js)$/.test(req.path)) return res.sendStatus(404);
@@ -39,7 +39,12 @@ export async function createBackend(options = {}) {
   }
   app.use((req, res) => res.sendStatus(404));
   const server = http.createServer(app);
-  games = await attachGames(server, options);
+  try {
+    const { attachGames } = await import('./runtime.mjs');
+    games = await attachGames(server, options);
+  } catch (err) {
+    console.warn('[后台] WebSocket 联机模块未安装（单人模式与 Studio 正常可用）:', err.message);
+  }
   return {
     server, games, studio,
     async close() {
@@ -50,9 +55,11 @@ export async function createBackend(options = {}) {
   };
 }
 
+const entryBase = process.argv[1] ? path.basename(process.argv[1]).toLowerCase() : '';
 const isMain = process.argv[1] && (
   path.resolve(process.argv[1]).toLowerCase() === fileURLToPath(import.meta.url).toLowerCase() ||
-  path.basename(process.argv[1]) === 'preview-server.mjs'
+  entryBase === 'preview-server.mjs' ||
+  entryBase === 'server.mjs'
 );
 
 if (isMain) {
@@ -70,12 +77,43 @@ if (isMain) {
   } catch (err) {
     console.warn('[studio] 预置示例项目跳过:', err.message);
   }
-  const port = Number(process.env.PORT || 3000);
+
+  const startPort = Number(process.env.PORT || 3000);
   const host = process.env.HOST || '0.0.0.0';
-  server.listen(port, host, () => {
-    const actualPort = server.address().port;
-    console.log(`游戏统一后台：http://localhost:${actualPort}（游戏大厅 / ，Studio 创作台 http://localhost:${actualPort}/studio/）`);
-  });
+  function tryListen(port, maxAttempts = 10) {
+    const onError = err => {
+      if (err.code === 'EADDRINUSE' && !process.env.PORT && maxAttempts > 0) {
+        console.warn(`端口 ${port} 已被占用，自动尝试端口 ${port + 1}...`);
+        tryListen(port + 1, maxAttempts - 1);
+      } else {
+        console.error('无法启动服务:', err.message);
+        process.exitCode = 1;
+      }
+    };
+    server.once('error', onError);
+    server.listen(port, host, () => {
+      server.removeListener('error', onError);
+      const actualPort = server.address().port;
+      const studioUrl = `http://localhost:${actualPort}/studio/`;
+      const homeUrl = `http://localhost:${actualPort}/`;
+      console.log('\n========================================');
+      console.log('🌱 Game Plant 本地服务已启动！');
+      console.log(`> AI 创作台 Studio: ${studioUrl}`);
+      console.log(`> 游戏大厅首页:     ${homeUrl}`);
+      console.log(`> 魂斗罗2026:       ${homeUrl}games/contra2026/`);
+      console.log(`> 大闹天宫:         ${homeUrl}games/wukong/`);
+      console.log('========================================\n');
+      if (process.argv.includes('--open')) {
+        const cmd = process.platform === 'win32' ? ['cmd.exe', ['/c', 'start', '', studioUrl]] :
+          process.platform === 'darwin' ? ['open', [studioUrl]] : ['xdg-open', [studioUrl]];
+        const child = spawn(cmd[0], cmd[1], { detached: true, stdio: 'ignore', windowsHide: true });
+        child.on('error', () => {});
+        child.unref();
+      }
+    });
+  }
+  tryListen(startPort);
+
   let closing = false;
   async function shutdown() {
     if (closing) return;
