@@ -71,8 +71,9 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   router.get('/play/:id', (req, res) => res.redirect(301, `/play/${encodeURIComponent(req.params.id)}/` + (req._parsedUrl.search || '')));
   router.get('/play/:id/', wrap(async (req, res) => {
     const spec = await store.readSpec(req.params.id);
-    if (spec.template !== 'contra') throw new ProjectError(400, `暂不支持模板 ${spec.template}`);
-    res.set('Cache-Control', 'no-store').sendFile(path.join(root, 'games', 'contra2026', 'index.html'));
+    const gameDir = spec.template === 'contra' ? 'contra2026' : spec.template === 'wukong' ? 'wukong' : null;
+    if (!gameDir) throw new ProjectError(400, `暂不支持模板 ${spec.template}`);
+    res.set('Cache-Control', 'no-store').sendFile(path.join(root, 'games', gameDir, 'index.html'));
   }));
 
   router.get('/api/studio/status', (req, res) => res.json({

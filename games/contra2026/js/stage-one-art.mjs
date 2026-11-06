@@ -294,6 +294,13 @@ export class StageOneArt {
       cloud.addColorStop(0,'rgba(12,26,43,.78)');cloud.addColorStop(.55,'rgba(12,28,43,.3)');cloud.addColorStop(1,'rgba(8,22,31,.08)');
       g.fillStyle=cloud;g.fillRect(0,0,384,216);g.restore();
     }
+    const theme=this.state?.stageTheme;
+    if(theme?.skyTint&&theme.tintAlpha>0){
+      g.save();g.globalAlpha=Math.max(0,Math.min(.75,theme.tintAlpha));
+      const wash=g.createLinearGradient(0,0,0,196);
+      wash.addColorStop(0,theme.skyTint);wash.addColorStop(.65,theme.skyTint);wash.addColorStop(1,'rgba(0,0,0,0)');
+      g.fillStyle=wash;g.fillRect(0,0,384,196);g.restore();
+    }
   }
   terrainChunk(index) {
     if (this.terrainCache.has(index)) {
@@ -837,6 +844,19 @@ export class StageOneArt {
         this.g.save();this.g.globalAlpha=Math.min(1,(1-progress)*2);
         this.hudText('+1 命',fx.x,fx.y-progress*14,'#dcffae',6.5,'center');this.g.restore();
       }
+      else if(fx.k==='meleeArc'){
+        const g=this.g,a0=Math.atan2(fx.ay||0,fx.ax||fx.face||1);
+        g.save();g.globalAlpha=Math.max(0,1-progress);
+        g.strokeStyle=fx.color||'#ffd24a';g.lineWidth=3.2*(1-progress*.5);g.lineCap='round';
+        g.beginPath();g.arc(fx.x,fx.y,(fx.r||22)*(.7+progress*.35),a0-1.05,a0+1.05);g.stroke();
+        g.strokeStyle='#fff8dc';g.lineWidth=1.2;
+        g.beginPath();g.arc(fx.x,fx.y,(fx.r||22)*(.7+progress*.35),a0-.75,a0+.75);g.stroke();
+        g.restore();
+      }
+      else if(fx.k==='combatNumber'){
+        this.g.save();this.g.globalAlpha=Math.min(1,(1-progress)*1.8);
+        this.hudText(fx.text,fx.x,fx.y-progress*12,fx.heal?'#8df5a5':fx.player?'#ff8b7b':'#ffd86b',5.8,'center');this.g.restore();
+      }
       else if (fx.k === 'impact') drawImpact(this.g,fx);
       else if (fx.k === 'hit') drawImpact(this.g,{...fx,material:'metal',angle:Math.PI,power:1,seed:Math.floor(fx.x*31+fx.y*97),life:.2});
       else this.rect(fx.x, fx.y, fx.k === 'debris' ? 3 : 1, fx.k === 'debris' ? 2 : 1, fx.k === 'drop' ? '#a4e4fc' : fx.k === 'debris' ? '#6c8094' : '#f8b800');
@@ -882,14 +902,14 @@ export class StageOneArt {
         this.rect(sx + 1, 24, 15, selected ? .8 : .4, selected ? '#c99c53' : '#4b6659');
       } else this.rect(sx + 6, 21, 5, .6, 'rgba(147,171,150,.35)');
     }
-    const ready = !(cooldown > 0), gx = x + 98, aircraftMissile=actor.ride==='heli'&&!this.assets?.skinActors;
+    const rageMode=actor.maxRage>0,ready=rageMode?(actor.rage||0)>=actor.maxRage:!(cooldown > 0), gx = x + 98, aircraftMissile=actor.ride==='heli'&&!this.assets?.skinActors;
     if(aircraftMissile){
       this.line(gx+.3,22.7,gx+3.1,17.2,ready?'#d1d7c5':'#63746c',2);
       this.line(gx-.3,22.8,gx+2.6,22.1,ready?'#8faaa1':'#45594c',.7);
     }else{
-      this.rect(gx, 18, 3.4, 4.8, ready ? '#819e53' : '#45594c'); this.rect(gx + .9, 16.5, 1.6, 1.5, '#b4bf9f');
+      this.rect(gx, 18, 3.4, 4.8, ready ? (rageMode ? '#ffd24a' : '#819e53') : '#45594c'); this.rect(gx + .9, 16.5, 1.6, 1.5, '#b4bf9f');
     }
-    this.hudText(ready ? aircraftMissile?'导弹':'就绪' : Math.ceil(cooldown) + '秒', gx + 5.5, 17.8, ready ? muted : '#d5b36c', 4.9);
+    this.hudText(rageMode ? (ready ? '大招' : Math.floor((actor.rage || 0) / actor.maxRage * 100) + '%') : (ready ? aircraftMissile?'导弹':'就绪' : Math.ceil(cooldown) + '秒'), gx + 5.5, 17.8, ready ? (rageMode ? '#ffd24a' : muted) : '#d5b36c', 4.9);
     const buffs = [];
     if (actor.shieldT > 0) buffs.push('护盾' + Math.ceil(actor.shieldT) + '秒');
     if (actor.camoT > 0) buffs.push('迷彩' + Math.ceil(actor.camoT) + '秒');
@@ -897,12 +917,31 @@ export class StageOneArt {
     if (actor.giantT > 0) buffs.push(giantPowerLabel(actor));
     if (actor.ride) buffs.push((actor.ride === 'heli' ? '飞行' : '摩托') + Math.ceil(actor.rideT) + '秒');
     if (local && G.freezeT > 0) buffs.push('冻结' + Math.ceil(G.freezeT) + '秒');
-    if (buffs.length) this.hudText(buffs.join(' · '), x + 5, 30, '#a7c6b4', 5.3, 'left', 126);
+    let statusY = 30;
+    if (actor.maxHp > 1 || actor.maxRage > 0) {
+      let bx = x + 5;
+      if (actor.maxHp > 1) {
+        const ratio = Math.max(0, Math.min(1, (actor.hp ?? actor.maxHp) / actor.maxHp));
+        this.hudText('血', bx, 28.8, '#e8a598', 4.8);
+        this.rect(bx + 7, 29.8, 38, 3.6, 'rgba(12,26,20,.85)');
+        this.rect(bx + 7.5, 30.3, 37 * ratio, 2.6, ratio > .35 ? '#5fd37b' : '#f06449');
+        this.hudText(`${Math.ceil(actor.hp ?? actor.maxHp)}`, bx + 47, 28.8, '#dce8df', 4.6);
+        bx += 66;
+      }
+      if (actor.maxRage > 0) {
+        const ratio = Math.max(0, Math.min(1, (actor.rage || 0) / actor.maxRage));
+        this.hudText('怒', bx, 28.8, ratio >= 1 ? '#ffd24a' : '#d5b36c', 4.8);
+        this.rect(bx + 7, 29.8, 34, 3.6, 'rgba(12,26,20,.85)');
+        this.rect(bx + 7.5, 30.3, 33 * ratio, 2.6, ratio >= 1 ? '#ffd24a' : '#e09f3e');
+      }
+      statusY = 35;
+    }
+    if (buffs.length) this.hudText(buffs.join(' · '), x + 5, statusY, '#a7c6b4', 5.3, 'left', 126);
     g.globalAlpha = .4; this.line(x, 27, x + 128, 27, '#63816c', .5); g.globalAlpha = 1;
   }
   hud(G, options) {
     const { online, guest, settings, highScore } = options;
-    const g = this.g; g.save();
+    const g = this.g, stageTitle = G.stageName || '雨林要塞'; g.save();
     const shade = g.createLinearGradient(0, 0, 0, 38);
     shade.addColorStop(0, 'rgba(1,12,9,.9)'); shade.addColorStop(.56, 'rgba(2,16,11,.75)');
     shade.addColorStop(.8, 'rgba(2,16,11,.25)'); shade.addColorStop(1, 'rgba(2,16,11,0)');
@@ -914,7 +953,7 @@ export class StageOneArt {
       infinite: settings.inf === 'on', local: !!guest });
     else {
       this.hudText('第一关', 376, 4, '#e1e6d5', 7, 'right');
-      this.hudText('雨林要塞', 376, 17, '#9fb4a5', 5.8, 'right');
+      this.hudText(stageTitle, 376, 17, '#9fb4a5', 5.8, 'right');
     }
     if (G.boss.active && !G.boss.dead) {
       const core = G.boss.parts[2], health = Math.max(0, Math.min(1, core.hp / core.max));
@@ -930,7 +969,7 @@ export class StageOneArt {
       const waiting=online&&options.players.some(p=>p.exitEntered);
       const complete=options.players.every(p=>p.exitEntered||(p.dead&&G.lives<=0));
       this.hudText(complete?'正在进入第二关':waiting?'等待队友进入':'跳入缺口进入下一关',192,18,'#cfb37b',5.3,'center',88);
-    } else if (online) this.hudText('第一关 · 雨林要塞', 192, 18, '#99b09d', 5.5, 'center', 84);
+    } else if (online) this.hudText('第一关 · ' + stageTitle, 192, 18, '#99b09d', 5.5, 'center', 84);
     if (G.bannerT > 0 && G.bannerText) {
       const width = Math.min(330, G.bannerText.length * 7 + 24), left = 192 - width / 2;
       const ribbon = g.createLinearGradient(left, 0, left + width, 0);
@@ -973,11 +1012,20 @@ export class StageOneArt {
     this.present(destination);
   }
   openingSubtitles(seconds){
-    const g=this.g,page=openingCaption(seconds);g.save();
+    const g=this.g,custom=this.state?.storyOpening;
+    let page=openingCaption(seconds);
+    if(custom?.pages?.length){
+      const idx=custom.pages.findIndex(p=>seconds>=p.from&&seconds<=p.to);
+      if(idx>=0){
+        const p=custom.pages[idx],fade=Math.min(1,(seconds-p.from)/.35,(p.to-seconds)/.35);
+        page={...p,index:idx,total:custom.pages.length,alpha:Math.max(0,fade)};
+      }else page=null;
+    }
+    g.save();
     const top=g.createLinearGradient(0,0,0,29);top.addColorStop(0,'rgba(2,12,17,.82)');top.addColorStop(1,'rgba(2,12,17,0)');
     g.fillStyle=top;g.fillRect(0,0,384,29);
-    this.hudText('黑礁群岛 · 2087 年',12,9,'#d1ded7',6.1);
-    this.hudText('行动代号：赤焰',372,9,'#c5b88f',6.1,'right');
+    this.hudText(custom?.title||'黑礁群岛 · 2087 年',12,9,'#d1ded7',6.1);
+    this.hudText(custom?.subtitle||'行动代号：赤焰',372,9,'#c5b88f',6.1,'right');
     const shade=g.createLinearGradient(0,151,0,216);shade.addColorStop(0,'rgba(1,9,13,0)');shade.addColorStop(.22,'rgba(1,9,13,.92)');shade.addColorStop(1,'rgba(1,9,13,.97)');
     g.fillStyle=shade;g.fillRect(0,151,384,65);
     if(page){
@@ -995,7 +1043,7 @@ export class StageOneArt {
     if (G.mode === 'intro') {
       this.g.globalAlpha = .8; this.rect(0, 0, 384, 216, '#000000'); this.g.globalAlpha = 1;
       this.text('第一关', 192, 66, '#fcfcfc', 2, 'center');
-      this.text('雨林要塞', 192, 92, '#f8b800', 1, 'center');
+      this.text(G.stageName || '雨林要塞', 192, 92, '#f8b800', 1, 'center');
       this.actor({ x: options.online ? 172 : 192, y: 157, face: 1, anim: 0 }, StageOneArt.playerRole(options.online));
       if (options.online) this.actor({ x: 212, y: 157, face: 1, anim: 0 }, 'blue');
       this.present(destination); return;
@@ -1026,7 +1074,7 @@ export class StageOneArt {
     for(const p of options.players)this.wadingWake(p,options.water.surf);
     drawStageOneRain(g,camera,G.t/60,rain,options,true);
     drawWindblownLeaves(g,camera,G.t/60,rain,options,true);
-    this.bullets(G.eb, true); this.effects(G.fx); g.restore();
+    this.bullets(G.eb, true); this.effects(G.fx); this.drawWorld?.(g); g.restore();
     this.hud(G, options);
     if (G.flashT > 0) { g.globalAlpha = Math.min(.7, G.flashT * 2); this.rect(0, 0, 384, 216, '#fcfcfc'); g.globalAlpha = 1; }
     this.present(destination);

@@ -154,3 +154,147 @@ test('the module example in the agent prompt runs and its bird dives', async () 
   assert.deepEqual(plain(e.MOD.errors), []);
   assert.ok(dived, 'a bird started a dive');
 });
+
+test('M4 Wukong Stage 1 Benchmark: Contra template + Track A spec + Track B spell module reproduces Wukong Stage 1 gameplay', () => {
+  const wukongStage1Spec = {
+    meta: { title: '大圣破南天' },
+    items: { specialCooldown: 0.4 },
+    stages: {
+      order: [1],
+      1: {
+        name: '第一章：南天门',
+        theme: { skyTint: '#ff7b38', tintAlpha: 0.22, hue: 24 },
+        pods: [{ at: 180, kind: 'g', y0: 72 }, { at: 360, kind: 'f', y0: 68 }],
+        boxes: [[240, 'S'], [520, 'L']],
+      },
+    },
+    story: {
+      openingTitle: '齐天大圣 · 南天门之战',
+      openingSubtitle: '大闹天宫前传',
+      opening: [{ tag: '壹 · 大闹天宫', line1: '金箍棒起风云动', line2: '南天门外战鼓擂' }],
+    },
+    rules: {
+      health: { maxHp: 64, hitDamage: 12, invincibleSeconds: 0.4, killHeal: 4, killHealEvery: 2 },
+      rage: { enabled: 1, max: 100, onHit: 50, onKill: 25, ultimateDamage: 20, ultimateName: '万道金光' },
+      melee: { enabled: 1, range: 42, damage: 4, reflectBullets: 1, color: '#ffd24a' },
+    },
+  };
+
+  const wukongSpellsModule = api => {
+    const clones = [];
+    let worldDraws = 0;
+    let attacks = 0;
+    let hurts = 0;
+
+    // Custom celestial supply fairy that heals the player when defeated
+    api.defineEnemy('peachFairy', {
+      name: '蟠桃仙娥', hp: 3, score: 500, drop: 'g',
+      box: { w: 18, h: 16 }, contact: false,
+      spawn: { stages: [1], every: [2, 3], max: 1, height: 'sky', firstDelay: 0.5 },
+      init(e) { e.vx = -45; },
+      update(e, game) { e.x += e.vx * game.dt; e.y += Math.sin(e.age * 6) * 12 * game.dt; },
+      onKill(e, game) { game.healPlayer(10); game.banner('仙桃回血 +10', 1.2); },
+    });
+
+    api.on('playerAttack', () => { attacks++; });
+    api.on('playerHurt', () => { hurts++; });
+
+    // Override Special Item L: 'g' summons 2 monkey clones; 'f' casts Freeze Spell (定身术)
+    api.on('useItem', (player, kind, game) => {
+      if (kind === 'g') {
+        clones.push(
+          { x: player.x - 18, y: player.y, face: player.face || 1, ttl: 6, cd: 0.1 },
+          { x: player.x + 18, y: player.y, face: player.face || 1, ttl: 6, cd: 0.2 },
+        );
+        game.banner('身外身法', 1.4);
+        game.sound('mount');
+        return true;
+      }
+      if (kind === 'f') {
+        game.freezeEnemies(4);
+        game.clearEnemyBullets(player.x, player.y - 12, 160);
+        game.banner('定身术 · 4秒', 1.4);
+        game.sound('flash');
+        return true;
+      }
+      return false;
+    });
+
+    api.on('step', game => {
+      const p = game.players()[0];
+      for (let i = clones.length - 1; i >= 0; i--) {
+        const c = clones[i];
+        c.ttl -= game.dt;
+        if (c.ttl <= 0) { clones.splice(i, 1); continue; }
+        if (p) { c.y = p.y; c.face = p.face || 1; }
+        c.cd -= game.dt;
+        if (c.cd <= 0) {
+          c.cd = 0.35;
+          game.fireBullet(c.x, c.y - 12, c.face * 240, 0, { kind: 's', dmg: 2 });
+        }
+      }
+    });
+
+    api.on('drawWorld', g => {
+      worldDraws++;
+      g.fillStyle = '#ffd24a';
+      for (const c of clones) g.fillRect(c.x - 5, c.y - 22, 10, 22);
+    });
+
+    api.on('drawScreen', ctx => {
+      ctx.fillStyle = '#ffd24a';
+      ctx.fillRect(4, 4, Math.min(40, attacks + hurts + worldDraws), 2);
+    });
+  };
+
+  const e = boot([wukongSpellsModule], { spec: wukongStage1Spec });
+  e.play(1);
+
+  // 1. Stage 1 theme & 64-HP / Rage initialization
+  assert.equal(e.G.stageName, '第一章：南天门');
+  assert.equal(e.G.p.hp, 64);
+  assert.equal(e.G.p.maxRage, 100);
+
+  // 2. Melee slash + playerAttack hook
+  e.frames(2, { KeyJ: true });
+  assert.ok(e.G.fx.some(f => f.k === 'meleeArc'), 'melee arc spawned on attack');
+
+  // 3. Pick and cast Clone Spell (身外身法 via 'g' item + KeyL)
+  e.pickItem('g');
+  assert.deepEqual(plain(e.G.inv), ['g']);
+  e.frames(2, { KeyL: true });
+  assert.deepEqual(plain(e.G.inv), [], 'custom useItem consumed special item');
+  assert.equal(e.G.bannerText, '身外身法');
+  const pbBefore = e.G.pb.length;
+  e.frames(60);
+  assert.ok(e.G.pb.length > pbBefore, 'monkey clones fired friendly bullets via game.fireBullet');
+
+  // 4. Pick and cast Freeze Spell (定身术 via 'f' item + KeyL)
+  e.pickItem('f');
+  e.frames(2, { KeyL: true });
+  assert.equal(e.G.bannerText, '定身术 · 4秒');
+  assert.ok(e.G.freezeT > 3.5, 'enemies frozen via game.freezeEnemies');
+
+  // 5. Hurt player to test HP loss, playerHurt hook, and Peach Fairy heal on kill
+  e.G.p.invT = 0;
+  e.killPlayer();
+  assert.equal(e.G.p.hp, 52);
+  const fairy = e.spawnModEnemy('peachFairy', { x: e.G.p.x + 30, y: e.G.p.y - 20 });
+  assert.ok(fairy, 'spawned peachFairy');
+  e.damageEnemy(fairy, 10, fairy.x, fairy.y);
+  assert.equal(fairy.dead, true);
+  assert.equal(e.G.p.hp, 62, 'defeating peachFairy healed player by +10 HP');
+
+  // 6. Trigger Rage Ultimate (万道金光)
+  e.G.p.rage = 100;
+  const enemy = { t: 'run', x: e.G.p.x + 50, y: e.G.p.y, hp: 8, vx: 0, vy: 0 };
+  e.G.en.push(enemy);
+  e.frames(2, { KeyI: true });
+  assert.equal(enemy.dead, true, 'Rage ultimate defeated enemy');
+  assert.equal(e.G.p.rage, 0);
+
+  // Render full frame (background tint, HUD HP/Rage bars, drawWorld clones, drawScreen overlay)
+  e.render();
+  assert.deepEqual(plain(e.MOD.errors), []);
+});
+

@@ -87,3 +87,10 @@ console.log(e.G.p.x, e.G.score, e.G.en.length);
 - **精灵编辑与局部重绘（`backend/ai/sprites.mjs`）**：`recolorSprite` 负责同色替换与 HSL 调色，`compositeRegionEdit` 负责框选区域 AI 局部重绘（严格保留框外像素）。
 - **实时预览控制（`studioControl`）**：引擎监听 `window.postMessage({ type: 'studio:control', stage, x, debug, god })` 及 URL 参数 `?stage=&x=&debug=1&god=1`，用于 Studio 跳关、坐标跳转、碰撞框调试层与无敌模式。
 
+## 进阶玩法规则与悟空基准（M4）
+
+- **A 轨玩法规则（`rules`）**：`rules.health`（多点生命条、受击扣血、连杀回血）、`rules.rage`（受击/击杀攒怒、按 `I` 键释放全屏大招清弹伤敌）、`rules.melee`（射击附带近战月牙挥砍与敌弹反弹）。为保证黄金回放指纹不变，当这些规则处于模板默认值时，不在 `G` 或 `G.p` 上挂载额外字段。
+- **开场故事与关卡天色（`story` + `stages.<n>.theme`）**：`story.openingTitle / openingSubtitle / opening` 控制开场字幕；`stages.<n>.theme.{skyTint, tintAlpha, hue}` 控制关卡天色渲染与色相偏移。
+- **B 轨法术与世界绘制钩子**：`playerAttack`、`playerHurt`、`useItem`（返回 `true` 接管 `L` 键特殊道具，用于分身术/定身术等自定义技能）、`drawWorld`（世界坐标层绘制召唤物），配合 `MOD_GAME.{fireBullet, damageEnemiesInRadius, healPlayer, clearEnemyBullets, freezeEnemies}`。
+
+

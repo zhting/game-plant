@@ -28,6 +28,10 @@ export const MOD_HOOKS = Object.freeze({
   stageStart: '(game, stage) 关卡开始或重开时',
   step: '(game) 每帧一次（1/60 秒），在敌人更新之前',
   kill: '(enemy, game) 任意敌人被消灭时（包括原版敌人）',
+  playerAttack: '(player, game) 玩家每次开火或近战挥击时',
+  playerHurt: '(player, hit, game) 玩家受击扣血或阵亡时',
+  useItem: '(player, itemKind, game) 玩家使用特殊道具时（返回 true 可接管该道具效果）',
+  drawWorld: '(ctx, game) 世界坐标绘制层（随镜头平移，可画分身、法阵、护体特效）',
   drawScreen: '(ctx, game) 每帧画面最上层，屏幕坐标 384×216，可用来画额外的 HUD',
 });
 
@@ -138,12 +142,14 @@ export function createModRuntime(modules = [], { reserved = [], items = null, im
   return {
     active, api, enemies, hooks, errors, record,
     spawners: [...enemies.values()].filter(def => def.spawn),
-    /** Call every subscriber of a hook; a throwing subscriber is disabled. */
+    /** Call every subscriber of a hook; a throwing subscriber is disabled. Returns true if any subscriber returned true. */
     emit(name, ...args) {
-      for (const hook of hooks[name]) {
+      let handled = false;
+      for (const hook of hooks[name] || []) {
         if (hook.broken) continue;
-        try { hook.fn(...args); } catch (err) { hook.broken = true; record(`钩子 ${name}`, err); }
+        try { if (hook.fn(...args) === true) handled = true; } catch (err) { hook.broken = true; record(`钩子 ${name}`, err); }
       }
+      return handled;
     },
     /** Run an enemy callback; on error, record it and remove the enemy. */
     call(def, key, e, ...args) {

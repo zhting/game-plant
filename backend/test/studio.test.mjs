@@ -139,9 +139,15 @@ test('studio HTTP API: token auth, projects, chat, preview page and undo', { tim
     // The preview page and its game.json are public so play links can be shared.
     const page = await fetch(origin + '/play/web/');
     assert.equal(page.status, 200);
-    assert.match(await page.text(), /main\.mjs\?v=m3-1/);
+    assert.match(await page.text(), /main\.mjs\?v=m4-1/);
     assert.equal((await (await fetch(origin + '/api/projects/web/game.json')).json()).enemies.hpScale, 2);
     assert.equal((await fetch(origin + '/play/missing/')).status, 404);
+
+    // Wukong template project creation and preview page
+    assert.equal((await call('POST', '/api/projects', { id: 'wk', title: '大圣项目', template: 'wukong' })).status, 201);
+    const wkPage = await fetch(origin + '/play/wk/');
+    assert.equal(wkPage.status, 200);
+    assert.match(await wkPage.text(), /悟空/);
 
     const project = await (await call('GET', '/api/projects/web')).json();
     assert.equal(project.resolved.weapons.rifle.cd, 0.24);

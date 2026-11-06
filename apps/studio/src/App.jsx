@@ -19,6 +19,7 @@ export default function App() {
 
   // Studio preview live controls (stage jump, checkpoint X, hitbox debug overlay, god mode)
   const iframeRef = useRef(null);
+  const [newTemplate, setNewTemplate] = useState('contra');
   const [previewStage, setPreviewStage] = useState('');
   const [previewX, setPreviewX] = useState('');
   const [debugOverlay, setDebugOverlay] = useState(false);
@@ -61,10 +62,11 @@ export default function App() {
   }, [currentId, loadProject]);
 
   async function createProject() {
-    const title = prompt('新游戏的名字', '我的横版射击');
+    const defTitle = newTemplate === 'wukong' ? '我的大闹天宫' : '我的横版射击';
+    const title = prompt('新游戏的名字', defTitle);
     if (title === null) return;
     try {
-      const { id } = await api.createProject({ title: title.trim() || undefined });
+      const { id } = await api.createProject({ title: title.trim() || undefined, template: newTemplate });
       setProjects(await api.projects());
       setCurrentId(id);
     } catch (e) { setError(e.message); }
@@ -100,6 +102,10 @@ export default function App() {
           <option value="">选择项目…</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.title}（{p.id}）</option>)}
         </select>
+        <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => setNewTemplate(e.target.value)}>
+          <option value="contra">模板：魂斗罗2026</option>
+          <option value="wukong">模板：悟空大闹天宫</option>
+        </select>
         <button onClick={createProject}>＋ 新项目</button>
         <span className="spacer" />
         {status && <span className={'ai ' + (status.ai.configured ? 'ok' : 'off')} title={JSON.stringify(status.ai.models, null, 1)}>
@@ -110,10 +116,10 @@ export default function App() {
       {!project ? (
         <main className="empty">
           <h2>用对话做一个属于你的横版射击游戏</h2>
-          <p>新建项目会复制「魂斗罗2026」模板。之后在左侧用中文告诉 AI 你想改什么，比如：</p>
+          <p>新建项目可选择「魂斗罗2026」或「悟空大闹天宫」模板。之后在左侧用中文告诉 AI 你想改什么，比如：</p>
           <ul>
-            <li>“步枪射速快一倍，开局 5 条命”</li>
-            <li>“第一关的敌人血量翻倍，但每个补给都掉散弹枪”</li>
+            <li>“步枪射速快一倍，开局 5 条命，开启 64 点血条和怒气大招”</li>
+            <li>“开启近战棍花斩击并能反弹敌弹，第一关天色改成晚霞金红”</li>
             <li>“给主角画一套银色机甲皮肤并换上”</li>
           </ul>
           <button className="primary" onClick={createProject}>＋ 新建项目</button>

@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=m3-1';
+import { StageOneArt } from './stage-one-art.mjs?v=m4-1';
 import { STAGE_THREE, WATERFALL_GATE, FLAME_BRIDGES, flameJetState, flameJetPositions, waterfallNodesAlive } from './stage-three-layout.mjs?v=crossing-flames-1';
 import { WATERFALL_ARMS, waterfallArmPose } from './stage-three-arms.mjs?v=boss-detail-1';
 import { drawStageThreeWaterfall } from './stage-three-waterfall.mjs?v=boss-detail-1';

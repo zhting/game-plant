@@ -155,8 +155,8 @@ flowchart LR
 - **验收**：一套主角加敌人的换皮，能通过"对话生成 + 手工微调"在半天内完成
 
 ### M4 悟空基准 + 持续数据化
-- [ ] 从 `template:contra` 出发，用对话复刻出悟空第 1 关的核心差异（血量、怒气大招、法术、回血、天庭美术、开场故事）
-- [ ] 把 B 轨里高频的写法沉淀成 A 轨组件；可选开放第 9–16 关原型作为模板
+- [x] 从 `template:contra` 出发，用对话复刻出悟空第 1 关的核心差异（血量、怒气大招、法术、回血、天庭美术、开场故事）
+- [x] 把 B 轨里高频的写法沉淀成 A 轨组件；同时提供 `templates/wukong/` 作为第二模板
 
 ---
 
@@ -231,6 +231,22 @@ B 轨（项目代码模块）与美术生图/截图自检管线已经跑通：AI
 - [x] 框选区域 AI 局部重绘（`compositeRegionEdit` + `POST /api/projects/:id/sprites/ai`）：在画布上框选 `{ rx, ry, rw, rh }` 区域后交给 AI 重绘，框外像素严格锁定保留。
 - [x] 关卡顺序编排与补给可视化时间轴（`apps/studio/src/SpecPanel.jsx`）：可视化拖拽/调整 `stages.order`，并在横向关卡时间轴上直观查看、点选、增删、编辑飞行补给胶囊（`pods`）和地面感应补给箱（`boxes`）。
 - [x] 实时预览调试工具栏（`apps/studio/src/App.jsx` + `arcade-engine.mjs` `studioControl` / `drawStudioDebugOverlay`）：预览窗顶部支持一键跳关（1–8 关）、进度坐标跳转（起点/前段/中段/Boss 前）、碰撞框/地形实心线/补给触发线/锚点十字调试层开关、以及无敌测试模式开关。
+
+## 十五、M4 进度
+
+悟空基准测试与高频 B 轨能力沉淀为 A 轨组件（M4）已完成：从 `template: "contra"` 出发，仅需配置 `game.json`（A 轨）+ 1 个法术/仙娥模块（B 轨），即可完整复刻大闹天宫第 1 关的核心玩法与视觉体验；同时开放 `templates/wukong/` 作为可直接新建的第二套项目模板。
+
+- [x] **A 轨新增四大核心玩法/叙事规则**（`games/shared/game-spec.mjs` + `arcade-engine.mjs` + `stage-one-art.mjs`）：
+  1. **血条与击杀回血（`rules.health`）**：`maxHp`（>1 开启多点生命血条 HUD，替代一击必死）、`hitDamage`（单次受击扣血并飘字）、`invincibleSeconds`（受击无敌秒数）、`killHeal / killHealEvery`（累计击杀自动回血并飘绿字）。
+  2. **怒气槽与全屏大招（`rules.rage`）**：`enabled`、`max`、`onHit / onKill`（受击与击杀攒怒）、`ultimateDamage / ultimateName`（怒满按 `I` 键释放全屏金光大招、清屏敌弹并对屏幕内敌人与 Boss 部位造成巨额伤害）。
+  3. **近战挥砍与弹反（`rules.melee`）**：`enabled`、`range`、`damage`、`reflectBullets`（挥砍弧光将范围内敌方子弹反弹为友方子弹 `fromPlayer: true`）、`color`（自定义月牙刀光颜色）。
+  4. **开场故事与关卡天色滤镜（`story` + `stages.<n>.theme`）**：`story.openingTitle / openingSubtitle / opening` 自定义开场字幕页；`stages.<n>.theme.{skyTint, tintAlpha, hue}` 自定义关卡天色渐变渲染与场景色相偏移；HUD 与 DOM 关卡名实时读取 `stages.<n>.name`。
+- [x] **B 轨钩子与 `MOD_GAME` 能力扩展**（`games/shared/mod-runtime.mjs` + `backend/ai/mod-guide.mjs`）：
+  - 新增钩子：`playerAttack(player, game)`、`playerHurt(player, hit, game)`、`useItem(player, kind, game)`（返回 `true` 可接管特殊道具 `L` 键，自定义分身术/定身术等法术）、`drawWorld(g, game)`（世界坐标层绘制召唤物与法阵）。
+  - 新增 `MOD_GAME` 方法：`fireBullet(x, y, vx, vy, {kind, dmg})`（发射友方子弹，供分身/浮游炮使用）、`damageEnemiesInRadius(x, y, radius, dmg)`、`healPlayer(amount, actor)`、`clearEnemyBullets(x, y, radius)`、`freezeEnemies(seconds)`。
+- [x] **悟空基准端到端验证（`sim/test/mod-runtime.test.mjs`）**：从 `template: "contra"` 出发，组合 `rules.{health, rage, melee}` + `story.opening` + `stages.1.theme` 与单文件模块 `wukongSpellsModule`（实现「身外身法」双分身协同射击、「定身术」定身清弹、「蟠桃仙娥」击败回血），在无头引擎与画布渲染下完整通过验证，且 10 个黄金回放指纹保持零变化。
+- [x] **双模板与 Studio 参数面板升级（`templates/wukong/game.json` + `apps/studio`）**：Studio 顶部支持选择「魂斗罗2026」或「悟空大闹天宫」模板创建新项目；参数面板新增「进阶玩法规则（血条/怒气大招/近战斩击）」、「开场剧情文案」与「关卡天色滤镜」可视化表单。
+
 
 
 

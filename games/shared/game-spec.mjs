@@ -55,6 +55,12 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
   },
   skins: { player: {}, player2: {}, enemies: {} },
   audio: { stages: {} },
+  rules: {
+    health: { maxHp: 1, hitDamage: 12, invincibleSeconds: 1.1, killHeal: 0, killHealEvery: 4 },
+    rage: { enabled: 0, max: 100, onHit: 50, onKill: 10, ultimateDamage: 18, ultimateName: '万道金光' },
+    melee: { enabled: 0, range: 38, damage: 3, reflectBullets: 0, color: '#ffd24a' },
+  },
+  story: { openingTitle: '', openingSubtitle: '', opening: [] },
 });
 
 /** Item letters accepted in pods / boxes. Upper case = weapon chips, lower case & others = special items. */
@@ -114,7 +120,7 @@ const skinRule = desc => ({
 export const GAME_SPEC_SCHEMA = deepFreeze({
   type: 'object', props: {
     specVersion: num('GameSpec 版本', 1, GAME_SPEC_VERSION, { integer: true }),
-    template: { type: 'enum', desc: '模板', values: ['contra'] },
+    template: { type: 'enum', desc: '模板', values: ['contra', 'wukong'] },
     meta: { type: 'object', desc: '项目信息', props: {
       title: { type: 'string', desc: '游戏名称（显示在标题画面、开场、制作人员名单和浏览器标签）', maxLength: 20 },
       description: { type: 'string', desc: '简介', maxLength: 400 },
@@ -163,6 +169,11 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
     }, value: { type: 'object', props: {
       name: { type: 'string', desc: '关卡名称（显示在关卡开场和选关菜单）', maxLength: 20 },
       pods: podList, boxes: boxList,
+      theme: { type: 'object', desc: '关卡氛围与色调覆盖（如天宫金云、夕阳、夜幕）', props: {
+        skyTint: { type: 'string', desc: '背景色调遮罩颜色（如 #ffd166 或 rgba(255,210,110,0.3)）', maxLength: 32 },
+        tintAlpha: num('色调遮罩透明度（0~0.75，0 为关闭）', 0, 0.75),
+        hue: num('背景色相偏移（-180~180 度，0 为原色）', -180, 180),
+      } },
     } } },
     skins: { type: 'object', desc: '角色与敌人换皮（可替换为 assets/ 图片或调整色相/饱和度/亮度）', props: {
       player: skinRule('1P 主角外观'),
@@ -180,6 +191,42 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
         desc: '各关卡背景音乐（键为关卡号 1~8，值为内置曲目名或 assets/ 音频文件名如 bgm.ogg）',
         key: /^[1-8]$/,
         value: { type: 'string', desc: '内置曲目（stage1rock/stage2/stage3/stage4/stage5/stage6/stage7）或 assets/ 音频文件名', maxLength: 80 },
+      },
+    } },
+    rules: { type: 'object', desc: '高阶战斗规则（气血条、怒气大招、近战挥击）', props: {
+      health: { type: 'object', desc: '气血生命条模式（maxHp > 1 时启用，受击扣血而非一击必死）', props: {
+        maxHp: num('最大生命值（1=原版一击必死，>1 如 100 启用气血条）', 1, 9999, { integer: true }),
+        hitDamage: num('每次受击扣除的生命值', 1, 9999, { integer: true }),
+        invincibleSeconds: num('受击后短暂无敌时间（秒）', 0.1, 10),
+        killHeal: num('累计击杀回血量（0 为关闭）', 0, 999, { integer: true }),
+        killHealEvery: num('每击杀多少名敌人触发一次回血', 1, 100, { integer: true }),
+      } },
+      rage: { type: 'object', desc: '怒气槽与全屏大招（enabled=1 时启用，按 I 键在满怒气时释放大招）', props: {
+        enabled: num('是否开启怒气大招（0=原版手雷冷却，1=开启怒气槽）', 0, 1, { integer: true }),
+        max: num('怒气上限', 10, 1000, { integer: true }),
+        onHit: num('受击增加的怒气值', 0, 1000, { integer: true }),
+        onKill: num('击杀敌人增加的怒气值', 0, 1000, { integer: true }),
+        ultimateDamage: num('满怒气按 I 释放全屏大招的伤害', 1, 999, { integer: true }),
+        ultimateName: { type: 'string', desc: '大招名称（显示在释放横幅）', maxLength: 20 },
+      } },
+      melee: { type: 'object', desc: '近战挥击与消弹（enabled=1 时每次攻击附带前方近战弧光）', props: {
+        enabled: num('是否开启近战挥击（0=关闭，1=开启）', 0, 1, { integer: true }),
+        range: num('挥击半径（像素）', 12, 120),
+        damage: num('近战命中伤害', 1, 999, { integer: true }),
+        reflectBullets: num('是否震碎/反弹挥击范围内的敌方子弹（0=否，1=是）', 0, 1, { integer: true }),
+        color: { type: 'string', desc: '挥击弧光颜色（如 #ffd24a）', maxLength: 24 },
+      } },
+    } },
+    story: { type: 'object', desc: '剧情与开场字幕', props: {
+      openingTitle: { type: 'string', desc: '片头左上角地点/时代标题（如 花果山 · 齐天大圣）', maxLength: 24 },
+      openingSubtitle: { type: 'string', desc: '片头右上角行动副标题（如 大闹天宫）', maxLength: 24 },
+      opening: {
+        type: 'array', desc: '开场剧情字幕页（1~6 页，非空时替换第一关开场字幕）', maxItems: 6,
+        items: { type: 'object', props: {
+          tag: { type: 'string', desc: '章节小标题（如 壹 · 灵猴出世）', maxLength: 20 },
+          line1: { type: 'string', desc: '第一行字幕', maxLength: 36 },
+          line2: { type: 'string', desc: '第二行字幕', maxLength: 36 },
+        } },
       },
     } },
   },

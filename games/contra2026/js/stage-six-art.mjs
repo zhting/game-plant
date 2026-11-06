@@ -1,4 +1,4 @@
-import { StageOneArt } from './stage-one-art.mjs?v=m3-1';
+import { StageOneArt } from './stage-one-art.mjs?v=m4-1';
 import { HUD_PLAYER_X } from './hud-layout.mjs';
 import { FLAME_JET_ASSET, drawFlameJet } from './flame-jet-art.mjs?v=multi-stage-polish-1';
 import { drawFoundryAtmosphere } from './stage-six-atmosphere.mjs?v=foundry-motion-2';

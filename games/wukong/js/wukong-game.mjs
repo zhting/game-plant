@@ -1,6 +1,6 @@
 // Presentation for the original map. Combat simulation lives in wukong-combat.
 // Rendering never writes to map, player, enemy or network state.
-import { StageOneArt, STAGE_ONE_ASSETS } from '../../contra2026/js/stage-one-art.mjs?v=m3-1';
+import { StageOneArt, STAGE_ONE_ASSETS } from '../../contra2026/js/stage-one-art.mjs?v=m4-1';
 import { HDActorArt } from '../../contra2026/js/hd-actors.mjs?v=base-up-lift-1';
 import { RUN_BONES } from '../../contra2026/js/stage-one-motion.mjs?v=leg-alignment-2';
 import { staffGeometry, staffMotion } from './wukong-combat.mjs';

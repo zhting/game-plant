@@ -194,6 +194,75 @@ test('engine: skins, audio.stages and studioControl apply in-game', () => {
   assert.ok(e.G.camX >= 1000);
 });
 
+test('engine: rules.health, rules.rage, rules.melee, story.opening and stages.1.theme apply in Track A', () => {
+  const e = boot({
+    stages: { 1: { name: '第一章：南天门', theme: { skyTint: '#ff7b38', tintAlpha: 0.22, hue: 24 } } },
+    story: {
+      openingTitle: '齐天大圣 · 大闹天宫',
+      openingSubtitle: '西游记动作篇',
+      opening: [
+        { tag: '壹 · 踏碎凌霄', line1: '一棒碎凌霄，万仙莫敢当。', line2: '踏碎南天门，直捣通明殿。' },
+      ],
+    },
+    rules: {
+      health: { maxHp: 64, hitDamage: 12, invincibleSeconds: 0.2, killHeal: 4, killHealEvery: 2 },
+      rage: { enabled: 1, max: 100, onHit: 50, onKill: 25, ultimateDamage: 20, ultimateName: '万道金光' },
+      melee: { enabled: 1, range: 44, damage: 4, reflectBullets: 1, color: '#ffd24a' },
+    },
+  });
+  e.play(1);
+  assert.equal(e.G.stageName, '第一章：南天门');
+  assert.equal(e.G.stageTheme.skyTint, '#ff7b38');
+  assert.equal(e.G.storyOpening.title, '齐天大圣 · 大闹天宫');
+  assert.equal(e.G.p.hp, 64);
+  assert.equal(e.G.p.maxHp, 64);
+  assert.equal(e.G.p.rage, 0);
+  assert.equal(e.G.p.maxRage, 100);
+
+  // Non-lethal hit deducts HP and grants rage instead of losing a life
+  e.G.p.invT = 0;
+  e.killPlayer();
+  assert.equal(e.G.p.dead, false);
+  assert.equal(e.G.p.hp, 52);
+  assert.equal(e.G.p.rage, 50);
+  assert.equal(e.G.lives, 3);
+
+  // Second hit fills rage to 100
+  e.G.p.invT = 0;
+  e.killPlayer();
+  assert.equal(e.G.p.hp, 40);
+  assert.equal(e.G.p.rage, 100);
+
+  // Melee slash on fire damages close enemies and reflects enemy bullets into G.pb
+  const dummy = { t: 'run', x: e.G.p.x + 24, y: e.G.p.y, hp: 6, vx: 0, vy: 0 };
+  e.G.en.push(dummy);
+  const eb = { x: e.G.p.x + 14, y: e.G.p.y - 30, vx: -120, vy: 0, r: 3 };
+  e.G.eb.push(eb);
+  e.frames(1, { KeyJ: true });
+  assert.equal(dummy.hp, 2, 'melee slash dealt 4 damage');
+  assert.equal(eb.dead, true, 'melee slash cleared incoming enemy bullet');
+  assert.ok(e.G.pb.some(b => b.vx > 0), 'reflected bullet spawned in G.pb');
+  assert.ok(e.G.fx.some(f => f.k === 'meleeArc'), 'spawned meleeArc visual effect');
+
+  // Kill-heal triggers every 2 kills
+  e.killEnemy({ t: 'run', x: e.G.p.x + 60, y: e.G.p.y, hp: 1 });
+  assert.equal(e.G.p.hp, 40);
+  e.killEnemy({ t: 'run', x: e.G.p.x + 60, y: e.G.p.y, hp: 1 });
+  assert.equal(e.G.p.hp, 44, 'healed 4 HP after 2 kills');
+
+  // Rage ultimate (KeyI when rage >= 100) deals ultimateDamage to nearby enemies and clears enemy bullets
+  e.G.p.rage = 100;
+  const guard = { t: 'snp', x: e.G.p.x + 80, y: e.G.p.y - 10, hp: 15, vx: 0, vy: 0 };
+  e.G.en.push(guard);
+  e.G.eb.push({ x: e.G.p.x + 40, y: e.G.p.y - 10, vx: -90, vy: 0, r: 3 });
+  e.frames(2, { KeyI: true });
+  assert.equal(e.G.p.rage, 0, 'ultimate consumed full rage');
+  assert.equal(guard.dead, true, 'ultimate killed nearby guard');
+  assert.equal(e.G.bannerText, '万道金光 · 怒气释放');
+  e.render();
+});
+
 test('engine: an invalid spec refuses to boot', () => {
   assert.throws(() => boot({ weapons: { rifle: { cd: -1 } } }), /weapons\.rifle\.cd/);
 });
+

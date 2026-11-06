@@ -130,6 +130,8 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
       <p className="note">直接改数值或摆放补给都会生成一个版本（和 AI 修改一样可以撤销）。高亮的是和模板不同的字段。</p>
       {section(P.meta, ['meta'], '项目信息')}
       {section(P.player, ['player'], '玩家')}
+      {P.rules && section(P.rules, ['rules'], '进阶玩法规则（血条 / 怒气大招 / 近战斩击）')}
+      {P.story && section(P.story, ['story'], '开场剧情文案')}
       {section(P.weapons, ['weapons'], '武器')}
       {section(P.items, ['items'], '特殊道具')}
       <fieldset>
@@ -186,7 +188,7 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
       </fieldset>
 
       <fieldset>
-        <legend>关卡补给可视化摆放（时间轴）</legend>
+        <legend>关卡补给与天色滤镜（第 {dropStage} 关）</legend>
         <div className="timeline-toolbar">
           <select value={dropStage} onChange={e => { setDropStage(e.target.value); setSelDrop(null); }}>
             {Object.entries(STAGE_LEN).map(([st, len]) => (
@@ -196,6 +198,13 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
           <button type="button" onClick={addPod}>＋ 飞行胶囊</button>
           <button type="button" onClick={addBox}>＋ 地面补给箱</button>
         </div>
+        {P.stages.value.props.theme && (
+          <div className="stage-theme-fields">
+            {field(P.stages.value.props.theme.props.skyTint, ['stages', dropStage, 'theme', 'skyTint'], `第 ${dropStage} 关天色渲染色`)}
+            {field(P.stages.value.props.theme.props.tintAlpha, ['stages', dropStage, 'theme', 'tintAlpha'], `第 ${dropStage} 关天色浓度`)}
+            {field(P.stages.value.props.theme.props.hue, ['stages', dropStage, 'theme', 'hue'], `第 ${dropStage} 关色相偏移`)}
+          </div>
+        )}
 
         <div className="timeline-track">
           <div className="timeline-ruler">

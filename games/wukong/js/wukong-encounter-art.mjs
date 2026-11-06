@@ -1,4 +1,4 @@
-import { FORTRESS_EXIT } from '../../contra2026/js/stage-one-art.mjs?v=m3-1';
+import { FORTRESS_EXIT } from '../../contra2026/js/stage-one-art.mjs?v=m4-1';
 import { drawHealingPickup } from './wukong-hit-art.mjs';
 
 export const ENCOUNTER_ASSET='/games/wukong/assets/heaven-encounters.webp';

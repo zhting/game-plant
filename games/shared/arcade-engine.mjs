@@ -14,7 +14,7 @@ import { createCeilingParasites, createFloorParasites, ceilingParasiteBox, white
 import { createCeilingStalkers, ceilingStalkerBox, advanceCeilingStalker } from '/games/contra2026/js/ceiling-stalker.mjs?v=ceiling-stalker-1';
 import { createHiveBrainParts, hiveBroodRemaining, hiveBroodHealth, hiveDamageableParts, advanceHiveBrood, advanceHiveHatchling, hiveHatchlingBox, hiveShotBlocked } from '/games/contra2026/js/hive-brood.mjs?v=hive-four-ports-1';
 import { hiveSpikeHeight } from '/games/contra2026/js/stage-eight-hazards.mjs?v=organic-motion-2';
-import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=m3-1';
+import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=m4-1';
 import { createFortressRoofGuard, advanceFortressRoofGuard, roofGuardBox, fortressRoofY } from '/games/contra2026/js/fortress-roof-guard.mjs?v=roof-guard-1';
 import { riverFishJumps, riverFishBox, riverFishLifeReward } from '/games/contra2026/js/river-fish.mjs?v=fish-life-1';
 import {fortressCannonMuzzle,advanceFortressCannon} from '/games/contra2026/js/fortress-cannon.mjs?v=cannon-recoil-1';
@@ -59,8 +59,8 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
-import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=m3-1';
-import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=mods-2';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=m4-1';
+import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=m4-1';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
 // projectModules: optional { modules, assetBase } with the project's code modules; see games/shared/mod-runtime.mjs.
@@ -333,6 +333,64 @@ const SHIELD_T = SPEC.items.shieldSeconds;
 const GAME_TITLE = SPEC.meta?.title || '魂斗罗2026', CREDIT_TEAM = GAME_TITLE + '制作组';
 if (SPEC.meta?.title && typeof document !== 'undefined') { document.title = GAME_TITLE; const brand = document.querySelector?.('.loading-brand'); if (brand) brand.textContent = GAME_TITLE; }
 const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 ' + SHIELD_T + ' 秒', ...SPECIALS };
+const RULES_SPEC = SPEC.rules || {};
+const HEALTH_RULE = { maxHp: 1, hitDamage: 12, invincibleSeconds: 1.1, killHeal: 0, killHealEvery: 4, ...(RULES_SPEC.health || {}) };
+const RAGE_RULE = { enabled: 0, max: 100, onHit: 50, onKill: 10, ultimateDamage: 18, ultimateName: '万道金光', ...(RULES_SPEC.rage || {}) };
+const MELEE_RULE = { enabled: 0, range: 38, damage: 3, reflectBullets: 0, color: '#ffd24a', ...(RULES_SPEC.melee || {}) };
+const HAS_CUSTOM_HEALTH = !WUKONG && HEALTH_RULE.maxHp > 1;
+const HAS_CUSTOM_RAGE = !WUKONG && RAGE_RULE.enabled === 1;
+const HAS_CUSTOM_MELEE = !WUKONG && MELEE_RULE.enabled === 1;
+const STORY_OPENING = (() => {
+  const s = SPEC.story;
+  if (!s || (!s.openingTitle && !s.openingSubtitle && !(Array.isArray(s.opening) && s.opening.length))) return null;
+  const raw = Array.isArray(s.opening) && s.opening.length ? s.opening : null;
+  const span = (OPENING_DURATION - 1.2) / Math.max(1, raw ? raw.length : 1);
+  const pages = raw ? raw.map((lines, idx) => ({
+    from: Number((0.6 + idx * span).toFixed(2)),
+    to: Number((0.6 + (idx + 1) * span - 0.15).toFixed(2)),
+    lines: Array.isArray(lines) ? lines.map(String) : [String(lines)],
+  })) : OPENING_PAGES;
+  return { title: s.openingTitle || '', subtitle: s.openingSubtitle || '', pages };
+})();
+function healActor(actor, amount) {
+  const p = actor || G.p;
+  if (!p || p.dead || typeof p.maxHp !== 'number' || p.maxHp <= 1) return 0;
+  const before = p.hp ?? p.maxHp;
+  p.hp = Math.min(p.maxHp, before + Math.max(0, amount));
+  const gained = p.hp - before;
+  if (gained > 0) {
+    G.fx.push({ k: 'combatNumber', x: p.x, y: p.y - 34, text: '+' + gained, heal: true, t: 0, life: 0.75 });
+    G.fx.push({ k: 'healing', x: p.x, y: p.y - 14, t: 0, life: 0.65 });
+  }
+  return gained;
+}
+function performMeleeSlash(p) {
+  const range = MELEE_RULE.range, dmg = MELEE_RULE.damage * (p.giantT > 0 ? 2 : 1);
+  const dir = p.ax !== 0 ? Math.sign(p.ax) : p.face;
+  const cx = p.x + dir * (range * 0.52), cy = p.prone ? p.y - 7 : p.y - 18 + (p.ay || 0) * 10;
+  const hb = { x: cx - range * 0.6, y: cy - 18, w: range * 1.2, h: 36 };
+  G.fx.push({ k: 'meleeArc', x: p.x + dir * 12, y: cy, r: range * 0.72, face: dir, color: MELEE_RULE.color || '#ffd24a', t: 0, life: 0.18 });
+  for (const e of G.en) {
+    if (e.dead || e.t === 'beam' || (e.t === 'cart' && G.stage === 7) || (e.t === 'eel' && e.out < 0.3)) continue;
+    const eb = ebox(e);
+    if (overlap(hb, eb)) damageEnemy(e, dmg, eb.x + eb.w / 2, eb.y + eb.h / 2, { k: 'melee', vx: dir * 160, vy: 0, heavy: dmg >= 3 });
+  }
+  for (const pd of G.pods) if (!pd.dead && !pd.flee && overlap(hb, podBox(pd))) popPod(pd);
+  for (const pt of bossParts()) if (pt.hp > 0 && overlap(hb, pt.hitBox || pt)) {
+    spark(pt.x + pt.w / 2, pt.y + pt.h / 2, { material: pt.k === 'core' ? 'core' : 'metal', vx: dir * 160, vy: 0 });
+    hitBossPart(pt, dmg);
+  }
+  if (MELEE_RULE.reflectBullets) {
+    for (const b of G.eb) {
+      if (b.dead) continue;
+      if (overlap(hb, { x: b.x - b.r - 2, y: b.y - b.r - 2, w: (b.r + 2) * 2, h: (b.r + 2) * 2 })) {
+        b.dead = true;
+        G.pb.push({ k: 'b', x: b.x, y: b.y, vx: dir * 240, vy: -20, dmg: Math.max(1, Math.round(dmg * 0.7)) });
+        spark(b.x, b.y, { material: 'metal', vx: dir, vy: 0 });
+      }
+    }
+  }
+}
 
 // ================= project code modules (track B) =================
 // Everything below is inert when the project has no modules (MOD.active === false).
@@ -351,6 +409,31 @@ const MOD_GAME = Object.freeze({
   players: () => players().filter(q => !q.dead),
   aim: (x, y) => aimAtPlayer(x, y),
   shoot(x, y, vx, vy, options = {}) { const b = ebullet(x, y, vx, vy, options.gravity || 0, options.r || 2); b.from = 'mod'; if (options.sound !== false) sfx.eshot(); return b; },
+  fireBullet(x, y, vx, vy, options = {}) {
+    const k = options.kind || 'b', dmg = options.dmg ?? 1;
+    const b = k === 'laser'
+      ? { k: 'laser', x, y, vx, vy, dmg, hits: new Set() }
+      : { k, x, y, vx, vy, dmg };
+    G.pb.push(b);
+    return b;
+  },
+  damageEnemiesInRadius(x, y, radius = 48, dmg = 4) {
+    let hits = 0;
+    for (const e of G.en) {
+      if (e.dead || e.t === 'beam' || (e.t === 'eel' && e.out < 0.3)) continue;
+      const b = ebox(e), cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+      if (Math.hypot(cx - x, cy - y) <= radius) { damageEnemy(e, dmg, cx, cy); hits++; }
+    }
+    for (const pt of bossParts()) if (pt.hp > 0 && Math.hypot(pt.x + pt.w / 2 - x, pt.y + pt.h / 2 - y) <= radius + 10) { hitBossPart(pt, dmg); hits++; }
+    return hits;
+  },
+  healPlayer: (amount = 10, actor = G.p) => healActor(actor, amount),
+  clearEnemyBullets(x = G.p?.x || 0, y = G.p?.y || 0, radius = 999) {
+    let n = 0;
+    for (const b of G.eb) if (!b.dead && Math.hypot(b.x - x, b.y - y) <= radius) { b.dead = true; n++; }
+    return n;
+  },
+  freezeEnemies(seconds = 3) { G.freezeT = Math.max(G.freezeT || 0, seconds); G.flashT = Math.max(G.flashT || 0, 0.25); },
   spawn: (type, props) => spawnModEnemy(type, props),
   ground(x) { if (isBase()) return BASE_FLOOR; const s = groundAt(x); return s ? s.y : null; },
   land(e, halfWidth = 4) {
@@ -421,6 +504,7 @@ function drawModEnemy(e, g) {
   return true;
 }
 if (MOD.enemies.size) for (const art of [stageOneArt, stageTwoArt, stageThreeArt, stageFourArt, stageFiveArt, stageSixArt, hangarArt, stageSevenArt]) art.modEnemy = function (e) { return drawModEnemy(e, this.g); };
+if (MOD.hooks.drawWorld.length) stageOneArt.drawWorld = g => { if (G.mode === 'play') { g.save(); MOD.emit('drawWorld', g, MOD_GAME); g.restore(); } };
 const SKINS = SPEC.skins || {};
 const HAS_SKINS = Boolean(Object.keys(SKINS.player || {}).length || Object.keys(SKINS.player2 || {}).length || Object.keys(SKINS.enemies || {}).length);
 function resolveSkinRule(role, enemy, p) {
@@ -844,7 +928,7 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 // ================= game state =================
 const G = { mode: 'title' };
 function newPlayer(x) {
-  return { pid: 1, shotSeq:0, ...(WUKONG?{heroFrames:true,...newVitality()}:{}), x, y: 176, vx: 0, vy: 0, face: 1, onGround: true, support: null, inWater: false, prone: false, dive: false, spin: false,
+  return { pid: 1, shotSeq:0, ...(WUKONG?{heroFrames:true,...newVitality()}:{}), ...(HAS_CUSTOM_HEALTH?{hp:HEALTH_RULE.maxHp,maxHp:HEALTH_RULE.maxHp,killHealCount:0}:{}), ...(HAS_CUSTOM_RAGE?{rage:0,maxRage:RAGE_RULE.max}:{}), x, y: 176, vx: 0, vy: 0, face: 1, onGround: true, support: null, inWater: false, prone: false, dive: false, spin: false,
     dropT: 0, coyote: 0, airJumps: 0, cart: null, cartSeat: 0, cartDuck: false, cartCooldown: 0, cool: 0, wantFire: false, spCd: 0, ride: null, rideT: 0, motoPitch:0, motoDustClock:0, giantT: 0, giantHits: 0, giantGraceT: 0, giantHitT: 0, giantCrushT: 0, wet: false, camoT: 0, riot: 0, helmT: 0, cleatT: 0, thermT: 0, fireproofT: 0, magnetT: 0, droneT: 0, droneCd: 0, acidT: 0, o2T: 0, coolT: 0, boostT: 0, torpCd: 0, dashT: 0, dashCd: 0, iceAir: false, skid: false, hook: null, invT: 2, shieldT: 0, dead: false, deadT: 0, weapon: 'rifle', rapid: false, ax: 1, ay: 0, anim: 0, flashT: 0 };
 }
 function reset(stage, carry) {
@@ -852,7 +936,7 @@ function reset(stage, carry) {
   wukongHeroAudio?.resetEvents();
   const thirtyLives=!WUKONG&&(lifeCheat.enabled||!!(carry&&G.thirtyLives));
   const keep2 = carry && G.p2 ? { weapon: G.p2.weapon, rapid: G.p2.rapid, inv: G.inv2 || [] } : null;
-  const keep = carry && G.p ? { score: G.score, lives: G.lives, nextLife: G.nextLife, deaths: G.deaths, time: G.time, inv: G.inv.slice(), sel: G.sel, weapon: G.p.weapon, rapid: G.p.rapid } : null;
+  const keep = carry && G.p ? { score: G.score, lives: G.lives, nextLife: G.nextLife, deaths: G.deaths, time: G.time, inv: G.inv.slice(), sel: G.sel, weapon: G.p.weapon, rapid: G.p.rapid, hp: G.p.hp, rage: G.p.rage } : null;
   Object.assign(G, {
     camX: 0, camY: 0, t: 0, time: 0, score: 0, lives: thirtyLives?THIRTY_LIVES:SET.diff === 'easy' ? SPEC.player.lives.easy : SPEC.player.lives.normal, thirtyLives, nextLife: SPEC.player.extraLife.first, deaths: 0, shake: 0,
     p: newPlayer(40), pb: [], eb: [], gr: [], en: [], riverFishHits:{}, flashT: 0, nadeCd: 0, freezeT: 0, empT: 0, decoyT: 0, decoyX: 0, sweepT: 0, inv: [], sel: 0, pods: [], items: [], fx: [],
@@ -872,6 +956,11 @@ function reset(stage, carry) {
   for (const [x, y] of TURRETS) G.en.push({ t: 'tur', x, y: ((stage || 1) === 1 && y === 176 ? groundAt(x)?.y || y : y) - 16, hp: WUKONG&&(stage||1)===1?HEAVEN_HP.tur:6, ...(WUKONG&&(stage||1)===1?{maxHp:HEAVEN_HP.tur}:{}), idx: 6, rotT: 0, fireT: (stage || 1) === 1 ? 2.2 + rnd() : 0.9, flash: 0 });
   if(WUKONG&&(stage||1)===1)G.wukongFlights=[320,900,1520,2140].map(at=>({at,done:false}));else delete G.wukongFlights;
   G.stage = stage || 1;
+  const customStageName = SPEC.stages?.[G.stage]?.name;
+  if (customStageName) G.stageName = customStageName; else delete G.stageName;
+  const customTheme = SPEC.stages?.[G.stage]?.theme;
+  if (customTheme && (customTheme.skyTint || customTheme.tintAlpha || customTheme.hue)) G.stageTheme = customTheme; else delete G.stageTheme;
+  if (STORY_OPENING) G.storyOpening = STORY_OPENING; else delete G.storyOpening;
   if(!WUKONG&&G.stage===1)G.en.push(createFortressRoofGuard());
   stageMusicSession.begin(G.stage);
   if (G.stage === 1) { G.p.y = groundAt(G.p.x)?.y || 144; G.p.support = groundAt(G.p.x); }
@@ -883,7 +972,12 @@ function reset(stage, carry) {
   G.fortm = G.stage === 14; // 水下第六关: flood and drain the fortress compartments
   G.liftm = G.stage === 15; // 水下第七关: ride a lift down an ice shaft
   G.momm = G.stage === 16; // 水下第八关: guard the drill, then fight the Ancient Mother
-  if (keep) { Object.assign(G, { score: keep.score, lives: keep.lives, nextLife: keep.nextLife, deaths: keep.deaths, time: keep.time, inv: keep.inv.filter(k => WUKONG || stageItemAllowed(k,stage||1)), sel: 0 }); G.p.weapon = keep.weapon; G.p.rapid = keep.rapid; }
+  if (keep) {
+    Object.assign(G, { score: keep.score, lives: keep.lives, nextLife: keep.nextLife, deaths: keep.deaths, time: keep.time, inv: keep.inv.filter(k => WUKONG || stageItemAllowed(k,stage||1)), sel: 0 });
+    G.p.weapon = keep.weapon; G.p.rapid = keep.rapid;
+    if (HAS_CUSTOM_HEALTH && keep.hp > 0) G.p.hp = keep.hp;
+    if (HAS_CUSTOM_RAGE && typeof keep.rage === 'number') G.p.rage = keep.rage;
+  }
   if (isBase()) initBase();
   if (G.stage === 3) initStage3();
   if (G.stage === 5) initStage5();
@@ -1021,6 +1115,26 @@ function killPlayer(force,hit={}) {
     if (hit === 'ended') { puff(p.x, p.y); banner('巨大化护甲耗尽 · 恢复原尺寸', 1.4); }
     else { spark(p.x, p.y - 30, { material: 'metal' }); banner('巨大化护甲剩余 ' + p.giantHits + ' 次', 1); }
     return;
+  }
+  if (HAS_CUSTOM_HEALTH) {
+    if (!force) {
+      const dmg = Math.max(1, hit.damage ?? HEALTH_RULE.hitDamage);
+      p.hp = Math.max(0, (p.hp ?? HEALTH_RULE.maxHp) - dmg);
+      if (HAS_CUSTOM_RAGE && RAGE_RULE.onHit > 0) {
+        const beforeRage = p.rage || 0;
+        p.rage = Math.min(RAGE_RULE.max, beforeRage + RAGE_RULE.onHit);
+        if (beforeRage < RAGE_RULE.max && p.rage >= RAGE_RULE.max && p.hp > 0) banner('怒气已满 · I / 大招可释放', 1.6);
+      }
+      G.fx.push({ k: 'combatNumber', x: hit.x ?? p.x, y: (hit.y ?? p.y - 18) - 6, text: '-' + dmg, player: true, t: 0, life: 0.55 });
+      if (MOD.active) MOD.emit('playerHurt', p, { ...hit, damage: dmg, lethal: p.hp <= 0 }, MOD_GAME);
+      if (p.hp > 0) {
+        p.invT = Math.max(p.invT, HEALTH_RULE.invincibleSeconds);
+        sfx.hurt(); shake(1.5);
+        return;
+      }
+    } else p.hp = 0;
+  } else if (MOD.active) {
+    MOD.emit('playerHurt', p, { ...hit, damage: hit.damage ?? 1, lethal: true }, MOD_GAME);
   }
   if(isCelestial()){
     if(!force){
@@ -5874,31 +5988,42 @@ function updatePlayer(I) {
   if (trigger && p.cool <= 0 && !p.dive) {
     p.wantFire = false;
     const w = WEAP[p.weapon];
-    if (p.weapon === 'laser') for (const b of G.pb) if (b.k === 'laser' && (b.owner || 1) === p.pid) b.dead = true; // each player has their own beam
-    const live = G.pb.filter(b => !b.dead && !b.drone && !b.heliMissile && (b.owner || 1) === p.pid).length;
-    if (live + w.per <= w.max) {
-      let ox, oy;
-      if (G.subMode) { ox = p.x + p.face * 15; oy = p.y + 2; }
-      else if (G.uw) { ox = p.x + p.ax * 13; oy = p.y - 1 + p.ay * 7; }
-      else if (heli) { ox = p.x + p.ax * 14; oy = p.y - 6 + p.ay * 8; }
-      else if (moto) { const muzzle=motorcycleMuzzle(p);ox=muzzle.x;oy=muzzle.y; }
-      else if(isMinecartRider(p)){const muzzle=minecartMuzzle(p);ox=muzzle.x;oy=muzzle.y;}
-      else if (p.inWater) { ox = p.x + p.ax * 10; oy = WATER.surf - 7 + p.ay * 8; }
-      else if (p.spin) { ox = p.x + p.ax * 9; oy = p.y - 15 + p.ay * 9; }
-      else if (p.prone) { ox = p.x + p.face * 15; oy = p.y - 4; }
-      else if (p.ay < -0.9) { ox = p.x + p.face * 2; oy = p.y - 36; }
-      else { ox = p.x + p.ax * 13; oy = p.y - 20 + p.ay * 11; }
-      if (giant) { ox = p.x + (ox - p.x) * 2; oy = p.y + (oy - p.y) * 2; }
-      const dm = giant ? 2 : 1;
-      const spd = w.spd * (p.rapid ? 1.4 : 1) * (G.uw ? 0.8 : 1), base = Math.atan2(p.ay, p.ax);
-      const vx = Math.cos(base) * spd, vy = Math.sin(base) * spd;
-      if (p.weapon === 'spread') { for (const d of [-0.36, -0.18, 0, 0.18, 0.36]) G.pb.push({ k: 'sp', x: ox, y: oy, vx: Math.cos(base + d) * spd, vy: Math.sin(base + d) * spd, dmg: dm }); }
-      else if (p.weapon === 'laser') { G.pb.push({ k: 'laser', x: ox, y: oy, vx, vy, dmg: 2 * dm, hits: new Set() }); }
-      else if (p.weapon === 'fire') { G.pb.push({ k: 'fire', x: ox, y: oy, cx: ox, cy: oy, vx, vy, t: 0, dir: p.face, dmg: 2 * dm }); }
-      else if (p.weapon === 'homing') { G.pb.push({ k: 'msl', x: ox, y: oy, ang: base, spd, life: 2.4, dmg: 2 * dm }); }
-      else { G.pb.push({ k: 'b', x: ox, y: oy, vx, vy, dmg: dm }); }
-      p.cool = w.cd * (p.rapid ? 0.7 : 1); p.flashT = 0.05; p.fx = ox; p.fy = oy;
+    if (HAS_CUSTOM_MELEE) {
+      performMeleeSlash(p);
+      p.cool = w.cd * (p.rapid ? 0.7 : 1);
+      p.flashT = 0.05;
+      p.fx = p.x + p.face * 13;
+      p.fy = p.y - 18;
       playerGunshot(p);
+      if (MOD.active) MOD.emit('playerAttack', p, MOD_GAME);
+    } else {
+      if (p.weapon === 'laser') for (const b of G.pb) if (b.k === 'laser' && (b.owner || 1) === p.pid) b.dead = true; // each player has their own beam
+      const live = G.pb.filter(b => !b.dead && !b.drone && !b.heliMissile && (b.owner || 1) === p.pid).length;
+      if (live + w.per <= w.max) {
+        let ox, oy;
+        if (G.subMode) { ox = p.x + p.face * 15; oy = p.y + 2; }
+        else if (G.uw) { ox = p.x + p.ax * 13; oy = p.y - 1 + p.ay * 7; }
+        else if (heli) { ox = p.x + p.ax * 14; oy = p.y - 6 + p.ay * 8; }
+        else if (moto) { const muzzle=motorcycleMuzzle(p);ox=muzzle.x;oy=muzzle.y; }
+        else if(isMinecartRider(p)){const muzzle=minecartMuzzle(p);ox=muzzle.x;oy=muzzle.y;}
+        else if (p.inWater) { ox = p.x + p.ax * 10; oy = WATER.surf - 7 + p.ay * 8; }
+        else if (p.spin) { ox = p.x + p.ax * 9; oy = p.y - 15 + p.ay * 9; }
+        else if (p.prone) { ox = p.x + p.face * 15; oy = p.y - 4; }
+        else if (p.ay < -0.9) { ox = p.x + p.face * 2; oy = p.y - 36; }
+        else { ox = p.x + p.ax * 13; oy = p.y - 20 + p.ay * 11; }
+        if (giant) { ox = p.x + (ox - p.x) * 2; oy = p.y + (oy - p.y) * 2; }
+        const dm = giant ? 2 : 1;
+        const spd = w.spd * (p.rapid ? 1.4 : 1) * (G.uw ? 0.8 : 1), base = Math.atan2(p.ay, p.ax);
+        const vx = Math.cos(base) * spd, vy = Math.sin(base) * spd;
+        if (p.weapon === 'spread') { for (const d of [-0.36, -0.18, 0, 0.18, 0.36]) G.pb.push({ k: 'sp', x: ox, y: oy, vx: Math.cos(base + d) * spd, vy: Math.sin(base + d) * spd, dmg: dm }); }
+        else if (p.weapon === 'laser') { G.pb.push({ k: 'laser', x: ox, y: oy, vx, vy, dmg: 2 * dm, hits: new Set() }); }
+        else if (p.weapon === 'fire') { G.pb.push({ k: 'fire', x: ox, y: oy, cx: ox, cy: oy, vx, vy, t: 0, dir: p.face, dmg: 2 * dm }); }
+        else if (p.weapon === 'homing') { G.pb.push({ k: 'msl', x: ox, y: oy, ang: base, spd, life: 2.4, dmg: 2 * dm }); }
+        else { G.pb.push({ k: 'b', x: ox, y: oy, vx, vy, dmg: dm }); }
+        p.cool = w.cd * (p.rapid ? 0.7 : 1); p.flashT = 0.05; p.fx = ox; p.fy = oy;
+        playerGunshot(p);
+        if (MOD.active) MOD.emit('playerAttack', p, MOD_GAME);
+      }
     }
   }
   // special items
@@ -5972,6 +6097,7 @@ function useSpecial() {
   G.inv.splice(G.sel, 1);
   if (G.sel >= G.inv.length) G.sel = Math.max(0, G.inv.length - 1);
   p.spCd = k==='transform'?.6:SP_CD;
+  if (MOD.active && MOD.emit('useItem', p, k, MOD_GAME)) return;
   if(isCelestial()&&WUKONG_MAGIC[k]){
     activateWukongMagic(p,k,solids);sfx.grow();puff(p.x,p.y-14);banner(WUKONG_MAGIC[k].description,2.2);return;
   }
@@ -6024,6 +6150,29 @@ function useSpecial() {
 function requestNade() {
   const p=G.p;
   if(p.dead||p.enteringExit||p.exitEntered||(isBase()&&(G.base.trans>0||G.base.dead)))return false;
+  if (HAS_CUSTOM_RAGE) {
+    if ((p.rage || 0) < RAGE_RULE.max) {
+      banner('怒气不足 · ' + Math.floor(p.rage || 0) + '/' + RAGE_RULE.max, 0.9);
+      tone(180, 0.06, 'triangle', 0.035, 140);
+      return false;
+    }
+    p.rage = 0;
+    p.invT = Math.max(p.invT, 1.0);
+    G.flashT = 0.35;
+    G.fx.push({ k: 'ring', x: p.x, y: p.y - 16, t: 0, life: 0.65 });
+    const dmg = RAGE_RULE.ultimateDamage;
+    for (const e of G.en) {
+      if (e.dead || e.t === 'beam' || (e.t === 'eel' && e.out < 0.3) || !onScreen(e.x, 24)) continue;
+      const b = ebox(e);
+      damageEnemy(e, dmg, b.x + b.w / 2, b.y + b.h / 2);
+    }
+    for (const pt of bossParts()) if (pt.hp > 0) hitBossPart(pt, dmg);
+    for (const b of G.eb) b.dead = true;
+    p.rage = 0;
+    sfx.big(); shake(3.5);
+    banner(RAGE_RULE.ultimateName + ' · 怒气释放', 1.5);
+    return true;
+  }
   if (isCelestial()) {
     if(!rageReady(p)){banner('怒气不足 · 受击积攒怒气 '+Math.floor(p.rage||0)+'/'+WUKONG_RAGE.max,.9);tone(180,.06,'triangle',.035,140);return false;}
     if(startUltimate(p,rnd)){
@@ -6462,6 +6611,18 @@ function killEnemy(e,shot) {
   addScore({ artillery:800, heavyGunner:800, grenadier:300, run: 100, snp: 300, tur: 500, box: 500, rock: 100, mor: 300, cart: 200, sac: 500, larva: 50, whiteFloater:50, ceilingParasite:300, ceilingStalker:150, diver: 200, mine: 100, jelly: 100, msub: 500, boat: 500, eel: 300, valve: 200, fish: 100 }[e.t] || 100);
   if (!small) shake(2);
   if (e.t === 'box') G.items.push({ x: e.x, y: e.y - 14, vx: 20, vy: -170, kind: e.item });
+  if (HAS_CUSTOM_HEALTH && HEALTH_RULE.killHeal > 0 && G.p && !G.p.dead && e.t !== 'box') {
+    G.p.killHealCount = (G.p.killHealCount || 0) + 1;
+    if (G.p.killHealCount >= Math.max(1, HEALTH_RULE.killHealEvery || 4)) {
+      G.p.killHealCount = 0;
+      healActor(G.p, HEALTH_RULE.killHeal);
+    }
+  }
+  if (HAS_CUSTOM_RAGE && RAGE_RULE.onKill > 0 && G.p && !G.p.dead && e.t !== 'box') {
+    const beforeRage = G.p.rage || 0;
+    G.p.rage = Math.min(RAGE_RULE.max, beforeRage + RAGE_RULE.onKill);
+    if (beforeRage < RAGE_RULE.max && G.p.rage >= RAGE_RULE.max) banner('怒气已满 · I / 大招可释放', 1.5);
+  }
   if (MOD.active) MOD.emit('kill', e, MOD_GAME);
 }
 function damageEnemy(e, dmg, x, y, shot) {
@@ -7805,6 +7966,21 @@ function drawFx() {
     else if (f.k === 'smoke') { ctx.globalAlpha = 0.6 * (1 - k); el(f.x, f.y, 1.4 + k * 2, 1.4 + k * 2, '#cfc9d6'); ctx.globalAlpha = 1; }
     else if (f.k === 'hit') glow(f.x, f.y, 3.2, 'rgba(255,255,255,1)', 'rgba(255,220,120,0)');
     else if (f.k === 'puff') { ctx.globalAlpha = 1 - k; el(f.x, f.y, 1.4, 1.1, '#f4e9da'); ctx.globalAlpha = 1; }
+    else if (f.k === 'meleeArc') {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - k * 0.9);
+      ctx.strokeStyle = f.color || '#ffd24a';
+      ctx.lineWidth = Math.max(1.2, 3.6 * (1 - k * 0.45));
+      const r = (f.r || 24) * (0.7 + k * 0.35), face = f.face || 1;
+      const a0 = face > 0 ? -0.95 : Math.PI - 0.95, a1 = face > 0 ? 0.95 : Math.PI + 0.95;
+      ctx.beginPath(); ctx.arc(f.x, f.y, r, a0, a1); ctx.stroke();
+      ctx.restore();
+    } else if (f.k === 'combatNumber') {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - k * 0.85);
+      drawText(f.text || '', f.x, f.y - k * 14, f.heal ? '#6be88b' : f.player ? '#ff6450' : '#ffe378', 'center', 8);
+      ctx.restore();
+    }
   }
 }
 function dither(b, c) { ctx.save(); ctx.globalAlpha = 0.42; rr(b.x, b.y, b.w, b.h, 2, c); ctx.restore(); }
@@ -7834,10 +8010,14 @@ function drawHudContent() {
     F(sx, SLOT_Y, 14, 12, c); F(sx + 1, SLOT_Y + 1, 12, 10, '#000000');
     if (k) drawBadge(sx + 1, SLOT_Y + 1, k, 0);
   }
-  { const nx = SLOT_X + INV_MAX * 16 + 9, ny = SLOT_Y + 6, k = isCelestial()?1-Math.min(1,(p.rage||0)/(p.maxRage||100)):Math.max(0, G.nadeCd || 0) / NADE_CD, ready = k <= 0;
+  { const nx = SLOT_X + INV_MAX * 16 + 9, ny = SLOT_Y + 6, rageHud = isCelestial() || HAS_CUSTOM_RAGE, k = rageHud ? 1 - Math.min(1, (p.rage || 0) / (p.maxRage || 100)) : Math.max(0, G.nadeCd || 0) / NADE_CD, ready = k <= 0;
     ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(nx, ny, 7, 0, Math.PI * 2); ctx.stroke();
     ctx.strokeStyle = ready ? '#58d854' : '#f8b800'; ctx.beginPath(); ctx.arc(nx, ny, 7, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (1 - k)); ctx.stroke();
-    if(isCelestial()){seg(nx-3.5,ny+3.5,nx+3.5,ny-3.5,1.8,ready?'#f5d378':'#887552');seg(nx-3.5,ny+3.5,nx-2,ny+2,2.3,'#e8b851');seg(nx+2,ny-2,nx+3.5,ny-3.5,2.3,'#e8b851');}else{el(nx, ny + 0.8, 3.6, 4, ready ? '#4a7a36' : '#3a4a34'); rr(nx - 1.4, ny - 4.6, 2.8, 1.8, 0.5, ready ? '#c8ccd2' : '#7a8088'); seg(nx + 1.2, ny - 4, nx + 3.4, ny - 2.4, 0.8, ready ? '#c8ccd2' : '#7a8088');} }
+    if(rageHud){seg(nx-3.5,ny+3.5,nx+3.5,ny-3.5,1.8,ready?'#f5d378':'#887552');seg(nx-3.5,ny+3.5,nx-2,ny+2,2.3,'#e8b851');seg(nx+2,ny-2,nx+3.5,ny-3.5,2.3,'#e8b851');}else{el(nx, ny + 0.8, 3.6, 4, ready ? '#4a7a36' : '#3a4a34'); rr(nx - 1.4, ny - 4.6, 2.8, 1.8, 0.5, ready ? '#c8ccd2' : '#7a8088'); seg(nx + 1.2, ny - 4, nx + 3.4, ny - 2.4, 0.8, ready ? '#c8ccd2' : '#7a8088');} }
+  if (HAS_CUSTOM_HEALTH && p.maxHp > 1) {
+    const ratio = Math.max(0, Math.min(1, (p.hp ?? p.maxHp) / p.maxHp));
+    F(68, 7, 46, 5, '#000000'); F(69, 8, Math.round(44 * ratio), 3, ratio > 0.35 ? '#48d264' : '#ff4d3a');
+  }
   if (G.inv.length || p.spCd > 0) {
     const f = 1 - Math.max(0, p.spCd) / SP_CD;
     F(SLOT_X, SLOT_Y + 14, 46, 2, '#7c7c7c'); F(SLOT_X, SLOT_Y + 14, Math.round(46 * f), 2, f >= 1 ? '#58d854' : '#f8b800');
@@ -7934,6 +8114,10 @@ function drawIntro() {
 }
 function render() {
   renderFrame();
+  if (MOD.hooks.drawWorld.length && G.mode === 'play' && G.stage !== 1) {
+    const cx = Math.round(G.camX * R) / R, cy = Math.round(G.camY * R) / R;
+    setT(-cx, -cy); ctx.save(); MOD.emit('drawWorld', ctx, MOD_GAME); ctx.restore();
+  }
   if (MOD.hooks.drawScreen.length && G.mode === 'play') { setT(); ctx.save(); MOD.emit('drawScreen', ctx, MOD_GAME); ctx.restore(); }
   if (STUDIO_DEBUG.overlay) drawStudioDebugOverlay(ctx);
 }
@@ -8102,7 +8286,7 @@ function flashOverlay() { if (!(G.flashT > 0)) return; ctx.save(); ctx.globalAlp
 // Opening and ending use the HD renderers; the same shared clock controls sound and skipping.
 const CINE_LEN = { open: WUKONG ? WUKONG_OPENING_DURATION : OPENING_DURATION, end: ENDING_DURATION, uwopen: 26, uwend: 41 };
 const CINE_TYPE = 16; // characters per second for the typewriter text
-const OPEN_PAGES = WUKONG ? WUKONG_OPENING_PAGES : OPENING_PAGES;
+const OPEN_PAGES = WUKONG ? WUKONG_OPENING_PAGES : (STORY_OPENING?.pages || OPENING_PAGES);
 const END_PAGES = ENDING_PAGES;
 function startOpening() { initAudio(); if(WUKONG)Music.stop(); reset(firstPlayableStage()); G.cine = { kind: 'open', t: 0, typed: 0, skip: false, ev: {} }; setMode('cine'); Music.start(false, -5, 108); }
 const UWO_PAGES = [
@@ -8487,8 +8671,9 @@ function updateHudContent() {
   const p = G.p,form=isCelestial()?transformation(p):null,gcd = Math.max(0, p.spCd,form?.switchCooldown||0), ready = gcd <= 0 && (G.inv.length > 0||!!form);
   setText('bGren', form?'换形 · '+TRANSFORM_FORMS[form.form].name:!G.inv.length ? '道具' : gcd > 0 ? gcd.toFixed(1) : WUKONG && G.inv[G.sel] === 'h' ? '筋斗云' : isCelestial() && G.inv[G.sel] === 'g' ? WUKONG_MAGIC_SHORT.clone : SP_SHORT[G.inv[G.sel]]);
   if(WUKONG)setText('bFire',form?TRANSFORM_FORMS[form.form].skill:'棍击 / 蓄力');
+  else if(HAS_CUSTOM_MELEE)setText('bFire','挥击');
   bG.classList.toggle('dim', !ready);
-  const rageMode=isCelestial(),ncd=Math.max(0,G.nadeCd||0),full=rageMode&&rageReady(p)&&!p.dead;
+  const rageMode=isCelestial()||HAS_CUSTOM_RAGE,ncd=Math.max(0,G.nadeCd||0),full=rageMode&&(isCelestial()?rageReady(p):(p.rage||0)>=RAGE_RULE.max)&&!p.dead;
   setText('bNade',rageMode?(full?'大招':'怒气 '+Math.floor(p.rage||0)+'%'):ncd>0?ncd.toFixed(1):!WUKONG&&p.ride==='heli'?'导弹':'手雷');
   bN.classList.toggle('dim',rageMode?!full:ncd>0);bN.classList.toggle('rage-ready',full&&G.mode==='play');
   if(rageMode)bN.setAttribute('aria-label',full?'怒气已满，点击随机释放大招':'怒气 '+Math.floor(p.rage||0)+'%，受击积攒');
