@@ -51,7 +51,16 @@ export async function createBackend(options = {}) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { server, games } = await createBackend();
+  const { server, games, studio } = await createBackend();
+  if ((await studio.store.list()).length === 0) {
+    await studio.store.create({ id: 'wukong-stage1-demo', title: '悟空传·花果山断崖', template: 'wukong' });
+    await studio.store.writeFiles('wukong-stage1-demo', [{
+      path: 'modules/spells.mjs',
+      content: `export default function setup(api) {\n  api.on('useItem', (player, kind, game) => {\n    if (kind === 'g') {\n      game.freezeEnemies(3);\n      game.clearEnemyBullets();\n      game.damageEnemiesInRadius(player.x, player.y, 180, 6);\n      return true;\n    }\n    if (kind === 'f') {\n      game.healPlayer(30);\n      return true;\n    }\n    return false;\n  });\n}\n`,
+    }], '挂载定身术与回血毫毛模块');
+    await studio.store.create({ id: 'wukong-origin', title: '大闹天宫·原版基准', template: 'wukong' });
+    await studio.store.create({ id: 'contra-mod-demo', title: '魂斗罗2026·创作演示', template: 'contra' });
+  }
   const port = Number(process.env.PORT || 3000);
   const host = process.env.HOST || '0.0.0.0';
   server.listen(port, host, () => console.log(`游戏统一后台：http://${host}:${server.address().port}（魂斗罗 + 大闹天宫 + Studio /studio/）`));

@@ -6,4 +6,3 @@ Thumbs.db
 /backend/.env
 # Local-only speech generation tools and model weights; never shipped with the game.
 /.playwright-mcp/
-/apps/studio/dist/
