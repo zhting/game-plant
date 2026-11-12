@@ -9,6 +9,7 @@ import { promisify } from 'node:util';
 import crypto from 'node:crypto';
 import { validateGameSpec, patchGameSpec, resolveGameSpec } from '../games/shared/game-spec.mjs';
 import { PROJECT_ID_PATTERN } from '../games/shared/project-spec.mjs';
+import { packZip, unpackZip } from './zip.mjs';
 
 const run = promisify(execFile);
 const GIT_IDENTITY = ['-c', 'user.name=Game Plant Studio', '-c', 'user.email=studio@game-plant.local', '-c', 'commit.gpgsign=false'];
@@ -88,7 +89,7 @@ export function createProjectStore({ dir, templatesDir }) {
         try {
           const spec = JSON.parse(await fs.readFile(path.join(dir, entry.name, 'game.json'), 'utf8'));
           const updatedAt = (await git(entry.name, ['log', '-1', '--format=%cI'])).trim();
-          out.push({ id: entry.name, title: spec.meta?.title || entry.name, template: spec.template, updatedAt });
+          out.push({ id: entry.name, title: spec.meta?.title || entry.name, description: spec.meta?.description || '', template: spec.template, updatedAt });
         } catch { /* not a project */ }
       }
       return out.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
@@ -271,6 +272,124 @@ export function createProjectStore({ dir, templatesDir }) {
         const result = await commitStaged(id, `回到版本 ${rev.slice(0, 7)}`);
         return { ...result, spec };
       });
+    },
+
+    /** Duplicate an existing project (spec + modules + assets) into a fresh git repository. */
+    async duplicate(sourceId, { id, title } = {}) {
+      const sourceSpec = await this.readSpec(sourceId);
+      const baseTitle = String(sourceSpec.meta?.title || sourceId);
+      const nextTitle = title ? String(title).slice(0, 20) : `${baseTitle.slice(0, 17)} 副本`;
+      const modList = await this.listFiles(sourceId, 'modules');
+      const assetList = await this.listFiles(sourceId, 'assets');
+      const copiedFiles = [];
+      for (const f of [...modList, ...assetList]) {
+        copiedFiles.push({ path: f.path, content: await this.readFile(sourceId, f.path) });
+      }
+      const created = await this.create({ id, title: nextTitle, template: sourceSpec.template || 'contra' });
+      try {
+        const nextSpec = { ...sourceSpec, meta: { ...(sourceSpec.meta || {}), title: nextTitle } };
+        await this.writeSpec(created.id, nextSpec, `复制自项目 ${sourceId}`);
+        if (copiedFiles.length) {
+          await this.writeFiles(created.id, copiedFiles, `复制模块与美术资源（来自 ${sourceId}）`);
+        }
+        return { id: created.id, spec: await this.readSpec(created.id) };
+      } catch (err) {
+        await fs.rm(projectDir(created.id), { recursive: true, force: true });
+        throw err;
+      }
+    },
+
+    /** Permanently delete a project directory. */
+    remove(id) {
+      return locked(id, async () => {
+        await requireProject(id);
+        await fs.rm(projectDir(id), { recursive: true, force: true });
+        return { ok: true, id };
+      });
+    },
+
+    /** Export a project (game.json, modules/*, assets/*, README.txt) as a portable .zip Buffer. */
+    async exportZip(id) {
+      const spec = await this.readSpec(id);
+      const entries = [
+        { name: 'game.json', data: JSON.stringify(spec, null, 2) + '\n' },
+        {
+          name: 'README.txt',
+          data: [
+            `Game Plant 原创作品包：${spec.meta?.title || id} (${id})`,
+            `底座模板：${spec.template || 'contra'}`,
+            '',
+            '如何使用：',
+            '1. 启动 Game Plant 后打开 /studio/ 工作台；',
+            '2. 点击顶部「📥 导入作品包」，选择本 .zip 文件即可一键还原游玩与继续改装！',
+            '',
+          ].join('\n'),
+        },
+      ];
+      for (const folder of ['modules', 'assets']) {
+        for (const f of await this.listFiles(id, folder)) {
+          entries.push({ name: f.path, data: await this.readFile(id, f.path) });
+        }
+      }
+      return packZip(entries);
+    },
+
+    /** Import a portable .zip Buffer into a new project after validating game.json, file rules, and modules. */
+    async importZip(zipBuf, { id, title, verifyModules } = {}) {
+      let rawEntries;
+      try { rawEntries = unpackZip(zipBuf); }
+      catch (err) { throw new ProjectError(400, err.message); }
+
+      // Support archives zipped either at root (game.json) or inside a single top-level folder (foo/game.json).
+      let entries = rawEntries;
+      if (!entries.some(e => e.name === 'game.json')) {
+        const sub = entries.find(e => /^[^/]+\/game\.json$/.test(e.name));
+        if (sub) {
+          const prefix = sub.name.slice(0, sub.name.indexOf('/') + 1);
+          entries = entries.filter(e => e.name.startsWith(prefix)).map(e => ({ name: e.name.slice(prefix.length), data: e.data }));
+        }
+      }
+      const specEntry = entries.find(e => e.name === 'game.json');
+      if (!specEntry) throw new ProjectError(400, '作品包缺少 game.json 文件');
+      let spec;
+      try { spec = JSON.parse(specEntry.data.toString('utf8')); }
+      catch { throw new ProjectError(400, '作品包内的 game.json 不是有效 JSON'); }
+      const nextTitle = title ? String(title).slice(0, 20) : (spec.meta?.title ? String(spec.meta.title).slice(0, 20) : '导入的原创作品');
+      spec = { ...spec, meta: { ...(spec.meta || {}), title: nextTitle } };
+      checkSpec(spec);
+
+      const filesToWrite = [];
+      const modSources = [];
+      for (const e of entries) {
+        if (e.name === 'game.json' || e.name === 'README.txt') continue;
+        const folder = e.name.split('/')[0];
+        if (!PROJECT_FILE_RULES[folder]) continue; // ignore extra docs
+        const rule = fileRule(e.name);
+        if (e.data.length > rule.maxBytes) throw new ProjectError(413, `${e.name}: 超过大小限制`);
+        if (folder === 'modules') {
+          const src = e.data.toString('utf8');
+          modSources.push({ path: e.name, source: src });
+          filesToWrite.push({ path: e.name, content: src });
+        } else {
+          filesToWrite.push({ path: e.name, content: e.data });
+        }
+      }
+      if (filesToWrite.length > 20) throw new ProjectError(400, '作品包内模块与资源文件超过 20 个上限');
+      if (modSources.length && typeof verifyModules === 'function') {
+        await verifyModules(modSources);
+      }
+
+      const created = await this.create({ id, title: nextTitle, template: spec.template || 'contra' });
+      try {
+        await this.writeSpec(created.id, spec, '导入作品包 game.json');
+        if (filesToWrite.length) {
+          await this.writeFiles(created.id, filesToWrite, `导入 ${filesToWrite.length} 个模块与资源文件`);
+        }
+        return { id: created.id, spec: await this.readSpec(created.id), filesImported: filesToWrite.length };
+      } catch (err) {
+        await fs.rm(projectDir(created.id), { recursive: true, force: true });
+        throw err;
+      }
     },
   };
 }

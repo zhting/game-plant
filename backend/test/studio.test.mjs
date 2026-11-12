@@ -11,6 +11,7 @@ import { createUsageMeter } from '../ai/config.mjs';
 import { validateGameSpec, patchGameSpec } from '../../games/shared/game-spec.mjs';
 import { checkModuleSource, runIsolated } from '../../sim/isolated.mjs';
 import { STARTER_THEMES, GAMEPLAY_BRICKS } from '../../apps/studio/src/presets.js';
+import { packZip } from '../zip.mjs';
 
 const root = path.resolve(new URL('../../', import.meta.url).pathname);
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'studio-test-'));
@@ -328,4 +329,92 @@ test('starter themes and zero-code gameplay bricks pass validation and isolated 
   const play = await runIsolated({ kind: 'playtest', spec: { template: 'contra' }, modules, stages: [1], seconds: 4, seed: 1 }, { timeoutMs: 20000 });
   assert.equal(play.ok, true, play.error);
 });
+
+test('studio Phase 4: public showcase, standalone play title/desc, duplicate, delete, and zip export/import', { timeout: 30000 }, async () => {
+  const { EXAMPLE_MODULE } = await import('../ai/mod-guide.mjs');
+  const sharp = (await import('sharp')).default;
+  const app = await createBackend({ studio: { dataDir: tmp(), token: 'p4tok', aiConfig: { apiKey: '', models: {}, agent: {}, limits: {} } } });
+  app.server.listen(0, '127.0.0.1');
+  await once(app.server, 'listening');
+  const origin = `http://127.0.0.1:${app.server.address().port}`;
+  const auth = { authorization: 'Bearer p4tok' };
+  try {
+    // 1. Create a rich project with custom description, module, and PNG asset
+    assert.equal((await fetch(origin + '/api/projects', {
+      method: 'POST', headers: { ...auth, 'content-type': 'application/json' },
+      body: JSON.stringify({ id: 'cyber', title: '赛博特工' }),
+    })).status, 201);
+    assert.equal((await fetch(origin + '/api/projects/cyber/game.json', {
+      method: 'PATCH', headers: { ...auth, 'content-type': 'application/json' },
+      body: JSON.stringify({ patch: { meta: { description: '霓虹飞斧闯关' }, weapons: { rifle: { pierce: 1 } } }, message: '设置简介与穿透' }),
+    })).status, 200);
+    const png = await sharp({ create: { width: 16, height: 16, channels: 4, background: { r: 20, g: 200, b: 240, alpha: 1 } } }).png().toBuffer();
+    assert.equal((await fetch(origin + '/api/projects/cyber/files/modules/bird.mjs', {
+      method: 'PUT', headers: { ...auth, 'content-type': 'text/plain' }, body: EXAMPLE_MODULE,
+    })).status, 200);
+    assert.equal((await fetch(origin + '/api/projects/cyber/files/assets/bird.png', {
+      method: 'PUT', headers: { ...auth, 'content-type': 'image/png' }, body: png,
+    })).status, 200);
+
+    // 2. Public showcase endpoint works without auth token; /play/:id/ injects custom title & description
+    const pubRes = await fetch(origin + '/api/public/projects');
+    assert.equal(pubRes.status, 200);
+    const pubList = await pubRes.json();
+    assert.equal(pubList.length, 1);
+    assert.equal(pubList[0].title, '赛博特工');
+    assert.equal(pubList[0].description, '霓虹飞斧闯关');
+
+    const playHtml = await (await fetch(origin + '/play/cyber/')).text();
+    assert.match(playHtml, /<title>赛博特工 · Game Plant<\/title>/);
+    assert.match(playHtml, /<meta name="description" content="霓虹飞斧闯关">/);
+
+    // 3. Duplicate project clones spec, modules, and assets
+    const dupRes = await fetch(origin + '/api/projects/cyber/duplicate', {
+      method: 'POST', headers: { ...auth, 'content-type': 'application/json' }, body: JSON.stringify({}),
+    });
+    assert.equal(dupRes.status, 201);
+    const dup = await dupRes.json();
+    assert.equal(dup.spec.meta.title, '赛博特工 副本');
+    assert.equal(dup.spec.weapons.rifle.pierce, 1);
+    const dupDetail = await (await fetch(`${origin}/api/projects/${dup.id}`, { headers: auth })).json();
+    assert.deepEqual(dupDetail.files.modules.map(f => f.path), ['modules/bird.mjs']);
+    assert.deepEqual(dupDetail.files.assets.map(f => f.path), ['assets/bird.png']);
+
+    // 4. Export .zip & Import .zip roundtrip
+    const zipRes = await fetch(origin + '/api/projects/cyber/export', { headers: auth });
+    assert.equal(zipRes.status, 200);
+    assert.match(zipRes.headers.get('content-type') || '', /application\/zip/);
+    const zipBuf = Buffer.from(await zipRes.arrayBuffer());
+    assert.ok(zipBuf.length > 100);
+
+    const impRes = await fetch(origin + '/api/projects/import', {
+      method: 'POST',
+      headers: { ...auth, 'content-type': 'application/zip', 'x-title': encodeURIComponent('导入特工版') },
+      body: zipBuf,
+    });
+    assert.equal(impRes.status, 201);
+    const imp = await impRes.json();
+    assert.equal(imp.spec.meta.title, '导入特工版');
+    assert.equal(imp.spec.weapons.rifle.pierce, 1);
+    assert.equal(imp.filesImported, 2);
+
+    // 5. Malicious module inside .zip is rejected with 422 before creating a repo
+    const badZip = packZip([
+      { name: 'subpack/game.json', data: JSON.stringify({ version: 1, template: 'contra', meta: { title: '坏包' } }) },
+      { name: 'subpack/modules/evil.mjs', data: "import fs from 'node:fs';\nexport default () => {};" },
+    ]);
+    const badImp = await fetch(origin + '/api/projects/import', {
+      method: 'POST', headers: { ...auth, 'content-type': 'application/zip' }, body: badZip,
+    });
+    assert.equal(badImp.status, 422);
+    assert.equal((await (await fetch(origin + '/api/projects', { headers: auth })).json()).length, 3);
+
+    // 6. Delete project removes directory cleanly
+    assert.equal((await fetch(`${origin}/api/projects/${dup.id}`, { method: 'DELETE', headers: auth })).status, 200);
+    assert.equal((await fetch(`${origin}/api/projects/${dup.id}`, { headers: auth })).status, 404);
+  } finally {
+    await app.close();
+  }
+});
+
 

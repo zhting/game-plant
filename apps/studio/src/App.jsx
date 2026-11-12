@@ -19,11 +19,13 @@ export default function App() {
   const [tab, setTab] = useState('params');
   const [error, setError] = useState('');
 
-  // Inline project creation state (avoids window.prompt which is blocked in sandboxed preview iframes)
+  // Inline project creation & management state (avoids window.prompt / window.confirm)
   const [newTemplate, setNewTemplate] = useState('contra');
   const [newTitle, setNewTitle] = useState('我的横版射击');
   const [showCreateBar, setShowCreateBar] = useState(false);
   const [creating, setCreating] = useState(false);
+  const [busyAction, setBusyAction] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   // Studio preview live controls (stage jump, checkpoint X, hitbox debug overlay, god mode)
   const iframeRef = useRef(null);
@@ -48,7 +50,8 @@ export default function App() {
   useEffect(() => { boot().catch(e => setError(e.message)); }, [boot]);
 
   const loadProject = useCallback(async (id, { reloadPreview = true } = {}) => {
-    if (!id) { setProject(null); return; }
+    setConfirmDelete(false);
+    if (!id) { setProject(null); history.replaceState(null, '', location.pathname); return; }
     try {
       const p = await api.project(id);
       setProject(p);
@@ -119,6 +122,79 @@ export default function App() {
     }
   }
 
+  async function handleDuplicate() {
+    if (!project || busyAction) return;
+    setBusyAction(true);
+    setError('');
+    try {
+      const { id } = await api.duplicateProject(project.id);
+      setProjects(await api.projects());
+      setCurrentId(id);
+    } catch (err) {
+      setError(err.details ? `${err.message}：${err.details.join('；')}` : err.message);
+    } finally {
+      setBusyAction(false);
+    }
+  }
+
+  async function handleExportZip() {
+    if (!project || busyAction) return;
+    setBusyAction(true);
+    setError('');
+    try {
+      const blob = await api.exportProjectZip(project.id);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${project.id}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusyAction(false);
+    }
+  }
+
+  async function handleImportZip(e) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file || busyAction) return;
+    setBusyAction(true);
+    setError('');
+    try {
+      const buf = await file.arrayBuffer();
+      const { id } = await api.importProjectZip(buf);
+      setProjects(await api.projects());
+      setCurrentId(id);
+      setShowCreateBar(false);
+    } catch (err) {
+      setError(err.details ? `${err.message}：${err.details.join('；')}` : err.message);
+    } finally {
+      setBusyAction(false);
+    }
+  }
+
+  async function handleDeleteProject() {
+    if (!project || busyAction) return;
+    setBusyAction(true);
+    setError('');
+    try {
+      await api.deleteProject(project.id);
+      setConfirmDelete(false);
+      localStorage.removeItem('game-plant-project');
+      setProject(null);
+      setCurrentId('');
+      setProjects(await api.projects());
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusyAction(false);
+    }
+  }
+
   if (status?.auth && !status.authorized) {
     return (
       <div className="gate">
@@ -146,12 +222,30 @@ export default function App() {
     <div className="app">
       <header>
         <strong className="brand" style={{ cursor: 'pointer' }} onClick={() => setCurrentId('')} title="返回项目首页与创世主题大厅">🌱 Game Plant Studio</strong>
+        <a className="hall-link" href="/" title="打开街机大厅与原创作品墙">🕹 作品墙</a>
         <select value={currentId} onChange={e => setCurrentId(e.target.value)}>
           <option value="">选择项目…</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.title}（{p.id}）</option>)}
         </select>
         {project ? (
-          <button onClick={() => setShowCreateBar(v => !v)}>＋ 新项目 / 主题包</button>
+          <>
+            <button onClick={() => setShowCreateBar(v => !v)}>＋ 新建</button>
+            <button disabled={busyAction} onClick={handleDuplicate} title="完整复制当前项目的配置、积木代码与精灵贴图">📄 复制</button>
+            <button disabled={busyAction} onClick={handleExportZip} title="打包下载 .zip 作品包，可备份或发给朋友一键导入">📦 导出 .zip</button>
+            <label className="upload" title="导入他人分享或自己备份的 .zip 作品包">
+              📥 导入 .zip
+              <input type="file" accept=".zip,application/zip" disabled={busyAction} onChange={handleImportZip} />
+            </label>
+            {!confirmDelete ? (
+              <button className="danger-outline" disabled={busyAction} onClick={() => setConfirmDelete(true)} title="删除当前项目">🗑 删除</button>
+            ) : (
+              <span className="confirm-del">
+                确认删除？
+                <button className="danger" disabled={busyAction} onClick={handleDeleteProject}>确定删除</button>
+                <button disabled={busyAction} onClick={() => setConfirmDelete(false)}>取消</button>
+              </span>
+            )}
+          </>
         ) : (
           <>
             <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => handleTemplateChange(e.target.value)}>
@@ -159,6 +253,10 @@ export default function App() {
               <option value="wukong">模板：悟空大闹天宫</option>
             </select>
             <button className="primary" disabled={creating} onClick={submitCreateProject}>{creating ? '创建中…' : '＋ 空白项目'}</button>
+            <label className="upload" title="从 .zip 作品包导入游戏项目">
+              📥 导入作品包
+              <input type="file" accept=".zip,application/zip" disabled={busyAction} onChange={handleImportZip} />
+            </label>
           </>
         )}
         <span className="spacer" />
@@ -218,6 +316,10 @@ export default function App() {
               <option value="wukong">模板：悟空大闹天宫（棍法神通动作底座）</option>
             </select>
             <button type="submit" className="primary" disabled={creating}>{creating ? '正在创建…' : '＋ 新建项目'}</button>
+            <label className="upload" style={{ padding: '6px 12px', fontSize: 13 }}>
+              📥 导入 .zip 作品包
+              <input type="file" accept=".zip,application/zip" disabled={busyAction} onChange={handleImportZip} />
+            </label>
           </form>
 
           {projects.length > 0 && (

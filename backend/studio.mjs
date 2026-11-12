@@ -1,5 +1,6 @@
 // Studio HTTP API: projects (git-backed game.json), chat with the creation agent,
 // and the /play/<project>/ preview pages. Mounted by backend/server.mjs.
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { loadExpress } from './mini-express.mjs';
@@ -13,6 +14,7 @@ import { runImageTool } from './ai/image-tool.mjs';
 import { GAME_SPEC_SCHEMA, CONTRA_SPEC_DEFAULTS, ITEM_KINDS, ENEMY_TYPES } from '../games/shared/game-spec.mjs';
 
 const express = loadExpress();
+const escHtml = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
 /**
  * @param {object} options
@@ -47,6 +49,13 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   };
   const auth = (req, res, next) => authorized(req) ? next() : res.status(401).json({ error: '需要 Studio 口令' });
 
+  // Public: Arcade Hall showcase list (safe read-only metadata for local/shared game wall).
+  router.get('/api/public/projects', wrap(async (req, res) => {
+    const list = await store.list();
+    res.set('Cache-Control', 'no-store').json(list.map(({ id, title, description, template, updatedAt }) => ({
+      id, title, description: description || '', template, updatedAt,
+    })));
+  }));
   // Public: preview pages and their game.json, so play links can be shared with testers.
   router.get('/api/projects/:id/game.json', wrap(async (req, res) => {
     res.set('Cache-Control', 'no-store').json(await store.readSpec(req.params.id, req.query.rev || undefined));
@@ -72,7 +81,24 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
     const spec = await store.readSpec(req.params.id);
     const gameDir = spec.template === 'contra' ? 'contra2026' : spec.template === 'wukong' ? 'wukong' : null;
     if (!gameDir) throw new ProjectError(400, `暂不支持模板 ${spec.template}`);
-    res.set('Cache-Control', 'no-store').sendFile(path.join(root, 'games', gameDir, 'index.html'));
+    let html = await fs.readFile(path.join(root, 'games', gameDir, 'index.html'), 'utf8');
+    if (spec.meta?.title) {
+      const escTitle = escHtml(spec.meta.title);
+      html = html
+        .replace(/<title>[^<]*<\/title>/, `<title>${escTitle} · Game Plant</title>`)
+        .replace(/<p class="loading-brand">[^<]*<\/p>/, `<p class="loading-brand">${escTitle}</p>`)
+        .replace(/<h1 class="wukong-title">[^<]*<\/h1>/, `<h1 class="wukong-title">${escTitle}</h1>`);
+    }
+    if (spec.meta?.description) {
+      const escDesc = escHtml(spec.meta.description);
+      html = html.replace(/<p class="wukong-lede">[^<]*<\/p>/, `<p class="wukong-lede">${escDesc}</p>`);
+      if (/<meta name="description"[^>]*>/.test(html)) {
+        html = html.replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${escDesc}">`);
+      } else {
+        html = html.replace('</title>', `</title>\n<meta name="description" content="${escDesc}">`);
+      }
+    }
+    res.set('Cache-Control', 'no-store').type('html').send(html);
   }));
 
   router.get('/api/studio/status', (req, res) => res.json({
@@ -87,6 +113,33 @@ export function createStudio({ root, dataDir, token = process.env.STUDIO_TOKEN |
   }));
   router.get('/api/projects', wrap(async (req, res) => res.json(await store.list())));
   router.post('/api/projects', wrap(async (req, res) => res.status(201).json(await store.create(req.body || {}))));
+  const rawZip = express.raw({ type: () => true, limit: '20mb' });
+  router.post('/api/projects/import', rawZip, wrap(async (req, res) => {
+    if (!Buffer.isBuffer(req.body) || !req.body.length) throw new ProjectError(400, '请上传有效的 .zip 作品包');
+    const title = req.get('x-title') ? decodeURIComponent(String(req.get('x-title'))).trim() : (req.query.title ? String(req.query.title).trim() : undefined);
+    const id = req.query.id ? String(req.query.id).trim() : undefined;
+    const verifyModules = async mods => {
+      for (const m of mods) {
+        const errors = checkModuleSource(m.source);
+        if (errors.length) throw new ProjectError(422, `${m.path} 模块检查没有通过`, errors);
+      }
+      const inspect = await runIsolated({ kind: 'inspect', modules: mods }, { timeoutMs: 15000 });
+      if (!inspect.ok) {
+        throw new ProjectError(422, '作品包模块加载失败', (inspect.errors || [{ message: inspect.error }]).map(e => `${e.where || 'module'}: ${e.message}`));
+      }
+    };
+    res.status(201).json(await store.importZip(req.body, { id, title, verifyModules }));
+  }));
+  router.post('/api/projects/:id/duplicate', wrap(async (req, res) => res.status(201).json(await store.duplicate(req.params.id, req.body || {}))));
+  router.get('/api/projects/:id/export', wrap(async (req, res) => {
+    const id = req.params.id;
+    const zip = await store.exportZip(id);
+    res.set('Cache-Control', 'no-store')
+      .set('Content-Disposition', `attachment; filename="${id}.zip"`)
+      .type('application/zip')
+      .send(zip);
+  }));
+  router.delete('/api/projects/:id', wrap(async (req, res) => res.json(await store.remove(req.params.id))));
   router.get('/api/projects/:id', wrap(async (req, res) => {
     const id = req.params.id;
     res.json({

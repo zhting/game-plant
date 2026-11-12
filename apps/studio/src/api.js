@@ -25,6 +25,21 @@ export const api = {
   schema: () => request('GET', '/api/spec/schema'),
   projects: () => request('GET', '/api/projects'),
   createProject: body => request('POST', '/api/projects', body),
+  duplicateProject: (id, body = {}) => request('POST', `/api/projects/${id}/duplicate`, body),
+  deleteProject: id => request('DELETE', `/api/projects/${id}`),
+  exportProjectZip: async id => {
+    const res = await fetch(`/api/projects/${id}/export`, {
+      headers: getToken() ? { authorization: `Bearer ${getToken()}` } : {},
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => null);
+      throw new ApiError(res.status, err?.error || `导出失败 HTTP ${res.status}`, err?.details);
+    }
+    return res.blob();
+  },
+  importProjectZip: (buf, title) => request('POST', '/api/projects/import', null, {
+    raw: buf, type: 'application/zip', headers: title ? { 'x-title': encodeURIComponent(title) } : {},
+  }),
   project: id => request('GET', `/api/projects/${id}`),
   patch: (id, patch, message) => request('PATCH', `/api/projects/${id}/game.json`, { patch, message }),
   put: (id, spec, message) => request('PUT', `/api/projects/${id}/game.json`, { spec, message }),

@@ -5,12 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Game Plant · 游戏生产平台</title>
 <style>
-  :root { color-scheme: dark; --bg: #0d1016; --card: #161b24; --line: #273041; --text: #e8edf5; --muted: #8b97ab; --accent: #ff6a3d; }
+  :root { color-scheme: dark; --bg: #0d1016; --card: #161b24; --line: #273041; --text: #e8edf5; --muted: #8b97ab; --accent: #ff6a3d; --gold: #f2b33d; }
   * { box-sizing: border-box; }
   body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
   main { max-width: 960px; margin: 0 auto; padding: 56px 24px; }
+  .hero { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 36px; }
   h1 { margin: 0 0 4px; font-size: 32px; letter-spacing: .02em; }
-  p.lead { margin: 0 0 40px; color: var(--muted); }
+  p.lead { margin: 0; color: var(--muted); }
+  a.cta { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 10px; background: var(--gold); color: #1b1405; font-weight: 700; text-decoration: none; transition: transform .15s, filter .15s; }
+  a.cta:hover { transform: translateY(-2px); filter: brightness(1.06); }
+  h2.sec-title { margin: 36px 0 14px; font-size: 18px; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
   a.card { display: block; color: inherit; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .15s, border-color .15s; }
   a.card:hover, a.card:focus-visible { transform: translateY(-3px); border-color: var(--accent); outline: none; }
@@ -19,12 +23,34 @@
   .info h2 { margin: 0 0 4px; font-size: 20px; }
   .info span { color: var(--muted); font-size: 14px; }
   .tag { display: inline-block; margin-left: 8px; padding: 0 8px; border-radius: 99px; font-size: 12px; border: 1px solid var(--line); color: var(--muted); vertical-align: middle; }
+  .creator-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; margin-bottom: 12px; }
+  .creator-card { display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 18px; background: linear-gradient(155deg, #19202d, #131822); border: 1px solid var(--line); border-radius: 14px; transition: border-color .15s, transform .15s; }
+  .creator-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .creator-card h3 { margin: 0 0 6px; font-size: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .creator-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .creator-actions { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+  .creator-actions a { text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 8px; font-weight: 600; }
+  .creator-actions a.play-btn { background: var(--accent); color: #fff; flex: 1; text-align: center; }
+  .creator-actions a.edit-btn { background: #202737; color: var(--text); border: 1px solid var(--line); }
+  .creator-actions a:hover { filter: brightness(1.1); }
 </style>
 </head>
 <body>
 <main>
-  <h1>Game Plant</h1>
-  <p class="lead">游戏生产平台 · 内置模板 · <a href="/studio/" style="color:inherit">进入 AI 创作工作台 Studio →</a></p>
+  <div class="hero">
+    <div>
+      <h1>Game Plant</h1>
+      <p class="lead">零代码 AI 街机游戏创作平台 · 一句话改弹道、画精灵、搭关卡、打包分享</p>
+    </div>
+    <a class="cta" href="/studio/">✨ 进入 AI 创作工作台 Studio →</a>
+  </div>
+
+  <section id="creatorShowcase" hidden>
+    <h2 class="sec-title">🎮 创作者原创作品墙 <span class="tag" id="creatorCount">0</span></h2>
+    <div class="creator-grid" id="creatorGrid"></div>
+  </section>
+
+  <h2 class="sec-title">🕹️ 官方内置底座模板</h2>
   <div class="grid">
     <a class="card" href="/games/contra2026/">
       <img src="/assets/covers/contra2026-zh-512.webp" alt="魂斗罗2026 封面" width="512" height="512">
@@ -36,5 +62,49 @@
     </a>
   </div>
 </main>
+<script type="module">
+  try {
+    const res = await fetch('/api/public/projects', { cache: 'no-store' });
+    if (res.ok) {
+      const list = await res.json();
+      if (Array.isArray(list) && list.length > 0) {
+        const sec = document.getElementById('creatorShowcase');
+        const grid = document.getElementById('creatorGrid');
+        const count = document.getElementById('creatorCount');
+        count.textContent = `${list.length} 部作品`;
+        for (const p of list) {
+          const card = document.createElement('article');
+          card.className = 'creator-card';
+          const top = document.createElement('div');
+          const h3 = document.createElement('h3');
+          h3.textContent = p.title || p.id;
+          const badge = document.createElement('span');
+          badge.className = 'tag';
+          badge.textContent = p.template === 'wukong' ? '🐒 悟空动作底座' : '🔫 横版射击底座';
+          h3.appendChild(badge);
+          const desc = document.createElement('p');
+          desc.textContent = p.description || '由 Game Plant Studio 创作的原创街机作品，支持键盘、手柄与触屏直接游玩。';
+          top.append(h3, desc);
+
+          const actions = document.createElement('div');
+          actions.className = 'creator-actions';
+          const playLink = document.createElement('a');
+          playLink.className = 'play-btn';
+          playLink.href = `/play/${encodeURIComponent(p.id)}/`;
+          playLink.textContent = '▶ 立即游玩';
+          const editLink = document.createElement('a');
+          editLink.className = 'edit-btn';
+          editLink.href = `/studio/?project=${encodeURIComponent(p.id)}`;
+          editLink.textContent = '🛠 改装';
+          actions.append(playLink, editLink);
+
+          card.append(top, actions);
+          grid.appendChild(card);
+        }
+        sec.hidden = false;
+      }
+    }
+  } catch { /* ignore when static-only */ }
+</script>
 </body>
 </html>
