@@ -8,7 +8,7 @@ if (params.get('theme') === 'wukong') {
   location.replace(target.href);
 } else {
   const [{ startArcade }, { loadProjectSpec, loadProjectModules }] = await Promise.all([
-    import('/games/shared/arcade-engine.mjs?v=m4-1'),
+    import('/games/shared/arcade-engine.mjs?v=creator-1'),
     import('/games/shared/project-spec.mjs?v=mods-1'),
   ]);
   // /play/<project>/ pages boot with that project's game.json and modules; the stock page boots the template.

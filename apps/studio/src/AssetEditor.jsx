@@ -2,21 +2,29 @@ import { useEffect, useRef, useState } from 'react';
 import { api } from './api.js';
 
 const BUILTIN_TRACKS = [
-  ['', '（关卡默认配乐）'],
-  ['stage1_orchestral', '第一关 · 交响重制'],
-  ['stage1_classic', '第一关 · 经典街机'],
-  ['stage1_metal', '第一关 · 重金属'],
-  ['stage2_base', '第二关 · 地下指挥所'],
-  ['stage3_waterfall', '第三关 · 峡谷瀑布'],
-  ['stage4_fortress', '第四关 · 地下基地'],
-  ['stage5_snowfield', '第五关 · 极地冰原'],
-  ['stage6_energy', '第六关 · 高温能源厂'],
-  ['stage7_hangar', '第七关 · 机械机库'],
-  ['stage8_lair', '第八关 · 异形巢穴'],
-  ['boss', '首领战音乐'],
+  ['', '（关卡默认配乐）', ''],
+  ['stage1rock', '第一关 · 摇滚重制版', '/games/contra2026/assets/audio/stage1-rock-lite.ogg'],
+  ['stage1orchestral', '第一关 · 交响大编制版', '/games/contra2026/assets/audio/stage1-yue2-orchestral.ogg'],
+  ['stage1cyberpunk', '第一关 · 赛博朋克电子', '/games/contra2026/assets/audio/stage1-cyberpunk.ogg'],
+  ['stage1industrial', '第一关 · 工业重金属', '/games/contra2026/assets/audio/stage1-industrial-metal.ogg'],
+  ['stage1epic', '第一关 · 史诗混合版', '/games/contra2026/assets/audio/stage1-epic.ogg'],
+  ['stage1', '第一关 · 经典街机原声', '/games/contra2026/assets/audio/reference-stage1.ogg'],
+  ['stage2', '第二关 · 地下指挥所', '/games/contra2026/assets/audio/stage2-remix.ogg'],
+  ['stage2boss', '首领战 · 指挥所中枢', '/games/contra2026/assets/audio/reference-stage2-boss.ogg'],
+  ['stage3', '第三关 · 峡谷瀑布', '/games/contra2026/assets/audio/stage3-remix.ogg'],
+  ['stage4', '第四关 · 地下基地', '/games/contra2026/assets/audio/reference-stage4.ogg'],
+  ['stage4boss', '首领战 · 双生幻影', '/games/contra2026/assets/audio/reference-stage4-boss.ogg'],
+  ['stage5', '第五关 · 极地冰原', '/games/contra2026/assets/audio/reference-stage5.ogg'],
+  ['stage6', '第六关 · 高温能源厂', '/games/contra2026/assets/audio/reference-stage6.ogg'],
+  ['stage7', '终章 · 异形母巢决战', '/games/contra2026/assets/audio/reference-stage7.ogg'],
+  ['wukong1', '东方仙侠 · 西游云宫迅音', '/games/wukong/assets/journey-to-west-theme.ogg'],
+  ['wukong2', '东方国风 · 南天门破阵行军', '/games/wukong/assets/stage-02/south-gate-march.ogg'],
 ];
 
-const STAGES = { 1: '雨林要塞', 2: '地下指挥所', 3: '峡谷瀑布', 4: '地下基地', 5: '极地冰原', 6: '高温能源厂', 7: '机械机库', 8: '异形巢穴' };
+const TRACK_URL_MAP = Object.fromEntries(BUILTIN_TRACKS.filter(([, , u]) => u).map(([k, , u]) => [k, u]));
+
+const CONTRA_STAGES = { 1: '雨林要塞', 2: '地下指挥所', 3: '峡谷瀑布', 4: '地下基地', 5: '极地冰原', 6: '高温能源厂', 7: '机械机库', 8: '异形巢穴' };
+const WUKONG_STAGES = { 1: '花果山断崖', 2: '南天门破阵' };
 
 function rgbToHex(r, g, b) {
   return '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
@@ -30,12 +38,15 @@ function hexToRgb(hex) {
 }
 
 export default function AssetEditor({ project, schema, aiReady, onChanged, onError }) {
+  const isWukong = project.spec?.template === 'wukong';
+  const stageMap = isWukong ? WUKONG_STAGES : CONTRA_STAGES;
   const assets = project.files?.assets || [];
   const imageAssets = assets.filter(f => /\.(png|webp)$/i.test(f.path));
   const audioAssets = assets.filter(f => /\.(ogg|mp3|wav)$/i.test(f.path));
 
   const [selected, setSelected] = useState(() => imageAssets[0]?.path.replace(/^assets\//, '') || '');
   const [imgVersion, setImgVersion] = useState(0);
+  const [canvasDim, setCanvasDim] = useState({ w: 64, h: 64 });
   const [tool, setTool] = useState('pencil'); // pencil | eraser | picker | replace | region
   const [brushSize, setBrushSize] = useState(2);
   const [color, setColor] = useState('#f2b33d');
@@ -68,9 +79,20 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
   // Skin binding target: 'player' | 'player2' | 'enemy:all' | 'enemy:run' ...
   const [skinTarget, setSkinTarget] = useState('player');
 
+  // BGM preview state
+  const [playingStage, setPlayingStage] = useState('');
+  const audioRef = useRef(null);
+
   const canvasRef = useRef(null);
   const previewRef = useRef(null);
   const dragRef = useRef(null);
+
+  useEffect(() => () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
     if (!selected && imageAssets.length) setSelected(imageAssets[0].path.replace(/^assets\//, ''));
@@ -87,8 +109,11 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
     img.onload = () => {
       const c = canvasRef.current;
       if (!c) return;
-      c.width = img.naturalWidth || 64;
-      c.height = img.naturalHeight || 64;
+      const nw = img.naturalWidth || 64;
+      const nh = img.naturalHeight || 64;
+      c.width = nw;
+      c.height = nh;
+      setCanvasDim({ w: nw, h: nh });
       const ctx = c.getContext('2d');
       ctx.clearRect(0, 0, c.width, c.height);
       ctx.drawImage(img, 0, 0);
@@ -136,6 +161,46 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
     const et = skinTarget.replace(/^enemy:/, '');
     return skins.enemies?.[et] || {};
   })();
+
+  function resolvePreviewAudioUrl(stageNum, trackVal) {
+    if (trackVal) {
+      if (TRACK_URL_MAP[trackVal]) return TRACK_URL_MAP[trackVal];
+      return `/api/projects/${project.id}/files/assets/${encodeURIComponent(trackVal)}`;
+    }
+    if (isWukong) {
+      return Number(stageNum) === 2 ? TRACK_URL_MAP.wukong2 : TRACK_URL_MAP.wukong1;
+    }
+    const defaults = { 1: 'stage1rock', 2: 'stage2', 3: 'stage3', 4: 'stage4', 5: 'stage5', 6: 'stage6', 7: 'stage1rock', 8: 'stage7' };
+    return TRACK_URL_MAP[defaults[stageNum] || 'stage1rock'];
+  }
+
+  function toggleAudioPreview(stageNum, trackVal) {
+    if (playingStage === String(stageNum)) {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setPlayingStage('');
+      return;
+    }
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    const url = resolvePreviewAudioUrl(stageNum, trackVal);
+    if (!url) return;
+    const audio = new Audio(url);
+    audio.volume = 0.65;
+    audio.onended = () => setPlayingStage('');
+    audio.onerror = () => {
+      setPlayingStage('');
+      onError(`音频试听加载失败：${trackVal || '默认曲目'}`);
+    };
+    audioRef.current = audio;
+    setPlayingStage(String(stageNum));
+    audio.play().catch(err => {
+      setPlayingStage('');
+      onError(`无法播放音频：${err.message}`);
+    });
+  }
 
   function canvasCoords(e) {
     const c = canvasRef.current;
@@ -346,6 +411,11 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
     try {
       const val = trackValue || null;
       await api.patch(project.id, { audio: { stages: { [stageNum]: val } } }, val ? `第 ${stageNum} 关配乐 → ${val}` : `第 ${stageNum} 关恢复默认配乐`);
+      if (playingStage === String(stageNum)) {
+        audioRef.current?.pause();
+        audioRef.current = null;
+        setPlayingStage('');
+      }
       await onChanged();
     } catch (e) { onError(e.message); }
     finally { setBusy(false); }
@@ -376,7 +446,7 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
 
       {selected && (
         <fieldset>
-          <legend>2. 像素编辑 · 切帧动画 · 框选 AI 局部重绘（{selected}）</legend>
+          <legend>2. 像素编辑 · 切帧动画 · 框选 AI 局部重绘（{selected} · {canvasDim.w}×{canvasDim.h}px）</legend>
           <div className="tool-strip">
             {[
               ['pencil', '✏ 画笔'],
@@ -481,8 +551,8 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
         <div className="skin-row">
           <label>换皮对象
             <select value={skinTarget} onChange={e => setSkinTarget(e.target.value)}>
-              <option value="player">1P 主角（比尔）</option>
-              <option value="player2">2P 搭档（兰斯）</option>
+              <option value="player">{isWukong ? '1P 主角（齐天大圣）' : '1P 主角（比尔）'}</option>
+              <option value="player2">{isWukong ? '2P 搭档（二号行者）' : '2P 搭档（兰斯）'}</option>
               <option value="enemy:all">全体原版敌人（enemies.all）</option>
               {schema?.enemyTypes && Object.entries(schema.enemyTypes).map(([k, name]) => (
                 <option key={k} value={`enemy:${k}`}>敌人：{name}（{k}）</option>
@@ -521,23 +591,29 @@ export default function AssetEditor({ project, schema, aiReady, onChanged, onErr
       </fieldset>
 
       <fieldset>
-        <legend>4. 关卡背景音乐绑定（audio.stages）</legend>
-        <p className="note">支持切换内置曲目，或绑定上传到 assets/ 的 .ogg / .mp3 / .wav 音频。</p>
-        {Object.entries(STAGES).map(([st, name]) => {
+        <legend>4. 关卡背景音乐绑定与试听（audio.stages）</legend>
+        <p className="note">支持跨游戏切换全部内置曲库（摇滚/交响/赛博朋克/国风仙侠），或绑定上传到 assets/ 的音频文件。</p>
+        {Object.entries(stageMap).map(([st, name]) => {
           const cur = project.resolved?.audio?.stages?.[st] || '';
           const over = project.spec?.audio?.stages?.[st] !== undefined;
+          const isPlaying = playingStage === String(st);
           return (
-            <label key={st} className={'field' + (over ? ' overridden' : '')}>
-              <span className="name">第 {st} 关 · {name}</span>
-              <select value={cur} onChange={e => setStageMusic(st, e.target.value)}>
-                {BUILTIN_TRACKS.map(([val, label]) => <option key={val} value={val}>{label}</option>)}
-                {audioAssets.map(f => {
-                  const fn = f.path.replace(/^assets\//, '');
-                  return <option key={fn} value={fn}>自定义音频：{fn}</option>;
-                })}
-              </select>
-              {over && <button type="button" className="reset" title="恢复默认配乐" onClick={() => setStageMusic(st, '')}>↺</button>}
-            </label>
+            <div key={st} className={'field music-row' + (over ? ' overridden' : '')}>
+              <span className="name">第 {st} 关 · {project.resolved?.stages?.[st]?.name || name}</span>
+              <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                <select style={{ flex: 1 }} value={cur} onChange={e => setStageMusic(st, e.target.value)}>
+                  {BUILTIN_TRACKS.map(([val, label]) => <option key={val} value={val}>{label}</option>)}
+                  {audioAssets.map(f => {
+                    const fn = f.path.replace(/^assets\//, '');
+                    return <option key={fn} value={fn}>自定义音频：{fn}</option>;
+                  })}
+                </select>
+                <button type="button" onClick={() => toggleAudioPreview(st, cur)} title="试听本关配乐">
+                  {isPlaying ? '■ 停止' : '▶ 试听'}
+                </button>
+                {over && <button type="button" className="reset" title="恢复默认配乐" onClick={() => setStageMusic(st, '')}>↺</button>}
+              </div>
+            </div>
           );
         })}
       </fieldset>

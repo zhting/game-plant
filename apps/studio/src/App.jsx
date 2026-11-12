@@ -197,9 +197,14 @@ export default function App() {
                 else setPreviewKey(k => k + 1);
               }}>
                 <option value="">跳关：标题画面</option>
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-                  <option key={n} value={String(n)}>第 {n} 关 · {project.resolved?.stages?.[n]?.name || `Stage ${n}`}</option>
-                ))}
+                {(project.spec?.template === 'wukong' ? [1, 2] : [1, 2, 3, 4, 5, 6, 7, 8]).map(n => {
+                  const defName = project.spec?.template === 'wukong'
+                    ? ({ 1: '花果山断崖', 2: '南天门破阵' }[n])
+                    : `Stage ${n}`;
+                  return (
+                    <option key={n} value={String(n)}>第 {n} 关 · {project.resolved?.stages?.[n]?.name || defName}</option>
+                  );
+                })}
               </select>
               {previewStage && !['2', '3', '4', '7'].includes(previewStage) && (
                 <select value={previewX} title="关卡进度位置跳转" onChange={e => {

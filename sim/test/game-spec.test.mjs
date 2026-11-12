@@ -175,7 +175,7 @@ test('engine: skins, audio.stages and studioControl apply in-game', () => {
       player: { sprite: 'hero.png', width: 28, height: 36, frames: 4, hue: 120 },
       enemies: { run: { sprite: 'orc.png', width: 24, height: 30, frames: 2 }, tur: { sprite: 'cannon.png', width: 24, height: 24 } },
     },
-    audio: { stages: { 1: 'stage5', 2: 'custom-boss.ogg' } },
+    audio: { stages: { 1: 'stage5', 2: 'custom-boss.ogg', 3: 'stage1_orchestral', 4: 'wukong2' } },
   }, { modules: { modules: [], assetBase: '/api/projects/demo/files/assets' } });
   e.play(1);
   assert.equal(e.inspect().audio.resolved.track, 'stage5');
@@ -187,6 +187,11 @@ test('engine: skins, audio.stages and studioControl apply in-game', () => {
   assert.equal(ctrl.debug, true);
   assert.equal(ctrl.god, true);
   assert.equal(e.inspect().audio.resolved.track, 'project_stage_2');
+  e.studioControl({ stage: 3 });
+  assert.equal(e.inspect().audio.resolved.track, 'stage1orchestral', 'legacy alias maps to REFERENCE_TRACKS');
+  e.studioControl({ stage: 4 });
+  assert.equal(e.inspect().audio.resolved.track, 'wukong2', 'cross-game Wukong track resolves cleanly');
+  e.studioControl({ stage: 2, debug: true, god: true });
   e.frames(5);
   assert.ok(e.G.p.invT >= 0.4, 'god mode maintains player invulnerability');
   e.studioControl({ stage: 1, x: 1200 });
@@ -214,6 +219,8 @@ test('engine: rules.health, rules.rage, rules.melee, story.opening and stages.1.
   assert.equal(e.G.stageName, '第一章：南天门');
   assert.equal(e.G.stageTheme.skyTint, '#ff7b38');
   assert.equal(e.G.storyOpening.title, '齐天大圣 · 大闹天宫');
+  assert.equal(e.G.storyOpening.pages[0].tag, '壹 · 踏碎凌霄');
+  assert.deepEqual(Array.from(e.G.storyOpening.pages[0].lines), ['一棒碎凌霄，万仙莫敢当。', '踏碎南天门，直捣通明殿。']);
   assert.equal(e.G.p.hp, 64);
   assert.equal(e.G.p.maxHp, 64);
   assert.equal(e.G.p.rage, 0);

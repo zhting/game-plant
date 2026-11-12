@@ -96,7 +96,11 @@ const WUKONG = document.body.dataset?.game === 'wukong';
 const GAME_ID = WUKONG ? 'wukong' : 'contra2026';
 const isCelestial=()=>WUKONG&&(G.stage===1||G.stage===2);
 const isSiege=()=>WUKONG&&G.stage===2;
-const GAME_STAGES = WUKONG ? WUKONG_STAGES : (SPEC.stages?.order?.length ? SPEC.stages.order : OPEN_STAGES);
+const GAME_STAGES = WUKONG
+  ? (Array.isArray(gameSpec?.stages?.order) && SPEC.stages?.order?.some(s => isWukongStageOpen(s))
+      ? SPEC.stages.order.filter(s => isWukongStageOpen(s))
+      : WUKONG_STAGES)
+  : (SPEC.stages?.order?.length ? SPEC.stages.order : OPEN_STAGES);
 const RELEASE_MESSAGE = WUKONG ? WUKONG_RELEASE_MESSAGE : STAGE_RELEASE_MESSAGE;
 const canPlayStage = stage => WUKONG ? isWukongStageOpen(stage) : (stage >= 9 ? isStageOpen(stage) : GAME_STAGES.includes(stage));
 const firstPlayableStage = () => GAME_STAGES[0] || 1;
@@ -345,11 +349,20 @@ const STORY_OPENING = (() => {
   if (!s || (!s.openingTitle && !s.openingSubtitle && !(Array.isArray(s.opening) && s.opening.length))) return null;
   const raw = Array.isArray(s.opening) && s.opening.length ? s.opening : null;
   const span = (OPENING_DURATION - 1.2) / Math.max(1, raw ? raw.length : 1);
-  const pages = raw ? raw.map((lines, idx) => ({
-    from: Number((0.6 + idx * span).toFixed(2)),
-    to: Number((0.6 + (idx + 1) * span - 0.15).toFixed(2)),
-    lines: Array.isArray(lines) ? lines.map(String) : [String(lines)],
-  })) : OPENING_PAGES;
+  const pages = raw ? raw.map((item, idx) => {
+    const isObj = item && typeof item === 'object' && !Array.isArray(item);
+    const lines = Array.isArray(item)
+      ? item.map(String).filter(Boolean)
+      : isObj
+        ? [item.line1, item.line2].filter(v => typeof v === 'string' && v.trim() !== '').map(String)
+        : [String(item)];
+    return {
+      from: Number((0.6 + idx * span).toFixed(2)),
+      to: Number((0.6 + (idx + 1) * span - 0.15).toFixed(2)),
+      tag: isObj && item.tag ? String(item.tag) : `第 ${idx + 1} 幕`,
+      lines: lines.length ? lines : [''],
+    };
+  }) : OPENING_PAGES;
   return { title: s.openingTitle || '', subtitle: s.openingSubtitle || '', pages };
 })();
 function healActor(actor, amount) {
@@ -600,14 +613,28 @@ if(WUKONG)SET.stageMusic=normalizeWukongMusic(SET.stageMusic);else delete SET.st
 const stageMusicSession = new StageMusicSession();
 const gameMusicOptions=stage=>WUKONG?(stage===2?WUKONG_SIEGE_MUSIC_OPTIONS:WUKONG_MUSIC_OPTIONS):stageMusicOptions(stage);
 const gameMusicRecord=(stage,choice)=>WUKONG?(stage===2?WUKONG_SIEGE_MUSIC_RECORD:WUKONG_MUSIC_RECORD):musicRecord(stage,choice);
+const BUILTIN_AUDIO_ALIASES = {
+  stage1_orchestral: 'stage1orchestral', stage1_classic: 'stage1', stage1_metal: 'stage1industrial',
+  stage2_base: 'stage2', stage3_waterfall: 'stage3', stage4_fortress: 'stage4',
+  stage5_snowfield: 'stage5', stage6_energy: 'stage6', stage7_hangar: 'stage1rock', stage8_lair: 'stage7', boss: 'stage2boss',
+};
+const CROSS_GAME_TRACKS = {
+  wukong1: Object.freeze({ url: '/games/wukong/assets/journey-to-west-theme.ogg', loop: true, loopStart: 8, startOffset: 8 }),
+  wukong2: Object.freeze({ url: '/games/wukong/assets/stage-02/south-gate-march.ogg', loop: true }),
+};
 const STAGE_AUDIO_MAP = {};
 const EXTRA_TRACKS = {};
-for (const [st, val] of Object.entries(SPEC.audio?.stages || {})) {
-  if (!val) continue;
-  if (CONTRA_TRACKS[val] || (WUKONG && WUKONG_MUSIC_TRACKS?.[val])) STAGE_AUDIO_MAP[st] = val;
+for (const [st, rawVal] of Object.entries(SPEC.audio?.stages || {})) {
+  if (!rawVal) continue;
+  const val = BUILTIN_AUDIO_ALIASES[rawVal] || rawVal;
+  const activeBase = WUKONG ? WUKONG_MUSIC_TRACKS : CONTRA_TRACKS;
+  if (activeBase?.[val]) STAGE_AUDIO_MAP[st] = val;
+  else if (CONTRA_TRACKS[val]) { EXTRA_TRACKS[val] = CONTRA_TRACKS[val]; STAGE_AUDIO_MAP[st] = val; }
+  else if (REFERENCE_TRACKS[val]) { EXTRA_TRACKS[val] = REFERENCE_TRACKS[val]; STAGE_AUDIO_MAP[st] = val; }
+  else if (CROSS_GAME_TRACKS[val]) { EXTRA_TRACKS[val] = CROSS_GAME_TRACKS[val]; STAGE_AUDIO_MAP[st] = val; }
   else {
     const key = `project_stage_${st}`;
-    EXTRA_TRACKS[key] = Object.freeze({ url: `${projectModules?.assetBase || ''}/${encodeURIComponent(val)}`, loop: true });
+    EXTRA_TRACKS[key] = Object.freeze({ url: `${projectModules?.assetBase || ''}/${encodeURIComponent(rawVal)}`, loop: true });
     STAGE_AUDIO_MAP[st] = key;
   }
 }
@@ -641,7 +668,7 @@ const gameResourceOptions = {
 };
 const resourceCache = new Set();
 const gameVisualResources = stage => WUKONG ? gameResourceJobs({...gameResourceOptions,arts:stage===2?[stageOneArt,siegeArt]:[stageOneArt],records:gameMusicOptions(stage).map(({value})=>gameMusicRecord(stage,value).art)}) : stageResourceJobs(stage,gameResourceOptions);
-const startupMusicKeys = stage => WUKONG ? (stage===1?WUKONG_STARTUP_MUSIC:[startupMusicTrack(stage)]) : SET.music==='on'?(STAGE_AUDIO_MAP[stage]?[STAGE_AUDIO_MAP[stage]]:fixedStageMusicKeys(stage)):[];
+const startupMusicKeys = stage => WUKONG ? (STAGE_AUDIO_MAP[stage] ? [STAGE_AUDIO_MAP[stage]] : stage===1?WUKONG_STARTUP_MUSIC:[startupMusicTrack(stage)]) : SET.music==='on'?(STAGE_AUDIO_MAP[stage]?[STAGE_AUDIO_MAP[stage]]:fixedStageMusicKeys(stage)):[];
 const stageJobs = stage => [...gameVisualResources(stage),...musicResourceJobs(referenceMusic,startupMusicKeys(stage)),...(WUKONG?[wukongBattleAudio.resourceJob(),wukongHeroAudio.resourceJob()]:[])];
 const stageResourcesReady = stage => stageJobs(stage).every(job=>resourceCache.has(job.id));
 let gameResources = new ResourcePreloader([]), backgroundMusic = null, remoteWorld = null;

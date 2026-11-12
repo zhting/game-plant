@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { api } from './api.js';
 
-const STAGES = { 1: '雨林要塞', 2: '地下指挥所', 3: '峡谷瀑布', 4: '地下基地', 5: '极地冰原', 6: '高温能源厂', 7: '机械机库', 8: '异形巢穴' };
+const CONTRA_STAGES = { 1: '雨林要塞', 2: '地下指挥所', 3: '峡谷瀑布', 4: '地下基地', 5: '极地冰原', 6: '高温能源厂', 7: '机械机库', 8: '异形巢穴' };
+const WUKONG_STAGES = { 1: '花果山断崖', 2: '南天门破阵' };
 const STAGE_LEN = { 1: 3200, 5: 3200, 6: 3400, 8: 3200 };
 const nest = (path, value) => path.reduceRight((acc, key) => ({ [key]: acc }), value);
 const get = (obj, path) => path.reduce((o, k) => o?.[k], obj);
@@ -12,6 +13,9 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
   const [dropStage, setDropStage] = useState('1');
   const [selDrop, setSelDrop] = useState(null); // { type: 'pod' | 'box', index: number }
   if (!schema) return null;
+
+  const isWukong = project.spec?.template === 'wukong';
+  const STAGES = isWukong ? WUKONG_STAGES : CONTRA_STAGES;
 
   async function save(path, value, label) {
     setSaving(path.join('.'));
@@ -64,8 +68,11 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
 
   const P = schema.schema.props;
   const types = project.resolved.enemies.types || {};
-  const stageOrder = project.resolved.stages?.order || [1, 2, 3, 4, 5, 6, 7, 8];
+  const defaultOrder = isWukong ? [1, 2] : [1, 2, 3, 4, 5, 6, 7, 8];
+  const rawOrder = project.resolved.stages?.order || defaultOrder;
+  const stageOrder = isWukong ? (Array.isArray(project.spec?.stages?.order) ? project.spec.stages.order.filter(s => STAGES[s]) : defaultOrder) : rawOrder;
   const orderOverridden = Array.isArray(project.spec?.stages?.order);
+  const openingPages = Array.isArray(project.resolved.story?.opening) ? project.resolved.story.opening : [];
 
   // Stage drops timeline state
   const curStageData = project.resolved.stages?.[dropStage] || {};
@@ -73,6 +80,22 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
   const boxes = curStageData.boxes || [];
   const maxLen = STAGE_LEN[dropStage] || 3200;
   const itemKinds = schema.itemKinds || {};
+
+  function updateOpeningPage(idx, patch) {
+    const next = openingPages.map((pg, i) => i === idx ? { tag: pg.tag || '', line1: pg.line1 || '', line2: pg.line2 || '', ...patch } : pg);
+    save(['story', 'opening'], next, `开场字幕第 ${idx + 1} 页`);
+  }
+
+  function addOpeningPage() {
+    if (openingPages.length >= 6) return;
+    const next = [...openingPages, { tag: `第 ${openingPages.length + 1} 幕`, line1: '在这里写下你的世界观背景，', line2: '开启属于你的原创冒险！' }];
+    save(['story', 'opening'], next, '新增开场字幕页');
+  }
+
+  function removeOpeningPage(idx) {
+    const next = openingPages.filter((_, i) => i !== idx);
+    save(['story', 'opening'], next.length ? next : null, '删除开场字幕页');
+  }
 
   function moveStageOrder(idx, dir) {
     const next = [...stageOrder];
@@ -124,19 +147,59 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
 
   const activePod = selDrop?.type === 'pod' ? pods[selDrop.index] : null;
   const activeBox = selDrop?.type === 'box' ? boxes[selDrop.index] : null;
+  const maxStageCount = Object.keys(STAGES).length;
 
   return (
     <div className="spec">
-      <p className="note">直接改数值或摆放补给都会生成一个版本（和 AI 修改一样可以撤销）。高亮的是和模板不同的字段。</p>
+      <p className="note">
+        直接改数值或摆放补给都会生成一个版本（随时可撤销）。
+        {isWukong && ' 当前为「悟空大闹天宫」模板，默认自带 100 气血、金箍棒连招与怒气神通；如需高度自由改枪械/近战/8关顺序，推荐新建「魂斗罗2026」模板项目。'}
+      </p>
       {section(P.meta, ['meta'], '项目信息')}
-      {section(P.player, ['player'], '玩家')}
-      {P.rules && section(P.rules, ['rules'], '进阶玩法规则（血条 / 怒气大招 / 近战斩击）')}
-      {P.story && section(P.story, ['story'], '开场剧情文案')}
-      {section(P.weapons, ['weapons'], '武器')}
+      {section(P.player, ['player'], '玩家物理与命数')}
+      {!isWukong && P.rules && section(P.rules, ['rules'], '进阶玩法规则（血条 / 怒气大招 / 近战斩击）')}
+      {!isWukong && P.story && (
+        <fieldset>
+          <legend>开场剧情与世界观文案</legend>
+          {field(P.story.props.openingTitle, ['story', 'openingTitle'], '片头左上角地点/时代')}
+          {field(P.story.props.openingSubtitle, ['story', 'openingSubtitle'], '片头右上角行动代号')}
+          <div style={{ marginTop: 8 }}>
+            <div className="stage-order-head">
+              <span>开场故事字幕页（{openingPages.length} / 6 页，留空则显示原版字幕）</span>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {openingPages.length < 6 && <button type="button" onClick={addOpeningPage}>＋ 新增字幕页</button>}
+                {project.spec?.story?.opening !== undefined && <button type="button" onClick={() => save(['story', 'opening'], null, '恢复默认开场字幕')}>↺ 恢复默认</button>}
+              </div>
+            </div>
+            {openingPages.map((pg, idx) => (
+              <div key={idx} className="drop-inspector" style={{ marginTop: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <strong>第 {idx + 1} 页字幕</strong>
+                  <button type="button" onClick={() => removeOpeningPage(idx)}>✕ 删除</button>
+                </div>
+                <label>章节小标题 (tag)
+                  <input defaultValue={pg.tag || ''} maxLength={20} placeholder="如：第一章 · 赛博觉醒"
+                    onBlur={e => e.target.value !== (pg.tag || '') && updateOpeningPage(idx, { tag: e.target.value })} />
+                </label>
+                <label>第一行台词
+                  <input defaultValue={pg.line1 || ''} maxLength={36} placeholder="输入第一行剧情字幕（最多36字）"
+                    onBlur={e => e.target.value !== (pg.line1 || '') && updateOpeningPage(idx, { line1: e.target.value })} />
+                </label>
+                <label>第二行台词
+                  <input defaultValue={pg.line2 || ''} maxLength={36} placeholder="输入第二行剧情字幕（最多36字）"
+                    onBlur={e => e.target.value !== (pg.line2 || '') && updateOpeningPage(idx, { line2: e.target.value })} />
+                </label>
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      )}
+      {!isWukong && section(P.weapons, ['weapons'], '武器')}
       {section(P.items, ['items'], '特殊道具')}
       <fieldset>
         <legend>敌人</legend>
         {field(P.enemies.props.hpScale, ['enemies', 'hpScale'], '全体血量倍率')}
+        {P.enemies.props.spawnRateScale && field(P.enemies.props.spawnRateScale, ['enemies', 'spawnRateScale'], '杂兵刷新频率倍率')}
         {Object.entries(types).map(([t, rule]) => (
           <div className="type-row" key={t}>
             <b>{schema.enemyTypes[t] || t}</b>
@@ -158,7 +221,7 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
         <legend>关卡顺序与名称</legend>
         <div className="stage-order-head">
           <span>闯关顺序（共 {stageOrder.length} 关）</span>
-          {orderOverridden && <button type="button" onClick={() => save(['stages', 'order'], null, '关卡顺序')}>↺ 恢复默认八关</button>}
+          {orderOverridden && <button type="button" onClick={() => save(['stages', 'order'], null, '关卡顺序')}>↺ 恢复默认关卡</button>}
         </div>
         <div className="stage-chips">
           {stageOrder.map((st, idx) => (
@@ -169,10 +232,10 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
               {stageOrder.length > 1 && <button type="button" onClick={() => removeStageAt(idx)} title="移除此关">✕</button>}
             </div>
           ))}
-          {stageOrder.length < 8 && (
+          {stageOrder.length < maxStageCount && (
             <select value="" onChange={e => e.target.value && save(['stages', 'order'], [...stageOrder, Number(e.target.value)], '添加关卡')}>
               <option value="">＋ 添加关卡…</option>
-              {Object.entries(STAGES).map(([n, name]) => <option key={n} value={n}>第 {n} 关 · {name}</option>)}
+              {Object.entries(STAGES).filter(([n]) => !stageOrder.includes(Number(n))).map(([n, name]) => <option key={n} value={n}>第 {n} 关 · {name}</option>)}
             </select>
           )}
         </div>
