@@ -8,6 +8,9 @@ import { createBackend } from '../server.mjs';
 import { createProjectStore } from '../projects.mjs';
 import { runAgentTurn, describeSchema, systemPrompt } from '../ai/agent.mjs';
 import { createUsageMeter } from '../ai/config.mjs';
+import { validateGameSpec, patchGameSpec } from '../../games/shared/game-spec.mjs';
+import { checkModuleSource, runIsolated } from '../../sim/isolated.mjs';
+import { STARTER_THEMES, GAMEPLAY_BRICKS } from '../../apps/studio/src/presets.js';
 
 const root = path.resolve(new URL('../../', import.meta.url).pathname);
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'studio-test-'));
@@ -296,7 +299,33 @@ test('studio built-in Mock AI mode works without GEMINI_API_KEY', { timeout: 300
     assert.equal(skinRes.status, 200);
     const skinChat = await skinRes.json();
     assert.equal(skinChat.spec.skins.player.sprite, 'hero-mecha.png');
+    assert.ok(skinChat.steps.some(s => s.name === 'image_gen' && s.previewDataUrl?.startsWith('data:image/png;base64,')), 'image_gen echoes previewDataUrl');
+
+    const shotRes = await fetch(`${origin}/api/projects/${id}/chat`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ message: '抓一帧第一关实机画面检查效果' }),
+    });
+    assert.equal(shotRes.status, 200);
+    const shotChat = await shotRes.json();
+    assert.ok(shotChat.steps.some(s => s.name === 'screenshot' && /^data:image\/(png|webp);base64,/.test(s.previewDataUrl || '')), 'screenshot echoes previewDataUrl');
   } finally {
     await app.close();
   }
 });
+
+test('starter themes and zero-code gameplay bricks pass validation and isolated playtest', { timeout: 30000 }, async () => {
+  for (const theme of STARTER_THEMES) {
+    const base = JSON.parse(fs.readFileSync(path.join(root, 'templates', theme.template, 'game.json'), 'utf8'));
+    const candidate = patchGameSpec(base, theme.patch || {});
+    assert.deepEqual(validateGameSpec(candidate), [], `theme ${theme.id} valid`);
+  }
+  const modules = GAMEPLAY_BRICKS.map(b => {
+    assert.deepEqual(checkModuleSource(b.source), [], `brick ${b.id} static check`);
+    return { path: b.path, source: b.source };
+  });
+  const inspect = await runIsolated({ kind: 'inspect', modules }, { timeoutMs: 15000 });
+  assert.equal(inspect.ok, true, JSON.stringify(inspect.errors));
+  const play = await runIsolated({ kind: 'playtest', spec: { template: 'contra' }, modules, stages: [1], seconds: 4, seed: 1 }, { timeoutMs: 20000 });
+  assert.equal(play.ok, true, play.error);
+});
+

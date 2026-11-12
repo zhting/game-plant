@@ -13,11 +13,16 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
   const [saving, setSaving] = useState('');
   const [dropStage, setDropStage] = useState('1');
   const [selDrop, setSelDrop] = useState(null); // { type: 'pod' | 'box' | 'spawn', index: number }
+  const [query, setQuery] = useState('');
+  const [collapsed, setCollapsed] = useState({ weapons: false });
   if (!schema) return null;
 
   const isWukong = project.spec?.template === 'wukong';
   const STAGES = isWukong ? WUKONG_STAGES : CONTRA_STAGES;
   const imageAssets = (project.files?.assets || []).map(f => f.name).filter(n => /\.(png|webp|jpg|jpeg|svg)$/i.test(n));
+  const normQuery = query.trim().toLowerCase();
+  const matchSearch = (...texts) => !normQuery || texts.some(t => String(t || '').toLowerCase().includes(normQuery));
+  const toggleCollapse = id => setCollapsed(prev => ({ ...prev, [id]: !prev[id] }));
 
   async function save(path, value, label) {
     setSaving(path.join('.'));
@@ -31,8 +36,12 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
 
   const field = (node, path, label) => {
     const key = path.join('.');
+    if (!matchSearch(label, node.desc, key)) return null;
     const value = get(project.resolved, path);
     const overridden = get(project.spec, path) !== undefined;
+    const isToggle = node.type === 'number' && node.integer && node.min === 0 && node.max === 1;
+    const lastKey = path.at(-1);
+    const isColor = node.type === 'string' && (lastKey === 'color' || lastKey === 'skyTint');
     const commit = raw => {
       let v = raw;
       if (node.type === 'number') { v = Number(raw); if (raw === '' || !Number.isFinite(v)) return; }
@@ -40,30 +49,70 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
       save(path, v, label);
     };
     return (
-      <label key={key} className={'field' + (overridden ? ' overridden' : '') + (saving === key ? ' saving' : '')} title={node.desc}>
+      <div key={key} className={'field' + (overridden ? ' overridden' : '') + (saving === key ? ' saving' : '')} title={node.desc}>
         <span className="name">{label}</span>
-        {node.type === 'enum'
-          ? <select defaultValue={value} key={value} onChange={e => commit(e.target.value)}>{node.values.map(v => <option key={v}>{v}</option>)}</select>
-          : <input key={String(value)} type={node.type === 'number' ? 'number' : 'text'} defaultValue={value ?? ''} min={node.min} max={node.max}
-              step={node.integer ? 1 : 'any'} placeholder={node.type === 'string' ? '（模板默认）' : ''}
-              onBlur={e => commit(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }} />}
+        {node.type === 'enum' ? (
+          <select defaultValue={value} key={value} onChange={e => commit(e.target.value)}>{node.values.map(v => <option key={v}>{v}</option>)}</select>
+        ) : isToggle ? (
+          <label className="switch-control">
+            <input type="checkbox" checked={Boolean(value)} onChange={e => commit(e.target.checked ? 1 : 0)} />
+            <span>{value ? '已开启' : '已关闭'}</span>
+          </label>
+        ) : isColor ? (
+          <div className="color-control">
+            <input
+              type="color"
+              value={/^#[0-9a-fA-F]{6}$/.test(value || '') ? value : '#56e0ff'}
+              onChange={e => commit(e.target.value)}
+              title="点击选色"
+            />
+            <input
+              key={String(value)}
+              type="text"
+              defaultValue={value ?? ''}
+              placeholder="（默认色）"
+              onBlur={e => commit(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
+            />
+          </div>
+        ) : (
+          <input key={String(value)} type={node.type === 'number' ? 'number' : 'text'} defaultValue={value ?? ''} min={node.min} max={node.max}
+            step={node.integer ? 1 : 'any'} placeholder={node.type === 'string' ? '（模板默认）' : ''}
+            onBlur={e => commit(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }} />
+        )}
         {overridden && <button type="button" className="reset" title="恢复模板默认" onClick={() => save(path, null, label)}>↺</button>}
         {node.desc && node.desc !== label && <small>{node.desc}</small>}
-      </label>
+      </div>
     );
   };
 
   const section = (node, path, title) => {
     if (node.type !== 'object') return null;
+    const secKey = path.join('.') || 'root';
+    const isTop = path.length === 1;
+    const isOpen = normQuery ? true : !collapsed[secKey];
     const leaves = [], groups = [];
     for (const [k, child] of Object.entries(node.props)) {
-      if (child.type === 'object') groups.push(section(child, [...path, k], child.desc || k));
-      else if (['number', 'string', 'enum'].includes(child.type)) leaves.push(field(child, [...path, k], child.desc?.split('（')[0] || k));
+      if (child.type === 'object') {
+        const sub = section(child, [...path, k], child.desc || k);
+        if (sub) groups.push(sub);
+      } else if (['number', 'string', 'enum'].includes(child.type)) {
+        const f = field(child, [...path, k], child.desc?.split('（')[0] || k);
+        if (f) leaves.push(f);
+      }
     }
+    if (!leaves.length && !groups.length) return null;
     return (
-      <fieldset key={path.join('.') || 'root'}>
-        {title && <legend>{title}</legend>}
-        {leaves}{groups}
+      <fieldset key={secKey} className={!isOpen ? 'collapsed' : ''}>
+        {title && (
+          <legend
+            style={isTop ? { cursor: 'pointer', userSelect: 'none' } : undefined}
+            onClick={isTop ? () => toggleCollapse(secKey) : undefined}
+          >
+            {isTop ? (isOpen ? '▾ ' : '▸ ') : ''}{title}
+          </legend>
+        )}
+        {isOpen && <>{leaves}{groups}</>}
       </fieldset>
     );
   };
@@ -207,81 +256,114 @@ export default function SpecPanel({ project, schema, onChanged, onError }) {
     </div>
   );
 
+  const storyOpen = normQuery ? true : !collapsed.story;
+  const enemiesOpen = normQuery ? true : !collapsed.enemies;
+  const orderOpen = normQuery ? true : !collapsed.stageOrder;
+
   return (
     <div className="spec">
+      <div className="spec-search">
+        <input
+          type="search"
+          value={query}
+          placeholder="🔍 搜索参数（如：穿透、重力、血条、天色、Boss…）"
+          onChange={e => setQuery(e.target.value)}
+        />
+        {query && <button type="button" onClick={() => setQuery('')} title="清空搜索">✕</button>}
+      </div>
       <p className="note">
-        直接改数值或摆放补给/怪物都会生成一个版本（随时可撤销）。
-        {isWukong && ' 当前为「悟空大闹天宫」模板，默认自带 100 气血、金箍棒连招与怒气神通；如需高度自由改枪械/近战/8关顺序，推荐新建「魂斗罗2026」模板项目。'}
+        点击分组标题可折叠/展开；直接改数值或摆放补给/怪物都会生成可撤销的版本。
+        {isWukong && ' 当前为「悟空大闹天宫」模板，默认自带 100 气血、金箍棒连招与怒气神通。'}
       </p>
       {section(P.meta, ['meta'], '项目信息')}
       {section(P.player, ['player'], '玩家物理与命数')}
       {!isWukong && P.rules && section(P.rules, ['rules'], '进阶玩法规则（血条 / 怒气大招 / 近战斩击）')}
-      {!isWukong && P.story && (
-        <fieldset>
-          <legend>开场与通关剧情文案</legend>
-          {field(P.story.props.openingTitle, ['story', 'openingTitle'], '片头左上角地点/时代')}
-          {field(P.story.props.openingSubtitle, ['story', 'openingSubtitle'], '片头右上角行动代号')}
-          {renderStoryCards('opening', '开场故事字幕页', openingPages)}
-          <hr style={{ border: 0, borderTop: '1px dashed var(--line)', margin: '10px 0' }} />
-          {P.story.props.endingTitle && field(P.story.props.endingTitle, ['story', 'endingTitle'], '片尾左上角标题')}
-          {P.story.props.endingSubtitle && field(P.story.props.endingSubtitle, ['story', 'endingSubtitle'], '片尾右上角副标题')}
-          {renderStoryCards('ending', '通关结局字幕页', endingPages)}
+      {!isWukong && P.story && (!normQuery || matchSearch('剧情', '字幕', '片头', '片尾', '结局', 'story')) && (
+        <fieldset className={!storyOpen ? 'collapsed' : ''}>
+          <legend style={{ cursor: 'pointer', userSelect: 'none' }} onClick={() => toggleCollapse('story')}>
+            {storyOpen ? '▾ ' : '▸ '}开场与通关剧情文案
+          </legend>
+          {storyOpen && (
+            <>
+              {field(P.story.props.openingTitle, ['story', 'openingTitle'], '片头左上角地点/时代')}
+              {field(P.story.props.openingSubtitle, ['story', 'openingSubtitle'], '片头右上角行动代号')}
+              {renderStoryCards('opening', '开场故事字幕页', openingPages)}
+              <hr style={{ border: 0, borderTop: '1px dashed var(--line)', margin: '10px 0' }} />
+              {P.story.props.endingTitle && field(P.story.props.endingTitle, ['story', 'endingTitle'], '片尾左上角标题')}
+              {P.story.props.endingSubtitle && field(P.story.props.endingSubtitle, ['story', 'endingSubtitle'], '片尾右上角副标题')}
+              {renderStoryCards('ending', '通关结局字幕页', endingPages)}
+            </>
+          )}
         </fieldset>
       )}
       {!isWukong && section(P.weapons, ['weapons'], '武器（支持命名、弹色、穿透与抛物线重力）')}
       {section(P.items, ['items'], '特殊道具')}
-      <fieldset>
-        <legend>敌人</legend>
-        {field(P.enemies.props.hpScale, ['enemies', 'hpScale'], '全体血量倍率')}
-        {P.enemies.props.spawnRateScale && field(P.enemies.props.spawnRateScale, ['enemies', 'spawnRateScale'], '杂兵刷新频率倍率')}
-        {Object.entries(types).map(([t, rule]) => (
-          <div className="type-row" key={t}>
-            <b>{schema.enemyTypes[t] || t}</b>
-            {field(P.enemies.props.types.value.props.hp, ['enemies', 'types', t, 'hp'], '固定血量')}
-            {field(P.enemies.props.types.value.props.hpScale, ['enemies', 'types', t, 'hpScale'], '血量倍率')}
-            <button type="button" onClick={() => save(['enemies', 'types', t], null, `${t} 敌人规则`)}>删除</button>
-            {void rule}
-          </div>
-        ))}
-        <select value="" onChange={e => e.target.value && save(['enemies', 'types', e.target.value], { hpScale: 1 }, `添加敌人规则 ${e.target.value}`)}>
-          <option value="">＋ 按类型调整…</option>
-          {Object.entries(schema.enemyTypes).filter(([t]) => !types[t]).map(([t, name]) => <option key={t} value={t}>{name}（{t}）</option>)}
-        </select>
-      </fieldset>
+      {(!normQuery || matchSearch('敌人', '杂兵', 'enemies', '血量')) && (
+        <fieldset className={!enemiesOpen ? 'collapsed' : ''}>
+          <legend style={{ cursor: 'pointer', userSelect: 'none' }} onClick={() => toggleCollapse('enemies')}>
+            {enemiesOpen ? '▾ ' : '▸ '}敌人
+          </legend>
+          {enemiesOpen && (
+            <>
+              {field(P.enemies.props.hpScale, ['enemies', 'hpScale'], '全体血量倍率')}
+              {P.enemies.props.spawnRateScale && field(P.enemies.props.spawnRateScale, ['enemies', 'spawnRateScale'], '杂兵刷新频率倍率')}
+              {Object.entries(types).map(([t, rule]) => (
+                <div className="type-row" key={t}>
+                  <b>{schema.enemyTypes[t] || t}</b>
+                  {field(P.enemies.props.types.value.props.hp, ['enemies', 'types', t, 'hp'], '固定血量')}
+                  {field(P.enemies.props.types.value.props.hpScale, ['enemies', 'types', t, 'hpScale'], '血量倍率')}
+                  <button type="button" onClick={() => save(['enemies', 'types', t], null, `${t} 敌人规则`)}>删除</button>
+                  {void rule}
+                </div>
+              ))}
+              <select value="" onChange={e => e.target.value && save(['enemies', 'types', e.target.value], { hpScale: 1 }, `添加敌人规则 ${e.target.value}`)}>
+                <option value="">＋ 按类型调整…</option>
+                {Object.entries(schema.enemyTypes).filter(([t]) => !types[t]).map(([t, name]) => <option key={t} value={t}>{name}（{t}）</option>)}
+              </select>
+            </>
+          )}
+        </fieldset>
+      )}
       {section(P.bosses, ['bosses'], 'Boss（血量与色相外观）')}
       {section(P.scoring, ['scoring'], '计分')}
 
-      <fieldset>
-        <legend>关卡顺序与名称</legend>
-        <div className="stage-order-head">
-          <span>闯关顺序（共 {stageOrder.length} 关）</span>
-          {orderOverridden && <button type="button" onClick={() => save(['stages', 'order'], null, '关卡顺序')}>↺ 恢复默认关卡</button>}
-        </div>
-        <div className="stage-chips">
-          {stageOrder.map((st, idx) => (
-            <div key={`${st}-${idx}`} className="stage-chip">
-              <b>#{idx + 1}</b> <span>S{st} {project.resolved.stages?.[st]?.name || STAGES[st]}</span>
-              <button type="button" disabled={idx === 0} onClick={() => moveStageOrder(idx, -1)} title="前移">←</button>
-              <button type="button" disabled={idx === stageOrder.length - 1} onClick={() => moveStageOrder(idx, 1)} title="后移">→</button>
-              {stageOrder.length > 1 && <button type="button" onClick={() => removeStageAt(idx)} title="移除此关">✕</button>}
+      <fieldset className={!orderOpen ? 'collapsed' : ''}>
+        <legend style={{ cursor: 'pointer', userSelect: 'none' }} onClick={() => toggleCollapse('stageOrder')}>
+          {orderOpen ? '▾ ' : '▸ '}关卡顺序与名称
+        </legend>
+        {orderOpen && (
+          <>
+            <div className="stage-order-head">
+              <span>闯关顺序（共 {stageOrder.length} 关）</span>
+              {orderOverridden && <button type="button" onClick={() => save(['stages', 'order'], null, '关卡顺序')}>↺ 恢复默认关卡</button>}
             </div>
-          ))}
-          {stageOrder.length < maxStageCount && (
-            <select value="" onChange={e => e.target.value && save(['stages', 'order'], [...stageOrder, Number(e.target.value)], '添加关卡')}>
-              <option value="">＋ 添加关卡…</option>
-              {Object.entries(STAGES).filter(([n]) => !stageOrder.includes(Number(n))).map(([n, name]) => <option key={n} value={n}>第 {n} 关 · {name}</option>)}
-            </select>
-          )}
-        </div>
-        {Object.entries(STAGES).map(([n, name]) => {
-          const stage = project.resolved.stages?.[n] || {};
-          return (
-            <div key={n} className="stage-row">
-              {field(P.stages.value.props.name, ['stages', n, 'name'], `第 ${n} 关名称`)}
-              <small className="drops">{name}{stage.pods ? ` · 胶囊 ${stage.pods.length}` : ''}{stage.boxes ? ` · 补给 ${stage.boxes.length}` : ''}{stage.spawns?.length ? ` · 摆怪 ${stage.spawns.length} 波` : ''}</small>
+            <div className="stage-chips">
+              {stageOrder.map((st, idx) => (
+                <div key={`${st}-${idx}`} className="stage-chip">
+                  <b>#{idx + 1}</b> <span>S{st} {project.resolved.stages?.[st]?.name || STAGES[st]}</span>
+                  <button type="button" disabled={idx === 0} onClick={() => moveStageOrder(idx, -1)} title="前移">←</button>
+                  <button type="button" disabled={idx === stageOrder.length - 1} onClick={() => moveStageOrder(idx, 1)} title="后移">→</button>
+                  {stageOrder.length > 1 && <button type="button" onClick={() => removeStageAt(idx)} title="移除此关">✕</button>}
+                </div>
+              ))}
+              {stageOrder.length < maxStageCount && (
+                <select value="" onChange={e => e.target.value && save(['stages', 'order'], [...stageOrder, Number(e.target.value)], '添加关卡')}>
+                  <option value="">＋ 添加关卡…</option>
+                  {Object.entries(STAGES).filter(([n]) => !stageOrder.includes(Number(n))).map(([n, name]) => <option key={n} value={n}>第 {n} 关 · {name}</option>)}
+                </select>
+              )}
             </div>
-          );
-        })}
+            {Object.entries(STAGES).map(([n, name]) => {
+              const stage = project.resolved.stages?.[n] || {};
+              return (
+                <div key={n} className="stage-row">
+                  {field(P.stages.value.props.name, ['stages', n, 'name'], `第 ${n} 关名称`)}
+                  <small className="drops">{name}{stage.pods ? ` · 胶囊 ${stage.pods.length}` : ''}{stage.boxes ? ` · 补给 ${stage.boxes.length}` : ''}{stage.spawns?.length ? ` · 摆怪 ${stage.spawns.length} 波` : ''}</small>
+                </div>
+              );
+            })}
+          </>
+        )}
       </fieldset>
 
       <fieldset>

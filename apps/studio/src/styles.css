@@ -173,3 +173,39 @@ pre { background: #0f1116; border: 1px solid var(--line); border-radius: 6px; pa
 .muted, .note { color: var(--dim); font-size: 12px; }
 button.link { background: none; border: 0; padding: 0; color: var(--accent2); cursor: pointer; text-align: left; }
 button.link:hover { text-decoration: underline; }
+
+/* Starter Theme Cards, Bricks Library, Spec Controls & Chat Screenshots */
+.empty { max-width: 840px; margin: 4vh auto; padding: 0 20px 32px; overflow: auto; }
+.theme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.theme-card { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px; text-align: left; background: linear-gradient(155deg, #1d2230, #151822); border: 1px solid var(--line); border-radius: 10px; transition: transform .12s, border-color .12s; }
+.theme-card:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--accent); }
+.theme-card-top { display: flex; align-items: center; gap: 8px; width: 100%; }
+.theme-icon { font-size: 22px; }
+.theme-card strong { font-size: 15px; color: var(--text); flex: 1; }
+.theme-card p { margin: 0; font-size: 12px; color: var(--dim); line-height: 1.45; }
+.theme-card small { color: var(--accent); font-weight: 600; font-size: 12px; margin-top: 2px; }
+
+.brick-tag { display: inline-block; padding: 1px 6px; border-radius: 99px; font-size: 11px; font-weight: 500; background: #2b3246; color: #9fc3ff; border: 1px solid #3c4663; }
+.brick-list { display: flex; flex-direction: column; gap: 8px; }
+.brick-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.brick-card.active { border-color: var(--accent2); background: #162420; }
+.brick-head { display: flex; align-items: flex-start; gap: 10px; }
+.brick-icon { font-size: 22px; line-height: 1.2; }
+.brick-meta { flex: 1; min-width: 0; }
+.brick-meta strong { display: flex; align-items: center; gap: 6px; font-size: 13px; margin-bottom: 3px; }
+.brick-meta p { margin: 0; font-size: 12px; color: var(--dim); line-height: 1.4; }
+
+.spec-search { display: flex; gap: 6px; margin-bottom: 6px; position: sticky; top: 0; z-index: 3; background: var(--bg); padding: 4px 0; }
+.spec-search input { flex: 1; padding: 6px 10px; }
+.spec fieldset.collapsed { padding-bottom: 4px; opacity: 0.88; }
+.switch-control { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; background: #0f1116; border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; }
+.switch-control input { width: auto; margin: 0; accent-color: var(--accent2); }
+.color-control { display: flex; align-items: center; gap: 4px; }
+.color-control input[type="color"] { width: 28px; height: 26px; padding: 0; border: 1px solid var(--line); cursor: pointer; flex-shrink: 0; }
+.color-control input[type="text"] { flex: 1; min-width: 0; }
+
+.chat-shots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chat-shot { margin: 0; background: #0c0e13; border: 1px solid var(--line); border-radius: 6px; padding: 4px; max-width: 100%; }
+.chat-shot img { display: block; max-width: 100%; max-height: 150px; border-radius: 4px; image-rendering: pixelated; }
+.chat-shot figcaption { font-size: 11px; color: var(--dim); margin-top: 3px; text-align: center; }
+

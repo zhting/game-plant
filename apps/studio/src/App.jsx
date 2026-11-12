@@ -2,10 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, getToken, setToken, ApiError } from './api.js';
 import Chat from './Chat.jsx';
 import SpecPanel from './SpecPanel.jsx';
+import BricksPanel from './BricksPanel.jsx';
 import AssetEditor from './AssetEditor.jsx';
 import History from './History.jsx';
 import Files from './Files.jsx';
 import RawJson from './RawJson.jsx';
+import { STARTER_THEMES, GAMEPLAY_BRICKS } from './presets.js';
 
 export default function App() {
   const [status, setStatus] = useState(null);
@@ -92,6 +94,31 @@ export default function App() {
     }
   }
 
+  async function createFromTheme(theme) {
+    if (creating) return;
+    setCreating(true);
+    setError('');
+    try {
+      const { id } = await api.createProject({ title: theme.title, template: theme.template });
+      if (theme.patch) {
+        await api.patch(id, theme.patch, `应用创世主题包：${theme.title}`);
+      }
+      for (const brickId of theme.bricks || []) {
+        const brick = GAMEPLAY_BRICKS.find(b => b.id === brickId);
+        if (brick) {
+          await api.writeFile(id, brick.path, brick.source, 'text/javascript; charset=utf-8', `预装玩法积木：${brick.title}`);
+        }
+      }
+      setProjects(await api.projects());
+      setCurrentId(id);
+      setShowCreateBar(false);
+    } catch (err) {
+      setError(err.details ? `${err.message}：${err.details.join('；')}` : err.message);
+    } finally {
+      setCreating(false);
+    }
+  }
+
   if (status?.auth && !status.authorized) {
     return (
       <div className="gate">
@@ -113,71 +140,94 @@ export default function App() {
   if (debugOverlay) playQuery.set('debug', '1');
   if (godMode) playQuery.set('god', '1');
   const playUrl = basePlayUrl ? `${basePlayUrl}${playQuery.toString() ? `?${playQuery.toString()}` : ''}` : null;
+  const installedBrickCount = (project?.files?.modules || []).length;
 
   return (
     <div className="app">
       <header>
-        <strong className="brand" style={{ cursor: 'pointer' }} onClick={() => setCurrentId('')} title="返回项目首页">🌱 Game Plant Studio</strong>
+        <strong className="brand" style={{ cursor: 'pointer' }} onClick={() => setCurrentId('')} title="返回项目首页与创世主题大厅">🌱 Game Plant Studio</strong>
         <select value={currentId} onChange={e => setCurrentId(e.target.value)}>
           <option value="">选择项目…</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.title}（{p.id}）</option>)}
         </select>
-        <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => handleTemplateChange(e.target.value)}>
-          <option value="contra">模板：魂斗罗2026</option>
-          <option value="wukong">模板：悟空大闹天宫</option>
-        </select>
         {project ? (
-          <button onClick={() => setShowCreateBar(v => !v)}>＋ 新项目</button>
+          <button onClick={() => setShowCreateBar(v => !v)}>＋ 新项目 / 主题包</button>
         ) : (
-          <button className="primary" disabled={creating} onClick={submitCreateProject}>{creating ? '创建中…' : '＋ 新项目'}</button>
+          <>
+            <select value={newTemplate} title="新建项目所用的游戏模板" onChange={e => handleTemplateChange(e.target.value)}>
+              <option value="contra">模板：魂斗罗2026</option>
+              <option value="wukong">模板：悟空大闹天宫</option>
+            </select>
+            <button className="primary" disabled={creating} onClick={submitCreateProject}>{creating ? '创建中…' : '＋ 空白项目'}</button>
+          </>
         )}
         <span className="spacer" />
         {status && <span className={'ai ' + (status.ai.configured ? 'ok' : 'off')} title={JSON.stringify(status.ai.models, null, 1)}>
           {status.ai.mock
-            ? `AI：模拟测试模式（已就绪 · 今日 ${ status.ai.usage.requests || 0 } 次调用）`
+            ? `AI：离线智能模式（已就绪 · 今日 ${status.ai.usage.requests || 0} 次调用）`
             : status.ai.configured
               ? `AI：${status.ai.models.agent} · 今日 ${Math.round(status.ai.usage.tokens / 1000)}k / ${Math.round((status.ai.usage.limit || 0) / 1000)}k tokens`
               : 'AI 未配置（GEMINI_API_KEY）'}
         </span>}
       </header>
       {showCreateBar && project && (
-        <form className="create-bar" onSubmit={submitCreateProject}>
-          <span>新建游戏项目：</span>
-          <input value={newTitle} maxLength={20} placeholder="输入新游戏名称（最多20字）" onChange={e => setNewTitle(e.target.value)} autoFocus />
-          <select value={newTemplate} onChange={e => handleTemplateChange(e.target.value)}>
-            <option value="contra">模板：魂斗罗2026</option>
-            <option value="wukong">模板：悟空大闹天宫</option>
-          </select>
-          <button type="submit" className="primary" disabled={creating}>{creating ? '创建中…' : '立即创建'}</button>
-          <button type="button" onClick={() => setShowCreateBar(false)}>取消</button>
-        </form>
-      )}
-      {error && <div className="banner error" onClick={() => setError('')}>{error}（点击关闭）</div>}
-      {!project ? (
-        <main className="empty">
-          <h2>用对话做一个属于你的横版射击游戏</h2>
-          <p>新建项目可选择「魂斗罗2026」或「悟空大闹天宫」模板。之后在左侧用中文告诉 AI 你想改什么，比如：</p>
-          <ul>
-            <li>“步枪射速快一倍，开局 5 条命，开启 64 点血条和怒气大招”</li>
-            <li>“开启近战棍花斩击并能反弹敌弹，第一关天色改成晚霞金红”</li>
-            <li>“给主角画一套银色机甲皮肤并换上”</li>
-          </ul>
-          <form className="empty-create-form" onSubmit={submitCreateProject}>
-            <input value={newTitle} maxLength={20} placeholder="新游戏的名字（最多20字）" onChange={e => setNewTitle(e.target.value)} />
+        <div className="create-bar">
+          <form style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }} onSubmit={submitCreateProject}>
+            <span>新建空白项目：</span>
+            <input value={newTitle} maxLength={20} placeholder="输入新游戏名称（最多20字）" onChange={e => setNewTitle(e.target.value)} autoFocus />
             <select value={newTemplate} onChange={e => handleTemplateChange(e.target.value)}>
               <option value="contra">模板：魂斗罗2026</option>
               <option value="wukong">模板：悟空大闹天宫</option>
             </select>
+            <button type="submit" className="primary" disabled={creating}>{creating ? '创建中…' : '创建空白'}</button>
+          </form>
+          <span style={{ color: 'var(--dim)' }}>| 一键创世主题：</span>
+          {STARTER_THEMES.map(th => (
+            <button key={th.id} type="button" disabled={creating} onClick={() => createFromTheme(th)} title={th.desc}>
+              {th.icon} {th.title}
+            </button>
+          ))}
+          <button type="button" onClick={() => setShowCreateBar(false)}>收起</button>
+        </div>
+      )}
+      {error && <div className="banner error" onClick={() => setError('')}>{error}（点击关闭）</div>}
+      {!project ? (
+        <main className="empty">
+          <h2>不写一行代码，打造你的原创横版动作游戏</h2>
+          <p className="muted">点击任意「原创创世主题包」一秒生成完整差异化作品（自带定制武器弹道、天色配乐、剧情字幕与免代码玩法积木），或新建空白模板自由发挥：</p>
+
+          <div className="theme-grid">
+            {STARTER_THEMES.map(th => (
+              <button key={th.id} type="button" className="theme-card" disabled={creating} onClick={() => createFromTheme(th)}>
+                <div className="theme-card-top">
+                  <span className="theme-icon">{th.icon}</span>
+                  <strong>{th.title}</strong>
+                  <span className="brick-tag">{th.badge}</span>
+                </div>
+                <p>{th.desc}</p>
+                <small>点击一键生成并立即试玩 →</small>
+              </button>
+            ))}
+          </div>
+
+          <form className="empty-create-form" onSubmit={submitCreateProject}>
+            <span style={{ fontSize: 13, color: 'var(--dim)' }}>或者从纯净模板开始：</span>
+            <input value={newTitle} maxLength={20} placeholder="新游戏的名字（最多20字）" onChange={e => setNewTitle(e.target.value)} />
+            <select value={newTemplate} onChange={e => handleTemplateChange(e.target.value)}>
+              <option value="contra">模板：魂斗罗2026（8关射击/近战全自由）</option>
+              <option value="wukong">模板：悟空大闹天宫（棍法神通动作底座）</option>
+            </select>
             <button type="submit" className="primary" disabled={creating}>{creating ? '正在创建…' : '＋ 新建项目'}</button>
           </form>
+
           {projects.length > 0 && (
             <div className="existing-projects">
-              <h4>或者直接打开已有项目：</h4>
+              <h4>继续编辑我的已有作品（{projects.length}）：</h4>
               <div className="project-cards">
                 {projects.map(p => (
                   <button key={p.id} type="button" className="project-card" onClick={() => setCurrentId(p.id)}>
                     <strong>{p.title}</strong>
-                    <small>{p.template === 'wukong' ? '🐒 悟空大闹天宫' : '🔫 魂斗罗2026'} · <code>{p.id}</code></small>
+                    <small>{p.template === 'wukong' ? '🐒 悟空底座' : '🔫 魂斗罗底座'} · <code>{p.id}</code></small>
                   </button>
                 ))}
               </div>
@@ -237,13 +287,14 @@ export default function App() {
               <a href={basePlayUrl} target="_blank" rel="noreferrer">新窗口 ↗</a>
             </div>
             <iframe ref={iframeRef} key={previewKey} title="游戏预览" src={playUrl} allow="fullscreen; gamepad; autoplay" />
-            <p className="hint">点击画面后用键盘操作：WASD 移动，J 射击，K 跳跃，I 手雷/大招，L 道具/法术，Enter 开始/暂停。顶部工具栏可随时跳关、看碰撞框或开无敌。</p>
+            <p className="hint">点击画面后用键盘操作：WASD 移动，J 射击/挥砍，K 跳跃，I 手雷/大招，L 道具/法术，Enter 开始/暂停。顶部工具栏可随时跳关、看碰撞框或开无敌。</p>
           </section>
           <aside className="side">
             <nav>
               {[
                 ['params', '参数与关卡'],
-                ['assets', '资源与换皮'],
+                ['bricks', `🧩 玩法积木${installedBrickCount ? ` (${installedBrickCount})` : ''}`],
+                ['assets', '美术与配乐'],
                 ['files', '代码与文件'],
                 ['history', '版本'],
                 ['json', 'game.json'],
@@ -251,6 +302,7 @@ export default function App() {
                 <button key={key} className={tab === key ? 'active' : ''} onClick={() => setTab(key)}>{label}</button>)}
             </nav>
             {tab === 'params' && <SpecPanel project={project} schema={schema} onChanged={changed} onError={setError} />}
+            {tab === 'bricks' && <BricksPanel project={project} onChanged={changed} onError={setError} onOpenCode={() => setTab('files')} />}
             {tab === 'assets' && <AssetEditor project={project} schema={schema} aiReady={status?.ai.configured} onChanged={changed} onError={setError} />}
             {tab === 'files' && <Files project={project} onChanged={changed} onError={setError} />}
             {tab === 'history' && <History project={project} onChanged={changed} onError={setError} />}

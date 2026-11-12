@@ -318,7 +318,21 @@ export async function runAgentTurn({ llm, config, store, projectId, message, his
     const responses = [];
     for (const call of res.functionCalls) {
       const { _images: images, ...result } = await runTool({ llm, config, store, projectId, name: call.name, args: call.args, changes });
-      steps.push({ name: call.name, args: call.args, ok: result?.ok !== false });
+      let previewDataUrl;
+      if (images?.[0]?.data) {
+        const rawBuf = Buffer.from(images[0].data);
+        if (rawBuf.length > 48_000) {
+          const sharp = await getSharp();
+          if (sharp) {
+            const thumb = await sharp(rawBuf).resize({ width: 384, withoutEnlargement: true }).webp({ quality: 82 }).toBuffer();
+            previewDataUrl = `data:image/webp;base64,${thumb.toString('base64')}`;
+          }
+        }
+        if (!previewDataUrl && rawBuf.length < 400_000) {
+          previewDataUrl = `data:${images[0].mimeType || 'image/png'};base64,${rawBuf.toString('base64')}`;
+        }
+      }
+      steps.push({ name: call.name, args: call.args, ok: result?.ok !== false, ...(previewDataUrl ? { previewDataUrl } : {}) });
       // Images (e.g. the generated sprite) go back as multimodal function-response parts so the model can see them.
       const parts = images?.map(img => ({ inlineData: { mimeType: img.mimeType, data: Buffer.from(img.data).toString('base64') } }));
       responses.push({ functionResponse: { ...(call.id ? { id: call.id } : {}), name: call.name, response: result, ...(parts?.length ? { parts } : {}) } });

@@ -70,10 +70,31 @@ function buildMockPatchFromText(text) {
     ensure(patch, 'rules').melee = { enabled: 1, range: 44, damage: 5, reflectBullets: 1, color: '#ffd24a' };
     labels.push('开启近战棍花斩击并可反弹敌弹');
   }
-  if (/晚霞|天色|金红|夜色|滤镜/.test(text)) {
+  if (/飞斧|抛物线|榴弹|投掷/.test(text)) {
+    const rf = ensure(ensure(patch, 'weapons'), 'rifle');
+    Object.assign(rf, { name: '圣银飞斧', cd: 0.26, spd: 220, damageScale: 2.5, gravity: 420, pierce: 1, color: '#ffd166', size: 5 });
+    labels.push('步枪改造为高伤穿透抛物线「圣银飞斧」');
+  } else if (/穿透|光刃|剑气/.test(text)) {
+    const rf = ensure(ensure(patch, 'weapons'), 'rifle');
+    Object.assign(rf, { name: '脉冲光刃', cd: 0.16, spd: 360, damageScale: 2, pierce: 1, color: '#00f5d4', size: 4 });
+    labels.push('步枪改造为贯穿敌阵的「脉冲光刃」');
+  }
+  if (/赛博|霓虹/.test(text)) {
+    const st1 = ensure(ensure(patch, 'stages'), '1');
+    st1.name = '霓虹下城区';
+    st1.theme = { skyTint: '#1b0b3b', tintAlpha: 0.34, hue: -48 };
+    ensure(ensure(patch, 'audio'), 'stages')['1'] = 'stage1cyberpunk';
+    labels.push('第一关切换为赛博霓虹夜幕与电子合成波配乐');
+  } else if (/晚霞|天色|金红|夜色|滤镜/.test(text)) {
     const st1 = ensure(ensure(patch, 'stages'), '1');
     st1.theme = { skyTint: '#ff5a2a', tintAlpha: 0.28, hue: 18 };
     labels.push('第一关天色改为晚霞金红');
+  }
+  if (/结局|片尾|通关字幕/.test(text)) {
+    ensure(patch, 'story').endingTitle = '新纪元 · 黎明';
+    patch.story.endingSubtitle = '英雄凯旋';
+    patch.story.ending = [{ tag: '终章 · 破晓', line1: '硝烟散尽，星光重回天际，', line2: '属于你的原创传奇就此铭刻！' }];
+    labels.push('自定义通关结局字幕');
   }
   if (/开头先掉|补给/.test(text)) {
     const st1 = ensure(ensure(patch, 'stages'), '1');
@@ -88,7 +109,8 @@ function buildMockPatchFromText(text) {
   }
   if (/Boss|头目/i.test(text)) {
     ensure(patch, 'bosses').hpScale = /减半|弱/.test(text) ? 0.6 : 1.5;
-    labels.push('调整 Boss 血量倍率');
+    if (/变色|紫|绿|红/.test(text)) patch.bosses.hue = 120;
+    labels.push('调整 Boss 血量与外观');
   }
 
   if (!labels.length) {
@@ -135,6 +157,9 @@ export function createMockGemini({ config = {}, usage } = {}) {
         if (/撤销|回退|还原/.test(userText)) {
           return makeCall('undo', {});
         }
+        if (/截图|画面检查|抓一帧|看看效果/.test(userText)) {
+          return makeCall('screenshot', { stage: 1, seconds: 2.5, debug: true });
+        }
         if (/画|皮肤|换皮|机甲|生图|精灵图/.test(userText)) {
           return makeCall('image_gen', {
             name: 'hero-mecha.png',
@@ -178,6 +203,7 @@ export function createMockGemini({ config = {}, usage } = {}) {
         if (r.name === 'spec_patch') return `已更新设置（${res.message || 'game.json'}），并通过自动试玩校验`;
         if (r.name === 'code_write') return `已写入代码模块 ${res.path || ''} 并通过隔离试玩检查`;
         if (r.name === 'image_gen') return `已生成模拟精灵图 ${res.path || ''}（${res.size?.width || 24}×${res.size?.height || 32}）`;
+        if (r.name === 'screenshot') return `已抓取第 ${res.stage || 1} 关实机画面快照（角色坐标 X=${Math.round(res.player?.x || 0)}）`;
         if (r.name === 'undo') return `已撤销最近一次修改（${res.message || ''}）`;
         return `已完成 ${r.name}`;
       });
