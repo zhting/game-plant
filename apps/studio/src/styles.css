@@ -100,11 +100,13 @@ header { display: flex; align-items: center; gap: 10px; padding: 8px 14px; borde
 .timeline-track { background: #0d1017; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; }
 .timeline-ruler { display: flex; justify-content: space-between; font-size: 10px; color: var(--dim); border-bottom: 1px dashed var(--line); padding-bottom: 3px; margin-bottom: 4px; }
 .timeline-lane { position: relative; height: 42px; border-bottom: 1px dashed #1f2433; }
-.timeline-lane.boxes-lane { height: 28px; border-bottom: 0; margin-top: 4px; }
+.timeline-lane.boxes-lane { height: 28px; margin-top: 4px; }
+.timeline-lane.spawns-lane { height: 30px; border-bottom: 0; margin-top: 4px; }
 .lane-label { position: absolute; left: 2px; top: 2px; font-size: 10px; color: var(--dim); pointer-events: none; }
 .drop-pin { position: absolute; transform: translate(-50%, 0); padding: 1px 5px; font-size: 11px; font-weight: 700; border-radius: 10px; line-height: 1.2; }
 .drop-pin.pod { background: #143d4d; border-color: #2fd4f7; color: #aef3ff; }
 .drop-pin.box { top: 4px; background: #473210; border-color: var(--accent); color: #ffe39e; border-radius: 4px; }
+.drop-pin.spawn { top: 5px; background: #4b1824; border-color: #ff6b8b; color: #ffc2d1; border-radius: 6px; }
 .drop-pin.active { outline: 2px solid #fff; z-index: 2; }
 .drop-inspector { display: flex; flex-direction: column; gap: 6px; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 8px; font-size: 12px; }
 .drop-inspector label { display: flex; justify-content: space-between; align-items: center; gap: 8px; }

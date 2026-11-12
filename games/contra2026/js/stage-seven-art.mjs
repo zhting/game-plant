@@ -1,4 +1,4 @@
-import {StageOneArt} from './stage-one-art.mjs?v=m4-1';
+import {StageOneArt} from './stage-one-art.mjs?v=creator-2';
 import {HUD_PLAYER_X} from './hud-layout.mjs';
 import {drawFrozenEnemy} from './enemy-freeze-art.mjs?v=larva-hop-1';
 import {drawHangarAtmosphere,drawHangarRouteBackdrop} from './stage-seven-atmosphere.mjs?v=hangar-required-routes-1';

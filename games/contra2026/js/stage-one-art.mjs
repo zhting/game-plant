@@ -255,46 +255,51 @@ export class StageOneArt {
   }
   rainIntensity(camera,tick){return rainStrength(camera+192,tick/60);}
   background(camera, tick, solids = [],rain=this.rainIntensity(camera,tick)) {
-    const g=this.g,time=tick/60;g.fillStyle=STAGE_ONE_PALETTE.sky;g.fillRect(0,0,384,216);
-    for(const star of nightStars(camera,tick/60)){
-      g.save();g.globalAlpha=star.alpha*(1-rain*.8);this.rect(star.x,star.y,star.size,star.size,star.color);
-      if(star.glint>.35){g.globalAlpha*=star.glint*.36;this.rect(star.x-.65,star.y+.2,1.8,.22,star.color);this.rect(star.x+.2,star.y-.65,.22,1.8,star.color);}
-      g.restore();
-    }
-    const snow=this.frame('snow','snow',250,57);
-    if(snow){
-      const shift=camera*.065;
-      for(let i=Math.floor((shift-110)/440);i<=Math.floor((shift+384-110)/440);i++)g.drawImage(snow,110+i*440-shift,28,250,57);
-    }
-    const forest=this.frame('lowJungle','lowJungle',280,44);
-    if(forest){
-      // A subdued parallax band sits behind the river and gaps between banks.
-      g.save();g.globalAlpha=.42;const shift=camera*.22;
-      for(let i=Math.floor(shift/278);i<=Math.floor((shift+384)/278);i++)drawWindForest(g,forest,i*278-shift,140,280,44,time,true,rain);
-      g.restore();
-      // Whole plants are anchored by their roots. Crowns can overhang a bank;
-      // no vertical terrain clip cuts a frond in half at a cliff.
-      for(const s of solids){
-        if(!s.g||s.water||s.x+s.w<camera||s.x>camera+384)continue;
-        for(let i=Math.floor(s.x/31);i<=Math.ceil((s.x+s.w)/31);i++){
-          const root=i*31+8+rnd(i*379)*9;if(root<s.x+7||root>s.x+s.w-7||root<camera-30||root>camera+414)continue;
-          const kind=Math.floor(rnd(i*419+11)*3),plant=this.forestPlant(kind),h=36+rnd(i*97)*9,w=38+rnd(i*67)*7;
-          if(plant)drawWindForest(g,plant,root-camera-w/2,s.y-h,w,h,time,false,rain,root,kind);
-        }
-        const fern=this.forestPlant(3);
-        if(fern)for(let i=Math.floor(s.x/23);i<=Math.ceil((s.x+s.w)/23);i++){
-          const root=i*23+9;if(root<s.x+4||root>s.x+s.w-4||root<camera-24||root>camera+408)continue;
-          const h=15+rnd(i*283)*5;drawWindForest(g,fern,root-camera-17,s.y-h,34,h,time,false,rain,root+19,3);
+    const g=this.g,time=tick/60,theme=this.state?.stageTheme;
+    if(theme?.hue){g.save();g.filter=`hue-rotate(${theme.hue}deg)`;}
+    g.fillStyle=STAGE_ONE_PALETTE.sky;g.fillRect(0,0,384,216);
+    const customBg=(this.baseArt||this).customBgImage?.(g,camera,384,216)===true;
+    if(!customBg){
+      for(const star of nightStars(camera,tick/60)){
+        g.save();g.globalAlpha=star.alpha*(1-rain*.8);this.rect(star.x,star.y,star.size,star.size,star.color);
+        if(star.glint>.35){g.globalAlpha*=star.glint*.36;this.rect(star.x-.65,star.y+.2,1.8,.22,star.color);this.rect(star.x+.2,star.y-.65,.22,1.8,star.color);}
+        g.restore();
+      }
+      const snow=this.frame('snow','snow',250,57);
+      if(snow){
+        const shift=camera*.065;
+        for(let i=Math.floor((shift-110)/440);i<=Math.floor((shift+384-110)/440);i++)g.drawImage(snow,110+i*440-shift,28,250,57);
+      }
+      const forest=this.frame('lowJungle','lowJungle',280,44);
+      if(forest){
+        // A subdued parallax band sits behind the river and gaps between banks.
+        g.save();g.globalAlpha=.42;const shift=camera*.22;
+        for(let i=Math.floor(shift/278);i<=Math.floor((shift+384)/278);i++)drawWindForest(g,forest,i*278-shift,140,280,44,time,true,rain);
+        g.restore();
+        // Whole plants are anchored by their roots. Crowns can overhang a bank;
+        // no vertical terrain clip cuts a frond in half at a cliff.
+        for(const s of solids){
+          if(!s.g||s.water||s.x+s.w<camera||s.x>camera+384)continue;
+          for(let i=Math.floor(s.x/31);i<=Math.ceil((s.x+s.w)/31);i++){
+            const root=i*31+8+rnd(i*379)*9;if(root<s.x+7||root>s.x+s.w-7||root<camera-30||root>camera+414)continue;
+            const kind=Math.floor(rnd(i*419+11)*3),plant=this.forestPlant(kind),h=36+rnd(i*97)*9,w=38+rnd(i*67)*7;
+            if(plant)drawWindForest(g,plant,root-camera-w/2,s.y-h,w,h,time,false,rain,root,kind);
+          }
+          const fern=this.forestPlant(3);
+          if(fern)for(let i=Math.floor(s.x/23);i<=Math.ceil((s.x+s.w)/23);i++){
+            const root=i*23+9;if(root<s.x+4||root>s.x+s.w-4||root<camera-24||root>camera+408)continue;
+            const h=15+rnd(i*283)*5;drawWindForest(g,fern,root-camera-17,s.y-h,34,h,time,false,rain,root+19,3);
+          }
         }
       }
     }
-    if(rain>.001){
+    if(rain>.001&&!customBg){
       g.save();g.globalAlpha=rain;
       const cloud=g.createLinearGradient(0,0,0,180);
       cloud.addColorStop(0,'rgba(12,26,43,.78)');cloud.addColorStop(.55,'rgba(12,28,43,.3)');cloud.addColorStop(1,'rgba(8,22,31,.08)');
       g.fillStyle=cloud;g.fillRect(0,0,384,216);g.restore();
     }
-    const theme=this.state?.stageTheme;
+    if(theme?.hue)g.restore();
     if(theme?.skyTint&&theme.tintAlpha>0){
       g.save();g.globalAlpha=Math.max(0,Math.min(.75,theme.tintAlpha));
       const wash=g.createLinearGradient(0,0,0,196);
@@ -749,9 +754,10 @@ export class StageOneArt {
     else{this.exitPath();g.fillStyle='#071018';g.fill();}
   }
   fortress(boss) {
-    const b = FORTRESS_ART, g = this.g;
+    const b = FORTRESS_ART, g = this.g, bossFlt = (this.baseArt || this).bossFilter;
     // Painting before the facade lets the actual concrete hide his legs and body.
     if(!boss.dead)for(const e of this.state.en||[])if(e.roofGuard&&!e.dead)this.enemy(roofGuardPose(e));
+    if (bossFlt) { g.save(); g.filter = bossFlt; }
     const layers=this.fortressLayers();
     for(const part of boss.parts)if(part.hp>0&&layers?.barrels[part.k]){
       const barrel=layers.barrels[part.k],pose=fortressCannonPose(part);
@@ -760,6 +766,7 @@ export class StageOneArt {
     const facade=this.fortressFrame(boss);
     if(facade)g.drawImage(facade,b.x,b.y,b.w,b.h);
     else this.rect(b.x + 40, 0, b.w - 40, b.h, '#6c8094');
+    if (bossFlt) g.restore();
     for (const part of boss.parts) {
       if (part.hp <= 0) {
         const r=FORTRESS_DAMAGE_REGIONS[part.k],wreck=this.frame('damage',part.k,r.w,r.h);
@@ -784,6 +791,20 @@ export class StageOneArt {
   bullets(bullets, hostile = false) {
     for (const b of bullets) {
       if (b.dead) continue;
+      if (!hostile && (b.color || b.size > 0)) {
+        const r = b.size > 0 ? b.size : (b.k === 'laser' ? 3 : 2.4), col = b.color || '#56e0ff';
+        if (b.k === 'laser' || b.pierce) {
+          const len = Math.hypot(b.vx, b.vy) || 1, tail = b.k === 'laser' ? 24 : 12;
+          const x = b.x - b.vx / len * tail, y = b.y - b.vy / len * tail;
+          this.line(x, y, b.x, b.y, col, r * 1.35);
+          this.line(x, y, b.x, b.y, '#ffffff', Math.max(0.9, r * 0.5));
+        } else {
+          this.light(b.x, b.y, r * 2.1, col);
+          this.disc(b.x, b.y, r, col);
+          this.disc(b.x, b.y, r * 0.45, '#ffffff');
+        }
+        continue;
+      }
       if (b.k === 'laser') {
         const len = Math.hypot(b.vx, b.vy) || 1, x = b.x - b.vx / len * 24, y = b.y - b.vy / len * 24;
         this.line(x, y, b.x, b.y, '#f83800', 3); this.line(x, y, b.x, b.y, '#fcfcfc');
@@ -888,7 +909,8 @@ export class StageOneArt {
     const lives = Math.max(0, G.lives);
     for (let i = 0; i < Math.min(infinite ? 3 : lives, 3); i++) this.life(x + 77 + i * 7, 4, role==='blue' ? '#0058f8' : '#f83800');
     this.hudText(infinite ? '无限' : '×' + lives, x + 102, 6, muted, 5);
-    this.hudText(WEAPON_LABELS[actor.weapon] || '步枪', x + 5, 17, '#d5ddc6', 6);
+    const wLabel = (this.baseArt || this).weaponLabels?.[actor.weapon] || WEAPON_LABELS[actor.weapon] || '步枪';
+    this.hudText(wLabel, x + 5, 17, '#d5ddc6', 6, 'left', 16);
     if (actor.rapid) this.hudText('速', x + 21, 17.5, '#dfb66b', 5);
     // Empty slots are quiet notches; occupied slots keep their labels and selection cue.
     for (let i = 0; i < 3; i++) {

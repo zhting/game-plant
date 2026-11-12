@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createHeadlessEngine, ENGINE_IMPORTS } from '../../sim/headless.mjs';
-import {WukongSkin,SKIN_RIG} from '../../games/wukong/js/wukong-game.mjs?v=dialogue-4';
+import {WukongSkin,SKIN_RIG} from '../../games/wukong/js/wukong-game.mjs?v=creator-2';
 import {PRONE_ART} from '../../games/wukong/js/wukong-prone.mjs';
 import {staffGeometry,staffMotion,ULTIMATE,STAFF_VARIANTS,AIR_VARIANTS,advanceStaff,staffCopies} from '../../games/wukong/js/wukong-combat.mjs';
 import {flyingGuard} from '../../games/wukong/js/wukong-enemies.mjs';

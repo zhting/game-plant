@@ -1,4 +1,4 @@
-import {StageOneArt} from './stage-one-art.mjs?v=m4-1';
+import {StageOneArt} from './stage-one-art.mjs?v=creator-2';
 import {drawExplosion} from './combat-art.mjs?v=combat-polish-1';
 import {ENDING_DURATION,endingEase,endingCaption,endingPose} from './ending-story.mjs?v=ending-hd-1';
 
@@ -142,8 +142,16 @@ export class EndingArt extends StageOneArt{
     if(!credits)this.aircraft(endingPose(t).homeHeli,t,{warm:.1});
     else{const g=this.g;g.save();g.globalAlpha=.63*endingEase((t-20.6)/1.2);this.rect(0,0,384,216,'#030d18');g.restore();}
   }
-  subtitles(t){
-    const g=this.g,page=endingCaption(t);
+  subtitles(t,G){
+    const g=this.g,custom=G?.storyEnding;
+    let page=endingCaption(t);
+    if(custom?.pages?.length){
+      const idx=custom.pages.findIndex(p=>t>=p.from&&t<=p.to);
+      if(idx>=0){
+        const p=custom.pages[idx],fade=Math.min(1,(t-p.from)/.35,(p.to-t)/.35);
+        page={...p,index:idx,total:custom.pages.length,alpha:Math.max(0,fade)};
+      }else page=null;
+    }
     g.save();g.globalAlpha=.35+(page?.alpha||0)*.65;
     const shade=g.createLinearGradient(0,153,0,216);shade.addColorStop(0,'rgba(1,9,13,0)');shade.addColorStop(.32,'rgba(1,9,13,.84)');shade.addColorStop(1,'rgba(1,9,13,.96)');g.fillStyle=shade;g.fillRect(0,153,384,63);
     if(page){
@@ -155,9 +163,11 @@ export class EndingArt extends StageOneArt{
   }
   credits(G,t){
     const seconds=Math.floor(G.time||0),duration=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
-    const rows=[['恭喜通关！','#e9ca8b',18,0],['赤焰小队 · 任务完成','#f4f2e5',10,30],
+    const studioTitle=G.gameTitle?`${G.gameTitle} 创作者`:'魂斗罗2026制作组';
+    const subBanner=G.storyEnding?.subtitle||(G.gameTitle?`${G.gameTitle} · 圆满通关`:'赤焰小队 · 任务完成');
+    const rows=[['恭喜通关！','#e9ca8b',18,0],[subBanner,'#f4f2e5',10,30],
       ['最终得分  '+String(G.score||0).padStart(6,'0'),'#e5e5dd',9,66],['通关用时  '+duration,'#e5e5dd',9,82],['阵亡次数  '+(G.deaths||0),'#e5e5dd',9,98],
-      ['— 制作人员 —','#9dbdce',9,140],['游戏设计  魂斗罗2026制作组','#e5e5dd',9,162],['关卡与美术  魂斗罗2026制作组','#e5e5dd',9,178],['音乐音效  魂斗罗2026制作组','#e5e5dd',9,194],['制作  玩家与克劳德','#e5e5dd',9,210],
+      ['— 制作人员 —','#9dbdce',9,140],['游戏设计  '+studioTitle,'#e5e5dd',9,162],['关卡与美术  '+studioTitle,'#e5e5dd',9,178],['音乐音效  '+studioTitle,'#e5e5dd',9,194],['创作引擎  Game Plant Studio','#e5e5dd',9,210],
       ['特别感谢','#9dbdce',9,246],['每一位坚持到这里的玩家','#e5e5dd',9,262],['全剧终','#e9ca8b',21,330]];
     const base=226-endingPose(t).creditScroll;
     for(const [text,color,size,offset]of rows){const y=base+offset;if(y<-25||y>216)continue;this.g.save();this.g.globalAlpha=clamp(Math.min((y+20)/20,(215-y)/18),0,1);this.hudText(text,192,y,color,size,'center',350);this.g.restore();}
@@ -172,9 +182,9 @@ export class EndingArt extends StageOneArt{
     if(t<11.5)this.escape(t,options);
     if(t>=10.6&&t<20.6){g.save();g.globalAlpha=endingEase((t-10.6)/.9);this.home(t);g.restore();}
     if(t>=20.6){this.home(t,true);this.credits(G,t);}
-    if(t<20.6)this.subtitles(t);
+    if(t<20.6)this.subtitles(t,G);
     const top=g.createLinearGradient(0,0,0,27);top.addColorStop(0,'rgba(2,12,17,.72)');top.addColorStop(1,'rgba(2,12,17,0)');g.fillStyle=top;g.fillRect(0,0,384,27);
-    this.hudText('黑礁群岛 · 作战结束',12,9,'#d1ded7',6.1);this.hudText('行动代号：赤焰',372,9,'#c5b88f',6.1,'right');
+    this.hudText(G.storyEnding?.title||'黑礁群岛 · 作战结束',12,9,'#d1ded7',6.1);this.hudText(G.storyEnding?.subtitle||'行动代号：赤焰',372,9,'#c5b88f',6.1,'right');
     if(t>.6)this.hudText('回车 / 射击键 / 点击屏幕：跳过片尾',192,208,'#9cb1b5',5.2,'center');
     const fade=Math.max(1-t/.55,(t-(ENDING_DURATION-.75))/.75);if(fade>0){g.save();g.globalAlpha=clamp(fade,0,1);this.rect(0,0,384,216,'#000');g.restore();}
     this.present(destination);

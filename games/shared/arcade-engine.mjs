@@ -14,16 +14,16 @@ import { createCeilingParasites, createFloorParasites, ceilingParasiteBox, white
 import { createCeilingStalkers, ceilingStalkerBox, advanceCeilingStalker } from '/games/contra2026/js/ceiling-stalker.mjs?v=ceiling-stalker-1';
 import { createHiveBrainParts, hiveBroodRemaining, hiveBroodHealth, hiveDamageableParts, advanceHiveBrood, advanceHiveHatchling, hiveHatchlingBox, hiveShotBlocked } from '/games/contra2026/js/hive-brood.mjs?v=hive-four-ports-1';
 import { hiveSpikeHeight } from '/games/contra2026/js/stage-eight-hazards.mjs?v=organic-motion-2';
-import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=m4-1';
+import { StageOneArt, FORTRESS_ART, FORTRESS_TARGETS, FORTRESS_EXIT } from '/games/contra2026/js/stage-one-art.mjs?v=creator-2';
 import { createFortressRoofGuard, advanceFortressRoofGuard, roofGuardBox, fortressRoofY } from '/games/contra2026/js/fortress-roof-guard.mjs?v=roof-guard-1';
 import { riverFishJumps, riverFishBox, riverFishLifeReward } from '/games/contra2026/js/river-fish.mjs?v=fish-life-1';
 import {fortressCannonMuzzle,advanceFortressCannon} from '/games/contra2026/js/fortress-cannon.mjs?v=cannon-recoil-1';
 import {advanceMotorcycle,motorcycleMuzzle,motorcycleDust} from '/games/contra2026/js/motorcycle-motion.mjs?v=moto-wheelie-2';
-import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=m3-1';
-import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=m3-1';
-import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=m3-1';
-import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=m3-1';
-import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=m3-1';
+import { StageTwoArt } from '/games/contra2026/js/stage-two-art.mjs?v=creator-2';
+import { StageFourArt } from '/games/contra2026/js/stage-four-art.mjs?v=creator-2';
+import { StageFiveArt } from '/games/contra2026/js/stage-five-art.mjs?v=creator-2';
+import { StageSixArt } from '/games/contra2026/js/stage-six-art.mjs?v=creator-2';
+import { StageSevenArt } from '/games/contra2026/js/stage-seven-art.mjs?v=creator-2';
 import { HANGAR_PLATE, createHangarPlates, hangarPlateBox, collideHangarPlates } from '/games/contra2026/js/stage-seven-obstacles.mjs?v=hangar-required-routes-1';
 import { MINECART, isMinecartRider, syncMinecartRider, leaveMinecart, boardMinecart, minecartMuzzle, minecartRiderBox, minecartCanRise, collideMinecartClearance } from '/games/contra2026/js/minecart-rider.mjs?v=hangar-required-routes-1';
 import { STAGE_SEVEN_ROUTE, hangarSectionAt, createStageSevenSolids, HANGAR_CART_TUNNEL, HANGAR_PRESSES, hangarPressState, hangarPressCrushBox, HANGAR_SNIPERS, HANGAR_BOXES, HANGAR_PODS, HANGAR_CART_DEPOTS, HANGAR_ENCOUNTERS } from '/games/contra2026/js/stage-seven-layout.mjs?v=hangar-required-routes-1';
@@ -33,7 +33,7 @@ import { STAGE_SIX_GALLERY, createStageSixGallerySolids, createStageSixGunners, 
 import { drawExplosion, drawSupplyDisc, drawEquipmentTurret, drawEquipmentSupply } from '/games/contra2026/js/combat-art.mjs?v=combat-polish-1';
 import { STAGE_FIVE_ROUTE, createSnowDefenders, snowDefenderBox, advanceSnowDefender, advanceSnowOrdnance, createFlyingFortress, placeFlyingFortress, advanceFlyingFortress, advanceFortressEscorts, advanceFortressSaucer, fortressSaucerBox } from '/games/contra2026/js/stage-five-combat.mjs?v=fortress-saucers-1';
 import { STAGE_FOUR_ROOMS, STAGE_FOUR_DEVICES, makeTwinProjections, advanceTwinProjections, initStageFourDefenses, advanceStageFourShutters, stageFourFacilityClosed, advanceStageFourGallery, stageFourGalleryTargets } from '/games/contra2026/js/stage-four-layout.mjs?v=stage-four-defense-1';
-import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=m3-1';
+import { StageThreeArt } from '/games/contra2026/js/stage-three-art.mjs?v=creator-2';
 import { drawImpactHelmet } from '/games/contra2026/js/impact-helmet-art.mjs?v=helmet-detail-2';
 import { GamepadInput } from '/games/contra2026/js/gamepad-input.mjs?v=controller-refinements-1';
 import { THIRTY_LIVES, ThirtyLivesCheat, inTitleLogo } from '/games/contra2026/js/thirty-lives.mjs?v=lives-load-1';
@@ -48,7 +48,7 @@ import { BASE_BOSS_DEVICES, BASE_BOSS_MOVER, bossDevicesRemaining, movingBossX, 
 import { baseSupplyKind } from '/games/contra2026/js/base-supply.mjs?v=stage-four-1';
 import { drawSupplySaucer } from '/games/contra2026/js/supply-saucer.mjs?v=pointed-drop-1';
 import { OPENING_DURATION, OPENING_PAGES } from '/games/contra2026/js/opening-story.mjs?v=opening-story-1';
-import { EndingArt } from '/games/contra2026/js/ending-art.mjs?v=m3-1';
+import { EndingArt } from '/games/contra2026/js/ending-art.mjs?v=creator-2';
 import { ENDING_DURATION, ENDING_PAGES } from '/games/contra2026/js/ending-story.mjs?v=ending-hd-1';
 import { canEnterExit, beginExitEntry, advanceExitEntry, teamInsideExit } from '/games/contra2026/js/stage-one-exit.mjs?v=exit-right-1';
 import { addImpact } from '/games/contra2026/js/impact-effects.mjs?v=hit-feedback-1';
@@ -59,7 +59,7 @@ import { REFERENCE_TRACKS, ReferenceMusic, StageMusicSession, musicForScene, sta
 import { musicRecord } from '/games/contra2026/js/music-records.mjs?v=stage-four-1';
 import { ResourcePreloader, gameResourceJobs, musicResourceJobs } from '/games/contra2026/js/resource-preloader.mjs?v=enemy-freeze-2';
 import { stageResourceJobs } from '/games/contra2026/js/stage-resources.mjs?v=ending-hd-1';
-import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=m4-1';
+import { resolveGameSpec } from '/games/shared/game-spec.mjs?v=creator-2';
 import { createModRuntime, drawModSprite, STOCK_ENEMY_TYPES } from '/games/shared/mod-runtime.mjs?v=m4-1';
 // Each document supplies only the systems used by its game.
 // gameSpec: optional project overrides (game.json); see games/shared/game-spec.mjs.
@@ -336,7 +336,7 @@ function tuneBosses() {
 const SHIELD_T = SPEC.items.shieldSeconds;
 const GAME_TITLE = SPEC.meta?.title || '魂斗罗2026', CREDIT_TEAM = GAME_TITLE + '制作组';
 if (SPEC.meta?.title && typeof document !== 'undefined') { document.title = GAME_TITLE; const brand = document.querySelector?.('.loading-brand'); if (brand) brand.textContent = GAME_TITLE; }
-const ITEM_NAMES = { M: '连发机枪', S: '扇形散弹', L: '贯穿光束', F: '螺旋火焰', H: '跟踪导弹', R: '速射芯片', B: '护盾 ' + SHIELD_T + ' 秒', ...SPECIALS };
+const ITEM_NAMES = { M: WEAP.machine.name || '连发机枪', S: WEAP.spread.name || '扇形散弹', L: WEAP.laser.name || '贯穿光束', F: WEAP.fire.name || '螺旋火焰', H: WEAP.homing.name || '跟踪导弹', R: '速射芯片', B: '护盾 ' + SHIELD_T + ' 秒', ...SPECIALS };
 const RULES_SPEC = SPEC.rules || {};
 const HEALTH_RULE = { maxHp: 1, hitDamage: 12, invincibleSeconds: 1.1, killHeal: 0, killHealEvery: 4, ...(RULES_SPEC.health || {}) };
 const RAGE_RULE = { enabled: 0, max: 100, onHit: 50, onKill: 10, ultimateDamage: 18, ultimateName: '万道金光', ...(RULES_SPEC.rage || {}) };
@@ -344,12 +344,10 @@ const MELEE_RULE = { enabled: 0, range: 38, damage: 3, reflectBullets: 0, color:
 const HAS_CUSTOM_HEALTH = !WUKONG && HEALTH_RULE.maxHp > 1;
 const HAS_CUSTOM_RAGE = !WUKONG && RAGE_RULE.enabled === 1;
 const HAS_CUSTOM_MELEE = !WUKONG && MELEE_RULE.enabled === 1;
-const STORY_OPENING = (() => {
-  const s = SPEC.story;
-  if (!s || (!s.openingTitle && !s.openingSubtitle && !(Array.isArray(s.opening) && s.opening.length))) return null;
-  const raw = Array.isArray(s.opening) && s.opening.length ? s.opening : null;
-  const span = (OPENING_DURATION - 1.2) / Math.max(1, raw ? raw.length : 1);
-  const pages = raw ? raw.map((item, idx) => {
+function parseStoryPages(raw, duration, fallbackPages) {
+  if (!Array.isArray(raw) || !raw.length) return fallbackPages;
+  const span = (duration - 1.2) / Math.max(1, raw.length);
+  return raw.map((item, idx) => {
     const isObj = item && typeof item === 'object' && !Array.isArray(item);
     const lines = Array.isArray(item)
       ? item.map(String).filter(Boolean)
@@ -362,8 +360,17 @@ const STORY_OPENING = (() => {
       tag: isObj && item.tag ? String(item.tag) : `第 ${idx + 1} 幕`,
       lines: lines.length ? lines : [''],
     };
-  }) : OPENING_PAGES;
-  return { title: s.openingTitle || '', subtitle: s.openingSubtitle || '', pages };
+  });
+}
+const STORY_OPENING = (() => {
+  const s = SPEC.story;
+  if (!s || (!s.openingTitle && !s.openingSubtitle && !(Array.isArray(s.opening) && s.opening.length))) return null;
+  return { title: s.openingTitle || '', subtitle: s.openingSubtitle || '', pages: parseStoryPages(s.opening, OPENING_DURATION, OPENING_PAGES) };
+})();
+const STORY_ENDING = (() => {
+  const s = SPEC.story;
+  if (!s || (!s.endingTitle && !s.endingSubtitle && !(Array.isArray(s.ending) && s.ending.length))) return null;
+  return { title: s.endingTitle || '', subtitle: s.endingSubtitle || '', pages: parseStoryPages(s.ending, ENDING_DURATION, ENDING_PAGES) };
 })();
 function healActor(actor, amount) {
   const p = actor || G.p;
@@ -563,6 +570,31 @@ function applyEnemySkin(e, g) {
   return true;
 }
 if (HAS_SKINS) { stageOneArt.customSkin = applyActorSkin; stageOneArt.customEnemySkin = applyEnemySkin; }
+if (!WUKONG && gameSpec?.weapons && Object.values(gameSpec.weapons).some(w => w?.name)) {
+  stageOneArt.weaponLabels = Object.fromEntries(Object.entries(WEAP).map(([k, v]) => [k, v.name]));
+}
+if (!WUKONG && (SPEC.bosses.hue || SPEC.bosses.saturate !== 1)) {
+  stageOneArt.bossFilter = [
+    SPEC.bosses.hue ? `hue-rotate(${SPEC.bosses.hue}deg)` : '',
+    SPEC.bosses.saturate !== 1 ? `saturate(${SPEC.bosses.saturate})` : '',
+  ].filter(Boolean).join(' ');
+}
+if (Object.values(SPEC.stages || {}).some(st => st && typeof st === 'object' && st.theme?.bgImage)) {
+  stageOneArt.customBgImage = (g, camera, w, h) => {
+    const bg = G.stageTheme?.bgImage;
+    if (!bg) return false;
+    const img = MOD.api.image(bg);
+    const iw = img?.naturalWidth || img?.width || 0, ih = img?.naturalHeight || img?.height || 0;
+    if (iw > 0 && ih > 0) {
+      const scale = h / ih, tw = Math.max(64, iw * scale), ox = -((camera * 0.25) % tw);
+      for (let x = ox; x < w; x += tw) g.drawImage(img, x, 0, tw + 0.5, h);
+    } else {
+      g.fillStyle = G.stageTheme?.skyTint || '#14182e';
+      g.fillRect(0, 0, w, h);
+    }
+    return true;
+  };
+}
 
 function findLand(x, b0, b1, hw, skipLedge) {
   let best = null;
@@ -986,8 +1018,12 @@ function reset(stage, carry) {
   const customStageName = SPEC.stages?.[G.stage]?.name;
   if (customStageName) G.stageName = customStageName; else delete G.stageName;
   const customTheme = SPEC.stages?.[G.stage]?.theme;
-  if (customTheme && (customTheme.skyTint || customTheme.tintAlpha || customTheme.hue)) G.stageTheme = customTheme; else delete G.stageTheme;
+  if (customTheme && (customTheme.skyTint || customTheme.tintAlpha || customTheme.hue || customTheme.bgImage)) G.stageTheme = customTheme; else delete G.stageTheme;
   if (STORY_OPENING) G.storyOpening = STORY_OPENING; else delete G.storyOpening;
+  if (STORY_ENDING) G.storyEnding = STORY_ENDING; else delete G.storyEnding;
+  if (!WUKONG && GAME_TITLE !== '魂斗罗2026') G.gameTitle = GAME_TITLE; else delete G.gameTitle;
+  const stageSpawns = SPEC.stages?.[G.stage]?.spawns;
+  if (Array.isArray(stageSpawns) && stageSpawns.length) G.spawnTrig = stageSpawns.map(s => ({ ...s, done: false })); else delete G.spawnTrig;
   if(!WUKONG&&G.stage===1)G.en.push(createFortressRoofGuard());
   stageMusicSession.begin(G.stage);
   if (G.stage === 1) { G.p.y = groundAt(G.p.x)?.y || 144; G.p.support = groundAt(G.p.x); }
@@ -1432,15 +1468,15 @@ function updatePlayerBase(I) {
     const w = WEAP[p.weapon];
     if (p.weapon === 'laser') for (const b of G.pb) if (b.k === 'laser' && (b.owner || 1) === p.pid) b.dead = true;
     if (G.pb.filter(b => !b.dead && (b.owner || 1) === p.pid).length + w.per <= w.max) {
-      const g = giant ? 2 : 1;
+      const g = giant ? 2 : 1, dm = g * (w.damageScale ?? 1);
       const muzzle=p.aimUp?baseUpMuzzle(p,StageOneArt.playerRole(cooperative(),p.pid===2?1:0)):null;
       const ox = muzzle?.x ?? p.x + 1 + p.aimDx * 8 * g, oy = muzzle?.y ?? (p.spin ? p.y - 15 * g : p.prone ? p.y - (isBase() ? 26 : 16) * g : p.y - 38 * g);
       const xe = 192 + (p.x - 192) * 0.5 + p.aimDx * 60, ye = baseShotHeight(p, G.stage, !!B.def.boss, B.bossPhase), spd = 1.8 * (p.rapid ? 1.4 : 1);
-      const shot = (k, dx, extra) => G.pb.push(Object.assign({ k, t: 0, x0: ox, y0: oy, x: ox, y: oy, xe: xe + dx, ye, spd, dmg: g,upward:!!p.aimUp }, extra || {}));
+      const shot = (k, dx, extra) => G.pb.push(Object.assign({ k, t: 0, x0: ox, y0: oy, x: ox, y: oy, xe: xe + dx, ye, spd, dmg: dm,upward:!!p.aimUp }, extra || {}));
       if (p.weapon === 'spread') { for (const d of [-40, -20, 0, 20, 40]) shot('sp', d); }
-      else if (p.weapon === 'laser') { shot('laser', 0, { dmg: 2 * g, hits: new Set(), spd: isBase() ? 8 : spd * 1.3 }); }
-      else if (p.weapon === 'fire') { shot('fire', 0, { dmg: 2 * g, spd: spd * 0.8 }); }
-      else if (p.weapon === 'homing') { const tg = nearestTarget(xe, ye); shot('msl', tg ? tg.x + tg.w / 2 - xe : 0, { dmg: 2 * g, spd: spd * 0.9, lock:tg?.mover?'bcore':tg?.k==='twin'?'twin'+tg.id:tg?.k==='gallery'?'gallery'+tg.galleryId:null,ye: tg ? tg.y + tg.h / 2 : ye }); }
+      else if (p.weapon === 'laser') { shot('laser', 0, { dmg: 2 * dm, hits: new Set(), spd: isBase() ? 8 : spd * 1.3 }); }
+      else if (p.weapon === 'fire') { shot('fire', 0, { dmg: 2 * dm, spd: spd * 0.8 }); }
+      else if (p.weapon === 'homing') { const tg = nearestTarget(xe, ye); shot('msl', tg ? tg.x + tg.w / 2 - xe : 0, { dmg: 2 * dm, spd: spd * 0.9, lock:tg?.mover?'bcore':tg?.k==='twin'?'twin'+tg.id:tg?.k==='gallery'?'gallery'+tg.galleryId:null,ye: tg ? tg.y + tg.h / 2 : ye }); }
       else { shot('b', 0); }
       p.cool = w.cd * (p.rapid ? 0.7 : 1); p.flashT = 0.05; p.flashUp=!!p.aimUp; p.fx = ox; p.fy = oy;
       playerGunshot(p);
@@ -6039,14 +6075,22 @@ function updatePlayer(I) {
         else if (p.ay < -0.9) { ox = p.x + p.face * 2; oy = p.y - 36; }
         else { ox = p.x + p.ax * 13; oy = p.y - 20 + p.ay * 11; }
         if (giant) { ox = p.x + (ox - p.x) * 2; oy = p.y + (oy - p.y) * 2; }
-        const dm = giant ? 2 : 1;
+        const dm = (giant ? 2 : 1) * (w.damageScale ?? 1);
         const spd = w.spd * (p.rapid ? 1.4 : 1) * (G.uw ? 0.8 : 1), base = Math.atan2(p.ay, p.ax);
-        const vx = Math.cos(base) * spd, vy = Math.sin(base) * spd;
-        if (p.weapon === 'spread') { for (const d of [-0.36, -0.18, 0, 0.18, 0.36]) G.pb.push({ k: 'sp', x: ox, y: oy, vx: Math.cos(base + d) * spd, vy: Math.sin(base + d) * spd, dmg: dm }); }
-        else if (p.weapon === 'laser') { G.pb.push({ k: 'laser', x: ox, y: oy, vx, vy, dmg: 2 * dm, hits: new Set() }); }
-        else if (p.weapon === 'fire') { G.pb.push({ k: 'fire', x: ox, y: oy, cx: ox, cy: oy, vx, vy, t: 0, dir: p.face, dmg: 2 * dm }); }
-        else if (p.weapon === 'homing') { G.pb.push({ k: 'msl', x: ox, y: oy, ang: base, spd, life: 2.4, dmg: 2 * dm }); }
-        else { G.pb.push({ k: 'b', x: ox, y: oy, vx, vy, dmg: dm }); }
+        const lobVy = w.gravity > 0 && p.ay === 0 && !G.uw ? -Math.min(180, w.gravity * 0.38) : 0;
+        const vx = Math.cos(base) * spd, vy = Math.sin(base) * spd + lobVy;
+        const dec = b => {
+          if (w.gravity) b.grav = w.gravity;
+          if (w.pierce === 1 && b.k !== 'laser') { b.pierce = 1; b.hits = new Set(); }
+          if (w.color) b.color = w.color;
+          if (w.size > 0) b.size = w.size;
+          return b;
+        };
+        if (p.weapon === 'spread') { for (const d of [-0.36, -0.18, 0, 0.18, 0.36]) G.pb.push(dec({ k: 'sp', x: ox, y: oy, vx: Math.cos(base + d) * spd, vy: Math.sin(base + d) * spd + lobVy, dmg: dm })); }
+        else if (p.weapon === 'laser') { G.pb.push(dec({ k: 'laser', x: ox, y: oy, vx, vy, dmg: 2 * dm, hits: new Set() })); }
+        else if (p.weapon === 'fire') { G.pb.push(dec({ k: 'fire', x: ox, y: oy, cx: ox, cy: oy, vx, vy, t: 0, dir: p.face, dmg: 2 * dm })); }
+        else if (p.weapon === 'homing') { G.pb.push(dec({ k: 'msl', x: ox, y: oy, ang: base, spd, life: 2.4, dmg: 2 * dm })); }
+        else { G.pb.push(dec({ k: 'b', x: ox, y: oy, vx, vy, dmg: dm })); }
         p.cool = w.cd * (p.rapid ? 0.7 : 1); p.flashT = 0.05; p.fx = ox; p.fy = oy;
         playerGunshot(p);
         if (MOD.active) MOD.emit('playerAttack', p, MOD_GAME);
@@ -6327,6 +6371,23 @@ function updateEnemies() {
     }
   }
   if (MOD.spawners.length) modSpawn();
+  if (G.spawnTrig) {
+    for (const sp of G.spawnTrig) {
+      if (sp.done || (G.camX < sp.at && p.x < sp.at + 120)) continue;
+      sp.done = true;
+      const count = Math.max(1, Math.min(8, sp.count || 1));
+      for (let i = 0; i < count; i++) {
+        const sx = Math.min(LEVEL_W - 24, G.camX + W - 16 + i * 18);
+        const sy = sp.y > 0 ? sp.y : (groundAt(sx)?.y ?? 176);
+        if (MOD.enemies.has(sp.type)) spawnModEnemy(sp.type, { x: sx, y: sy });
+        else if (sp.type === 'snp') G.en.push({ t: 'snp', x: sx, y: sy, hp: isCelestial() ? HEAVEN_HP.snp : 1, ...(isCelestial() ? { maxHp: HEAVEN_HP.snp } : {}), fireT: 1.2 + rnd(), face: -1, ax: -1, ay: 0, flash: 0 });
+        else if (sp.type === 'tur') G.en.push({ t: 'tur', x: sx, y: sy - 16, hp: isCelestial() ? HEAVEN_HP.tur : 6, ...(isCelestial() ? { maxHp: HEAVEN_HP.tur } : {}), idx: 6, rotT: 0, fireT: 1.2 + rnd(), flash: 0 });
+        else if (sp.type === 'larva') G.en.push({ t: 'larva', x: sx, y: sy, vx: -58, vy: 0, hp: 1, on: false, anim: 0, flash: 0 });
+        else if (sp.type === 'cart') G.en.push({ t: 'cart', x: sx, y: sy, vx: -95, vy: 0, hp: 5, on: true, flash: 0 });
+        else G.en.push(runner(sx, sy, -1));
+      }
+    }
+  }
   for (const e of G.en) {
     if (e.flash > 0) e.flash -= DT;
     if (e.mod) { const def = MOD.enemies.get(e.t); if (def) { updateModEnemy(def, e); continue; } }
@@ -6848,6 +6909,7 @@ function findTarget(x, y, combatOnly = false) {
 }
 function updateBullets() {
   for (const b of G.pb) {
+    if (b.grav && b.k !== 'msl') b.vy += b.grav * DT;
     if (b.k === 'fire') {
       b.t += DT; b.cx += b.vx * DT; b.cy += b.vy * DT;
       const r = Math.min(8, b.t * 60), a = b.t * 15 * b.dir;
@@ -6862,8 +6924,8 @@ function updateBullets() {
       b.x += b.vx * DT; b.y += b.vy * DT;
       if ((G.t & 1) === 0) G.fx.push({ k: 'smoke', x: b.x - Math.cos(b.ang) * 5, y: b.y - Math.sin(b.ang) * 5, t: 0, life: 0.35 });
     } else { b.x += b.vx * DT; b.y += b.vy * DT; }
-    const hx = b.k === 'fire' ? b.cx : b.x, hy = b.k === 'fire' ? b.cy : b.y, m = b.k === 'laser' ? 32 : 8;
-    if (hx < G.camX - m || hx > G.camX + W + m || hy < G.camY - m || hy > G.camY + H + m) b.dead = true;
+    const hx = b.k === 'fire' ? b.cx : b.x, hy = b.k === 'fire' ? b.cy : b.y, m = b.k === 'laser' ? 32 : 8, topM = b.grav ? 140 : m;
+    if (hx < G.camX - m || hx > G.camX + W + m || hy < G.camY - topM || hy > G.camY + H + m) b.dead = true;
   }
   for (const b of G.eb) {
     if(b.dead)continue;
@@ -6970,7 +7032,7 @@ function bulletBoxes(b) {
     const l = Math.hypot(b.vx, b.vy) || 1, dx = b.vx / l, dy = b.vy / l;
     return [0, 8, 16, 24].map(o => ({ x: b.x - dx * o - 2, y: b.y - dy * o - 2, w: 4, h: 4 }));
   }
-  const r = b.k === 'fire' ? 3 : 2;
+  const r = b.size > 0 ? b.size : (b.k === 'fire' ? 3 : 2);
   return [{ x: b.x - r, y: b.y - r, w: r * 2, h: r * 2 }];
 }
 const anyOverlap = (boxes, t) => boxes.some(bx => overlap(bx, t));
@@ -6992,7 +7054,7 @@ function collide() {
   }
   for (const b of G.pb) {
     if (b.dead) continue;
-    const bxs = bulletBoxes(b), pierce = b.k === 'laser';
+    const bxs = bulletBoxes(b), pierce = b.k === 'laser' || !!b.pierce;
     for(const target of fish){
       if(!anyOverlap(bxs,riverFishBox(target))||!hitRiverFish(target))continue;
       if(b.heliMissile)detonateHeliMissile(b);else if(!pierce)b.dead=true;
@@ -8314,7 +8376,7 @@ function flashOverlay() { if (!(G.flashT > 0)) return; ctx.save(); ctx.globalAlp
 const CINE_LEN = { open: WUKONG ? WUKONG_OPENING_DURATION : OPENING_DURATION, end: ENDING_DURATION, uwopen: 26, uwend: 41 };
 const CINE_TYPE = 16; // characters per second for the typewriter text
 const OPEN_PAGES = WUKONG ? WUKONG_OPENING_PAGES : (STORY_OPENING?.pages || OPENING_PAGES);
-const END_PAGES = ENDING_PAGES;
+const END_PAGES = STORY_ENDING?.pages || ENDING_PAGES;
 function startOpening() { initAudio(); if(WUKONG)Music.stop(); reset(firstPlayableStage()); G.cine = { kind: 'open', t: 0, typed: 0, skip: false, ev: {} }; setMode('cine'); Music.start(false, -5, 108); }
 const UWO_PAGES = [
   { from: 0.8, to: 4.9, lines: ['黑礁群岛沉没三个月后，', '深海声呐捕捉到一阵规律的心跳声。'] },

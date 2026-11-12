@@ -269,7 +269,76 @@ test('engine: rules.health, rules.rage, rules.melee, story.opening and stages.1.
   e.render();
 });
 
+test('engine: custom weapon physics/pierce/visuals, stage spawns/bgImage, ending story and boss tint apply', () => {
+  const e = boot({
+    weapons: {
+      rifle: { name: '雷霆飞斧', damageScale: 3, gravity: 420, pierce: 1, color: '#00f5d4', size: 4 },
+      machine: { name: '脉冲步枪' },
+    },
+    stages: {
+      1: {
+        theme: { bgImage: 'cyber-bg.png' },
+        spawns: [{ at: 40, type: 'snp', count: 2, y: 0 }],
+      },
+    },
+    bosses: { hue: 120, saturate: 1.5 },
+    story: {
+      endingTitle: '新纪元 · 2099',
+      endingSubtitle: '传奇落幕',
+      ending: [{ tag: '终章 · 凯旋', line1: '硝烟散尽，曙光重临。', line2: '英雄归来。' }],
+    },
+  }, { modules: { modules: [], assetBase: '/api/projects/demo/files/assets' } });
+  e.play(1);
+
+  // Custom weapon banner on pickup
+  e.pickItem('M');
+  assert.equal(e.G.bannerText, '脉冲步枪');
+  e.G.p.weapon = 'rifle';
+
+  // Place two enemies in front of the player to verify damageScale=3 and pierce=1
+  const en1 = { t: 'run', x: e.G.p.x + 28, y: e.G.p.y, hp: 3, vx: 0, vy: 0 };
+  const en2 = { t: 'run', x: e.G.p.x + 36, y: e.G.p.y, hp: 3, vx: 0, vy: 0 };
+  e.G.en.push(en1, en2);
+
+  // Fire parabolic piercing axe
+  e.frames(1, { KeyJ: true });
+  const shot = e.G.pb[0];
+  assert.ok(shot, 'player fired custom projectile');
+  assert.equal(shot.dmg, 3);
+  assert.equal(shot.grav, 420);
+  assert.equal(shot.pierce, 1);
+  assert.equal(shot.color, '#00f5d4');
+  assert.equal(shot.size, 4);
+  const initialVy = shot.vy;
+  assert.ok(initialVy < 0, 'parabolic weapon launches with upward lob velocity');
+
+  e.frames(6);
+  assert.ok(shot.vy > initialVy, 'gravity pulls projectile downward over time');
+  assert.equal(en1.dead, true, 'first enemy killed by 3-damage shot');
+  assert.equal(en2.dead, true, 'second enemy also killed by piercing shot');
+
+  // Stage spawns wave triggered because player started near x=40 (p.x >= at - 120 check: G.camX >= 40 or p.x >= 160)
+  e.G.p.x = 180;
+  const snpBefore = e.G.en.filter(x => x.t === 'snp').length;
+  e.frames(2);
+  const snpAfter = e.G.en.filter(x => x.t === 'snp').length;
+  assert.equal(e.G.spawnTrig[0].done, true, 'stage spawn wave triggered');
+  assert.equal(snpAfter - snpBefore, 2, 'spawned 2 snipers from stages.1.spawns');
+
+  // Render stage background & custom colored bullet without error, requesting bgImage
+  e.render();
+  assert.ok(e.MOD.api.image('cyber-bg.png').src.endsWith('/cyber-bg.png'), 'stage bgImage requested');
+
+  // Render ending cine with custom ending story
+  assert.equal(e.G.storyEnding.title, '新纪元 · 2099');
+  assert.deepEqual(Array.from(e.G.storyEnding.pages[0].lines), ['硝烟散尽，曙光重临。', '英雄归来。']);
+  e.G.mode = 'cine';
+  e.G.cine = { kind: 'end', t: 2.0, typed: 40, skip: false, ev: {} };
+  e.render();
+});
+
 test('engine: an invalid spec refuses to boot', () => {
   assert.throws(() => boot({ weapons: { rifle: { cd: -1 } } }), /weapons\.rifle\.cd/);
 });
+
 

@@ -23,16 +23,16 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
     extraLife: { first: 20000, every: 70000 },
   },
   weapons: {
-    rifle:   { name: '步枪', cd: 0.24, max: 4, per: 1, spd: 270 },
-    machine: { name: '连发机枪', cd: 0.09, max: 7, per: 1, spd: 290 },
-    spread:  { name: '扇形散弹', cd: 0.30, max: 15, per: 5, spd: 260 },
-    laser:   { name: '贯穿光束', cd: 0.28, max: 1, per: 1, spd: 380 },
-    fire:    { name: '螺旋火焰', cd: 0.28, max: 4, per: 1, spd: 170 },
-    homing:  { name: '跟踪导弹', cd: 0.32, max: 4, per: 1, spd: 150 },
+    rifle:   { name: '步枪', cd: 0.24, max: 4, per: 1, spd: 270, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
+    machine: { name: '连发机枪', cd: 0.09, max: 7, per: 1, spd: 290, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
+    spread:  { name: '扇形散弹', cd: 0.30, max: 15, per: 5, spd: 260, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
+    laser:   { name: '贯穿光束', cd: 0.28, max: 1, per: 1, spd: 380, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
+    fire:    { name: '螺旋火焰', cd: 0.28, max: 4, per: 1, spd: 170, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
+    homing:  { name: '跟踪导弹', cd: 0.32, max: 4, per: 1, spd: 150, damageScale: 1, gravity: 0, pierce: 0, color: '', size: 0 },
   },
   items: { specialCooldown: 2, inventorySize: 3, shieldSeconds: 10 },
   enemies: { hpScale: 1, spawnRateScale: 1, types: {} },
-  bosses: { hpScale: 1 },
+  bosses: { hpScale: 1, hue: 0, saturate: 1 },
   scoring: { scale: 1 },
   stages: {
     order: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -60,7 +60,7 @@ export const CONTRA_SPEC_DEFAULTS = deepFreeze({
     rage: { enabled: 0, max: 100, onHit: 50, onKill: 10, ultimateDamage: 18, ultimateName: '万道金光' },
     melee: { enabled: 0, range: 38, damage: 3, reflectBullets: 0, color: '#ffd24a' },
   },
-  story: { openingTitle: '', openingSubtitle: '', opening: [] },
+  story: { openingTitle: '', openingSubtitle: '', opening: [], endingTitle: '', endingSubtitle: '', ending: [] },
 });
 
 /** Item letters accepted in pods / boxes. Upper case = weapon chips, lower case & others = special items. */
@@ -82,11 +82,16 @@ export const ENEMY_TYPES = deepFreeze({
 const num = (desc, min, max, extra = {}) => ({ type: 'number', desc, min, max, ...extra });
 const weapon = name => ({
   type: 'object', desc: name, props: {
-    name: { type: 'string', desc: '显示名称', maxLength: 12 },
+    name: { type: 'string', desc: '显示名称（同步更新拾取横幅与顶部 HUD）', maxLength: 12 },
     cd: num('射击间隔（秒），越小射速越快', 0.03, 2),
     max: num('同屏最多子弹数', 1, 40, { integer: true }),
     per: num('每次射出的子弹数', 1, 9, { integer: true }),
     spd: num('子弹速度（像素/秒）', 60, 800),
+    damageScale: num('伤害倍率（1 为原版伤害，2 为双倍伤害）', 0.25, 20),
+    gravity: num('弹道重力（0=直线，正数如 360 为抛物线飞斧/榴弹，负数上飘）', -600, 1200),
+    pierce: num('是否穿透敌人（0=命中消失，1=贯穿路径上所有敌人）', 0, 1, { integer: true }),
+    color: { type: 'string', desc: '自定义弹丸发光颜色（如 #00f5d4，留空使用原版弹丸样式）', maxLength: 24 },
+    size: num('自定义弹丸半径像素（0=原版尺寸，建议 2~8）', 0, 16),
   },
 });
 const podList = {
@@ -99,6 +104,23 @@ const boxList = {
   type: 'array', desc: '地面补给箱：[x 坐标, 掉落道具]，开合循环，打开时才能击破', maxItems: 20,
   items: { type: 'tuple', items: [num('x 坐标', 0, 20000), { type: 'enum', desc: '掉落道具', values: Object.keys(ITEM_KINDS) }] },
 };
+const spawnList = {
+  type: 'array', desc: '关卡定点刷怪波次：玩家推进到 at 坐标时生成指定敌人（支持原版与模块自定义敌人）', maxItems: 60,
+  items: { type: 'object', props: {
+    at: num('触发位置（关卡 x 坐标）', 40, 20000),
+    type: { type: 'string', desc: '敌人类型 ID（如 run/snp/tur/larva 或模块自定义敌人名）', maxLength: 24 },
+    count: num('一次刷出数量', 1, 8, { integer: true }),
+    y: num('生成高度 y（0=自动贴地面，>0 为空中指定高度）', 0, 200),
+  } },
+};
+const storyPages = desc => ({
+  type: 'array', desc, maxItems: 6,
+  items: { type: 'object', props: {
+    tag: { type: 'string', desc: '章节小标题（如 壹 · 灵猴出世）', maxLength: 20 },
+    line1: { type: 'string', desc: '第一行字幕', maxLength: 36 },
+    line2: { type: 'string', desc: '第二行字幕', maxLength: 36 },
+  } },
+});
 const skinRule = desc => ({
   type: 'object', desc, props: {
     sprite: { type: 'string', desc: '项目 assets/ 下的图片文件名（如 hero.png），留空则使用原版模型', maxLength: 80 },
@@ -162,14 +184,17 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
     } },
     bosses: { type: 'object', desc: 'Boss（各关关底 Boss 及其可破坏部位）', props: {
       hpScale: num('全体 Boss 部位血量倍率（向上取整，至少 1）', 0.1, 20),
+      hue: num('关底 Boss 色相偏移（-180~180 度，0 为原色）', -180, 180),
+      saturate: num('关底 Boss 饱和度倍率（0~4，1 为原色）', 0, 4),
     } },
     scoring: { type: 'object', desc: '计分', props: { scale: num('得分倍率', 0, 100) } },
     stages: { type: 'map', desc: '按关卡调整，键为关卡号 1~8', key: /^[1-8]$/, props: {
       order: { type: 'array', desc: '关卡顺序与启用的关卡列表（1~8，不重复）', minItems: 1, maxItems: 8, unique: true, items: num('关卡号', 1, 8, { integer: true }) },
     }, value: { type: 'object', props: {
       name: { type: 'string', desc: '关卡名称（显示在关卡开场和选关菜单）', maxLength: 20 },
-      pods: podList, boxes: boxList,
-      theme: { type: 'object', desc: '关卡氛围与色调覆盖（如天宫金云、夕阳、夜幕）', props: {
+      pods: podList, boxes: boxList, spawns: spawnList,
+      theme: { type: 'object', desc: '关卡视觉背景与色调覆盖（可替换横向视差背景图或调天色）', props: {
+        bgImage: { type: 'string', desc: '自定义横向视差背景图（assets/ 下的图片名如 cyber-bg.png，留空使用原版背景）', maxLength: 80 },
         skyTint: { type: 'string', desc: '背景色调遮罩颜色（如 #ffd166 或 rgba(255,210,110,0.3)）', maxLength: 32 },
         tintAlpha: num('色调遮罩透明度（0~0.75，0 为关闭）', 0, 0.75),
         hue: num('背景色相偏移（-180~180 度，0 为原色）', -180, 180),
@@ -190,7 +215,7 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
         type: 'map',
         desc: '各关卡背景音乐（键为关卡号 1~8，值为内置曲目名或 assets/ 音频文件名如 bgm.ogg）',
         key: /^[1-8]$/,
-        value: { type: 'string', desc: '内置曲目（stage1rock/stage2/stage3/stage4/stage5/stage6/stage7）或 assets/ 音频文件名', maxLength: 80 },
+        value: { type: 'string', desc: '内置曲目（stage1rock/stage1orchestral/stage1cyberpunk/stage2/stage3/stage5/wukong1 等）或 assets/ 音频文件名', maxLength: 80 },
       },
     } },
     rules: { type: 'object', desc: '高阶战斗规则（气血条、怒气大招、近战挥击）', props: {
@@ -217,17 +242,13 @@ export const GAME_SPEC_SCHEMA = deepFreeze({
         color: { type: 'string', desc: '挥击弧光颜色（如 #ffd24a）', maxLength: 24 },
       } },
     } },
-    story: { type: 'object', desc: '剧情与开场字幕', props: {
+    story: { type: 'object', desc: '剧情与开场/通关字幕', props: {
       openingTitle: { type: 'string', desc: '片头左上角地点/时代标题（如 花果山 · 齐天大圣）', maxLength: 24 },
       openingSubtitle: { type: 'string', desc: '片头右上角行动副标题（如 大闹天宫）', maxLength: 24 },
-      opening: {
-        type: 'array', desc: '开场剧情字幕页（1~6 页，非空时替换第一关开场字幕）', maxItems: 6,
-        items: { type: 'object', props: {
-          tag: { type: 'string', desc: '章节小标题（如 壹 · 灵猴出世）', maxLength: 20 },
-          line1: { type: 'string', desc: '第一行字幕', maxLength: 36 },
-          line2: { type: 'string', desc: '第二行字幕', maxLength: 36 },
-        } },
-      },
+      opening: storyPages('开场剧情字幕页（1~6 页，非空时替换片头字幕）'),
+      endingTitle: { type: 'string', desc: '通关片尾左上角标题（如 新纪元 · 2099 年）', maxLength: 24 },
+      endingSubtitle: { type: 'string', desc: '通关片尾右上角副标题（如 传奇落幕）', maxLength: 24 },
+      ending: storyPages('通关结局字幕页（1~6 页，非空时替换片尾字幕）'),
     } },
   },
 });

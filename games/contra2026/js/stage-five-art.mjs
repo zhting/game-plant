@@ -1,5 +1,5 @@
 import { HUD_PLAYER_X } from './hud-layout.mjs';
-import { StageOneArt } from './stage-one-art.mjs?v=m4-1';
+import { StageOneArt } from './stage-one-art.mjs?v=creator-2';
 import { COMBAT_ASSETS, EQUIPMENT_SUPPLY, EQUIPMENT_TURRET, drawExplosion, drawEquipmentSupply, drawEquipmentTurret } from './combat-art.mjs?v=combat-polish-1';
 import { STAGE_FIVE_ROUTE, FOREST_GRENADIERS, snowDefenderBox, fortressEscortPort } from './stage-five-combat.mjs?v=fortress-saucers-1';
 import { ThermalMaterialCache, thermalSeconds } from './stage-five-thermal.mjs?v=thermal-vision-2';

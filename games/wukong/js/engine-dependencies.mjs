@@ -1,6 +1,6 @@
 // Only the Wukong entry loads these game-specific systems.
 export { WUKONG_STAGES, WUKONG_RELEASE_MESSAGE, isWukongStageOpen } from './release-stages.mjs';
-export { WukongSkin } from './wukong-game.mjs?v=dialogue-4';
+export { WukongSkin } from './wukong-game.mjs?v=creator-2';
 export * as WukongSiege from './wukong-stage-two.mjs?v=mods-2';
 export { WukongSiegeArt } from './wukong-stage-two-art.mjs?v=mods-2';
 export { wukongMountText } from './wukong-mount.mjs';
